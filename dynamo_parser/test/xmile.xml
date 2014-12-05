@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xmile version="1.0"  xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" xmlns:isee="http://iseesystems.com/XMILE">
+	<header>
+		<vendor>isee systems</vendor>
+		<product version="10.0.2" lang="en">STELLA</product>
+		<name>lynx-hares modules.stmx</name>
+		<copyright>(C) 2013 by isee systems, inc.</copyright>
+	</header>
+
+	<sim_specs method="RK4" time_units="yr">
+		<start>0</start>
+		<stop>60</stop>
+		<dt>0.125</dt>
+	</sim_specs>
+
+	<model name="Hares">
+	  <variables>
+		<stock name="Hares">
+			<eqn>5E4</eqn>
+			<inflow>hare_births</inflow>
+			<outflow>hare_deaths</outflow>
+		</stock>
+		<flow name="hare_births">
+			<eqn>Hares*hare_birth_fraction</eqn>
+		</flow>
+		<flow name="hare_deaths">
+			<eqn>Lynx.Lynx*hares_killed_per_lynx</eqn>
+		</flow>
+		<stock name="Lynx" access="input">
+			<eqn>1250</eqn>
+		</stock>
+		<aux name="hare_birth\nfraction">
+			<eqn>1.25</eqn>
+		</aux>
+		<aux name="hare\ndensity" access="output">
+			<eqn>Hares/area</eqn>
+			<to>Lynx.hare_density</to>
+		</aux>
+		<aux name="area">
+			<eqn>1E3</eqn>
+		</aux>
+		<aux name="hares_killed\nper_lynx">
+			<eqn>hare_density</eqn>
+			<gf>
+				<xscale min="0" max="500"/>
+				<yscale min="0" max="1000"/>
+				<ypts>0,50,100,150,200,250,300,350,400,450,500</ypts>
+			</gf>
+		</aux>
+	  </variables>
+	</model>
+
+	<model name="Lynx">
+	  <variables>
+		<stock name="Lynx" access="output">
+			<eqn>1250</eqn>
+			<inflow>lynx_births</inflow>
+			<outflow>lynx_deaths</outflow>
+			<outflow>one_time_lynx_harvest</outflow>
+			<to>Hares.Lynx</to>
+		</stock>
+		<flow name="lynx_births">
+			<eqn>Lynx*lynx_birth_fraction</eqn>
+		</flow>
+		<flow name="lynx_deaths">
+			<eqn>Lynx*lynx_death_fraction</eqn>
+		</flow>
+		<flow name="one_time_lynx_harvest">
+			<eqn>PULSE(size_of_1_time_lynx_harvest, 4, 1e3)</eqn>
+		</flow>
+		<aux name="hare\ndensity" access="input">
+			<eqn>50</eqn>
+		</aux>
+		<aux name="lynx_birth\nfraction">
+			<eqn>0.25</eqn>
+		</aux>
+		<aux name="size_of_1_time\nlynx_harvest">
+			<eqn>1</eqn>
+		</aux>
+		<aux name="lynx_death_fraction">
+			<eqn>Hares.hare_density</eqn>
+			<gf>
+				<xscale min="0" max="100"/>
+				<yscale min="0" max="1"/>
+				<ypts>.94,.66,.4,.35,.3,.25,.2,.15,.1,.07,.05</ypts>
+			</gf>
+		</aux>
+      </variables>
+	</model>
+
+	<macro filter="flow" name="non_negative">
+		<parm>flow</parm>
+		<parm>value</parm>
+		<eqn>IF value THEN MAX(flow, 0) ELSE flow</eqn>
+	</macro>
+</xmile>

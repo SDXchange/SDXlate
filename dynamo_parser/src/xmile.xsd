@@ -1,0 +1,1994 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified"
+  xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" targetNamespace="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+
+  <!-- 
+  
+  Schema for XMILE v1.0  October 13, 2014
+  
+    Contributing Authors: Will Glass-Hussain
+                          Robert Eberlein
+  -->
+
+  <xs:element name="xmile">
+    <xs:annotation>
+      <xs:documentation>
+        The root element for the XMILE file. Note that certain child elements
+        (i.e. model) are required for the primary file but not for included
+        files.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="header" />
+        <xs:choice maxOccurs="unbounded">
+          <xs:element ref="sim_specs" minOccurs="0" maxOccurs="1" />
+          <xs:element ref="model_units" minOccurs="0" maxOccurs="1" />
+          <xs:element ref="behavior" minOccurs="0" maxOccurs="1" />
+          <xs:element ref="data" minOccurs="0" maxOccurs="1" />
+          <xs:element ref="style" minOccurs="0" maxOccurs="1" />
+          <xs:element ref="macro" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element ref="model" minOccurs="1" maxOccurs="unbounded" />
+
+          <!-- need to inline dimensions element below to avoid conflict with dimensions element in stock/flow/aux -->
+          <xs:element name="dimensions">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="dim" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                      <xs:element name="elem" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                          <xs:attribute name="name" type="xs:string" use="required" />
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="name" type="xs:string" use="required" />
+                    <xs:attribute name="size" type="xs:int" use="optional" />
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="version" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:enumeration value="1.0" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Certain child options (product, options, vendor) of the header tag are 
+  required for main models but not for included files -->
+  <xs:element name="header">
+    <xs:annotation>
+      <xs:documentation>
+        Provides information about the origin of the model and required
+        capabilities. Note that certain child elements (i.e. product,
+        options, vendor) are required for the primary file but not for
+        included files.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="vendor" type="xs:string" minOccurs="0" />
+        <xs:element name="name" type="xs:string" minOccurs="0" />
+        <xs:element name="version" type="xs:string" minOccurs="0" />
+        <xs:element name="caption" type="xs:string" minOccurs="0" />
+        <xs:element name="author" type="xs:string" minOccurs="0" />
+        <xs:element name="affiliation" type="xs:string" minOccurs="0" />
+        <xs:element name="client" type="xs:string" minOccurs="0" />
+        <xs:element name="copyright" type="xs:string" minOccurs="0" />
+        <xs:element name="created" type="xs:date" minOccurs="0" />
+        <xs:element name="modified" type="xs:date" minOccurs="0" />
+        <xs:element name="uuid" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element ref="image" minOccurs="0" />
+        <xs:element ref="options" minOccurs="0" />
+        <xs:element ref="product" minOccurs="0" />
+        <xs:element ref="contact" minOccurs="0" />
+        <xs:element ref="includes" minOccurs="0" />
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="image">
+    <xs:annotation>
+      <xs:documentation>
+        Picture of the model in JPG, GIF, TIF, or PNG format. The
+        resource attribute is optional and may specify a relative
+        file path, an absolute file path, or a URL.  The picture
+        data may also be embedded inside the tag in Data URI format,
+        using base64 encoding.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="resource" use="optional" type="xs:string"/>
+          <xs:attribute name="size_to_parent" type="xs:boolean" default="false" />
+          <!--clarify_spec - width and height not always necessary?-->
+          <xs:attribute name="width" type="xs:int" use="optional" />
+          <xs:attribute name="height" type="xs:int" use="optional" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="contact">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="address" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="phone" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="fax" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="website" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="options">
+    <xs:annotation>
+      <xs:documentation>
+        Provides information about the required capabilities to use this model.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="uses_conveyor" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="arrest" type="xs:boolean" use="optional" />
+            <xs:attribute name="leak" type="xs:boolean" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="uses_queue" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="overflow" type="xs:boolean" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="uses_submodels" type="empty_type" minOccurs="0" />
+        <xs:element name="uses_macros" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="references_macros" type="xs:boolean" use="required" />
+            <xs:attribute name="option_filters" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="uses_event_posters" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="messages" type="xs:boolean" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="has_model_view" type="empty_type" minOccurs="0" />
+        <xs:element name="uses_outputs" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="numeric_display" type="xs:boolean" />
+            <xs:attribute name="lamp" type="xs:boolean" use="optional" />
+            <xs:attribute name="gauge" type="xs:boolean" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="uses_inputs" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="numeric_input" type="xs:boolean" use="optional" />
+            <xs:attribute name="list" type="xs:boolean" use="optional" />
+            <xs:attribute name="graphical_input" type="xs:boolean" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="uses_annotation" type="empty_type" minOccurs="0" />
+        <xs:element name="uses_arrays" minOccurs="0" >
+          <xs:complexType>
+            <xs:attribute name="max_dimensions" type="xs:integer" use="required" />
+            <xs:attribute name="invalid_index_value" default="0" use="optional">
+              <xs:simpleType>
+                <xs:restriction base="xs:double">
+                  <xs:enumeration value="0" />
+                  <xs:enumeration value="NaN" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+      <xs:attribute name="namespace" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="product">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="version" type="xs:string" use="required" />
+          <xs:attribute name="lang" type="xs:string" use="optional" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="includes">
+    <xs:annotation>
+      <xs:documentation>
+        Provides a list of included files/resources.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="include" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="resource" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="sim_specs">
+    <xs:annotation>
+      <xs:documentation>
+        Default simulation specifications for this model.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="stop" type="xs:double" minOccurs="1" />
+        <xs:element name="start" type="xs:double" minOccurs="1" />
+        <xs:element name="dt" minOccurs="0" default="1">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:double">
+                <xs:attribute name="reciprocal" type="xs:boolean" default="false" use="optional" />
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="run" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="by" use="required">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="all" />
+                  <xs:enumeration value="group" />
+                  <xs:enumeration value="module" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+      <xs:attribute name="time_units" type="time_unit_type" default="" use="optional" />
+      <xs:attribute name="method" type="method_type" default="euler" use="optional" />
+      <xs:attribute name="pause" type="xs:double" use="optional" default="INF" />
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:simpleType name="method_type">
+    <xs:annotation>
+      <xs:documentation>
+        Allows any string to be entered as a method while providing an
+        enumerated list of recommended standard types.
+        Valid entries include enumerated entries as well as comma
+        separated lists, such as "rk2,rk4".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes="standard_method_type xs:string" />
+  </xs:simpleType>
+
+  <xs:simpleType name="standard_method_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="euler" />
+      <xs:enumeration value="rk2" />
+      <xs:enumeration value="rk2_auto" />
+      <xs:enumeration value="rk4" />
+      <xs:enumeration value="rk4_auto" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="time_unit_type">
+    <xs:annotation>
+      <xs:documentation>
+        Allows any string to be entered as a time unit while providing an
+        enumerated list of recommended
+        standard types.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes="standard_time_unit_type xs:string" />
+  </xs:simpleType>
+
+  <xs:simpleType name="standard_time_unit_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="day" />
+      <xs:enumeration value="hour" />
+      <xs:enumeration value="microsecond" />
+      <xs:enumeration value="millisecond" />
+      <xs:enumeration value="minute" />
+      <xs:enumeration value="month" />
+      <xs:enumeration value="nanosecond" />
+      <xs:enumeration value="quarter" />
+      <xs:enumeration value="second" />
+      <xs:enumeration value="week" />
+      <xs:enumeration value="year" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="model_units">
+    <xs:annotation>
+      <xs:documentation>
+        Definitions of units used in this model.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="unit" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:choice>
+              <xs:element name="eqn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+              <xs:element name="alias" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:choice>
+            <xs:attribute name="name" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="model">
+    <xs:annotation>
+      <xs:documentation>
+        Definition of model equations and optional diagrams.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="sim_specs" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="behavior" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="variables" />
+        <xs:element ref="views" minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+
+      <!-- note - name is generally required/recommended but is optional for primary model -->
+      <xs:attribute name="name" type="xs:string" use="optional" />
+
+      <xs:attribute name="resource" type="xs:string" use="optional" />
+      <xs:attribute name="run" type="xs:boolean" use="optional" default="false" />
+      <xs:attribute name="password" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <!-- entity is used for both just a name declaration and a name with a value
+       we use the name with the value as the ref and inline uses where there are
+       online attributes -->
+  <xs:element name="entity">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="value" type="xs:double" />
+      </xs:all>
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="index" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+
+
+
+  <xs:element name="variables">
+    <xs:annotation>
+      <xs:documentation>
+        A list of stocks, flows, auxiliaries (with equations) used in the model.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="stock" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="flow" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="auxvar" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="gf" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="group" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="module" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Implementation note: Cannot use extensions to inherit common elements for stock, flow, aux elements, as this enforces
+    ordering between inherited and new child elements. -->
+
+  <xs:element name="stock">
+    <xs:annotation>
+      <xs:documentation>
+        Core building block of a model, also called level or state. Stocks
+        accumulate. Their value at the start of the simulation must be set
+        as either a constant or with an initial equation. The initial
+        equation is evaluated only once, at the beginning of the
+        simulation.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <!-- common child elements -->
+        <xs:element name="eqn" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="mathml" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="units" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="doc" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="gf" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="dimensions" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="event_poster" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="scale" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="range" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="format" minOccurs="0" maxOccurs="1" />
+
+        <!-- specific child elements for stock -->
+        <xs:element name="inflow" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="outflow" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="queue" type="empty_type" minOccurs="0" maxOccurs="1" />
+        <xs:element name="non_negative" type="boolean_or_empty_type" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="conveyor" minOccurs="0" maxOccurs="1" />
+
+        <!-- for arrays.  necessarily repeats some of the above elements which may vary per subscript -->
+        <xs:element name="element" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element name="eqn" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element name="mathml" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element ref="gf" minOccurs="0" maxOccurs="1" />
+              <xs:element ref="event_poster" minOccurs="0" maxOccurs="1" />
+              <xs:element name="inflow" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="outflow" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="queue" type="empty_type" minOccurs="0" maxOccurs="1" />
+              <xs:element name="non_negative" type="boolean_or_empty_type" minOccurs="0" maxOccurs="1" />
+              <xs:element ref="conveyor" minOccurs="0" maxOccurs="1" />
+            </xs:choice>
+            <xs:attribute name="subscript" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+
+      <!-- common attributes -->
+      <xs:attribute name="name" type="xs:string" use="optional" />
+      <xs:attribute name="access" type="access_type" use="optional" />
+      <xs:attribute name="autoexport" type="xs:boolean" use="optional" default="false" />
+      <xs:attribute name="subscript" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="conveyor">
+    <xs:annotation>
+      <xs:documentation>
+        Provides additional options for a stock that describe the
+        characteristics of a conveyor.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="len" type="xs:string" minOccurs="0" />
+        <xs:element name="capacity" type="xs:string" minOccurs="0" />
+        <xs:element name="in_limit" type="xs:string" minOccurs="0" />
+        <xs:element name="sample" type="xs:string" minOccurs="0" />
+        <xs:element name="arrest" type="xs:string" minOccurs="0" />
+      </xs:all>
+      <xs:attribute name="discrete" type="xs:boolean" use="optional" default="false" />
+      <xs:attribute name="batch_integrity" type="xs:boolean" use="optional" default="false" />
+      <xs:attribute name="one_at_a_time" type="xs:boolean" use="optional" default="true" />
+      <xs:attribute name="exponential_leak" type="xs:boolean" use="optional" default="false" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="flow">
+    <xs:annotation>
+      <xs:documentation>
+        Core building block of a model, also called a rate or a derivative.
+        Flows represent the rate of change of a stock. Each timestep the
+        flow multiplied by the timestep is added to the stock.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <!-- common child elements -->
+        <xs:element name="eqn" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="mathml" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="units" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="doc" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="gf" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="dimensions" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="event_poster" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="scale" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="range" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="format" minOccurs="0" maxOccurs="1" />
+
+        <!-- specific child elements elements for flow -->
+        <xs:element name="multiplier" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="non_negative" type="boolean_or_empty_type" minOccurs="0" maxOccurs="1" />
+        <xs:element name="overflow" type="empty_type" />
+        <xs:element name="leak" type="empty_type" />
+        <xs:element name="leak_integers" type="empty_type" />
+
+        <!-- for arrays.  necessarily repeats some of the above elements which may vary per subscript -->
+        <xs:element name="element" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element name="eqn" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element name="mathml" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element ref="gf" minOccurs="0" maxOccurs="1" />
+              <xs:element ref="event_poster" minOccurs="0" maxOccurs="1" />
+              <xs:element name="multiplier" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element name="non_negative" type="boolean_or_empty_type" minOccurs="0" maxOccurs="1" />
+              <xs:element name="overflow" type="empty_type" />
+              <xs:element name="leak" type="empty_type" />
+              <xs:element name="leak_integers" type="empty_type" />
+            </xs:choice>
+            <xs:attribute name="subscript" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+
+      <xs:attribute name="name" type="xs:string" use="optional" />
+      <xs:attribute name="access" type="access_type" use="optional" />
+      <xs:attribute name="autoexport" type="xs:boolean" use="optional" default="false" />
+      <xs:attribute name="subscript" type="xs:string" use="optional" />
+
+      <!-- specific attributes for flow -->
+      <xs:attribute name="leak_start" type="xs:double" default="0" />
+      <xs:attribute name="leak_end" type="xs:double" default="1" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="auxvar">
+    <xs:annotation>
+      <xs:documentation>
+        Core building block of a model. Auxiliaries allow the isolation of
+        any algebraic function that is used. They can both clarify a model
+        and factor out important or repeated calculations. They can be
+        defined using any algebraic expression (including a constant
+        value), optionally in conjunction with a graphical function.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <!-- common -->
+        <xs:element name="eqn" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="mathml" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="units" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="doc" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="gf" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="dimensions" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="event_poster" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="scale" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="range" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="format" minOccurs="0" maxOccurs="1" />
+
+        <!-- for arrays.  necessarily repeats some of the above elements which may vary per subscript -->
+        <xs:element name="element" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element name="eqn" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element name="mathml" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element ref="gf" minOccurs="0" maxOccurs="1" />
+              <xs:element ref="event_poster" minOccurs="0" maxOccurs="1" />
+            </xs:choice>
+            <xs:attribute name="subscript" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+
+      <xs:attribute name="name" type="xs:string" use="optional" />
+      <xs:attribute name="access" type="access_type" use="optional" />
+      <xs:attribute name="autoexport" type="xs:boolean" use="optional" default="false" />
+      <xs:attribute name="subscript" type="xs:string" use="optional" />
+
+      <!-- specific attributes for aux -->
+      <xs:attribute name="flow_concept" type="xs:boolean" default="false" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="access_type">
+    <xs:annotation>
+      <xs:documentation>
+        Used in conjunction with submodels to define input and outputs.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="input" />
+      <xs:enumeration value="output" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="scale">
+    <xs:annotation>
+      <xs:documentation>
+        Default scale for a variable output.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="min" type="xs:double" use="optional" />
+      <xs:attribute name="max" type="xs:double" use="optional" />
+      <xs:attribute name="auto" type="xs:boolean" use="optional" />
+      <xs:attribute name="group" type="xs:integer" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="range">
+    <xs:annotation>
+      <xs:documentation>
+        Default range of allowable inputs for a variable.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="min" type="xs:double" use="optional" />
+      <xs:attribute name="max" type="xs:double" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:attributeGroup name="format_attributes" >
+    <xs:attribute name="precision" type="xs:double" use="optional" />
+    <xs:attribute name="scale_by" type="xs:integer" default="1" use="optional" />
+    <xs:attribute name="delimit_000s" type="xs:boolean" default="false" use="optional" />
+    <xs:attribute name="display_as" default="number" use="optional">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="number" />
+          <xs:enumeration value="currency" />
+          <xs:enumeration value="percent" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+
+
+  <xs:element name="format">
+    <xs:annotation>
+      <xs:documentation>
+        Default format when displaying a variable or accepting input.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="format_attributes" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="gf">
+    <xs:annotation>
+      <xs:documentation>
+        Graphical function, alternately called lookup functions or table
+        functions. They represent a (potentially) non-linear relationship.
+        Graphical functions may occur as part of other variables or (with
+        a name) as a stand alone variable.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="xscale" type="min_max_type" minOccurs="0" />
+        <xs:element name="yscale" type="min_max_type" minOccurs="0" />
+        <xs:element name="xpts" type="points_type" minOccurs="0" />
+        <xs:element name="ypts" type="points_type" minOccurs="1" />
+      </xs:all>
+      <xs:attribute name="name" type="xs:string" use="optional" />
+      <xs:attribute name="type" use="optional" default="continuous">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="continuous" />
+            <xs:enumeration value="extrapolate" />
+            <xs:enumeration value="discrete" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="min_max_type">
+    <xs:attribute name="min" type="xs:double" />
+    <xs:attribute name="max" type="xs:double" />
+  </xs:complexType>
+
+  <xs:complexType name="points_type">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="sep" type="xs:string" use="optional" default="," />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="group">
+    <xs:annotation>
+      <xs:documentation>
+        A grouping of variables, also called a sector or view.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="doc" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <!-- this entity use does not allow an index only the name as an attribute -->
+        <xs:element name="entity" minOccurs="0" maxOccurs="unbounded" >
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+      <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="module">
+    <xs:annotation>
+      <xs:documentation>
+        Modules are placeholders in the variables section for submodels. If
+        present, this must appear in every model that references that
+        submodel.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="connect" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="to" type="xs:string" use="required" />
+            <xs:attribute name="from" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <!-- the resource is really only optional if the submodel is contained in the model - otherwise it much refer to location-->
+      <xs:attribute name="resource" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="dimensions">
+    <xs:annotation>
+      <xs:documentation>
+        Dimensions for a specific stock, flow, or aux in a model.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="dim" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="event_poster">
+    <xs:annotation>
+      <xs:documentation>
+        Events based on entity values can be triggered while the model
+        is being simulated. These events are limited to pausing the
+        simulation (default) or stopping the simulation.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded">
+        <xs:element name="threshold">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="event" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="text_box" />
+                    <xs:element ref="image" />
+                    <xs:element ref="video" />
+                    <xs:element ref="sound" />
+                    <xs:element ref="link" />
+                  </xs:choice>
+                  <xs:attribute name="sim_action" use="optional" default="pause">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="pause" />
+                        <xs:enumeration value="stop" />
+                        <xs:enumeration value="message" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="value" type="xs:double" use="required" />
+            <xs:attribute name="direction" use="optional" default="increasing">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="increasing" />
+                  <xs:enumeration value="decreasing" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="repeat" use="optional" default="each">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="each" />
+                  <xs:enumeration value="once" />
+                  <xs:enumeration value="once_ever" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="interval" type="xs:integer" use="optional" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="min" type="xs:double" use="required" />
+      <xs:attribute name="max" type="xs:double" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="views">
+    <xs:annotation>
+      <xs:documentation>
+        List of views or diagrams pertaining to the model.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="style" minOccurs="0" maxOccurs="1" />
+        <xs:element name="view" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:complexContent>
+              <xs:extension base="view_content_type">
+                <xs:attribute name="background" type="xs:string" />
+                <xs:attribute name="zoom" type="xs:double" />
+                <xs:attribute name="scroll_x" type="xs:double" />
+                <xs:attribute name="scroll_y" type="xs:double" />
+                <xs:attribute name="home_page" type="xs:integer" />
+                <xs:attribute name="home_view" type="xs:boolean" />
+                <xs:attribute name="page_width" type="xs:double" />
+                <xs:attribute name="page_height" type="xs:double" />
+                <xs:attribute name="show_pages" type="xs:boolean" />
+                <xs:attribute name="page_orientation">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="landscape" />
+                      <xs:enumeration value="portrait" />
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="page_sequence">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="row" />
+                      <xs:enumeration value="column" />
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="type" type="view_type" default="stock_flow" />
+                <!-- clarify_spec - the following are for popups only -->
+                <xs:attribute name="x" type="xs:int" use="optional" />
+                <xs:attribute name="y" type="xs:int" use="optional" />
+                <xs:attribute name="content" type="xs:string" use="optional" />
+              </xs:extension>
+            </xs:complexContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:simpleType name="view_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="stock_flow"/>
+      <xs:enumeration value="interface"/>
+      <xs:enumeration value="popup"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <xs:simpleType name="menu_action_choices">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="open"/>
+      <xs:enumeration value="close"/>
+      <xs:enumeration value="save"/>
+      <xs:enumeration value="save_as"/>
+      <xs:enumeration value="save_as_image"/>
+      <xs:enumeration value="revert"/>
+      <xs:enumeration value="print_setup"/>
+      <xs:enumeration value="print"/>
+      <xs:enumeration value="print_screen"/>
+      <xs:enumeration value="run"/>
+      <xs:enumeration value="pause"/>
+      <xs:enumeration value="resume"/>
+      <xs:enumeration value="stop"/>
+      <xs:enumeration value="run_restore"/>
+      <xs:enumeration value="restore_all"/>
+      <xs:enumeration value="restore_sliders"/>
+      <xs:enumeration value="restore_knobs"/>
+      <xs:enumeration value="restore_list_inputs"/>
+      <xs:enumeration value="restore_graphical_inputs"/>
+      <xs:enumeration value="restore_switches"/>
+      <xs:enumeration value="restore_numeric_displays"/>
+      <xs:enumeration value="restore_graphs_tables"/>
+      <xs:enumeration value="restore_lamps_gauges"/>
+      <xs:enumeration value="data_manager"/>
+      <xs:enumeration value="save_data_now"/>
+      <xs:enumeration value="import_now"/>
+      <xs:enumeration value="export_now"/>
+      <xs:enumeration value="exit"/>
+      <xs:enumeration value="find"/>
+      <xs:enumeration value="run_specs"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <xs:complexType name="view_content_type">
+    <xs:annotation>
+      <xs:documentation>
+        Content of a view or container
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="style" minOccurs="0" maxOccurs="1" />
+
+      <xs:element name="stock">
+        <xs:complexType>
+          <xs:all>
+            <xs:element ref="shape" minOccurs="0"/>
+          </xs:all>
+          <xs:attribute name="name" type="xs:string" />
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attributeGroup ref="positioning_attributes" />
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="flow">
+        <xs:complexType>
+          <xs:all>
+            <xs:element ref="shape" minOccurs="0"/>
+            <xs:element name="pts">
+              <xs:complexType>
+                <xs:sequence maxOccurs="unbounded">
+                  <xs:element name="pt">
+                    <xs:complexType>
+                      <xs:attribute name="x" type="xs:double" />
+                      <xs:attribute name="y" type="xs:double" />
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:all>
+          <xs:attribute name="name" type="xs:string" />
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attributeGroup ref="positioning_attributes" />
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="aux">
+        <xs:complexType>
+          <xs:all>
+            <xs:element ref="shape" minOccurs="0"/>
+          </xs:all>
+          <xs:attribute name="name" type="xs:string" />
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attributeGroup ref="positioning_attributes" />
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="module">
+        <xs:complexType>
+          <xs:all>
+            <xs:element ref="shape" minOccurs="0"/>
+          </xs:all>
+          <xs:attribute name="name" type="xs:string" />
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attributeGroup ref="positioning_attributes" />
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="group">
+        <xs:complexType>
+          <xs:sequence minOccurs ="0" maxOccurs="unbounded">
+            <xs:element name="item">
+              <xs:complexType>
+                <xs:attribute name="uid" type="xs:int" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="name" type="xs:string" />
+          <xs:attribute name="locked" type="xs:boolean" />
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attributeGroup ref="positioning_attributes" />
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="connector">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="from" minOccurs="1">
+              <xs:complexType mixed="true">
+                <xs:all minOccurs="0">
+                  <xs:element name="alias" minOccurs="0">
+                    <xs:complexType>
+                      <xs:attribute name="uid" type="xs:int" />
+                      <xs:attribute name="x" type="xs:double" />
+                      <xs:attribute name="y" type="xs:double" />
+                    </xs:complexType>
+                  </xs:element>
+                </xs:all>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="to" type="xs:string" minOccurs="1" />
+          </xs:all>
+          <xs:attribute name="uid" type="xs:int" />
+          <xs:attribute name="x" type="xs:double" />
+          <xs:attribute name="y" type="xs:double" />
+          <xs:attribute name="angle" type="xs:double" />
+          <xs:attribute name="delay_mark" type="xs:boolean" use="optional" default="false" />
+          <xs:attribute name="line_style" use="optional" default="solid">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="solid" />
+                <xs:enumeration value="dashed" />
+                <xs:enumeration value="vendor specific" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attributeGroup ref="style_attributes" />
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="alias">
+        <xs:complexType>
+          <xs:all>
+            <xs:element ref="shape" minOccurs="0"/>
+            <xs:element name="of" type="xs:string" minOccurs="1" />
+          </xs:all>
+          <xs:attribute name="uid" type="xs:int" />
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attributeGroup ref="positioning_attributes" />
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element ref="text_box" />
+      <xs:element ref="graphics_frame" />
+
+      <!-- Output objects -->
+      <xs:element name="graph">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="plot" minOccurs="1" maxOccurs="unbounded"/>
+          </xs:choice>
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attribute name="type" type="graph_type" default="time_series"/>
+          <xs:attribute name="title" type="xs:string" use="optional"/>
+          <xs:attribute name="doc" type="xs:string" use="optional"/>
+          <xs:attribute name="show_grid" type="xs:boolean" default="true"/>
+          <xs:attribute name="num_x_grid_lines" type="xs:int" default="0"/>
+          <xs:attribute name="num_y_grid_lines" type="xs:int" default="0"/>
+          <xs:attribute name="num_y_labels" type="xs:int" default="0"/>
+          <xs:attribute name="x_axis_title" type="xs:string" use="optional"/>
+          <xs:attribute name="right_axis_title" type="xs:string" use="optional"/>
+          <xs:attribute name="right_axis_auto_scale" type="xs:boolean" default="true"/>
+          <xs:attribute name="right_axis_multi_scale" type="xs:boolean" default="true"/>
+          <xs:attribute name="left_axis_title" type="xs:string" use="optional"/>
+          <xs:attribute name="left_axis_auto_scale" type="xs:boolean" default="true"/>
+          <xs:attribute name="left_axis_multi_scale" type="xs:boolean" default="true"/>
+          <xs:attribute name="plot_numbers" type="xs:boolean" default="false"/>
+          <xs:attribute name="comparative" type="xs:boolean" default="false"/>
+          <xs:attribute name="from" type="xs:double" use="optional"/>
+          <xs:attribute name="to" type="xs:double" use="optional"/>
+
+        </xs:complexType>
+      </xs:element>
+
+
+      <!-- Output objects -->
+
+      <xs:element name="table">
+        <xs:complexType>
+          <xs:choice>
+            <!-- we expand item inline because it is specialized for the table even though not defined a a separate type elsewhere -->
+            <xs:element name="item" minOccurs="1" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:all>
+                  <!-- note that entity is not optional if type = variable but the conditional logic is not in this xsd-->
+                  <xs:element name="entity" minOccurs="0"  >
+                    <xs:complexType>
+                      <xs:attribute name="name" type="xs:string" use="required" />
+                      <xs:attribute name="index" type="xs:string" use="optional" />
+                    </xs:complexType>
+                  </xs:element>
+                </xs:all>
+                <xs:attributeGroup ref="style_attributes" />
+                <xs:attributeGroup ref="format_attributes" />
+                <xs:attribute name="type" type="table_item_type" default="variable" />
+                <!-- clarify_spec - this is necessary to maintain order but not clearly delineated in the spec -->
+                <xs:attribute name="index" type="xs:int" />
+
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+          <!-- note that default text alignment is right but that is not broken out in style_attributes -->
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attribute name="title" type="xs:string" use="optional"/>
+          <xs:attribute name="doc" type="xs:string" use="optional"/>
+          <xs:attribute name="orientation" type="orientation" default="vertical" />
+          <xs:attribute name="column_width" type="xs:int" use="required"/>
+          <xs:attribute name="blank_column_width" type="xs:int" use="optional"/>
+          <xs:attribute name="report_interval" type="report_interval" use="required"/>
+          <xs:attribute name="report_balances" type="report_balances" default="beginning"/>
+          <xs:attribute name="report_flows" type="report_flows" default="instantaneous"/>
+          <xs:attribute name="comparative" type="xs:boolean" default="false"/>
+          <xs:attribute name="wrap_text" type="xs:boolean" default="false"/>
+          <xs:attributeGroup ref="header_style_attributes"/>
+
+        </xs:complexType>
+      </xs:element>
+
+
+
+
+      <!-- input devices -->
+
+      <xs:element name="button">
+        <xs:complexType>
+          <xs:all>
+            <xs:element ref="image" minOccurs="0" />
+            <xs:element ref="video" minOccurs="0" />
+            <xs:element ref="sound"  minOccurs="0"/>
+            <xs:element name="menu_action" minOccurs ="0">
+              <xs:complexType>
+                <xs:simpleContent>
+                  <xs:extension base="menu_action_choices">
+                    <!-- the following only apply for import_now and export_now - then they are required see spec-->
+                    <xs:attribute name="resource" type="xs:string" use="optional" />
+                    <xs:attribute name="worksheet" type="xs:string" use="optional" />
+                    <xs:attribute name="all" type="xs:boolean" default="false" />
+                    <!-- the following only with save_data_now -->
+                    <xs:attribute name="run_name" type="xs:string" use="optional" />
+                  </xs:extension>
+                </xs:simpleContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element ref="switch_action" minOccurs ="0" />
+            <xs:element ref="popup" minOccurs="0" />
+            <xs:element ref="link" minOccurs="0" />
+          </xs:all>
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attributeGroup ref="positioning_attributes" />
+          <xs:attribute name="transparency" type="transparency_type" default="opaque" />
+          <xs:attribute name="style" default="square">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="square"/>
+                <xs:enumeration value="rounded"/>
+                <xs:enumeration value="capsule"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="label" type="xs:string" use="optional" />
+          <!-- clarify_spec - should list attributes and elements separately clicking_sound is between two elements -->
+          <xs:attribute name="clicking_sound" type="xs:boolean" default="true" />
+
+
+          <xs:attribute name="show_name" type="xs:boolean" use="optional" default="true"/>
+          <xs:attribute name="show_number" type="xs:boolean" use="optional" default="true"/>
+          <xs:attribute name="show_min_max" type="xs:boolean" use="optional" default="true"/>
+          <xs:attribute name="name" type="xs:string" />
+          <!-- clarify_spec - buttons need uids  -->
+          <xs:attribute name="uid" type="xs:int" use="optional" />
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element ref="slider" />
+      <xs:element ref="knob" />
+      <xs:element ref="list_input" />
+      <xs:element ref="numeric_display" />
+      <xs:element ref="switch" />
+      <xs:element ref="graphical_input" />
+      <xs:element ref="stacked_container" />
+
+      <!-- options is also used for file options so is expanded inline here -->
+      <xs:element name="options">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element ref="entity" maxOccurs="unbounded" />
+          </xs:choice>
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attributeGroup ref="positioning_attributes" />
+          <xs:attribute name="show_name" type="xs:boolean" default="false" />
+          <xs:attribute name="clicking_sound" type="xs:boolean" default="false" />
+          <xs:attribute name="layout" default="vertical">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="vertical"/>
+                <xs:enumeration value="horizontal"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="vertical_spacing" type="xs:int" default="2" />
+          <xs:attribute name="horizontal_spacing" type="xs:int" default="2" />
+          <xs:attribute name="uid" type="xs:int" use="required" />
+        </xs:complexType>
+      </xs:element>
+
+
+
+    </xs:choice>
+
+
+    <xs:attribute name="width" type="xs:double" use="optional" />
+    <xs:attribute name="height" type="xs:double" use="optional" />
+
+  </xs:complexType>
+
+
+  <!-- output object type definitions -->
+  <xs:simpleType name="graph_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="time_series"/>
+      <xs:enumeration value="scatter"/>
+      <xs:enumeration value="bar"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="orientation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="horizontal"/>
+      <xs:enumeration value="vertical"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="table_item_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="variable"/>
+      <xs:enumeration value="space"/>
+      <xs:enumeration value="time"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <xs:simpleType name="report_interval">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:double"/>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="DT"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <xs:simpleType name="report_balances">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="beginning"/>
+      <xs:enumeration value="ending"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="report_flows">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="instantaneous"/>
+      <xs:enumeration value="summed"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="slider">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="entity" >
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="index" type="xs:string" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="reset_to" minOccurs="0" />
+      </xs:all>
+      <xs:attribute name="show_name" type="xs:boolean" use="optional" default="true"/>
+      <xs:attribute name="show_number" type="xs:boolean" use="optional" default="true"/>
+      <xs:attribute name="show_min_max" type="xs:boolean" use="optional" default="true"/>
+      <xs:attribute name="name" type="xs:string" />
+      <xs:attribute name="min" type="xs:double" use="optional" />
+      <xs:attribute name="max" type="xs:double" use="optional" />
+      <xs:attribute name="precision" type="xs:double" use="optional" />
+      <xs:attributeGroup ref="style_attributes" />
+      <xs:attributeGroup ref="positioning_attributes" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="knob">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="entity" >
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="index" type="xs:string" use="optional" />
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+      <xs:attribute name="show_name" type="xs:boolean" use="optional" default="true"/>
+      <xs:attribute name="show_number" type="xs:boolean" use="optional" default="true"/>
+      <xs:attribute name="show_min_max" type="xs:boolean" use="optional" default="true"/>
+      <xs:attribute name="name" type="xs:string" />
+      <xs:attribute name="min" type="xs:double" use="optional" />
+      <xs:attribute name="max" type="xs:double" use="optional" />
+      <xs:attribute name="precision" type="xs:double" use="optional" />
+      <xs:attributeGroup ref="style_attributes" />
+      <xs:attributeGroup ref="positioning_attributes" />
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="list_input">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="numeric_input"  maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:all>
+              <!-- note we do not expect value in this case-->
+              <xs:element name="entity" minOccurs="0"  >
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="index" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+            <xs:attribute name="min" type="xs:double" use="optional" />
+            <xs:attribute name="max" type="xs:double" use="optional" />
+            <xs:attribute name="precision" type="xs:double" use="optional" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="column_width" type="xs:int" use="required"/>
+      <!-- the following is required if used in a stacked container -->
+      <xs:attribute name="index" type="xs:int" use="optional"/>
+      <xs:attributeGroup ref="style_attributes" />
+      <xs:attributeGroup ref="positioning_attributes" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="numeric_display">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="entity" >
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="index" type="xs:string" use="optional" />
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+      <xs:attributeGroup ref="format_attributes" />
+      <xs:attributeGroup ref="style_attributes" />
+      <xs:attributeGroup ref="positioning_attributes" />
+      <xs:attribute name="show_name" type="xs:boolean" default="false" />
+      <xs:attribute name="retain_ending_value" type="xs:boolean" default="false" />
+      <xs:attribute name="uid" type="xs:int" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="switch">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="entity" >
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="index" type="xs:string" use="optional" />
+            <xs:attribute name="value" type="xs:double" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="reset_to" minOccurs="0" />
+      </xs:all>
+      <xs:attributeGroup ref="style_attributes" />
+      <xs:attributeGroup ref="positioning_attributes" />
+      <xs:attribute name="show_name" type="xs:boolean" default="false" />
+      <xs:attribute name="clicking_sound" type="xs:boolean" default="false" />
+      <xs:attribute name="switch_style" default="toggle">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="toggle"/>
+            <xs:enumeration value="push_button"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="uid" type="xs:int" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="graphical_input">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="entity" >
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="index" type="xs:string" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="gf" minOccurs="0" />
+      </xs:all>
+      <xs:attributeGroup ref="style_attributes" />
+      <xs:attributeGroup ref="positioning_attributes" />
+      <xs:attribute name="show_name" type="xs:boolean" default="false" />
+      <!--clarify_spec - what uid values are truly required? -->
+      <xs:attribute name="uid" type="xs:int" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+
+
+  <xs:element name="stacked_container">
+    <xs:annotation>
+      <xs:documentation>
+        A stacked container is used to allow XMILE display objects to be
+        stacked on top of one another in flipbook form.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="view_content_type">
+          <xs:attribute name="x" type="xs:double" />
+          <xs:attribute name="y" type="xs:double" />
+          <xs:attribute name="uid" type="xs:int" />
+          <xs:attribute name="visible_index" type="xs:integer" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="plot">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="entity" >
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="index" type="xs:string" use="optional" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="scale" minOccurs="0" />
+      </xs:all>
+      <xs:attribute name="index" type="xs:int" />
+      <xs:attribute name="pen_width" type="xs:int" default="1" />
+      <xs:attribute name="pen_style" type="penstyle" default="solid" />
+      <xs:attribute name="show_y_axis" type="xs:boolean" default="true" />
+      <xs:attribute name="title" type="xs:string" use="required" />
+      <xs:attribute name="right_axis" type="xs:boolean" default="false" />
+
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="penstyle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="solid"/>
+      <xs:enumeration value="dotted"/>
+      <xs:enumeration value="dashed"/>
+      <xs:enumeration value="dot_dashed"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+  <!-- input device type definitions -->
+  <xs:simpleType name="after_choices">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="one_time"/>
+      <xs:enumeration value="one_dt"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="reset_to">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:double">
+          <xs:attribute name="after" type="after_choices"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+
+  <!-- clarify_spec this is not really spelled out completely in the spec -->
+  <xs:element name="switch_action">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="entity" />
+        <xs:element name="group">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="value" type="xs:double" />
+            </xs:all>
+            <xs:attribute name="name" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- clarify_spec this is not really spelled out completely in the spec -->
+  <xs:element name="popup">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="text_box" />
+        <xs:element ref="image" />
+        <xs:element ref="video" />
+        <xs:element ref="sound" />
+        <xs:element ref="link" />
+      </xs:choice>
+      <xs:attributeGroup ref="style_attributes" />
+      <xs:attributeGroup ref="positioning_attributes" />
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="shape">
+    <xs:annotation>
+      <xs:documentation>
+        Optional shape of a given element.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="type" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="rectangle" />
+            <xs:enumeration value="circle" />
+            <xs:enumeration value="name_only" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="width" use="optional" />
+      <xs:attribute name="height" use="optional" />
+      <xs:attribute name="radius" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="behavior">
+    <xs:annotation>
+      <xs:documentation>
+        Simulation behavior definitions that are inherited/cascaded through all
+        models defined in this XMILE document.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="non_negative" type="boolean_or_empty_type" minOccurs="0" />
+        <xs:element name="stock" minOccurs="0">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="non_negative" type="boolean_or_empty_type" minOccurs="0" />
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="flow">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="non_negative" type="boolean_or_empty_type" minOccurs="0" />
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="macro">
+    <xs:annotation>
+      <xs:documentation>
+        Defines macros that provide custom functions or building blocks that
+        can be used in model entity
+        equations.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="parm" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="eqn" type="xs:string" minOccurs="1" maxOccurs="1" />
+        <xs:element name="format" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="doc" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="sim_specs" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="variables" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="views" minOccurs="0" maxOccurs="1" />
+      </xs:choice>
+      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="namespace" type="xs:string" use="optional" />
+      <xs:attribute name="filter" use="optional">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="stock" />
+            <xs:enumeration value="flow" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="applyto" use="optional">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="inflows" />
+            <xs:enumeration value="outflows" />
+            <xs:enumeration value="upstream" />
+            <xs:enumeration value="downstream" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- clarify_spec - note that style is not allowed at the file level  in this xsd -->
+  <xs:element name="style">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="stock" type="style_type" minOccurs="0" />
+        <xs:element name="flow" type="style_type" minOccurs="0" />
+        <xs:element name="aux" type="style_type" minOccurs="0" />
+        <xs:element name="connector" type="style_type" minOccurs="0" />
+        <xs:element name="module" type="style_type" minOccurs="0" />
+        <xs:element name="group" type="style_type" minOccurs="0" />
+      </xs:all>
+      <xs:attributeGroup ref="style_attributes" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="style_type">
+    <xs:attributeGroup ref="style_attributes" />
+    <xs:attributeGroup ref="style_positioning_attributes" />
+  </xs:complexType>
+
+  <xs:attributeGroup name="positioning_attributes">
+    <xs:attribute name="x" type="xs:double" />
+    <xs:attribute name="y" type="xs:double" />
+    <xs:attributeGroup ref="style_positioning_attributes" />
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="style_positioning_attributes">
+    <xs:annotation>
+      <xs:documentation>
+        This is a subset of what can be attached to individual display elements.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="height" type="xs:double" />
+    <xs:attribute name="width" type="xs:double" />
+    <xs:attribute name="label_side">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="top" />
+          <xs:enumeration value="left" />
+          <xs:enumeration value="center" />
+          <xs:enumeration value="bottom" />
+          <xs:enumeration value="right" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="label_angle" type="xs:double" />
+  </xs:attributeGroup>
+
+  <xs:simpleType name="text_align">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="left" />
+      <xs:enumeration value="right" />
+      <xs:enumeration value="center" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="vertical_text_align">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="top" />
+      <xs:enumeration value="bottom" />
+      <xs:enumeration value="center" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:attributeGroup name="style_attributes">
+    <xs:attribute name="border_width" type="border_width_type" />
+    <xs:attribute name="border_color" type="color_type" />
+    <xs:attribute name="border_style" default="none">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="none" />
+          <xs:enumeration value="solid" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="font_family" type="xs:string" />
+    <xs:attribute name="font_style" default="normal">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="normal" />
+          <xs:enumeration value="italic" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="font_weight" default="normal">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="normal" />
+          <xs:enumeration value="bold" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="text_decoration" default="normal">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="normal" />
+          <xs:enumeration value="underline" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="text_align" type="text_align" default="left" />
+    <xs:attribute name="vertical_text_align" type="vertical_text_align" default="center" />
+    <xs:attribute name="font_color" type="color_type" />
+    <xs:attribute name="text_background" type="color_type" />
+    <xs:attribute name="font_size" type="xs:string" />
+    <xs:attribute name="padding" type="xs:string" />
+    <xs:attribute name="color" type="color_type" />
+    <xs:attribute name="background" type="color_type" />
+    <xs:attribute name="z_index" type="xs:integer" />
+  </xs:attributeGroup>
+
+
+  <xs:attributeGroup name="header_style_attributes">
+    <xs:attribute name="header_border_width" type="border_width_type" />
+    <xs:attribute name="header_border_color" type="color_type" />
+    <xs:attribute name="header_border_style" default="none">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="none" />
+          <xs:enumeration value="solid" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="header_font_family" type="xs:string" />
+    <xs:attribute name="header_font_style" default="normal">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="normal" />
+          <xs:enumeration value="italic" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="header_font_weight" default="normal">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="normal" />
+          <xs:enumeration value="bold" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="header_text_decoration" default="normal">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="normal" />
+          <xs:enumeration value="underline" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="header_text_align" type="text_align" default="left" />
+    <xs:attribute name="header_vertical_text_align" type="vertical_text_align" default="center"/>
+    <xs:attribute name="header_font_color" type="color_type" />
+    <xs:attribute name="header_text_background" type="color_type" />
+    <xs:attribute name="header_font_size" type="xs:string" />
+    <xs:attribute name="header_padding" type="xs:string" />
+    <xs:attribute name="header_color" type="color_type" />
+    <xs:attribute name="header_background" type="color_type" />
+    <xs:attribute name="header_z_index" type="xs:integer" />
+  </xs:attributeGroup>
+
+
+  <xs:simpleType name="color_type">
+    <xs:annotation>
+      <xs:documentation>
+        Allows any string to be entered as a color while providing an
+        enumerated list of recommended
+        standard types.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes="standard_color_type xs:string" />
+  </xs:simpleType>
+
+  <xs:simpleType name="standard_color_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="aqua" />
+      <xs:enumeration value="black" />
+      <xs:enumeration value="blue" />
+      <xs:enumeration value="fuchsia" />
+      <xs:enumeration value="gray" />
+      <xs:enumeration value="green" />
+      <xs:enumeration value="lime" />
+      <xs:enumeration value="maroon" />
+      <xs:enumeration value="navy" />
+      <xs:enumeration value="olive" />
+      <xs:enumeration value="purple" />
+      <xs:enumeration value="red" />
+      <xs:enumeration value="silver" />
+      <xs:enumeration value="teal" />
+      <xs:enumeration value="white" />
+      <xs:enumeration value="yellow" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="border_width_type">
+    <xs:annotation>
+      <xs:documentation>
+        Allows any double to be entered as a color while providing an
+        enumerated list of recommended
+        standard types.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes="standard_border_width_type xs:double" />
+  </xs:simpleType>
+
+  <xs:simpleType name="standard_border_width_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="thin" />
+      <xs:enumeration value="thick" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="data_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CSV"/>
+      <xs:enumeration value="XLS"/>
+      <xs:enumeration value="XML"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="frequency_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="automatic"/>
+      <xs:enumeration value="on_demand"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="orientation_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="vertical"/>
+      <xs:enumeration value="horizontal"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:attributeGroup name="data_attributes">
+    <xs:attribute name="type" type="data_type" default="CSV" />
+    <xs:attribute name="enable" type="xs:boolean" default="true" />
+    <xs:attribute name="frequency" type="frequency_type" default="automatic" />
+    <xs:attribute name="orientation" type="orientation_type" default="vertical" />
+    <xs:attribute name="resource" type="xs:string" use="required" />
+    <xs:attribute name="worksheet" type="xs:string" use="optional" />
+  </xs:attributeGroup>
+
+  <xs:element name="data">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="export" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:choice>
+              <xs:element name="all" minOccurs="0" />
+              <xs:element name="table" minOccurs="0">
+                <xs:complexType>
+                  <!-- note that the uid reference here is a string because it may be module qualified -->
+                  <xs:attribute name="uid" type="xs:string" use="required" />
+                  <xs:attribute name="use_settings" type="xs:boolean" default="false" />
+                </xs:complexType>
+              </xs:element>
+            </xs:choice>
+            <xs:attributeGroup ref="data_attributes" />
+            <xs:attribute name="interval" type="report_interval" default="0" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="import" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attributeGroup ref="data_attributes" />
+            <xs:attribute name="interval" type="report_interval" default="0" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  
+
+  <xs:element name="text_box">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attributeGroup ref="style_attributes" />
+          <xs:attributeGroup ref="positioning_attributes" />
+          <xs:attribute name="uid" type="xs:int" />
+          <xs:attribute name="appearance" type="transparency_type" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="transparency_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="opaque"/>
+      <xs:enumeration value="transparent"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <!-- same as image -->
+  <xs:element name="video">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="resource" use="optional" type="xs:string"/>
+          <xs:attribute name="size_to_parent" type="xs:boolean" default="false" />
+          <!--clarify_spec - width and height not always necessary?-->
+          <xs:attribute name="width" type="xs:int" use="optional" />
+          <xs:attribute name="height" type="xs:int" use="optional" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="graphics_frame">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="video" />
+        <xs:element ref="image" />
+      </xs:choice>
+      <xs:attributeGroup ref="style_attributes" />
+      <xs:attributeGroup ref="positioning_attributes" />
+      <xs:attribute name="uid" type="xs:int" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <!-- almost same as image -->
+  <xs:element name="sound">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="resource" use="optional" type="xs:string"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="link">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="x" type="xs:double" default="0" />
+          <xs:attribute name="y" type="xs:double" default="0" />
+          <xs:attribute name="zoom" type="xs:double" default="100" />
+          <xs:attribute name="effect" default="none">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="none"/>
+                <xs:enumeration value="dissolve"/>
+                <xs:enumeration value="checkerboard"/>
+                <xs:enumeration value="bars"/>
+                <xs:enumeration value="wipe_left"/>
+                <xs:enumeration value="wipe_right"/>
+                <xs:enumeration value="wipe_top"/>
+                <xs:enumeration value="wipe_bottom"/>
+                <xs:enumeration value="wipe_clockwise"/>
+                <xs:enumeration value="wipe_counterclockwise"/>
+                <xs:enumeration value="iris_in"/>
+                <xs:enumeration value="iris_out"/>
+                <xs:enumeration value="doors_close"/>
+                <xs:enumeration value="doors_open"/>
+                <xs:enumeration value="venetian_left"/>
+                <xs:enumeration value="venetian_right"/>
+                <xs:enumeration value="venetian_top"/>
+                <xs:enumeration value="venetian_bottom"/>
+                <xs:enumeration value="push_bottom"/>
+                <xs:enumeration value="push_top"/>
+                <xs:enumeration value="push_left"/>
+                <xs:enumeration value="push_right"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="to_black" type="xs:boolean" default="false" />
+          <!-- there is some complexity in the specification of the target - see the specification
+                     the validity of the target string is not checked by this xsd -->
+          <xs:attribute name="target" type="xs:string" use="required" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="empty_type">
+    <xs:complexContent>
+      <xs:restriction base="xs:anyType" />
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="boolean_or_empty_type">
+    <xs:complexContent>
+      <xs:restriction base="xs:anyType" />
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>

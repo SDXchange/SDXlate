@@ -1,0 +1,36 @@
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <!-- common -->
+        <xs:element name="eqn" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="mathml" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="units" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="doc" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="gf" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="dimensions" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="event_poster" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="scale" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="range" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="format" minOccurs="0" maxOccurs="1" />
+
+        <!-- for arrays.  necessarily repeats some of the above elements which may vary per subscript -->
+        <xs:element name="element" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element name="eqn" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element name="mathml" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element ref="gf" minOccurs="0" maxOccurs="1" />
+              <xs:element ref="event_poster" minOccurs="0" maxOccurs="1" />
+            </xs:choice>
+            <xs:attribute name="subscript" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+
+      <xs:attribute name="name" type="xs:string" use="optional" />
+      <xs:attribute name="access" type="access_type" use="optional" />
+      <xs:attribute name="autoexport" type="xs:boolean" use="optional" default="false" />
+      <xs:attribute name="subscript" type="xs:string" use="optional" />
+
+      <!-- specific attributes for aux -->
+      <xs:attribute name="flow_concept" type="xs:boolean" default="false" />
+    </xs:complexType>
