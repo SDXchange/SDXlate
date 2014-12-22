@@ -24,6 +24,10 @@ tokens {
   LEVEL;
   IVALUE;
   EQN;
+  PLOTVLIST;
+  PLOTVAR;
+  SCALE;
+  VIEW;
   }
   
 @header {
@@ -35,25 +39,24 @@ import java.util.HashMap;
 @lexer::header {package examples;}
 
 prog
-	: macroDef* defaultModule? namedModule* controlModule? NEWLINE* -> ^(DOCUMENT controlModule? ^(MODEL defaultModule? namedModule*)  macroDef* ) 
+	: macroDef* defaultModule? namedModule* (controlSector (controlStat | comment )+ viewSpec*)? NEWLINE* -> ^(DOCUMENT ^(CONTROL controlStat*) ^(MODEL (defaultModule ^(VIEW viewSpec*)?)? namedModule*)  macroDef* ) 
 	;
  	
 controlModule
- 	:	controlSector (controlStat | comment )+ -> ^(CONTROL  controlStat+)
+ 	:	controlSector (controlStat | comment )+ viewSpec*-> ^(CONTROL  controlStat+) ^(VIEW viewSpec*)
  	;
  	   	 	             
 controlStat   
     :	simSpec 
     |   runSpec ->
-    |   viewSpec ->
     ;
-    
+        
 defaultModule
-	:	(definition | comment)+ -> ^(MODULE ID["default"] ^(VARIABLES definition+))
+	:	(definition | comment)+ -> ^(MODULE ID["default"] ^(VARIABLES definition+) )
 	;
 	    
 namedModule  
-    	:	sector (definition | comment)+ -> ^(MODULE sector ^(VARIABLES definition+))
+    	:	sector (definition | comment)+ -> ^(MODULE sector ^(VARIABLES definition+) )
     	;
     	    
 definition
@@ -75,9 +78,29 @@ controlSector
  	
  		 	    
 viewSpec
-  	:	PLOT WS+ graphAssign ((','|'/') graphAssign)* NEWLINE
-    	|   	PRINT WS+ varList NEWLINE
-    	;    
+  	:	PLOT WS+ plotVarList (('/') plotVarList)* NEWLINE -> ^(PLOT plotVarList+)
+    |   	PRINT WS+ varList NEWLINE ->
+    ;    
+
+plotVarList
+ 	:   scaleSpec (',' scaleSpec )* -> ^(PLOTVLIST scaleSpec+)
+    ;
+    
+scaleSpec 
+	: ( plotVar (scaleRange)?) -> ^(PLOTVAR plotVar scaleRange?)
+	;
+    
+plotVar : ID '=' plotChar -> ID
+	;
+
+plotChar:   ID|NUMBER|'+'|'*'|'-' ->
+	;
+    
+scaleRange : '(' min ',' max ')'  -> ^(SCALE min max)
+	 ;  		 	    
+
+min: NUMBER;
+max: NUMBER;
     
 runSpec	
     	:	RUN lineComment? NEWLINE
@@ -104,9 +127,7 @@ macroEnd
 formalParams
 	:     	ID (',' ID)* -> ^(FORMAL_PARAMS ID*)
 	;
-graphAssign
-  	:	ID ('=' drawChar drawInterval? )? 
-  	;
+
 paramAssignment
     	:	ID '=' expr -> ^('=' ID expr)
     	;        
@@ -144,7 +165,7 @@ auxDef
 	;
 
 tableFunction
- 	: expol=('TABLE'| 'TABXT' | 'TABPL' ) '(' tName=ID ',' eqId=ID timeExt? ',' xMin=NUMBER ',' xMax=NUMBER ',' step=NUMBER ')'-> ^(EQN $eqId) ID[$tName.text] ^(XCOORDS ID[$tName.text] $expol $xMin $xMax $step)
+ 	: expol=('TABLE'| 'TABXT' | 'TABPL'| 'TABHL' ) '(' tName=ID ',' eqId=ID timeExt? ',' xMin=NUMBER ',' xMax=NUMBER ',' step=NUMBER ')'-> ^(EQN $eqId) ID[$tName.text] ^(XCOORDS ID[$tName.text] $expol $xMin $xMax $step)
  	;
 
 
@@ -165,7 +186,7 @@ comment
  	;
 
 rangeList 
-	:	 NUMBER ((','|'/') NUMBER)*
+	:	 NUMBER ((','|'/') NUMBER)* -> NUMBER+ 
 	;
 
 eqn

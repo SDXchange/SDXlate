@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 ./examples/Dynbare.g 2014-11-30 20:30:26
+// $ANTLR 3.5.2 ./examples/Dynbare.g 2014-12-16 23:20:11
 package examples;
 
 import org.antlr.runtime.*;
@@ -9,10 +9,6 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class DynbareLexer extends Lexer {
 	public static final int EOF=-1;
-	public static final int T__37=37;
-	public static final int T__38=38;
-	public static final int T__39=39;
-	public static final int T__40=40;
 	public static final int T__41=41;
 	public static final int T__42=42;
 	public static final int T__43=43;
@@ -30,6 +26,11 @@ public class DynbareLexer extends Lexer {
 	public static final int T__55=55;
 	public static final int T__56=56;
 	public static final int T__57=57;
+	public static final int T__58=58;
+	public static final int T__59=59;
+	public static final int T__60=60;
+	public static final int T__61=61;
+	public static final int T__62=62;
 	public static final int AUX=4;
 	public static final int CONST=5;
 	public static final int CONTROL=6;
@@ -52,17 +53,21 @@ public class DynbareLexer extends Lexer {
 	public static final int NUMBER=23;
 	public static final int PARAMS=24;
 	public static final int PLOT=25;
-	public static final int PRINT=26;
-	public static final int PTS=27;
-	public static final int RATE=28;
-	public static final int RUN=29;
-	public static final int SECTOR=30;
-	public static final int SPEC=31;
-	public static final int TAUX=32;
-	public static final int VARIABLES=33;
-	public static final int WS=34;
-	public static final int XCOORDS=35;
-	public static final int YCOORDS=36;
+	public static final int PLOTVAR=26;
+	public static final int PLOTVLIST=27;
+	public static final int PRINT=28;
+	public static final int PTS=29;
+	public static final int RATE=30;
+	public static final int RUN=31;
+	public static final int SCALE=32;
+	public static final int SECTOR=33;
+	public static final int SPEC=34;
+	public static final int TAUX=35;
+	public static final int VARIABLES=36;
+	public static final int VIEW=37;
+	public static final int WS=38;
+	public static final int XCOORDS=39;
+	public static final int YCOORDS=40;
 
 	// delegates
 	// delegators
@@ -79,95 +84,15 @@ public class DynbareLexer extends Lexer {
 	}
 	@Override public String getGrammarFileName() { return "./examples/Dynbare.g"; }
 
-	// $ANTLR start "T__37"
-	public final void mT__37() throws RecognitionException {
-		try {
-			int _type = T__37;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:4:7: ( '(' )
-			// ./examples/Dynbare.g:4:9: '('
-			{
-			match('('); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "T__37"
-
-	// $ANTLR start "T__38"
-	public final void mT__38() throws RecognitionException {
-		try {
-			int _type = T__38;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:5:7: ( ')' )
-			// ./examples/Dynbare.g:5:9: ')'
-			{
-			match(')'); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "T__38"
-
-	// $ANTLR start "T__39"
-	public final void mT__39() throws RecognitionException {
-		try {
-			int _type = T__39;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:6:7: ( '*' )
-			// ./examples/Dynbare.g:6:9: '*'
-			{
-			match('*'); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "T__39"
-
-	// $ANTLR start "T__40"
-	public final void mT__40() throws RecognitionException {
-		try {
-			int _type = T__40;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:7:7: ( '+' )
-			// ./examples/Dynbare.g:7:9: '+'
-			{
-			match('+'); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "T__40"
-
 	// $ANTLR start "T__41"
 	public final void mT__41() throws RecognitionException {
 		try {
 			int _type = T__41;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:8:7: ( ',' )
-			// ./examples/Dynbare.g:8:9: ','
+			// ./examples/Dynbare.g:4:7: ( '(' )
+			// ./examples/Dynbare.g:4:9: '('
 			{
-			match(','); 
+			match('('); 
 			}
 
 			state.type = _type;
@@ -184,10 +109,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__42;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:9:7: ( '-' )
-			// ./examples/Dynbare.g:9:9: '-'
+			// ./examples/Dynbare.g:5:7: ( ')' )
+			// ./examples/Dynbare.g:5:9: ')'
 			{
-			match('-'); 
+			match(')'); 
 			}
 
 			state.type = _type;
@@ -204,10 +129,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__43;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:10:7: ( '/' )
-			// ./examples/Dynbare.g:10:9: '/'
+			// ./examples/Dynbare.g:6:7: ( '*' )
+			// ./examples/Dynbare.g:6:9: '*'
 			{
-			match('/'); 
+			match('*'); 
 			}
 
 			state.type = _type;
@@ -224,10 +149,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__44;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:11:7: ( '=' )
-			// ./examples/Dynbare.g:11:9: '='
+			// ./examples/Dynbare.g:7:7: ( '+' )
+			// ./examples/Dynbare.g:7:9: '+'
 			{
-			match('='); 
+			match('+'); 
 			}
 
 			state.type = _type;
@@ -244,10 +169,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__45;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:12:7: ( 'A' )
-			// ./examples/Dynbare.g:12:9: 'A'
+			// ./examples/Dynbare.g:8:7: ( ',' )
+			// ./examples/Dynbare.g:8:9: ','
 			{
-			match('A'); 
+			match(','); 
 			}
 
 			state.type = _type;
@@ -264,10 +189,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__46;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:13:7: ( 'C' )
-			// ./examples/Dynbare.g:13:9: 'C'
+			// ./examples/Dynbare.g:9:7: ( '-' )
+			// ./examples/Dynbare.g:9:9: '-'
 			{
-			match('C'); 
+			match('-'); 
 			}
 
 			state.type = _type;
@@ -284,10 +209,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__47;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:14:7: ( 'L' )
-			// ./examples/Dynbare.g:14:9: 'L'
+			// ./examples/Dynbare.g:10:7: ( '/' )
+			// ./examples/Dynbare.g:10:9: '/'
 			{
-			match('L'); 
+			match('/'); 
 			}
 
 			state.type = _type;
@@ -304,10 +229,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__48;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:15:7: ( 'N' )
-			// ./examples/Dynbare.g:15:9: 'N'
+			// ./examples/Dynbare.g:11:7: ( '=' )
+			// ./examples/Dynbare.g:11:9: '='
 			{
-			match('N'); 
+			match('='); 
 			}
 
 			state.type = _type;
@@ -324,10 +249,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__49;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:16:7: ( 'P' )
-			// ./examples/Dynbare.g:16:9: 'P'
+			// ./examples/Dynbare.g:12:7: ( 'A' )
+			// ./examples/Dynbare.g:12:9: 'A'
 			{
-			match('P'); 
+			match('A'); 
 			}
 
 			state.type = _type;
@@ -344,10 +269,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__50;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:17:7: ( 'R' )
-			// ./examples/Dynbare.g:17:9: 'R'
+			// ./examples/Dynbare.g:13:7: ( 'C' )
+			// ./examples/Dynbare.g:13:9: 'C'
 			{
-			match('R'); 
+			match('C'); 
 			}
 
 			state.type = _type;
@@ -364,10 +289,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__51;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:18:7: ( 'T' )
-			// ./examples/Dynbare.g:18:9: 'T'
+			// ./examples/Dynbare.g:14:7: ( 'L' )
+			// ./examples/Dynbare.g:14:9: 'L'
 			{
-			match('T'); 
+			match('L'); 
 			}
 
 			state.type = _type;
@@ -384,11 +309,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__52;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:19:7: ( 'TABLE' )
-			// ./examples/Dynbare.g:19:9: 'TABLE'
+			// ./examples/Dynbare.g:15:7: ( 'N' )
+			// ./examples/Dynbare.g:15:9: 'N'
 			{
-			match("TABLE"); 
-
+			match('N'); 
 			}
 
 			state.type = _type;
@@ -405,11 +329,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__53;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:20:7: ( 'TABPL' )
-			// ./examples/Dynbare.g:20:9: 'TABPL'
+			// ./examples/Dynbare.g:16:7: ( 'P' )
+			// ./examples/Dynbare.g:16:9: 'P'
 			{
-			match("TABPL"); 
-
+			match('P'); 
 			}
 
 			state.type = _type;
@@ -426,11 +349,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__54;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:21:7: ( 'TABXT' )
-			// ./examples/Dynbare.g:21:9: 'TABXT'
+			// ./examples/Dynbare.g:17:7: ( 'R' )
+			// ./examples/Dynbare.g:17:9: 'R'
 			{
-			match("TABXT"); 
-
+			match('R'); 
 			}
 
 			state.type = _type;
@@ -447,10 +369,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__55;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:22:7: ( '[' )
-			// ./examples/Dynbare.g:22:9: '['
+			// ./examples/Dynbare.g:18:7: ( 'T' )
+			// ./examples/Dynbare.g:18:9: 'T'
 			{
-			match('['); 
+			match('T'); 
 			}
 
 			state.type = _type;
@@ -467,10 +389,11 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__56;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:23:7: ( '\\.' )
-			// ./examples/Dynbare.g:23:9: '\\.'
+			// ./examples/Dynbare.g:19:7: ( 'TABHL' )
+			// ./examples/Dynbare.g:19:9: 'TABHL'
 			{
-			match('.'); 
+			match("TABHL"); 
+
 			}
 
 			state.type = _type;
@@ -487,10 +410,11 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = T__57;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:24:7: ( ']' )
-			// ./examples/Dynbare.g:24:9: ']'
+			// ./examples/Dynbare.g:20:7: ( 'TABLE' )
+			// ./examples/Dynbare.g:20:9: 'TABLE'
 			{
-			match(']'); 
+			match("TABLE"); 
+
 			}
 
 			state.type = _type;
@@ -502,15 +426,117 @@ public class DynbareLexer extends Lexer {
 	}
 	// $ANTLR end "T__57"
 
+	// $ANTLR start "T__58"
+	public final void mT__58() throws RecognitionException {
+		try {
+			int _type = T__58;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ./examples/Dynbare.g:21:7: ( 'TABPL' )
+			// ./examples/Dynbare.g:21:9: 'TABPL'
+			{
+			match("TABPL"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "T__58"
+
+	// $ANTLR start "T__59"
+	public final void mT__59() throws RecognitionException {
+		try {
+			int _type = T__59;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ./examples/Dynbare.g:22:7: ( 'TABXT' )
+			// ./examples/Dynbare.g:22:9: 'TABXT'
+			{
+			match("TABXT"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "T__59"
+
+	// $ANTLR start "T__60"
+	public final void mT__60() throws RecognitionException {
+		try {
+			int _type = T__60;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ./examples/Dynbare.g:23:7: ( '[' )
+			// ./examples/Dynbare.g:23:9: '['
+			{
+			match('['); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "T__60"
+
+	// $ANTLR start "T__61"
+	public final void mT__61() throws RecognitionException {
+		try {
+			int _type = T__61;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ./examples/Dynbare.g:24:7: ( '\\.' )
+			// ./examples/Dynbare.g:24:9: '\\.'
+			{
+			match('.'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "T__61"
+
+	// $ANTLR start "T__62"
+	public final void mT__62() throws RecognitionException {
+		try {
+			int _type = T__62;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// ./examples/Dynbare.g:25:7: ( ']' )
+			// ./examples/Dynbare.g:25:9: ']'
+			{
+			match(']'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "T__62"
+
 	// $ANTLR start "NUMBER"
 	public final void mNUMBER() throws RecognitionException {
 		try {
 			int _type = NUMBER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:209:9: ( ( '+' | '-' )? ( ( '0' .. '9' )* '\\.' )? ( '0' .. '9' )+ ( ( 'E' | 'e' ) ( '+' | '-' )? ( '0' .. '9' )+ )? )
-			// ./examples/Dynbare.g:209:13: ( '+' | '-' )? ( ( '0' .. '9' )* '\\.' )? ( '0' .. '9' )+ ( ( 'E' | 'e' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
+			// ./examples/Dynbare.g:230:9: ( ( '+' | '-' )? ( ( '0' .. '9' )* '\\.' )? ( '0' .. '9' )+ ( ( 'E' | 'e' ) ( '+' | '-' )? ( '0' .. '9' )+ )? )
+			// ./examples/Dynbare.g:230:13: ( '+' | '-' )? ( ( '0' .. '9' )* '\\.' )? ( '0' .. '9' )+ ( ( 'E' | 'e' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
 			{
-			// ./examples/Dynbare.g:209:13: ( '+' | '-' )?
+			// ./examples/Dynbare.g:230:13: ( '+' | '-' )?
 			int alt1=2;
 			int LA1_0 = input.LA(1);
 			if ( (LA1_0=='+'||LA1_0=='-') ) {
@@ -533,14 +559,14 @@ public class DynbareLexer extends Lexer {
 
 			}
 
-			// ./examples/Dynbare.g:209:23: ( ( '0' .. '9' )* '\\.' )?
+			// ./examples/Dynbare.g:230:23: ( ( '0' .. '9' )* '\\.' )?
 			int alt3=2;
 			alt3 = dfa3.predict(input);
 			switch (alt3) {
 				case 1 :
-					// ./examples/Dynbare.g:209:24: ( '0' .. '9' )* '\\.'
+					// ./examples/Dynbare.g:230:24: ( '0' .. '9' )* '\\.'
 					{
-					// ./examples/Dynbare.g:209:24: ( '0' .. '9' )*
+					// ./examples/Dynbare.g:230:24: ( '0' .. '9' )*
 					loop2:
 					while (true) {
 						int alt2=2;
@@ -575,7 +601,7 @@ public class DynbareLexer extends Lexer {
 
 			}
 
-			// ./examples/Dynbare.g:209:41: ( '0' .. '9' )+
+			// ./examples/Dynbare.g:230:41: ( '0' .. '9' )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -608,7 +634,7 @@ public class DynbareLexer extends Lexer {
 				cnt4++;
 			}
 
-			// ./examples/Dynbare.g:209:52: ( ( 'E' | 'e' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
+			// ./examples/Dynbare.g:230:52: ( ( 'E' | 'e' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
 			int alt7=2;
 			int LA7_0 = input.LA(1);
 			if ( (LA7_0=='E'||LA7_0=='e') ) {
@@ -616,7 +642,7 @@ public class DynbareLexer extends Lexer {
 			}
 			switch (alt7) {
 				case 1 :
-					// ./examples/Dynbare.g:209:53: ( 'E' | 'e' ) ( '+' | '-' )? ( '0' .. '9' )+
+					// ./examples/Dynbare.g:230:53: ( 'E' | 'e' ) ( '+' | '-' )? ( '0' .. '9' )+
 					{
 					if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
 						input.consume();
@@ -626,7 +652,7 @@ public class DynbareLexer extends Lexer {
 						recover(mse);
 						throw mse;
 					}
-					// ./examples/Dynbare.g:209:62: ( '+' | '-' )?
+					// ./examples/Dynbare.g:230:62: ( '+' | '-' )?
 					int alt5=2;
 					int LA5_0 = input.LA(1);
 					if ( (LA5_0=='+'||LA5_0=='-') ) {
@@ -649,7 +675,7 @@ public class DynbareLexer extends Lexer {
 
 					}
 
-					// ./examples/Dynbare.g:209:72: ( '0' .. '9' )+
+					// ./examples/Dynbare.g:230:72: ( '0' .. '9' )+
 					int cnt6=0;
 					loop6:
 					while (true) {
@@ -703,7 +729,7 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = JKL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:210:6: ( ( 'K' ( 'L' )? ) | ( 'J' ( 'K' )? ) )
+			// ./examples/Dynbare.g:231:6: ( ( 'K' ( 'L' )? ) | ( 'J' ( 'K' )? ) )
 			int alt10=2;
 			int LA10_0 = input.LA(1);
 			if ( (LA10_0=='K') ) {
@@ -721,13 +747,13 @@ public class DynbareLexer extends Lexer {
 
 			switch (alt10) {
 				case 1 :
-					// ./examples/Dynbare.g:210:8: ( 'K' ( 'L' )? )
+					// ./examples/Dynbare.g:231:8: ( 'K' ( 'L' )? )
 					{
-					// ./examples/Dynbare.g:210:8: ( 'K' ( 'L' )? )
-					// ./examples/Dynbare.g:210:9: 'K' ( 'L' )?
+					// ./examples/Dynbare.g:231:8: ( 'K' ( 'L' )? )
+					// ./examples/Dynbare.g:231:9: 'K' ( 'L' )?
 					{
 					match('K'); 
-					// ./examples/Dynbare.g:210:13: ( 'L' )?
+					// ./examples/Dynbare.g:231:13: ( 'L' )?
 					int alt8=2;
 					int LA8_0 = input.LA(1);
 					if ( (LA8_0=='L') ) {
@@ -735,7 +761,7 @@ public class DynbareLexer extends Lexer {
 					}
 					switch (alt8) {
 						case 1 :
-							// ./examples/Dynbare.g:210:14: 'L'
+							// ./examples/Dynbare.g:231:14: 'L'
 							{
 							match('L'); 
 							}
@@ -748,13 +774,13 @@ public class DynbareLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// ./examples/Dynbare.g:210:23: ( 'J' ( 'K' )? )
+					// ./examples/Dynbare.g:231:23: ( 'J' ( 'K' )? )
 					{
-					// ./examples/Dynbare.g:210:23: ( 'J' ( 'K' )? )
-					// ./examples/Dynbare.g:210:24: 'J' ( 'K' )?
+					// ./examples/Dynbare.g:231:23: ( 'J' ( 'K' )? )
+					// ./examples/Dynbare.g:231:24: 'J' ( 'K' )?
 					{
 					match('J'); 
-					// ./examples/Dynbare.g:210:28: ( 'K' )?
+					// ./examples/Dynbare.g:231:28: ( 'K' )?
 					int alt9=2;
 					int LA9_0 = input.LA(1);
 					if ( (LA9_0=='K') ) {
@@ -762,7 +788,7 @@ public class DynbareLexer extends Lexer {
 					}
 					switch (alt9) {
 						case 1 :
-							// ./examples/Dynbare.g:210:29: 'K'
+							// ./examples/Dynbare.g:231:29: 'K'
 							{
 							match('K'); 
 							}
@@ -790,8 +816,8 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = NOTE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:211:6: ( 'NOTE' )
-			// ./examples/Dynbare.g:211:9: 'NOTE'
+			// ./examples/Dynbare.g:232:6: ( 'NOTE' )
+			// ./examples/Dynbare.g:232:9: 'NOTE'
 			{
 			match("NOTE"); 
 
@@ -811,8 +837,8 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = PLOT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:212:9: ( 'PLOT' )
-			// ./examples/Dynbare.g:212:12: 'PLOT'
+			// ./examples/Dynbare.g:233:9: ( 'PLOT' )
+			// ./examples/Dynbare.g:233:12: 'PLOT'
 			{
 			match("PLOT"); 
 
@@ -832,8 +858,8 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = RUN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:213:9: ( 'RUN' )
-			// ./examples/Dynbare.g:213:11: 'RUN'
+			// ./examples/Dynbare.g:234:9: ( 'RUN' )
+			// ./examples/Dynbare.g:234:11: 'RUN'
 			{
 			match("RUN"); 
 
@@ -853,8 +879,8 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = SPEC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:214:9: ( 'SPEC' )
-			// ./examples/Dynbare.g:214:11: 'SPEC'
+			// ./examples/Dynbare.g:235:9: ( 'SPEC' )
+			// ./examples/Dynbare.g:235:11: 'SPEC'
 			{
 			match("SPEC"); 
 
@@ -874,8 +900,8 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = PRINT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:215:9: ( 'PRINT' )
-			// ./examples/Dynbare.g:215:11: 'PRINT'
+			// ./examples/Dynbare.g:236:9: ( 'PRINT' )
+			// ./examples/Dynbare.g:236:11: 'PRINT'
 			{
 			match("PRINT"); 
 
@@ -895,8 +921,8 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = SECTOR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:216:8: ( 'SECTOR' )
-			// ./examples/Dynbare.g:216:10: 'SECTOR'
+			// ./examples/Dynbare.g:237:8: ( 'SECTOR' )
+			// ./examples/Dynbare.g:237:10: 'SECTOR'
 			{
 			match("SECTOR"); 
 
@@ -916,8 +942,8 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = MACRO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:217:9: ( 'MACRO' )
-			// ./examples/Dynbare.g:217:11: 'MACRO'
+			// ./examples/Dynbare.g:238:9: ( 'MACRO' )
+			// ./examples/Dynbare.g:238:11: 'MACRO'
 			{
 			match("MACRO"); 
 
@@ -937,8 +963,8 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = MEND;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:218:9: ( 'MEND' )
-			// ./examples/Dynbare.g:218:11: 'MEND'
+			// ./examples/Dynbare.g:239:9: ( 'MEND' )
+			// ./examples/Dynbare.g:239:11: 'MEND'
 			{
 			match("MEND"); 
 
@@ -958,8 +984,8 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = INTRN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:219:9: ( 'INTRN' )
-			// ./examples/Dynbare.g:219:11: 'INTRN'
+			// ./examples/Dynbare.g:240:9: ( 'INTRN' )
+			// ./examples/Dynbare.g:240:11: 'INTRN'
 			{
 			match("INTRN"); 
 
@@ -979,8 +1005,8 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:220:8: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
-			// ./examples/Dynbare.g:220:12: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+			// ./examples/Dynbare.g:241:8: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
+			// ./examples/Dynbare.g:241:12: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -990,7 +1016,7 @@ public class DynbareLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// ./examples/Dynbare.g:220:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+			// ./examples/Dynbare.g:241:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
 			loop11:
 			while (true) {
 				int alt11=2;
@@ -1035,10 +1061,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = NEWLINE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:221:8: ( ( '\\r' )? '\\n' )
-			// ./examples/Dynbare.g:221:9: ( '\\r' )? '\\n'
+			// ./examples/Dynbare.g:242:8: ( ( '\\r' )? '\\n' )
+			// ./examples/Dynbare.g:242:9: ( '\\r' )? '\\n'
 			{
-			// ./examples/Dynbare.g:221:9: ( '\\r' )?
+			// ./examples/Dynbare.g:242:9: ( '\\r' )?
 			int alt12=2;
 			int LA12_0 = input.LA(1);
 			if ( (LA12_0=='\r') ) {
@@ -1046,7 +1072,7 @@ public class DynbareLexer extends Lexer {
 			}
 			switch (alt12) {
 				case 1 :
-					// ./examples/Dynbare.g:221:9: '\\r'
+					// ./examples/Dynbare.g:242:9: '\\r'
 					{
 					match('\r'); 
 					}
@@ -1071,10 +1097,10 @@ public class DynbareLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./examples/Dynbare.g:222:5: ( ( ' ' | '\\t' )+ )
-			// ./examples/Dynbare.g:222:9: ( ' ' | '\\t' )+
+			// ./examples/Dynbare.g:243:5: ( ( ' ' | '\\t' )+ )
+			// ./examples/Dynbare.g:243:9: ( ' ' | '\\t' )+
 			{
-			// ./examples/Dynbare.g:222:9: ( ' ' | '\\t' )+
+			// ./examples/Dynbare.g:243:9: ( ' ' | '\\t' )+
 			int cnt13=0;
 			loop13:
 			while (true) {
@@ -1120,250 +1146,257 @@ public class DynbareLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// ./examples/Dynbare.g:1:8: ( T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | NUMBER | JKL | NOTE | PLOT | RUN | SPEC | PRINT | SECTOR | MACRO | MEND | INTRN | ID | NEWLINE | WS )
-		int alt14=35;
+		// ./examples/Dynbare.g:1:8: ( T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | NUMBER | JKL | NOTE | PLOT | RUN | SPEC | PRINT | SECTOR | MACRO | MEND | INTRN | ID | NEWLINE | WS )
+		int alt14=36;
 		alt14 = dfa14.predict(input);
 		switch (alt14) {
 			case 1 :
-				// ./examples/Dynbare.g:1:10: T__37
-				{
-				mT__37(); 
-
-				}
-				break;
-			case 2 :
-				// ./examples/Dynbare.g:1:16: T__38
-				{
-				mT__38(); 
-
-				}
-				break;
-			case 3 :
-				// ./examples/Dynbare.g:1:22: T__39
-				{
-				mT__39(); 
-
-				}
-				break;
-			case 4 :
-				// ./examples/Dynbare.g:1:28: T__40
-				{
-				mT__40(); 
-
-				}
-				break;
-			case 5 :
-				// ./examples/Dynbare.g:1:34: T__41
+				// ./examples/Dynbare.g:1:10: T__41
 				{
 				mT__41(); 
 
 				}
 				break;
-			case 6 :
-				// ./examples/Dynbare.g:1:40: T__42
+			case 2 :
+				// ./examples/Dynbare.g:1:16: T__42
 				{
 				mT__42(); 
 
 				}
 				break;
-			case 7 :
-				// ./examples/Dynbare.g:1:46: T__43
+			case 3 :
+				// ./examples/Dynbare.g:1:22: T__43
 				{
 				mT__43(); 
 
 				}
 				break;
-			case 8 :
-				// ./examples/Dynbare.g:1:52: T__44
+			case 4 :
+				// ./examples/Dynbare.g:1:28: T__44
 				{
 				mT__44(); 
 
 				}
 				break;
-			case 9 :
-				// ./examples/Dynbare.g:1:58: T__45
+			case 5 :
+				// ./examples/Dynbare.g:1:34: T__45
 				{
 				mT__45(); 
 
 				}
 				break;
-			case 10 :
-				// ./examples/Dynbare.g:1:64: T__46
+			case 6 :
+				// ./examples/Dynbare.g:1:40: T__46
 				{
 				mT__46(); 
 
 				}
 				break;
-			case 11 :
-				// ./examples/Dynbare.g:1:70: T__47
+			case 7 :
+				// ./examples/Dynbare.g:1:46: T__47
 				{
 				mT__47(); 
 
 				}
 				break;
-			case 12 :
-				// ./examples/Dynbare.g:1:76: T__48
+			case 8 :
+				// ./examples/Dynbare.g:1:52: T__48
 				{
 				mT__48(); 
 
 				}
 				break;
-			case 13 :
-				// ./examples/Dynbare.g:1:82: T__49
+			case 9 :
+				// ./examples/Dynbare.g:1:58: T__49
 				{
 				mT__49(); 
 
 				}
 				break;
-			case 14 :
-				// ./examples/Dynbare.g:1:88: T__50
+			case 10 :
+				// ./examples/Dynbare.g:1:64: T__50
 				{
 				mT__50(); 
 
 				}
 				break;
-			case 15 :
-				// ./examples/Dynbare.g:1:94: T__51
+			case 11 :
+				// ./examples/Dynbare.g:1:70: T__51
 				{
 				mT__51(); 
 
 				}
 				break;
-			case 16 :
-				// ./examples/Dynbare.g:1:100: T__52
+			case 12 :
+				// ./examples/Dynbare.g:1:76: T__52
 				{
 				mT__52(); 
 
 				}
 				break;
-			case 17 :
-				// ./examples/Dynbare.g:1:106: T__53
+			case 13 :
+				// ./examples/Dynbare.g:1:82: T__53
 				{
 				mT__53(); 
 
 				}
 				break;
-			case 18 :
-				// ./examples/Dynbare.g:1:112: T__54
+			case 14 :
+				// ./examples/Dynbare.g:1:88: T__54
 				{
 				mT__54(); 
 
 				}
 				break;
-			case 19 :
-				// ./examples/Dynbare.g:1:118: T__55
+			case 15 :
+				// ./examples/Dynbare.g:1:94: T__55
 				{
 				mT__55(); 
 
 				}
 				break;
-			case 20 :
-				// ./examples/Dynbare.g:1:124: T__56
+			case 16 :
+				// ./examples/Dynbare.g:1:100: T__56
 				{
 				mT__56(); 
 
 				}
 				break;
-			case 21 :
-				// ./examples/Dynbare.g:1:130: T__57
+			case 17 :
+				// ./examples/Dynbare.g:1:106: T__57
 				{
 				mT__57(); 
 
 				}
 				break;
+			case 18 :
+				// ./examples/Dynbare.g:1:112: T__58
+				{
+				mT__58(); 
+
+				}
+				break;
+			case 19 :
+				// ./examples/Dynbare.g:1:118: T__59
+				{
+				mT__59(); 
+
+				}
+				break;
+			case 20 :
+				// ./examples/Dynbare.g:1:124: T__60
+				{
+				mT__60(); 
+
+				}
+				break;
+			case 21 :
+				// ./examples/Dynbare.g:1:130: T__61
+				{
+				mT__61(); 
+
+				}
+				break;
 			case 22 :
-				// ./examples/Dynbare.g:1:136: NUMBER
+				// ./examples/Dynbare.g:1:136: T__62
+				{
+				mT__62(); 
+
+				}
+				break;
+			case 23 :
+				// ./examples/Dynbare.g:1:142: NUMBER
 				{
 				mNUMBER(); 
 
 				}
 				break;
-			case 23 :
-				// ./examples/Dynbare.g:1:143: JKL
+			case 24 :
+				// ./examples/Dynbare.g:1:149: JKL
 				{
 				mJKL(); 
 
 				}
 				break;
-			case 24 :
-				// ./examples/Dynbare.g:1:147: NOTE
+			case 25 :
+				// ./examples/Dynbare.g:1:153: NOTE
 				{
 				mNOTE(); 
 
 				}
 				break;
-			case 25 :
-				// ./examples/Dynbare.g:1:152: PLOT
+			case 26 :
+				// ./examples/Dynbare.g:1:158: PLOT
 				{
 				mPLOT(); 
 
 				}
 				break;
-			case 26 :
-				// ./examples/Dynbare.g:1:157: RUN
+			case 27 :
+				// ./examples/Dynbare.g:1:163: RUN
 				{
 				mRUN(); 
 
 				}
 				break;
-			case 27 :
-				// ./examples/Dynbare.g:1:161: SPEC
+			case 28 :
+				// ./examples/Dynbare.g:1:167: SPEC
 				{
 				mSPEC(); 
 
 				}
 				break;
-			case 28 :
-				// ./examples/Dynbare.g:1:166: PRINT
+			case 29 :
+				// ./examples/Dynbare.g:1:172: PRINT
 				{
 				mPRINT(); 
 
 				}
 				break;
-			case 29 :
-				// ./examples/Dynbare.g:1:172: SECTOR
+			case 30 :
+				// ./examples/Dynbare.g:1:178: SECTOR
 				{
 				mSECTOR(); 
 
 				}
 				break;
-			case 30 :
-				// ./examples/Dynbare.g:1:179: MACRO
+			case 31 :
+				// ./examples/Dynbare.g:1:185: MACRO
 				{
 				mMACRO(); 
 
 				}
 				break;
-			case 31 :
-				// ./examples/Dynbare.g:1:185: MEND
+			case 32 :
+				// ./examples/Dynbare.g:1:191: MEND
 				{
 				mMEND(); 
 
 				}
 				break;
-			case 32 :
-				// ./examples/Dynbare.g:1:190: INTRN
+			case 33 :
+				// ./examples/Dynbare.g:1:196: INTRN
 				{
 				mINTRN(); 
 
 				}
 				break;
-			case 33 :
-				// ./examples/Dynbare.g:1:196: ID
+			case 34 :
+				// ./examples/Dynbare.g:1:202: ID
 				{
 				mID(); 
 
 				}
 				break;
-			case 34 :
-				// ./examples/Dynbare.g:1:199: NEWLINE
+			case 35 :
+				// ./examples/Dynbare.g:1:205: NEWLINE
 				{
 				mNEWLINE(); 
 
 				}
 				break;
-			case 35 :
-				// ./examples/Dynbare.g:1:207: WS
+			case 36 :
+				// ./examples/Dynbare.g:1:213: WS
 				{
 				mWS(); 
 
@@ -1426,40 +1459,40 @@ public class DynbareLexer extends Lexer {
 		}
 		@Override
 		public String getDescription() {
-			return "209:23: ( ( '0' .. '9' )* '\\.' )?";
+			return "230:23: ( ( '0' .. '9' )* '\\.' )?";
 		}
 	}
 
 	static final String DFA14_eotS =
 		"\4\uffff\1\34\1\uffff\1\35\2\uffff\1\36\1\37\1\40\1\42\1\45\1\47\1\51"+
 		"\1\uffff\1\52\2\uffff\2\54\3\31\10\uffff\1\31\1\uffff\2\31\1\uffff\1\31"+
-		"\1\uffff\1\31\2\uffff\1\54\1\uffff\1\54\10\31\1\100\6\31\1\111\1\112\1"+
-		"\31\1\uffff\3\31\1\117\2\31\1\122\1\31\2\uffff\1\124\1\125\1\126\1\127"+
-		"\1\uffff\1\31\1\131\1\uffff\1\132\4\uffff\1\133\3\uffff";
+		"\1\uffff\1\31\2\uffff\1\54\1\uffff\1\54\10\31\1\100\6\31\1\112\1\113\1"+
+		"\31\1\uffff\4\31\1\121\2\31\1\124\1\31\2\uffff\1\126\1\127\1\130\1\131"+
+		"\1\132\1\uffff\1\31\1\134\1\uffff\1\135\5\uffff\1\136\3\uffff";
 	static final String DFA14_eofS =
-		"\134\uffff";
+		"\137\uffff";
 	static final String DFA14_minS =
 		"\1\11\3\uffff\1\56\1\uffff\1\56\2\uffff\7\60\1\uffff\1\60\2\uffff\2\60"+
 		"\1\105\1\101\1\116\10\uffff\1\124\1\uffff\1\117\1\111\1\uffff\1\116\1"+
 		"\uffff\1\102\2\uffff\1\60\1\uffff\1\60\1\105\2\103\1\116\1\124\1\105\1"+
-		"\124\1\116\1\60\1\114\1\103\1\124\1\122\1\104\1\122\2\60\1\124\1\uffff"+
-		"\1\105\1\114\1\124\1\60\2\117\1\60\1\116\2\uffff\4\60\1\uffff\1\122\1"+
-		"\60\1\uffff\1\60\4\uffff\1\60\3\uffff";
+		"\124\1\116\1\60\1\110\1\103\1\124\1\122\1\104\1\122\2\60\1\124\1\uffff"+
+		"\1\114\1\105\1\114\1\124\1\60\2\117\1\60\1\116\2\uffff\5\60\1\uffff\1"+
+		"\122\1\60\1\uffff\1\60\5\uffff\1\60\3\uffff";
 	static final String DFA14_maxS =
 		"\1\172\3\uffff\1\71\1\uffff\1\71\2\uffff\7\172\1\uffff\1\71\2\uffff\2"+
 		"\172\1\120\1\105\1\116\10\uffff\1\124\1\uffff\1\117\1\111\1\uffff\1\116"+
 		"\1\uffff\1\102\2\uffff\1\172\1\uffff\1\172\1\105\2\103\1\116\1\124\1\105"+
 		"\1\124\1\116\1\172\1\130\1\103\1\124\1\122\1\104\1\122\2\172\1\124\1\uffff"+
-		"\1\105\1\114\1\124\1\172\2\117\1\172\1\116\2\uffff\4\172\1\uffff\1\122"+
-		"\1\172\1\uffff\1\172\4\uffff\1\172\3\uffff";
+		"\1\114\1\105\1\114\1\124\1\172\2\117\1\172\1\116\2\uffff\5\172\1\uffff"+
+		"\1\122\1\172\1\uffff\1\172\5\uffff\1\172\3\uffff";
 	static final String DFA14_acceptS =
-		"\1\uffff\1\1\1\2\1\3\1\uffff\1\5\1\uffff\1\7\1\10\7\uffff\1\23\1\uffff"+
-		"\1\25\1\26\5\uffff\1\41\1\42\1\43\1\4\1\6\1\11\1\12\1\13\1\uffff\1\14"+
-		"\2\uffff\1\15\1\uffff\1\16\1\uffff\1\17\1\24\1\uffff\1\27\23\uffff\1\32"+
-		"\10\uffff\1\30\1\31\4\uffff\1\33\2\uffff\1\37\1\uffff\1\34\1\20\1\21\1"+
-		"\22\1\uffff\1\36\1\40\1\35";
+		"\1\uffff\1\1\1\2\1\3\1\uffff\1\5\1\uffff\1\7\1\10\7\uffff\1\24\1\uffff"+
+		"\1\26\1\27\5\uffff\1\42\1\43\1\44\1\4\1\6\1\11\1\12\1\13\1\uffff\1\14"+
+		"\2\uffff\1\15\1\uffff\1\16\1\uffff\1\17\1\25\1\uffff\1\30\23\uffff\1\33"+
+		"\11\uffff\1\31\1\32\5\uffff\1\34\2\uffff\1\40\1\uffff\1\35\1\20\1\21\1"+
+		"\22\1\23\1\uffff\1\37\1\41\1\36";
 	static final String DFA14_specialS =
-		"\134\uffff}>";
+		"\137\uffff}>";
 	static final String[] DFA14_transitionS = {
 			"\1\33\1\32\2\uffff\1\32\22\uffff\1\33\7\uffff\1\1\1\2\1\3\1\4\1\5\1\6"+
 			"\1\21\1\7\12\23\3\uffff\1\10\3\uffff\1\11\1\31\1\12\5\31\1\30\1\25\1"+
@@ -1519,35 +1552,38 @@ public class DynbareLexer extends Lexer {
 			"\1\76",
 			"\1\77",
 			"\12\31\7\uffff\32\31\6\uffff\32\31",
-			"\1\101\3\uffff\1\102\7\uffff\1\103",
-			"\1\104",
+			"\1\101\3\uffff\1\102\3\uffff\1\103\7\uffff\1\104",
 			"\1\105",
 			"\1\106",
 			"\1\107",
 			"\1\110",
+			"\1\111",
 			"\12\31\7\uffff\32\31\6\uffff\32\31",
 			"\12\31\7\uffff\32\31\6\uffff\32\31",
-			"\1\113",
-			"",
 			"\1\114",
+			"",
 			"\1\115",
 			"\1\116",
-			"\12\31\7\uffff\32\31\6\uffff\32\31",
+			"\1\117",
 			"\1\120",
-			"\1\121",
 			"\12\31\7\uffff\32\31\6\uffff\32\31",
+			"\1\122",
 			"\1\123",
+			"\12\31\7\uffff\32\31\6\uffff\32\31",
+			"\1\125",
 			"",
 			"",
 			"\12\31\7\uffff\32\31\6\uffff\32\31",
 			"\12\31\7\uffff\32\31\6\uffff\32\31",
 			"\12\31\7\uffff\32\31\6\uffff\32\31",
 			"\12\31\7\uffff\32\31\6\uffff\32\31",
+			"\12\31\7\uffff\32\31\6\uffff\32\31",
 			"",
-			"\1\130",
+			"\1\133",
 			"\12\31\7\uffff\32\31\6\uffff\32\31",
 			"",
 			"\12\31\7\uffff\32\31\6\uffff\32\31",
+			"",
 			"",
 			"",
 			"",
@@ -1589,7 +1625,7 @@ public class DynbareLexer extends Lexer {
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | NUMBER | JKL | NOTE | PLOT | RUN | SPEC | PRINT | SECTOR | MACRO | MEND | INTRN | ID | NEWLINE | WS );";
+			return "1:1: Tokens : ( T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | NUMBER | JKL | NOTE | PLOT | RUN | SPEC | PRINT | SECTOR | MACRO | MEND | INTRN | ID | NEWLINE | WS );";
 		}
 	}
 
