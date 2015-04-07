@@ -1,4 +1,4 @@
-package examples;
+package edu.iastate.xmile.examples;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+
+import javax.xml.bind.JAXBElement;
 
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
@@ -31,8 +33,9 @@ import org.oasis.xmile.v1_0.Views;
 import org.oasis.xmile.v1_0.Views.View;
 import org.oasis.xmile.v1_0.Xmile;
 
-import edu.iastate.xmile.XmlHelper;
-import examples.Symbol.Type;
+import edu.iastate.xmile.examples.Symbol.Type;
+import edu.iastate.xmile.util.XmlHelper;
+import examples.DynbareParser;
 
 public class Dyn2XmileMapper {
 
@@ -69,6 +72,15 @@ public class Dyn2XmileMapper {
 //		System.out.println("Ivalue Table:\n"+initialValues.toString());
         return helper.marshal(document);
     }
+
+    public Xmile map2Document(){
+        visit(root);// TODO Auto-generated method stub
+//      System.out.println("Ivalue Table:\n"+initialValues.toString());
+
+        return document;
+    }
+
+
 
 
     private void visit(CommonTree node) {
@@ -287,8 +299,12 @@ public class Dyn2XmileMapper {
                 table.setXscale(scale);
             }
             CommonTree xItem = xcoords.get(gf);
-            populateMinMax(scale, xItem);
-            table.setType(getExtrapolateName(xItem));
+            if (xItem == null){
+                System.err.println("Unable to retrieve xcoord information for table="+gf);
+            } else {
+                populateMinMax(scale, xItem);
+                table.setType(getExtrapolateName(xItem));
+            }
         }
 
     }
@@ -299,18 +315,21 @@ public class Dyn2XmileMapper {
         for (String name: symtab.keySet()){
             Symbol sym = symtab.get(name);
             Type type = sym.getType();
-            if (type != null && type != Type.fRef && type != Type.stock){
+            if (type != null && type != Type.fRef && type != Type.stock && type != Type.function){
                 for (String from: sym.getFrom()){
-                    View.Connector conn = factory.createViewContentTypeConnector();
-                    conn.setTo(name);
-                    conn.setUid(uid++);
-                    ViewContentType.Connector.From frm = factory.createViewContentTypeConnectorFrom();
-                    frm.getContent().add(from);
-                    conn.setFrom(frm);
-                    if (type == Type.init ){
-                        conn.setColor("#E8E8E8");
+                    Symbol fSym = symtab.get(from);
+                    if (fSym != null && fSym.getType()!=Type.function){
+                        View.Connector conn = factory.createViewContentTypeConnector();
+                        conn.setTo(name);
+                        conn.setUid(uid++);
+                        ViewContentType.Connector.From frm = factory.createViewContentTypeConnectorFrom();
+                        frm.getContent().add(from);
+                        conn.setFrom(frm);
+                        if (type == Type.init ){
+                            conn.setColor("#E8E8E8");
+                        }
+                        vList.add(conn);
                     }
-                    vList.add(conn);
                 }
             }
         }
@@ -448,7 +467,29 @@ public class Dyn2XmileMapper {
                     break;
             }
         }
+        removeFunctionRefs(elList);
+    }
 
+    private void removeFunctionRefs(List<Object> elList) {
+        List<Object> removals = new ArrayList<Object>();
+        for (Object item: elList){
+            String var = ((JAXBElement<String>) item).getValue();
+            if (!isSimpleVar(var)) {
+                removals.add(item);
+            }
+        }
+        for (Object item: removals){
+//            elList.remove(item);
+        }
+
+    }
+
+    private boolean isSimpleVar(String name) {
+        Symbol sym = symtab.get(name);
+        if (sym == null) return false;
+        System.out.println("Symbol and type: "+name+": "+sym.getType());
+        if (sym.getType() == Symbol.Type.function) return false;
+        return true;
     }
 
     private FlowType getNodeFlowType(CommonTree focus, String stkName) {

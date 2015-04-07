@@ -1,0 +1,23 @@
+
+SymbolTable:
+RECOV          stock          RECOV
+RECOV          stock          CURE
+CNTCTS         aux            TABIN
+SUSC           stock          SUSC
+SUSC           stock          INF
+TOTAL          init           SUSC
+TOTAL          init           SICK
+TOTAL          init           RECOV
+SICK           stock          SICK
+SICK           stock          INF
+SICK           stock          CURE
+INF            flow           SICK
+INF            flow           CNTCTS
+INF            flow           FRSICK
+TABIN          aux            SUSC
+TABIN          aux            TOTAL
+DUR            aux
+CURE           flow           SICK
+CURE           flow           DUR
+FRSICK         aux
+

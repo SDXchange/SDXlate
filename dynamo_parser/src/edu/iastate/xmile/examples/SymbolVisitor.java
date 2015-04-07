@@ -1,13 +1,18 @@
-package examples;
+package edu.iastate.xmile.examples;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.antlr.runtime.tree.CommonTree;
 
-import examples.Symbol.Type;
+import edu.iastate.xmile.DynFunctions;
+import edu.iastate.xmile.DynVars;
+import edu.iastate.xmile.examples.Symbol.Type;
+import examples.DynbareParser;
 
 //TOTO: qualify all symbols with module name. or at least have option to
 //do so. (global vs. model namespaces)
@@ -17,9 +22,23 @@ public class SymbolVisitor {
     Map<String, Symbol> symtab = new HashMap<String, Symbol>();
     Map<String, Symbol> initSyms = new HashMap<String, Symbol>();
     int indent = 0;
+    private static DynFunctions functions = new DynFunctions();
+    private static DynVars vars = new DynVars();
 
     public SymbolVisitor(CommonTree t) {
         this.tree = t;
+        addBuiltIns();
+    }
+
+    private void addBuiltIns() {
+        for (String name : functions.getAll()){
+            Symbol item = new Symbol(name, Type.function);
+            symtab.put(name, item);
+        }
+        for (String name : vars.getAll()){
+            Symbol item = new Symbol(name, Type.aux);
+            symtab.put(name, item);
+        }
     }
 
     public Map<String, Symbol> visit() {
@@ -38,6 +57,7 @@ public class SymbolVisitor {
         {
             case DynbareParser.DOCUMENT :
             case DynbareParser.CONTROL :
+            case DynbareParser.PARAMS:
             case DynbareParser.MODEL :
             case DynbareParser.MODULE :
             case DynbareParser.VARIABLES:
@@ -49,11 +69,33 @@ public class SymbolVisitor {
             case DynbareParser.AUX:
                 recordSymbols(symtab, node);
                 break;
+            case DynbareParser.PAUX:
+                System.out.println("processing PAUX");
+                recordParam(symtab, node);
+                break;
             case DynbareParser.IVALUE:
                 recordSymbols(initSyms, node);
                 break;
             default:
                 System.out.println("Unhandled tokentype "+ node.getToken());
+        }
+    }
+
+    private void recordParam(Map<String,Symbol> table, CommonTree varNode) {
+        //for each param subtree
+        String name = varNode.getChild(0).getText(); // the ID
+        Symbol.Type type = Type.aux;
+        Symbol entry = new Symbol(name, type );
+        table.put(name, entry);
+        CommonTree expr = (CommonTree) varNode.getChild(1);
+        if (expr != null && expr.getChildren() != null){
+            for (Object item: expr.getChildren()){
+                CommonTree atom = (CommonTree) item;
+                List<String> rightIds = extractIds(atom);
+                if (rightIds != null && rightIds.size()>0){
+                    entry.addFrom(rightIds);
+                }
+            }
         }
     }
     private void recordSymbols(Map<String,Symbol> table, CommonTree varNode) {
@@ -117,4 +159,20 @@ public class SymbolVisitor {
         }
         return rval;
     }
+
+    public String dumpRefErrors() {
+        Set<String> refs = new HashSet<String>();
+        for (Symbol sym: symtab.values()){
+            refs.addAll(sym.getFrom());
+        }
+        String rval = "";
+        for (String ref : refs){
+            if (symtab.get(ref)==null){
+                rval+=ref+"\n";
+            }
+        }
+        return rval;
+    }
+
+
 }

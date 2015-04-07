@@ -11,9 +11,11 @@ package examples;
 }
 @lexer::header {package examples;}
 
-prog:   ( stat {System.out.println($stat.tree.toStringTree());} )+ ;
+prog:  (stat {System.out.println($stat.tree.toStringTree());})+  ;
 
-stat:   expr NEWLINE        -> expr
+
+stat:  mark NEWLINE
+    |    expr NEWLINE        -> expr
     |   ID '=' expr NEWLINE -> ^('=' ID expr)
     |   NEWLINE             ->
     ;
@@ -29,8 +31,18 @@ atom:   INT
     |   ID
     |   '('! expr ')'!
     ;
+    
+mark : C_MARK
+	|P_MARK
+;
+	
 
-ID  :   ('a'..'z'|'A'..'Z')+ ;
+P_MARK	:  'P' ;
+C_MARK	:  'C' ;
+		
+
+ID  :  ('a'..'z'|'A'..'Z')+ ;
+    
 INT :   '0'..'9'+ ;
 NEWLINE:'\r'? '\n' ;
 WS  :   (' '|'\t')+ {skip();} ;

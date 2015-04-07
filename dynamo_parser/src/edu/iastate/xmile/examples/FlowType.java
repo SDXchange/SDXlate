@@ -1,4 +1,4 @@
-package examples;
+package edu.iastate.xmile.examples;
 
 public enum FlowType {
 	inFlow,

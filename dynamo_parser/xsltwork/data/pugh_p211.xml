@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xmile>
+<xmile >
     <sim_specs>
         <stop>100.0</stop>
         <start>0.0</start>
@@ -55,7 +55,7 @@
                 <eqn>(IPD-CPPRG)/PPROD</eqn>
             </aux>
             <aux name="PPROD">
-                <eqn>SMOOTH(IPROD,TPPROD)</eqn>
+                <eqn>SMTH1(IPROD,TPPROD)</eqn>
             </aux>
             <aux name="TPPROD">
                 <eqn>6</eqn>
@@ -124,7 +124,7 @@
                 <eqn>EPREM/WFS</eqn>
             </aux>
             <aux name="LENGTH">
-                <eqn>CLIP(MAXLEN,0,1,FCOMP)</eqn>
+                <eqn>IF(1&lt;FCOMP)THEN(0)ELSE(MAXLEN)</eqn>
             </aux>
             <aux name="FCOMP">
                 <eqn>CRPRG/IPD</eqn>
@@ -200,10 +200,6 @@
                     <from>TIME</from>
                     <to>TREM</to>
                 </connector>
-                <connector uid="17">
-                    <from>CLIP</from>
-                    <to>LENGTH</to>
-                </connector>
                 <connector uid="18">
                     <from>MAXLEN</from>
                     <to>LENGTH</to>
@@ -237,7 +233,7 @@
                     <to>EPREM</to>
                 </connector>
                 <connector uid="26">
-                    <from>SMOOTH</from>
+                    <from>SMTH1(,)</from>
                     <to>PPROD</to>
                 </connector>
                 <connector uid="27">
@@ -350,3 +346,4 @@
         </views>
     </model>
 </xmile>
+

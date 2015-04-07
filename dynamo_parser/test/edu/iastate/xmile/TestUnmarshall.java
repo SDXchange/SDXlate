@@ -14,6 +14,8 @@ import org.oasis.xmile.v1_0.ObjectFactory;
 import org.oasis.xmile.v1_0.Variables;
 import org.oasis.xmile.v1_0.Xmile;
 
+import edu.iastate.xmile.util.XmlHelper;
+
 public class TestUnmarshall {
 
 	@Test

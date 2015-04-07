@@ -18,6 +18,7 @@ tokens {
   RATE; 
   AUX;
   TAUX;
+  PAUX;
   XCOORDS;
   YCOORDS;
   PTS;
@@ -27,6 +28,8 @@ tokens {
   PLOTVLIST;
   PLOTVAR;
   SCALE;
+  UNARYMINUS;
+  UNARYPLUS;
   VIEW;
   }
   
@@ -37,6 +40,11 @@ import java.util.HashMap;
 }
 
 @lexer::header {package examples;}
+
+@lexer::members {
+	public int lexField = 0;
+
+	}
 
 prog
 	: macroDef* defaultModule? namedModule* (controlSector (controlStat | comment )+ viewSpec*)? NEWLINE* -> ^(DOCUMENT ^(CONTROL controlStat*) ^(MODEL (defaultModule ^(VIEW viewSpec*)?)? namedModule*)  macroDef* ) 
@@ -67,13 +75,17 @@ definition
     |   rateDef 
     |   tblDef  
     ;
-	
+
+comment
+    :  {input.LT(1).getText().contentEquals("NOTE")}? NOTE COMMENT? NEWLINE  ->
+    ;
+    	
 sector 
- 	:	NOTE '*' 'P' WS+ '['  SECTOR '=' ID  ']' lineComment?  NEWLINE -> ID
+ 	:	PSECTOR WS+ '['  SECTOR '=' ID  ']' lineComment? WS? NEWLINE -> ID
  	;
 
 controlSector 
- 	:	NOTE '*' 'C' WS+ '['  SECTOR '=' ID ']' lineComment?  NEWLINE -> ID
+ 	:	CSECTOR WS+ '['  SECTOR '=' ID ']' lineComment? WS? NEWLINE -> ID
  	;
  	
  		 	    
@@ -103,7 +115,7 @@ min: NUMBER;
 max: NUMBER;
     
 runSpec	
-    	:	RUN lineComment? NEWLINE
+    	:	{input.LT(1).getText().contentEquals("RUN")}? RUN COMMENT? NEWLINE
     	;
     
 simSpec 
@@ -129,7 +141,7 @@ formalParams
 	;
 
 paramAssignment
-    	:	ID '=' expr -> ^('=' ID expr)
+    	:	ID '=' expr -> ^(PAUX ID expr) 
     	;        
 varList
  	:	colspec? ID ((','|'/') ID )*
@@ -153,15 +165,15 @@ colspec
  	;
  	
 constDef 
-	:	'C' WS+ id=ID '=' eqn lineComment? NEWLINE -> ^(AUX ID eqn) 
+	:	'C' WS+ id=ID '=' eqn lineComment? WS? NEWLINE -> ^(AUX ID eqn) 
 	;
 initDef
-	:	'N' WS+ ID '=' eqn lineComment? NEWLINE -> ^(IVALUE ID eqn)
+	:	'N' WS+ ID '=' eqn lineComment? WS? NEWLINE -> ^(IVALUE ID eqn)
 	;
 
 auxDef
-	: 'A' WS+ ID timeExt '=' tableFunction lineComment? NEWLINE  -> ^(TAUX ID tableFunction )
-	| 'A' WS+ ID timeExt '=' eqn lineComment? NEWLINE  -> ^(AUX ID eqn)	 
+	: 'A' WS+ ID timeExt '=' tableFunction lineComment? WS? NEWLINE  -> ^(TAUX ID tableFunction )
+	| 'A' WS+ ID timeExt '=' eqn lineComment? WS?  NEWLINE  -> ^(AUX ID eqn)	 
 	;
 
 tableFunction
@@ -170,20 +182,17 @@ tableFunction
 
 
 rateDef
-	:	'R' WS+ ID  timeExt '=' eqn lineComment? NEWLINE -> ^(RATE ID  eqn )
+	:	'R' WS+ ID  timeExt '=' eqn lineComment? WS? NEWLINE -> ^(RATE ID  eqn )
 	;
 
 lvlDef
-	:	'L' WS+ ID timeExt '=' eqn lineComment? NEWLINE -> ^(LEVEL ID eqn )
+	:	'L' WS+ ID timeExt '=' eqn lineComment? WS?  NEWLINE -> ^(LEVEL ID eqn )
 	;
 tblDef
-	:	'T' WS+ ID '=' rangeList lineComment? NEWLINE -> ^(YCOORDS ID ^(PTS rangeList))
+	:	'T' WS+ ID '=' rangeList lineComment? WS?  NEWLINE -> ^(YCOORDS ID ^(PTS rangeList))
 	;
 
-comment
- 	:	NOTE lineComment? NEWLINE
-    |   NOTE WS+ NEWLINE
- 	;
+lineComment: WS COMMENT;
 
 rangeList 
 	:	 NUMBER ((','|'/') NUMBER)* -> NUMBER+ 
@@ -201,8 +210,14 @@ multExpr
     :   atom ( ('*'|'/') atom )*
     ; 
 
-atom 
+atom  
     :   NUMBER 
+    	{ String temp = $NUMBER.text; 
+    	  $NUMBER.setText(temp.replace("E", "e"));
+    	}
+   	
+    |   cc='-' ID  timeExt? -> UNARYMINUS[$cc,"-"] ID
+    |   '+' ID  timeExt? -> ID
     |   ID  timeExt? -> ID
     |   funcRef
     |   '(' expr ')' 
@@ -218,20 +233,14 @@ paramList
 	
 timeExt :	'\.' JKL 
 	;
-	
-lineComment
-	: WS+ commentText;
-	
-	
-commentText
- 	:	(~(WS|NEWLINE)(~NEWLINE)*)
-  ;
-
+		
 NUMBER  :   ('+'|'-')?(('0'..'9')*'\.')?('0'..'9')+(('E'|'e')('+'|'-')?('0'..'9')+)?  ;
 JKL 	:	('K' ('L')?) | ('J' ('K')?) ;
-NOTE	: 	'NOTE' ;
+CSECTOR :   {lexField==0}? 'NOTE*C' ;
+PSECTOR :   {lexField==0}? 'NOTE*P' ;
+NOTE	: 	'NOTE' {lexField = 2; };
 PLOT    : 	'PLOT' ;
-RUN     :	'RUN' ;
+RUN     :	'RUN' {lexField = 2; };
 SPEC    :	'SPEC';
 PRINT   :	'PRINT' ;
 SECTOR	:	'SECTOR';
@@ -239,6 +248,7 @@ MACRO   :	'MACRO';
 MEND    :	'MEND';
 INTRN   :	'INTRN';
 ID    	:   ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9')*;
-NEWLINE:'\r'? '\n' ;
-WS  :   (' '|'\t')+  ;
+NEWLINE: ('\r'? '\n')+ {lexField = 0; };
+WS  :   (' '|'\t')+  { lexField += 1 ;  };
+COMMENT:  {lexField >= 2}?=> (~'\n')*;
 

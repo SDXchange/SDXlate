@@ -1,4 +1,4 @@
-package examples;
+package edu.iastate.xmile.examples;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +10,8 @@ public class Symbol {
         aux,
         gf,
         init,
-        fRef
+        fRef,
+        function
     }
     private static final int kColWid = 15;
     private Type symType;
