@@ -1,4 +1,4 @@
-package edu.iastate.xmile.examples;
+package org.sdxchange.dynamo.app;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,8 +32,8 @@ import org.oasis.xmile.v1_0.ViewContentType.Graph;
 import org.oasis.xmile.v1_0.Views;
 import org.oasis.xmile.v1_0.Views.View;
 import org.oasis.xmile.v1_0.Xmile;
+import org.sdxchange.dynamo.app.Symbol.Type;
 
-import edu.iastate.xmile.examples.Symbol.Type;
 import edu.iastate.xmile.util.XmlHelper;
 import examples.DynbareParser;
 

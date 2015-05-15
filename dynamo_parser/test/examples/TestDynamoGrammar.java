@@ -17,11 +17,11 @@ import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.oasis.xmile.v1_0.Xmile;
+import org.sdxchange.dynamo.app.Dyn2Xmile;
+import org.sdxchange.dynamo.app.Dyn2XmileMapper;
+import org.sdxchange.dynamo.app.Symbol;
+import org.sdxchange.dynamo.app.SymbolVisitor;
 
-import edu.iastate.xmile.Dyn2Xmile;
-import edu.iastate.xmile.examples.Dyn2XmileMapper;
-import edu.iastate.xmile.examples.Symbol;
-import edu.iastate.xmile.examples.SymbolVisitor;
 import edu.iastate.xmile.util.XmlHelper;
 
 public class TestDynamoGrammar {

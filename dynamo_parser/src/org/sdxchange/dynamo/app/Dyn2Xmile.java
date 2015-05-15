@@ -1,4 +1,4 @@
-package edu.iastate.xmile;
+package org.sdxchange.dynamo.app;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,13 +13,11 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
 import org.oasis.xmile.v1_0.Xmile;
+import org.sdxchange.dynamo.parser.DynamoLexer;
+import org.sdxchange.dynamo.parser.DynamoParser;
 
-import edu.iastate.xmile.examples.Dyn2XmileMapper;
-import edu.iastate.xmile.examples.Symbol;
-import edu.iastate.xmile.examples.SymbolVisitor;
 import edu.iastate.xmile.util.XmlHelper;
-import examples.DynbareLexer;
-import examples.DynbareParser;
+
 
 public class Dyn2Xmile {
 
@@ -107,10 +105,10 @@ public class Dyn2Xmile {
     private static CommonTree getAst(InputStream testInput)
             throws IOException, RecognitionException {
         ANTLRInputStream input = new ANTLRInputStream(testInput);
-        DynbareLexer lexer = new DynbareLexer(input);
+        DynamoLexer lexer = new DynamoLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        DynbareParser parser = new DynbareParser(tokens);
-        DynbareParser.prog_return r = parser.prog();
+        DynamoParser parser = new DynamoParser(tokens);
+        DynamoParser.prog_return r = parser.prog();
         // walk resulting tree
         CommonTree t = (CommonTree)r.getTree();
         return t;

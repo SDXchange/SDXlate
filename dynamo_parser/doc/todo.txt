@@ -1,0 +1,43 @@
+
+Backlog Dynamo parser
+=================================================
+Determine Current State of examples
+Automate evaluaton of parser test results. 
+Preprocess to collapse continuation lines. 
+Research/Test whether "use functions" or "use macros" changes insightmaker behavior
+Make dependency graph/view generation depend only on Symbol table if possible. 
+Treat each reference to a function as a separate variable instance in the symbol table.
+capture line comments and card comments (which conform to doc standard) in symbol table.  
+Restore Dynamo Samples to original form. 
+Generalize Function replacement mechanism. 
+... Dependency extraction for graph
+... Nested function references
+... Replacement with target macro/function
+... Eliminate need for segment headers in Dynamo input
+Codify Build Targets
+... parser and lexer generation
+... test execution
+... executable jar creation
+... xmile marshaller generation
+... Build should deploy an app for convenient manual testing
+... graphical front end to app 
+
+Convenient download of working tools from site. 
+Create cross compile runner. 
+
+Backlog Vensim parser
+===============================================================
+Extract intermediate form from Vensim (enough to mimic dynamo?)
+load intermediate form into symbol table 
+ 
+
+Backlog Output Adapters
+================================================
+
+
+ Completed
+ ==========================================
+ rename dynbare grammar
+ Codify Build Targets
+... parser and lexer generation
+ 

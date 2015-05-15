@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project name="dyn2xmile" default="all" basedir="./.." >
+	<target name="init">
+		<property name="grammar.dir" value="${basedir}/src/org/sdxchange/grammars/dynamo/"/>
+		<property name="genout.dir" value="${basedir}/generated/org/sdxchange/dynamo/parser/"/>
+		<property name="bin.dir" value="${basdir}/bin"/>
+		<property name="src.dir" value="{basedir}/src/"/>
+		<property name="antlr.dir" value="${basedir}/lib"/>
+		<property name="grammar.file" value="Dynamo.g" />
+		<echo>grammar.dir = ${grammar.dir}</echo>
+		
+		
+	</target>
+	
+	<target name="genParser" depends="clean,init">
+		<exec executable="java">
+			<arg line="-cp ${antlr.dir}/antlr-3.5.2-complete.jar org.antlr.Tool -o ${genout.dir} ${grammar.dir}${grammar.file}"/>
+		</exec>		
+	</target>
+	
+	<target name="compile">
+	</target>
+	
+	<target name="clean" depends="init">
+		<delete>
+			<fileset dir="${genout.dir}">
+			</fileset>
+		</delete>
+	</target>
+	
+	<target name="all" depends="genParser,init">
+		<!-- the following requires the a run configuration setting to run in workspace jvm -->
+		<eclipse.refreshLocal resource="dynamo_parser/generated" depth="infinite"/>
+	</target>
+	
+</project>

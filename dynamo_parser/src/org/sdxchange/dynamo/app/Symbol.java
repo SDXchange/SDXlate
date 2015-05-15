@@ -1,4 +1,4 @@
-package edu.iastate.xmile.examples;
+package org.sdxchange.dynamo.app;
 
 import java.util.LinkedList;
 import java.util.List;

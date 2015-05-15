@@ -1,4 +1,4 @@
-package edu.iastate.xmile.examples;
+package org.sdxchange.dynamo.app;
 
 public enum FlowType {
 	inFlow,
