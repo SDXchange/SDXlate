@@ -1,0 +1,9 @@
+RATE   RATE2          RATE2          150  50   10+AUX2                                                     [AUX2]
+AUX    AUX2           AUX2           50   50   (IF(0<TIME)THEN(STORE2+10)ELSE(0))                          [STORE2, TIME]
+RATE   RATE1          RATE1          150  100  10+AUX1                                                     [AUX1]
+AUX    AUX1           AUX1           50   100  (IF(0<TIME)THEN(STORE1+10)ELSE(0))                          [STORE1]
+LVL    STORE2         STORE2         200  50   10                                                          IN [RATE2]
+                                                                                                           OUT[]
+LVL    STORE1         STORE1         200  100  10                                                          IN [RATE1, STORE]
+                                                                                                           OUT[]
+

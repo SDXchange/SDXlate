@@ -1,19 +1,21 @@
 
 Backlog Dynamo parser
 =================================================
-Determine Current State of examples
-Automate evaluaton of parser test results. 
-Preprocess to collapse continuation lines. 
+
+Conformance: remove name from "root" model. 
+Conformance: add version attribute to xmile tag
+
+Push new version
+Grammar rule for array initializers (T ID[*] = x,x,x) They cause a problem because treating as table fails to find tInfo. 
+
+Test "compact if/else" in insight maker. 
+map plot  start and stop times
+map axis ranges.
+
+Automate evaluation of parser test results. 
 Research/Test whether "use functions" or "use macros" changes insightmaker behavior
-Make dependency graph/view generation depend only on Symbol table if possible. 
-Treat each reference to a function as a separate variable instance in the symbol table.
 capture line comments and card comments (which conform to doc standard) in symbol table.  
-Restore Dynamo Samples to original form. 
 Generalize Function replacement mechanism. 
-... Dependency extraction for graph
-... Nested function references
-... Replacement with target macro/function
-... Eliminate need for segment headers in Dynamo input
 Codify Build Targets
 ... parser and lexer generation
 ... test execution
@@ -40,4 +42,12 @@ Backlog Output Adapters
  rename dynbare grammar
  Codify Build Targets
 ... parser and lexer generation
- 
+ Determine Current State of examples
+ Preprocess to collapse continuation lines. Used rewriter instead. 
+ Make dependency graph/view generation depend only on Symbol table if possible. 
+ Restore Dynamo Samples to original form. 
+ ... Dependency extraction for graph
+... Nested function references
+... Replacement with target macro/function
+... Eliminate need for segment headers in Dynamo input
+Package Main Line 

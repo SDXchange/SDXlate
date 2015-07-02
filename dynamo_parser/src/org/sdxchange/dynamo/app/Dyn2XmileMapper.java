@@ -208,7 +208,7 @@ public class Dyn2XmileMapper {
                 }
                 String symType = (symEntry == null) ? "null symEntry": symEntry.getType().name();
                 System.err.println("Ivalue "+varName+" is of type "+symType);
-                if (symEntry != null && symEntry.getType() == Type.stock){
+                if (symEntry != null && symEntry.getType() == Type.kStock){
                     captureIValueEqn(model.getName(), node);
                 }
                 else {
@@ -252,6 +252,7 @@ public class Dyn2XmileMapper {
                 index += plotSet.size();
             }
         }
+
     }
     private void setGraphDefaults(Graph graph) {
         graph.setBackground("yellow");
@@ -315,17 +316,17 @@ public class Dyn2XmileMapper {
         for (String name: symtab.keySet()){
             Symbol sym = symtab.get(name);
             Type type = sym.getType();
-            if (type != null && type != Type.fRef && type != Type.stock && type != Type.function){
+            if (type != null && type != Type.kPendingDef && type != Type.kStock && type != Type.kFuncRef){
                 for (String from: sym.getFrom()){
                     Symbol fSym = symtab.get(from);
-                    if (fSym != null && fSym.getType()!=Type.function){
+                    if (fSym != null && fSym.getType()!=Type.kFuncRef){
                         View.Connector conn = factory.createViewContentTypeConnector();
                         conn.setTo(name);
                         conn.setUid(uid++);
                         ViewContentType.Connector.From frm = factory.createViewContentTypeConnectorFrom();
                         frm.getContent().add(from);
                         conn.setFrom(frm);
-                        if (type == Type.init ){
+                        if (type == Type.kInit ){
                             conn.setColor("#E8E8E8");
                         }
                         vList.add(conn);
@@ -488,7 +489,7 @@ public class Dyn2XmileMapper {
         Symbol sym = symtab.get(name);
         if (sym == null) return false;
         System.out.println("Symbol and type: "+name+": "+sym.getType());
-        if (sym.getType() == Symbol.Type.function) return false;
+        if (sym.getType() == Symbol.Type.kFuncRef) return false;
         return true;
     }
 
@@ -618,7 +619,7 @@ public class Dyn2XmileMapper {
     /**
      * @param parent
      * @param start
-     * @return comma deliminted sequence of test from selected siblings.
+     * @return comma deliminted sequence of text from selected siblings.
      */
     private String siblingText(CommonTree parent, int start){
         return siblingText(parent, start, parent.getChildCount()-1);

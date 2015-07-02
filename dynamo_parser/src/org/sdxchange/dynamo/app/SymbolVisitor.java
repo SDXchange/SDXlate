@@ -30,11 +30,11 @@ public class SymbolVisitor {
 
     private void addBuiltIns() {
         for (String name : functions.getAll()){
-            Symbol item = new Symbol(name, Type.function);
+            Symbol item = new Symbol(name, Type.kFuncRef);
             symtab.put(name, item);
         }
         for (String name : vars.getAll()){
-            Symbol item = new Symbol(name, Type.aux);
+            Symbol item = new Symbol(name, Type.kAux);
             symtab.put(name, item);
         }
     }
@@ -82,7 +82,7 @@ public class SymbolVisitor {
     private void recordParam(Map<String,Symbol> table, CommonTree varNode) {
         //for each param subtree
         String name = varNode.getChild(0).getText(); // the ID
-        Symbol.Type type = Type.aux;
+        Symbol.Type type = Type.kAux;
         Symbol entry = new Symbol(name, type );
         table.put(name, entry);
         CommonTree expr = (CommonTree) varNode.getChild(1);
@@ -117,12 +117,12 @@ public class SymbolVisitor {
 
     private Type token2symbolType(int type) {
         switch (type){
-            case DynbareParser.AUX: return Type.aux;
-            case DynbareParser.LEVEL: return Type.stock;
-            case DynbareParser.RATE:  return Type.flow;
-            case DynbareParser.TAUX:  return Type.aux;
-            case DynbareParser.YCOORDS: return Type.gf;
-            case DynbareParser.IVALUE: return Type.init;
+            case DynbareParser.AUX: return Type.kAux;
+            case DynbareParser.LEVEL: return Type.kStock;
+            case DynbareParser.RATE:  return Type.kFlow;
+            case DynbareParser.TAUX:  return Type.kAux;
+            case DynbareParser.YCOORDS: return Type.kGfunc;
+            case DynbareParser.IVALUE: return Type.kInit;
         }
         return null;
     }

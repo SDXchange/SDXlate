@@ -44,13 +44,21 @@ public class TestDynamoGrammar {
 
     @Test
     public void testExponential() throws RecognitionException, IOException {
-        String data = "C VAR=1E6\n";
+        String data = "C VAR=1E6\n"
+                + "C V2=2e+6\n"
+                + "C V3=3.1412e-2 with comment\n";
         parseString(data);
     }
 
     @Test
     public void testTabhl() throws RecognitionException, IOException {
         String data = "A    FREFTS.K=TABHL(TFEFS,TSKPRM.K/PJBSZ.K,0,.2,.04)\n";
+        parseString(data);
+    }
+
+    @Test
+    public void testInvalidFuncRef() throws RecognitionException, IOException {
+        String data = "A    VAR.K=BADFUNC(X,Y,Z)\n";
         parseString(data);
     }
 

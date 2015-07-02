@@ -26,7 +26,7 @@ public class TestExampleGrammars {
 
     @Test
     public void testPredicate() throws RecognitionException, IOException {
-        String data = "P\n C\nC\n";
+        String data = "A\n C\nC\n";
         InputStream testInput = new ByteArrayInputStream(data.getBytes());
         ANTLRInputStream input = new ANTLRInputStream(testInput);
         ExprLexer lexer = new ExprLexer(input);

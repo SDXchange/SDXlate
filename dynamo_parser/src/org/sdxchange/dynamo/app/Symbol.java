@@ -5,19 +5,32 @@ import java.util.List;
 
 public class Symbol {
     enum Type {
-        stock,
-        flow,
-        aux,
-        gf,
-        init,
-        fRef,
-        function
+        kStock,
+        kFlow,
+        kAux,
+        kGfunc,
+        kInit,
+        kFuncRef,
+        kPendingDef
     }
     private static final int kColWid = 15;
-    private Type symType;
+    protected Type symType;
+    protected NsType nsType;
+    protected String ns; /* namespace id */
 
     private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private List<String> from = new LinkedList<String>();
+    protected String eqn;
+    protected String lineCmnt;
 
     public Symbol (String name, Type type){
         symType = type;
@@ -31,7 +44,7 @@ public class Symbol {
     }
 
     public void setType(Type type){
-        if (symType != null && symType != Type.fRef){
+        if (symType != null && symType != Type.kPendingDef){
             System.err.println("Error: attempted symbol type redefinition from "+symType +" to "+type);
         }
         else {
@@ -51,17 +64,27 @@ public class Symbol {
     public String toString(){
         String rval = "";
         if (from == null || from.size() == 0){
-            rval += rpad(name, kColWid) + symType.name()+"\n";
+            rval += rPad(name, kColWid) + symType.name()+"\n";
         }
         for (String ante: from){
-            rval += rpad(name, kColWid) + rpad(symType.name(), kColWid) + ante +"\n";
+            rval += rPad(name, kColWid) + rPad(symType.name(), kColWid) + ante +"\n";
         }
         return rval;
     }
 
     public static final String pad = "                                                         ";
-    public static String rpad(String str, int wid) {
+    public static String rPad(String str, int wid) {
         return str + pad.substring(0, wid-str.length());
+    }
+
+    public static String lPad(String str, char c, int wid){
+        StringBuffer buf = new StringBuffer(wid);
+        int padchars = (wid - str.length());
+        while ( padchars-- > 0){
+            buf.append( c);
+        }
+        buf.append(str);
+        return buf.toString();
     }
 
     public void addFrom(List<String> ids) {

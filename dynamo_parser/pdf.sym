@@ -1,0 +1,6 @@
+LVL    DENSITY        DENSITY        200  50   0                                                           IN [PROBRT]
+                                                                                                           OUT[]
+AUX    PROB           PROB           50   50   TIME/100                                                    [TIME]
+RATE   PROBRT         PROBRT         150  50   PROB                                                        [PROB]
+GF     DISTTAB        DISTTAB        200  100  .0001,.014,.03205,.06027,.09679,.13272,.15542,.15542,.13272,[]
+

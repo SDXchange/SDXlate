@@ -1,0 +1,7 @@
+AUX    MAXLEN         MAXLEN         50   50   50                                                          []
+RATE   TDIFF          TDIFF          150  50   KFAC*(RMTMP-CUPTEMP)                                        [RMTMP, KFAC, CUPTEMP]
+AUX    RMTMP          RMTMP          50   100  68                                                          []
+LVL    CUPTEMP        CUPTEMP        200  50   170                                                         IN [TDIFF]
+                                                                                                           OUT[]
+AUX    KFAC           KFAC           50   150  .17                                                         []
+

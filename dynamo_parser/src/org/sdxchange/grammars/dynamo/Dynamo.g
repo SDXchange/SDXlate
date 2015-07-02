@@ -9,6 +9,7 @@ tokens {
   CONTROL;
   PARAMS;
   FORMAL_PARAMS;
+  FREF;
   LOCALS;
   MODEL;
   MACRODEF;
@@ -198,7 +199,7 @@ rangeList
 	;
 
 eqn
-	: expr	-> ^(EQN expr)
+	: expr 	-> ^(EQN expr)
 	;
 expr
     :   multExpr 
@@ -218,12 +219,12 @@ atom
     |   cc='-' ID  timeExt? -> UNARYMINUS[$cc,"-"] ID
     |   '+' ID  timeExt? -> ID
     |   ID  timeExt? -> ID
-    |   funcRef
+    |   funcRef 
     |   '(' expr ')' 
     ;
     
 funcRef 
-   	:   ID '(' paramList ')'
+   	:   ID '(' paramList ')' -> ^( FREF ID paramList ) 
     	;
     	
 paramList

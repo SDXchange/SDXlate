@@ -1,8 +1,7 @@
-// $ANTLR 3.5.2 C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g 2015-05-11 17:45:16
+// $ANTLR 3.5.2 C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g 2015-05-26 18:14:28
 
 package org.sdxchange.dynamo.parser;
 import java.util.HashMap;
-
 
 
 import org.antlr.runtime.*;
@@ -17,17 +16,16 @@ import org.antlr.runtime.tree.*;
 public class DynamoParser extends Parser {
 	public static final String[] tokenNames = new String[] {
 		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "AUX", "COMMENT", "CONST", "CONTROL", 
-		"CSECTOR", "DOCUMENT", "EQN", "FORMAL_PARAMS", "ID", "INTRN", "IVALUE", 
-		"JKL", "LEVEL", "LOCALS", "MACRO", "MACRODEF", "MEND", "MODEL", "MODULE", 
-		"NEWLINE", "NOTE", "NUMBER", "PARAMS", "PAUX", "PLOT", "PLOTVAR", "PLOTVLIST", 
-		"PRINT", "PSECTOR", "PTS", "RATE", "RUN", "SCALE", "SECTOR", "SPEC", "TAUX", 
-		"UNARYMINUS", "UNARYPLUS", "VARIABLES", "VIEW", "WS", "XCOORDS", "YCOORDS", 
-		"'('", "')'", "'*'", "'+'", "','", "'-'", "'/'", "'='", "'A'", "'C'", 
-		"'L'", "'N'", "'R'", "'T'", "'TABHL'", "'TABLE'", "'TABPL'", "'TABXT'", 
-		"'['", "'\\.'", "']'"
+		"CSECTOR", "DOCUMENT", "EQN", "FORMAL_PARAMS", "FREF", "ID", "INTRN", 
+		"IVALUE", "JKL", "LEVEL", "LOCALS", "MACRO", "MACRODEF", "MEND", "MODEL", 
+		"MODULE", "NEWLINE", "NOTE", "NUMBER", "PARAMS", "PAUX", "PLOT", "PLOTVAR", 
+		"PLOTVLIST", "PRINT", "PSECTOR", "PTS", "RATE", "RUN", "SCALE", "SECTOR", 
+		"SPEC", "TAUX", "UNARYMINUS", "UNARYPLUS", "VARIABLES", "VIEW", "WS", 
+		"XCOORDS", "YCOORDS", "'('", "')'", "'*'", "'+'", "','", "'-'", "'/'", 
+		"'='", "'A'", "'C'", "'L'", "'N'", "'R'", "'T'", "'TABHL'", "'TABLE'", 
+		"'TABPL'", "'TABXT'", "'['", "'\\.'", "']'"
 	};
 	public static final int EOF=-1;
-	public static final int T__47=47;
 	public static final int T__48=48;
 	public static final int T__49=49;
 	public static final int T__50=50;
@@ -48,6 +46,7 @@ public class DynamoParser extends Parser {
 	public static final int T__65=65;
 	public static final int T__66=66;
 	public static final int T__67=67;
+	public static final int T__68=68;
 	public static final int AUX=4;
 	public static final int COMMENT=5;
 	public static final int CONST=6;
@@ -56,41 +55,42 @@ public class DynamoParser extends Parser {
 	public static final int DOCUMENT=9;
 	public static final int EQN=10;
 	public static final int FORMAL_PARAMS=11;
-	public static final int ID=12;
-	public static final int INTRN=13;
-	public static final int IVALUE=14;
-	public static final int JKL=15;
-	public static final int LEVEL=16;
-	public static final int LOCALS=17;
-	public static final int MACRO=18;
-	public static final int MACRODEF=19;
-	public static final int MEND=20;
-	public static final int MODEL=21;
-	public static final int MODULE=22;
-	public static final int NEWLINE=23;
-	public static final int NOTE=24;
-	public static final int NUMBER=25;
-	public static final int PARAMS=26;
-	public static final int PAUX=27;
-	public static final int PLOT=28;
-	public static final int PLOTVAR=29;
-	public static final int PLOTVLIST=30;
-	public static final int PRINT=31;
-	public static final int PSECTOR=32;
-	public static final int PTS=33;
-	public static final int RATE=34;
-	public static final int RUN=35;
-	public static final int SCALE=36;
-	public static final int SECTOR=37;
-	public static final int SPEC=38;
-	public static final int TAUX=39;
-	public static final int UNARYMINUS=40;
-	public static final int UNARYPLUS=41;
-	public static final int VARIABLES=42;
-	public static final int VIEW=43;
-	public static final int WS=44;
-	public static final int XCOORDS=45;
-	public static final int YCOORDS=46;
+	public static final int FREF=12;
+	public static final int ID=13;
+	public static final int INTRN=14;
+	public static final int IVALUE=15;
+	public static final int JKL=16;
+	public static final int LEVEL=17;
+	public static final int LOCALS=18;
+	public static final int MACRO=19;
+	public static final int MACRODEF=20;
+	public static final int MEND=21;
+	public static final int MODEL=22;
+	public static final int MODULE=23;
+	public static final int NEWLINE=24;
+	public static final int NOTE=25;
+	public static final int NUMBER=26;
+	public static final int PARAMS=27;
+	public static final int PAUX=28;
+	public static final int PLOT=29;
+	public static final int PLOTVAR=30;
+	public static final int PLOTVLIST=31;
+	public static final int PRINT=32;
+	public static final int PSECTOR=33;
+	public static final int PTS=34;
+	public static final int RATE=35;
+	public static final int RUN=36;
+	public static final int SCALE=37;
+	public static final int SECTOR=38;
+	public static final int SPEC=39;
+	public static final int TAUX=40;
+	public static final int UNARYMINUS=41;
+	public static final int UNARYPLUS=42;
+	public static final int VARIABLES=43;
+	public static final int VIEW=44;
+	public static final int WS=45;
+	public static final int XCOORDS=46;
+	public static final int YCOORDS=47;
 
 	// delegates
 	public Parser[] getDelegates() {
@@ -170,7 +170,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:50:4: macroDef
 					{
-					pushFollow(FOLLOW_macroDef_in_prog190);
+					pushFollow(FOLLOW_macroDef_in_prog195);
 					macroDef1=macroDef();
 					state._fsp--;
 
@@ -186,14 +186,14 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:50:14: ( defaultModule )?
 			int alt2=2;
 			int LA2_0 = input.LA(1);
-			if ( (LA2_0==NOTE||(LA2_0 >= 55 && LA2_0 <= 60)) ) {
+			if ( (LA2_0==NOTE||(LA2_0 >= 56 && LA2_0 <= 61)) ) {
 				alt2=1;
 			}
 			switch (alt2) {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:50:14: defaultModule
 					{
-					pushFollow(FOLLOW_defaultModule_in_prog193);
+					pushFollow(FOLLOW_defaultModule_in_prog198);
 					defaultModule2=defaultModule();
 					state._fsp--;
 
@@ -216,7 +216,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:50:29: namedModule
 					{
-					pushFollow(FOLLOW_namedModule_in_prog196);
+					pushFollow(FOLLOW_namedModule_in_prog201);
 					namedModule3=namedModule();
 					state._fsp--;
 
@@ -239,7 +239,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:50:43: controlSector ( controlStat | comment )+ ( viewSpec )*
 					{
-					pushFollow(FOLLOW_controlSector_in_prog200);
+					pushFollow(FOLLOW_controlSector_in_prog205);
 					controlSector4=controlSector();
 					state._fsp--;
 
@@ -261,7 +261,7 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:50:58: controlStat
 							{
-							pushFollow(FOLLOW_controlStat_in_prog203);
+							pushFollow(FOLLOW_controlStat_in_prog208);
 							controlStat5=controlStat();
 							state._fsp--;
 
@@ -271,7 +271,7 @@ public class DynamoParser extends Parser {
 						case 2 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:50:72: comment
 							{
-							pushFollow(FOLLOW_comment_in_prog207);
+							pushFollow(FOLLOW_comment_in_prog212);
 							comment6=comment();
 							state._fsp--;
 
@@ -300,7 +300,7 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:50:83: viewSpec
 							{
-							pushFollow(FOLLOW_viewSpec_in_prog212);
+							pushFollow(FOLLOW_viewSpec_in_prog217);
 							viewSpec7=viewSpec();
 							state._fsp--;
 
@@ -331,7 +331,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:50:95: NEWLINE
 					{
-					NEWLINE8=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_prog217);  
+					NEWLINE8=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_prog222);  
 					stream_NEWLINE.add(NEWLINE8);
 
 					}
@@ -473,7 +473,7 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:54:3: ( controlSector ( controlStat | comment )+ ( viewSpec )* -> ^( CONTROL ( controlStat )+ ) ^( VIEW ( viewSpec )* ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:54:5: controlSector ( controlStat | comment )+ ( viewSpec )*
 			{
-			pushFollow(FOLLOW_controlSector_in_controlModule271);
+			pushFollow(FOLLOW_controlSector_in_controlModule276);
 			controlSector9=controlSector();
 			state._fsp--;
 
@@ -495,7 +495,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:54:20: controlStat
 					{
-					pushFollow(FOLLOW_controlStat_in_controlModule274);
+					pushFollow(FOLLOW_controlStat_in_controlModule279);
 					controlStat10=controlStat();
 					state._fsp--;
 
@@ -505,7 +505,7 @@ public class DynamoParser extends Parser {
 				case 2 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:54:34: comment
 					{
-					pushFollow(FOLLOW_comment_in_controlModule278);
+					pushFollow(FOLLOW_comment_in_controlModule283);
 					comment11=comment();
 					state._fsp--;
 
@@ -534,7 +534,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:54:45: viewSpec
 					{
-					pushFollow(FOLLOW_viewSpec_in_controlModule283);
+					pushFollow(FOLLOW_viewSpec_in_controlModule288);
 					viewSpec12=viewSpec();
 					state._fsp--;
 
@@ -658,7 +658,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_simSpec_in_controlStat339);
+					pushFollow(FOLLOW_simSpec_in_controlStat344);
 					simSpec13=simSpec();
 					state._fsp--;
 
@@ -669,7 +669,7 @@ public class DynamoParser extends Parser {
 				case 2 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:59:9: runSpec
 					{
-					pushFollow(FOLLOW_runSpec_in_controlStat350);
+					pushFollow(FOLLOW_runSpec_in_controlStat355);
 					runSpec14=runSpec();
 					state._fsp--;
 
@@ -747,7 +747,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt11=3;
 				int LA11_0 = input.LA(1);
-				if ( ((LA11_0 >= 55 && LA11_0 <= 60)) ) {
+				if ( ((LA11_0 >= 56 && LA11_0 <= 61)) ) {
 					alt11=1;
 				}
 				else if ( (LA11_0==NOTE) ) {
@@ -758,7 +758,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:63:5: definition
 					{
-					pushFollow(FOLLOW_definition_in_defaultModule375);
+					pushFollow(FOLLOW_definition_in_defaultModule380);
 					definition15=definition();
 					state._fsp--;
 
@@ -768,7 +768,7 @@ public class DynamoParser extends Parser {
 				case 2 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:63:18: comment
 					{
-					pushFollow(FOLLOW_comment_in_defaultModule379);
+					pushFollow(FOLLOW_comment_in_defaultModule384);
 					comment16=comment();
 					state._fsp--;
 
@@ -873,7 +873,7 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:67:6: ( sector ( definition | comment )+ -> ^( MODULE sector ^( VARIABLES ( definition )+ ) ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:67:8: sector ( definition | comment )+
 			{
-			pushFollow(FOLLOW_sector_in_namedModule420);
+			pushFollow(FOLLOW_sector_in_namedModule425);
 			sector17=sector();
 			state._fsp--;
 
@@ -884,7 +884,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt12=3;
 				int LA12_0 = input.LA(1);
-				if ( ((LA12_0 >= 55 && LA12_0 <= 60)) ) {
+				if ( ((LA12_0 >= 56 && LA12_0 <= 61)) ) {
 					alt12=1;
 				}
 				else if ( (LA12_0==NOTE) ) {
@@ -895,7 +895,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:67:16: definition
 					{
-					pushFollow(FOLLOW_definition_in_namedModule423);
+					pushFollow(FOLLOW_definition_in_namedModule428);
 					definition18=definition();
 					state._fsp--;
 
@@ -905,7 +905,7 @@ public class DynamoParser extends Parser {
 				case 2 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:67:29: comment
 					{
-					pushFollow(FOLLOW_comment_in_namedModule427);
+					pushFollow(FOLLOW_comment_in_namedModule432);
 					comment19=comment();
 					state._fsp--;
 
@@ -1010,32 +1010,32 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:71:5: ( auxDef | lvlDef | initDef | constDef | rateDef | tblDef )
 			int alt13=6;
 			switch ( input.LA(1) ) {
-			case 55:
+			case 56:
 				{
 				alt13=1;
 				}
 				break;
-			case 57:
+			case 58:
 				{
 				alt13=2;
 				}
 				break;
-			case 58:
+			case 59:
 				{
 				alt13=3;
 				}
 				break;
-			case 56:
+			case 57:
 				{
 				alt13=4;
 				}
 				break;
-			case 59:
+			case 60:
 				{
 				alt13=5;
 				}
 				break;
-			case 60:
+			case 61:
 				{
 				alt13=6;
 				}
@@ -1052,7 +1052,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_auxDef_in_definition472);
+					pushFollow(FOLLOW_auxDef_in_definition477);
 					auxDef20=auxDef();
 					state._fsp--;
 
@@ -1066,7 +1066,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_lvlDef_in_definition482);
+					pushFollow(FOLLOW_lvlDef_in_definition487);
 					lvlDef21=lvlDef();
 					state._fsp--;
 
@@ -1080,7 +1080,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_initDef_in_definition492);
+					pushFollow(FOLLOW_initDef_in_definition497);
 					initDef22=initDef();
 					state._fsp--;
 
@@ -1094,7 +1094,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_constDef_in_definition500);
+					pushFollow(FOLLOW_constDef_in_definition505);
 					constDef23=constDef();
 					state._fsp--;
 
@@ -1108,7 +1108,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_rateDef_in_definition511);
+					pushFollow(FOLLOW_rateDef_in_definition516);
 					rateDef24=rateDef();
 					state._fsp--;
 
@@ -1122,7 +1122,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_tblDef_in_definition522);
+					pushFollow(FOLLOW_tblDef_in_definition527);
 					tblDef25=tblDef();
 					state._fsp--;
 
@@ -1184,7 +1184,7 @@ public class DynamoParser extends Parser {
 			if ( !((input.LT(1).getText().contentEquals("NOTE"))) ) {
 				throw new FailedPredicateException(input, "comment", "input.LT(1).getText().contentEquals(\"NOTE\")");
 			}
-			NOTE26=(Token)match(input,NOTE,FOLLOW_NOTE_in_comment544);  
+			NOTE26=(Token)match(input,NOTE,FOLLOW_NOTE_in_comment549);  
 			stream_NOTE.add(NOTE26);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:80:60: ( COMMENT )?
@@ -1197,7 +1197,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:80:60: COMMENT
 					{
-					COMMENT27=(Token)match(input,COMMENT,FOLLOW_COMMENT_in_comment546);  
+					COMMENT27=(Token)match(input,COMMENT,FOLLOW_COMMENT_in_comment551);  
 					stream_COMMENT.add(COMMENT27);
 
 					}
@@ -1205,7 +1205,7 @@ public class DynamoParser extends Parser {
 
 			}
 
-			NEWLINE28=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_comment549);  
+			NEWLINE28=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_comment554);  
 			stream_NEWLINE.add(NEWLINE28);
 
 			// AST REWRITE
@@ -1283,21 +1283,21 @@ public class DynamoParser extends Parser {
 		Object char_literal35_tree=null;
 		Object WS37_tree=null;
 		Object NEWLINE38_tree=null;
-		RewriteRuleTokenStream stream_67=new RewriteRuleTokenStream(adaptor,"token 67");
+		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
+		RewriteRuleTokenStream stream_66=new RewriteRuleTokenStream(adaptor,"token 66");
+		RewriteRuleTokenStream stream_68=new RewriteRuleTokenStream(adaptor,"token 68");
 		RewriteRuleTokenStream stream_PSECTOR=new RewriteRuleTokenStream(adaptor,"token PSECTOR");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
 		RewriteRuleTokenStream stream_SECTOR=new RewriteRuleTokenStream(adaptor,"token SECTOR");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
-		RewriteRuleTokenStream stream_65=new RewriteRuleTokenStream(adaptor,"token 65");
 		RewriteRuleSubtreeStream stream_lineComment=new RewriteRuleSubtreeStream(adaptor,"rule lineComment");
 
 		try {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:84:3: ( PSECTOR ( WS )+ '[' SECTOR '=' ID ']' ( lineComment )? ( WS )? NEWLINE -> ID )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:84:5: PSECTOR ( WS )+ '[' SECTOR '=' ID ']' ( lineComment )? ( WS )? NEWLINE
 			{
-			PSECTOR29=(Token)match(input,PSECTOR,FOLLOW_PSECTOR_in_sector573);  
+			PSECTOR29=(Token)match(input,PSECTOR,FOLLOW_PSECTOR_in_sector578);  
 			stream_PSECTOR.add(PSECTOR29);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:84:13: ( WS )+
@@ -1314,7 +1314,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:84:13: WS
 					{
-					WS30=(Token)match(input,WS,FOLLOW_WS_in_sector575);  
+					WS30=(Token)match(input,WS,FOLLOW_WS_in_sector580);  
 					stream_WS.add(WS30);
 
 					}
@@ -1328,20 +1328,20 @@ public class DynamoParser extends Parser {
 				cnt15++;
 			}
 
-			char_literal31=(Token)match(input,65,FOLLOW_65_in_sector578);  
-			stream_65.add(char_literal31);
+			char_literal31=(Token)match(input,66,FOLLOW_66_in_sector583);  
+			stream_66.add(char_literal31);
 
-			SECTOR32=(Token)match(input,SECTOR,FOLLOW_SECTOR_in_sector581);  
+			SECTOR32=(Token)match(input,SECTOR,FOLLOW_SECTOR_in_sector586);  
 			stream_SECTOR.add(SECTOR32);
 
-			char_literal33=(Token)match(input,54,FOLLOW_54_in_sector583);  
-			stream_54.add(char_literal33);
+			char_literal33=(Token)match(input,55,FOLLOW_55_in_sector588);  
+			stream_55.add(char_literal33);
 
-			ID34=(Token)match(input,ID,FOLLOW_ID_in_sector585);  
+			ID34=(Token)match(input,ID,FOLLOW_ID_in_sector590);  
 			stream_ID.add(ID34);
 
-			char_literal35=(Token)match(input,67,FOLLOW_67_in_sector588);  
-			stream_67.add(char_literal35);
+			char_literal35=(Token)match(input,68,FOLLOW_68_in_sector593);  
+			stream_68.add(char_literal35);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:84:41: ( lineComment )?
 			int alt16=2;
@@ -1356,7 +1356,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:84:41: lineComment
 					{
-					pushFollow(FOLLOW_lineComment_in_sector590);
+					pushFollow(FOLLOW_lineComment_in_sector595);
 					lineComment36=lineComment();
 					state._fsp--;
 
@@ -1376,7 +1376,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:84:54: WS
 					{
-					WS37=(Token)match(input,WS,FOLLOW_WS_in_sector593);  
+					WS37=(Token)match(input,WS,FOLLOW_WS_in_sector598);  
 					stream_WS.add(WS37);
 
 					}
@@ -1384,7 +1384,7 @@ public class DynamoParser extends Parser {
 
 			}
 
-			NEWLINE38=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_sector596);  
+			NEWLINE38=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_sector601);  
 			stream_NEWLINE.add(NEWLINE38);
 
 			// AST REWRITE
@@ -1462,21 +1462,21 @@ public class DynamoParser extends Parser {
 		Object char_literal45_tree=null;
 		Object WS47_tree=null;
 		Object NEWLINE48_tree=null;
-		RewriteRuleTokenStream stream_67=new RewriteRuleTokenStream(adaptor,"token 67");
+		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
+		RewriteRuleTokenStream stream_66=new RewriteRuleTokenStream(adaptor,"token 66");
+		RewriteRuleTokenStream stream_68=new RewriteRuleTokenStream(adaptor,"token 68");
 		RewriteRuleTokenStream stream_CSECTOR=new RewriteRuleTokenStream(adaptor,"token CSECTOR");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
 		RewriteRuleTokenStream stream_SECTOR=new RewriteRuleTokenStream(adaptor,"token SECTOR");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
-		RewriteRuleTokenStream stream_65=new RewriteRuleTokenStream(adaptor,"token 65");
 		RewriteRuleSubtreeStream stream_lineComment=new RewriteRuleSubtreeStream(adaptor,"rule lineComment");
 
 		try {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:88:3: ( CSECTOR ( WS )+ '[' SECTOR '=' ID ']' ( lineComment )? ( WS )? NEWLINE -> ID )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:88:5: CSECTOR ( WS )+ '[' SECTOR '=' ID ']' ( lineComment )? ( WS )? NEWLINE
 			{
-			CSECTOR39=(Token)match(input,CSECTOR,FOLLOW_CSECTOR_in_controlSector614);  
+			CSECTOR39=(Token)match(input,CSECTOR,FOLLOW_CSECTOR_in_controlSector619);  
 			stream_CSECTOR.add(CSECTOR39);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:88:13: ( WS )+
@@ -1493,7 +1493,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:88:13: WS
 					{
-					WS40=(Token)match(input,WS,FOLLOW_WS_in_controlSector616);  
+					WS40=(Token)match(input,WS,FOLLOW_WS_in_controlSector621);  
 					stream_WS.add(WS40);
 
 					}
@@ -1507,20 +1507,20 @@ public class DynamoParser extends Parser {
 				cnt18++;
 			}
 
-			char_literal41=(Token)match(input,65,FOLLOW_65_in_controlSector619);  
-			stream_65.add(char_literal41);
+			char_literal41=(Token)match(input,66,FOLLOW_66_in_controlSector624);  
+			stream_66.add(char_literal41);
 
-			SECTOR42=(Token)match(input,SECTOR,FOLLOW_SECTOR_in_controlSector622);  
+			SECTOR42=(Token)match(input,SECTOR,FOLLOW_SECTOR_in_controlSector627);  
 			stream_SECTOR.add(SECTOR42);
 
-			char_literal43=(Token)match(input,54,FOLLOW_54_in_controlSector624);  
-			stream_54.add(char_literal43);
+			char_literal43=(Token)match(input,55,FOLLOW_55_in_controlSector629);  
+			stream_55.add(char_literal43);
 
-			ID44=(Token)match(input,ID,FOLLOW_ID_in_controlSector626);  
+			ID44=(Token)match(input,ID,FOLLOW_ID_in_controlSector631);  
 			stream_ID.add(ID44);
 
-			char_literal45=(Token)match(input,67,FOLLOW_67_in_controlSector628);  
-			stream_67.add(char_literal45);
+			char_literal45=(Token)match(input,68,FOLLOW_68_in_controlSector633);  
+			stream_68.add(char_literal45);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:88:40: ( lineComment )?
 			int alt19=2;
@@ -1535,7 +1535,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:88:40: lineComment
 					{
-					pushFollow(FOLLOW_lineComment_in_controlSector630);
+					pushFollow(FOLLOW_lineComment_in_controlSector635);
 					lineComment46=lineComment();
 					state._fsp--;
 
@@ -1555,7 +1555,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:88:53: WS
 					{
-					WS47=(Token)match(input,WS,FOLLOW_WS_in_controlSector633);  
+					WS47=(Token)match(input,WS,FOLLOW_WS_in_controlSector638);  
 					stream_WS.add(WS47);
 
 					}
@@ -1563,7 +1563,7 @@ public class DynamoParser extends Parser {
 
 			}
 
-			NEWLINE48=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_controlSector636);  
+			NEWLINE48=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_controlSector641);  
 			stream_NEWLINE.add(NEWLINE48);
 
 			// AST REWRITE
@@ -1643,7 +1643,7 @@ public class DynamoParser extends Parser {
 		RewriteRuleTokenStream stream_PLOT=new RewriteRuleTokenStream(adaptor,"token PLOT");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_53=new RewriteRuleTokenStream(adaptor,"token 53");
+		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_plotVarList=new RewriteRuleSubtreeStream(adaptor,"rule plotVarList");
 		RewriteRuleSubtreeStream stream_varList=new RewriteRuleSubtreeStream(adaptor,"rule varList");
 
@@ -1668,7 +1668,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:93:6: PLOT ( WS )+ plotVarList ( ( '/' ) plotVarList )* NEWLINE
 					{
-					PLOT49=(Token)match(input,PLOT,FOLLOW_PLOT_in_viewSpec666);  
+					PLOT49=(Token)match(input,PLOT,FOLLOW_PLOT_in_viewSpec671);  
 					stream_PLOT.add(PLOT49);
 
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:93:11: ( WS )+
@@ -1685,7 +1685,7 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:93:11: WS
 							{
-							WS50=(Token)match(input,WS,FOLLOW_WS_in_viewSpec668);  
+							WS50=(Token)match(input,WS,FOLLOW_WS_in_viewSpec673);  
 							stream_WS.add(WS50);
 
 							}
@@ -1699,7 +1699,7 @@ public class DynamoParser extends Parser {
 						cnt21++;
 					}
 
-					pushFollow(FOLLOW_plotVarList_in_viewSpec671);
+					pushFollow(FOLLOW_plotVarList_in_viewSpec676);
 					plotVarList51=plotVarList();
 					state._fsp--;
 
@@ -1709,7 +1709,7 @@ public class DynamoParser extends Parser {
 					while (true) {
 						int alt22=2;
 						int LA22_0 = input.LA(1);
-						if ( (LA22_0==53) ) {
+						if ( (LA22_0==54) ) {
 							alt22=1;
 						}
 
@@ -1720,12 +1720,12 @@ public class DynamoParser extends Parser {
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:93:28: ( '/' )
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:93:29: '/'
 							{
-							char_literal52=(Token)match(input,53,FOLLOW_53_in_viewSpec675);  
-							stream_53.add(char_literal52);
+							char_literal52=(Token)match(input,54,FOLLOW_54_in_viewSpec680);  
+							stream_54.add(char_literal52);
 
 							}
 
-							pushFollow(FOLLOW_plotVarList_in_viewSpec678);
+							pushFollow(FOLLOW_plotVarList_in_viewSpec683);
 							plotVarList53=plotVarList();
 							state._fsp--;
 
@@ -1738,7 +1738,7 @@ public class DynamoParser extends Parser {
 						}
 					}
 
-					NEWLINE54=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_viewSpec682);  
+					NEWLINE54=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_viewSpec687);  
 					stream_NEWLINE.add(NEWLINE54);
 
 					// AST REWRITE
@@ -1779,7 +1779,7 @@ public class DynamoParser extends Parser {
 				case 2 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:94:10: PRINT ( WS )+ varList NEWLINE
 					{
-					PRINT55=(Token)match(input,PRINT,FOLLOW_PRINT_in_viewSpec702);  
+					PRINT55=(Token)match(input,PRINT,FOLLOW_PRINT_in_viewSpec707);  
 					stream_PRINT.add(PRINT55);
 
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:94:16: ( WS )+
@@ -1796,7 +1796,7 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:94:16: WS
 							{
-							WS56=(Token)match(input,WS,FOLLOW_WS_in_viewSpec704);  
+							WS56=(Token)match(input,WS,FOLLOW_WS_in_viewSpec709);  
 							stream_WS.add(WS56);
 
 							}
@@ -1810,12 +1810,12 @@ public class DynamoParser extends Parser {
 						cnt23++;
 					}
 
-					pushFollow(FOLLOW_varList_in_viewSpec707);
+					pushFollow(FOLLOW_varList_in_viewSpec712);
 					varList57=varList();
 					state._fsp--;
 
 					stream_varList.add(varList57.getTree());
-					NEWLINE58=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_viewSpec709);  
+					NEWLINE58=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_viewSpec714);  
 					stream_NEWLINE.add(NEWLINE58);
 
 					// AST REWRITE
@@ -1880,14 +1880,14 @@ public class DynamoParser extends Parser {
 		ParserRuleReturnScope scaleSpec61 =null;
 
 		Object char_literal60_tree=null;
-		RewriteRuleTokenStream stream_51=new RewriteRuleTokenStream(adaptor,"token 51");
+		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
 		RewriteRuleSubtreeStream stream_scaleSpec=new RewriteRuleSubtreeStream(adaptor,"rule scaleSpec");
 
 		try {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:98:3: ( scaleSpec ( ',' scaleSpec )* -> ^( PLOTVLIST ( scaleSpec )+ ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:98:7: scaleSpec ( ',' scaleSpec )*
 			{
-			pushFollow(FOLLOW_scaleSpec_in_plotVarList732);
+			pushFollow(FOLLOW_scaleSpec_in_plotVarList737);
 			scaleSpec59=scaleSpec();
 			state._fsp--;
 
@@ -1897,7 +1897,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt25=2;
 				int LA25_0 = input.LA(1);
-				if ( (LA25_0==51) ) {
+				if ( (LA25_0==52) ) {
 					alt25=1;
 				}
 
@@ -1905,10 +1905,10 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:98:18: ',' scaleSpec
 					{
-					char_literal60=(Token)match(input,51,FOLLOW_51_in_plotVarList735);  
-					stream_51.add(char_literal60);
+					char_literal60=(Token)match(input,52,FOLLOW_52_in_plotVarList740);  
+					stream_52.add(char_literal60);
 
-					pushFollow(FOLLOW_scaleSpec_in_plotVarList737);
+					pushFollow(FOLLOW_scaleSpec_in_plotVarList742);
 					scaleSpec61=scaleSpec();
 					state._fsp--;
 
@@ -2003,7 +2003,7 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:102:4: ( plotVar ( scaleRange )? )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:102:6: plotVar ( scaleRange )?
 			{
-			pushFollow(FOLLOW_plotVar_in_scaleSpec770);
+			pushFollow(FOLLOW_plotVar_in_scaleSpec775);
 			plotVar62=plotVar();
 			state._fsp--;
 
@@ -2011,14 +2011,14 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:102:14: ( scaleRange )?
 			int alt26=2;
 			int LA26_0 = input.LA(1);
-			if ( (LA26_0==47) ) {
+			if ( (LA26_0==48) ) {
 				alt26=1;
 			}
 			switch (alt26) {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:102:15: scaleRange
 					{
-					pushFollow(FOLLOW_scaleRange_in_scaleSpec773);
+					pushFollow(FOLLOW_scaleRange_in_scaleSpec778);
 					scaleRange63=scaleRange();
 					state._fsp--;
 
@@ -2104,21 +2104,21 @@ public class DynamoParser extends Parser {
 
 		Object ID64_tree=null;
 		Object char_literal65_tree=null;
+		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
-		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_plotChar=new RewriteRuleSubtreeStream(adaptor,"rule plotChar");
 
 		try {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:105:9: ( ID '=' plotChar -> ID )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:105:11: ID '=' plotChar
 			{
-			ID64=(Token)match(input,ID,FOLLOW_ID_in_plotVar801);  
+			ID64=(Token)match(input,ID,FOLLOW_ID_in_plotVar806);  
 			stream_ID.add(ID64);
 
-			char_literal65=(Token)match(input,54,FOLLOW_54_in_plotVar803);  
-			stream_54.add(char_literal65);
+			char_literal65=(Token)match(input,55,FOLLOW_55_in_plotVar808);  
+			stream_55.add(char_literal65);
 
-			pushFollow(FOLLOW_plotChar_in_plotVar805);
+			pushFollow(FOLLOW_plotChar_in_plotVar810);
 			plotChar66=plotChar();
 			state._fsp--;
 
@@ -2189,7 +2189,7 @@ public class DynamoParser extends Parser {
 		Object char_literal69_tree=null;
 		Object char_literal70_tree=null;
 		Object char_literal71_tree=null;
-		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
+		RewriteRuleTokenStream stream_53=new RewriteRuleTokenStream(adaptor,"token 53");
 
 		try {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:108:9: ( ID | NUMBER | '+' | '*' | '-' ->)
@@ -2205,17 +2205,17 @@ public class DynamoParser extends Parser {
 				alt27=2;
 				}
 				break;
-			case 50:
+			case 51:
 				{
 				alt27=3;
 				}
 				break;
-			case 49:
+			case 50:
 				{
 				alt27=4;
 				}
 				break;
-			case 52:
+			case 53:
 				{
 				alt27=5;
 				}
@@ -2232,7 +2232,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					ID67=(Token)match(input,ID,FOLLOW_ID_in_plotChar820); 
+					ID67=(Token)match(input,ID,FOLLOW_ID_in_plotChar825); 
 					ID67_tree = (Object)adaptor.create(ID67);
 					adaptor.addChild(root_0, ID67_tree);
 
@@ -2244,7 +2244,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					NUMBER68=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_plotChar822); 
+					NUMBER68=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_plotChar827); 
 					NUMBER68_tree = (Object)adaptor.create(NUMBER68);
 					adaptor.addChild(root_0, NUMBER68_tree);
 
@@ -2256,7 +2256,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					char_literal69=(Token)match(input,50,FOLLOW_50_in_plotChar824); 
+					char_literal69=(Token)match(input,51,FOLLOW_51_in_plotChar829); 
 					char_literal69_tree = (Object)adaptor.create(char_literal69);
 					adaptor.addChild(root_0, char_literal69_tree);
 
@@ -2268,7 +2268,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					char_literal70=(Token)match(input,49,FOLLOW_49_in_plotChar826); 
+					char_literal70=(Token)match(input,50,FOLLOW_50_in_plotChar831); 
 					char_literal70_tree = (Object)adaptor.create(char_literal70);
 					adaptor.addChild(root_0, char_literal70_tree);
 
@@ -2277,8 +2277,8 @@ public class DynamoParser extends Parser {
 				case 5 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:108:31: '-'
 					{
-					char_literal71=(Token)match(input,52,FOLLOW_52_in_plotChar828);  
-					stream_52.add(char_literal71);
+					char_literal71=(Token)match(input,53,FOLLOW_53_in_plotChar833);  
+					stream_53.add(char_literal71);
 
 					// AST REWRITE
 					// elements: 
@@ -2346,9 +2346,9 @@ public class DynamoParser extends Parser {
 		Object char_literal72_tree=null;
 		Object char_literal74_tree=null;
 		Object char_literal76_tree=null;
-		RewriteRuleTokenStream stream_47=new RewriteRuleTokenStream(adaptor,"token 47");
 		RewriteRuleTokenStream stream_48=new RewriteRuleTokenStream(adaptor,"token 48");
-		RewriteRuleTokenStream stream_51=new RewriteRuleTokenStream(adaptor,"token 51");
+		RewriteRuleTokenStream stream_49=new RewriteRuleTokenStream(adaptor,"token 49");
+		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
 		RewriteRuleSubtreeStream stream_min=new RewriteRuleSubtreeStream(adaptor,"rule min");
 		RewriteRuleSubtreeStream stream_max=new RewriteRuleSubtreeStream(adaptor,"rule max");
 
@@ -2356,24 +2356,24 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:111:12: ( '(' min ',' max ')' -> ^( SCALE min max ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:111:14: '(' min ',' max ')'
 			{
-			char_literal72=(Token)match(input,47,FOLLOW_47_in_scaleRange844);  
-			stream_47.add(char_literal72);
+			char_literal72=(Token)match(input,48,FOLLOW_48_in_scaleRange849);  
+			stream_48.add(char_literal72);
 
-			pushFollow(FOLLOW_min_in_scaleRange846);
+			pushFollow(FOLLOW_min_in_scaleRange851);
 			min73=min();
 			state._fsp--;
 
 			stream_min.add(min73.getTree());
-			char_literal74=(Token)match(input,51,FOLLOW_51_in_scaleRange848);  
-			stream_51.add(char_literal74);
+			char_literal74=(Token)match(input,52,FOLLOW_52_in_scaleRange853);  
+			stream_52.add(char_literal74);
 
-			pushFollow(FOLLOW_max_in_scaleRange850);
+			pushFollow(FOLLOW_max_in_scaleRange855);
 			max75=max();
 			state._fsp--;
 
 			stream_max.add(max75.getTree());
-			char_literal76=(Token)match(input,48,FOLLOW_48_in_scaleRange852);  
-			stream_48.add(char_literal76);
+			char_literal76=(Token)match(input,49,FOLLOW_49_in_scaleRange857);  
+			stream_49.add(char_literal76);
 
 			// AST REWRITE
 			// elements: min, max
@@ -2449,7 +2449,7 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			NUMBER77=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_min883); 
+			NUMBER77=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_min888); 
 			NUMBER77_tree = (Object)adaptor.create(NUMBER77);
 			adaptor.addChild(root_0, NUMBER77_tree);
 
@@ -2500,7 +2500,7 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			NUMBER78=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_max889); 
+			NUMBER78=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_max894); 
 			NUMBER78_tree = (Object)adaptor.create(NUMBER78);
 			adaptor.addChild(root_0, NUMBER78_tree);
 
@@ -2558,7 +2558,7 @@ public class DynamoParser extends Parser {
 			if ( !((input.LT(1).getText().contentEquals("RUN"))) ) {
 				throw new FailedPredicateException(input, "runSpec", "input.LT(1).getText().contentEquals(\"RUN\")");
 			}
-			RUN79=(Token)match(input,RUN,FOLLOW_RUN_in_runSpec909); 
+			RUN79=(Token)match(input,RUN,FOLLOW_RUN_in_runSpec914); 
 			RUN79_tree = (Object)adaptor.create(RUN79);
 			adaptor.addChild(root_0, RUN79_tree);
 
@@ -2572,7 +2572,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:118:58: COMMENT
 					{
-					COMMENT80=(Token)match(input,COMMENT,FOLLOW_COMMENT_in_runSpec911); 
+					COMMENT80=(Token)match(input,COMMENT,FOLLOW_COMMENT_in_runSpec916); 
 					COMMENT80_tree = (Object)adaptor.create(COMMENT80);
 					adaptor.addChild(root_0, COMMENT80_tree);
 
@@ -2581,7 +2581,7 @@ public class DynamoParser extends Parser {
 
 			}
 
-			NEWLINE81=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_runSpec914); 
+			NEWLINE81=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_runSpec919); 
 			NEWLINE81_tree = (Object)adaptor.create(NEWLINE81);
 			adaptor.addChild(root_0, NEWLINE81_tree);
 
@@ -2635,23 +2635,23 @@ public class DynamoParser extends Parser {
 		Object char_literal86_tree=null;
 		Object NEWLINE88_tree=null;
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
-		RewriteRuleTokenStream stream_51=new RewriteRuleTokenStream(adaptor,"token 51");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
+		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
 		RewriteRuleTokenStream stream_SPEC=new RewriteRuleTokenStream(adaptor,"token SPEC");
-		RewriteRuleTokenStream stream_53=new RewriteRuleTokenStream(adaptor,"token 53");
+		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_paramAssignment=new RewriteRuleSubtreeStream(adaptor,"rule paramAssignment");
 
 		try {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:122:6: ( SPEC WS paramAssignment ( ( ',' | '/' ) paramAssignment )* NEWLINE -> ^( PARAMS ( paramAssignment )+ ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:122:8: SPEC WS paramAssignment ( ( ',' | '/' ) paramAssignment )* NEWLINE
 			{
-			SPEC82=(Token)match(input,SPEC,FOLLOW_SPEC_in_simSpec938);  
+			SPEC82=(Token)match(input,SPEC,FOLLOW_SPEC_in_simSpec943);  
 			stream_SPEC.add(SPEC82);
 
-			WS83=(Token)match(input,WS,FOLLOW_WS_in_simSpec940);  
+			WS83=(Token)match(input,WS,FOLLOW_WS_in_simSpec945);  
 			stream_WS.add(WS83);
 
-			pushFollow(FOLLOW_paramAssignment_in_simSpec942);
+			pushFollow(FOLLOW_paramAssignment_in_simSpec947);
 			paramAssignment84=paramAssignment();
 			state._fsp--;
 
@@ -2661,7 +2661,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt30=2;
 				int LA30_0 = input.LA(1);
-				if ( (LA30_0==51||LA30_0==53) ) {
+				if ( (LA30_0==52||LA30_0==54) ) {
 					alt30=1;
 				}
 
@@ -2672,10 +2672,10 @@ public class DynamoParser extends Parser {
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:122:33: ( ',' | '/' )
 					int alt29=2;
 					int LA29_0 = input.LA(1);
-					if ( (LA29_0==51) ) {
+					if ( (LA29_0==52) ) {
 						alt29=1;
 					}
-					else if ( (LA29_0==53) ) {
+					else if ( (LA29_0==54) ) {
 						alt29=2;
 					}
 
@@ -2689,23 +2689,23 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:122:34: ','
 							{
-							char_literal85=(Token)match(input,51,FOLLOW_51_in_simSpec946);  
-							stream_51.add(char_literal85);
+							char_literal85=(Token)match(input,52,FOLLOW_52_in_simSpec951);  
+							stream_52.add(char_literal85);
 
 							}
 							break;
 						case 2 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:122:38: '/'
 							{
-							char_literal86=(Token)match(input,53,FOLLOW_53_in_simSpec948);  
-							stream_53.add(char_literal86);
+							char_literal86=(Token)match(input,54,FOLLOW_54_in_simSpec953);  
+							stream_54.add(char_literal86);
 
 							}
 							break;
 
 					}
 
-					pushFollow(FOLLOW_paramAssignment_in_simSpec951);
+					pushFollow(FOLLOW_paramAssignment_in_simSpec956);
 					paramAssignment87=paramAssignment();
 					state._fsp--;
 
@@ -2718,7 +2718,7 @@ public class DynamoParser extends Parser {
 				}
 			}
 
-			NEWLINE88=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_simSpec955);  
+			NEWLINE88=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_simSpec960);  
 			stream_NEWLINE.add(NEWLINE88);
 
 			// AST REWRITE
@@ -2806,7 +2806,7 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:126:3: ( macroStart ( intrnlStmt )* ( definition | comment )+ macroEnd -> ^( MACRO macroStart intrnlStmt ^( VARIABLES ( definition )+ ) ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:126:5: macroStart ( intrnlStmt )* ( definition | comment )+ macroEnd
 			{
-			pushFollow(FOLLOW_macroStart_in_macroDef985);
+			pushFollow(FOLLOW_macroStart_in_macroDef990);
 			macroStart89=macroStart();
 			state._fsp--;
 
@@ -2824,7 +2824,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:126:16: intrnlStmt
 					{
-					pushFollow(FOLLOW_intrnlStmt_in_macroDef987);
+					pushFollow(FOLLOW_intrnlStmt_in_macroDef992);
 					intrnlStmt90=intrnlStmt();
 					state._fsp--;
 
@@ -2843,7 +2843,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt32=3;
 				int LA32_0 = input.LA(1);
-				if ( ((LA32_0 >= 55 && LA32_0 <= 60)) ) {
+				if ( ((LA32_0 >= 56 && LA32_0 <= 61)) ) {
 					alt32=1;
 				}
 				else if ( (LA32_0==NOTE) ) {
@@ -2854,7 +2854,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:126:29: definition
 					{
-					pushFollow(FOLLOW_definition_in_macroDef991);
+					pushFollow(FOLLOW_definition_in_macroDef996);
 					definition91=definition();
 					state._fsp--;
 
@@ -2864,7 +2864,7 @@ public class DynamoParser extends Parser {
 				case 2 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:126:42: comment
 					{
-					pushFollow(FOLLOW_comment_in_macroDef995);
+					pushFollow(FOLLOW_comment_in_macroDef1000);
 					comment92=comment();
 					state._fsp--;
 
@@ -2880,7 +2880,7 @@ public class DynamoParser extends Parser {
 				cnt32++;
 			}
 
-			pushFollow(FOLLOW_macroEnd_in_macroDef1000);
+			pushFollow(FOLLOW_macroEnd_in_macroDef1005);
 			macroEnd93=macroEnd();
 			state._fsp--;
 
@@ -2979,8 +2979,8 @@ public class DynamoParser extends Parser {
 		Object char_literal99_tree=null;
 		Object WS100_tree=null;
 		Object NEWLINE101_tree=null;
-		RewriteRuleTokenStream stream_47=new RewriteRuleTokenStream(adaptor,"token 47");
 		RewriteRuleTokenStream stream_48=new RewriteRuleTokenStream(adaptor,"token 48");
+		RewriteRuleTokenStream stream_49=new RewriteRuleTokenStream(adaptor,"token 49");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
 		RewriteRuleTokenStream stream_MACRO=new RewriteRuleTokenStream(adaptor,"token MACRO");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
@@ -2991,7 +2991,7 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:130:3: ( MACRO ( WS )+ ID ( '(' formalParams ')' )? ( WS )* NEWLINE -> ID formalParams )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:130:5: MACRO ( WS )+ ID ( '(' formalParams ')' )? ( WS )* NEWLINE
 			{
-			MACRO94=(Token)match(input,MACRO,FOLLOW_MACRO_in_macroStart1032);  
+			MACRO94=(Token)match(input,MACRO,FOLLOW_MACRO_in_macroStart1037);  
 			stream_MACRO.add(MACRO94);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:130:11: ( WS )+
@@ -3008,7 +3008,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:130:11: WS
 					{
-					WS95=(Token)match(input,WS,FOLLOW_WS_in_macroStart1034);  
+					WS95=(Token)match(input,WS,FOLLOW_WS_in_macroStart1039);  
 					stream_WS.add(WS95);
 
 					}
@@ -3022,29 +3022,29 @@ public class DynamoParser extends Parser {
 				cnt33++;
 			}
 
-			ID96=(Token)match(input,ID,FOLLOW_ID_in_macroStart1037);  
+			ID96=(Token)match(input,ID,FOLLOW_ID_in_macroStart1042);  
 			stream_ID.add(ID96);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:130:18: ( '(' formalParams ')' )?
 			int alt34=2;
 			int LA34_0 = input.LA(1);
-			if ( (LA34_0==47) ) {
+			if ( (LA34_0==48) ) {
 				alt34=1;
 			}
 			switch (alt34) {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:130:19: '(' formalParams ')'
 					{
-					char_literal97=(Token)match(input,47,FOLLOW_47_in_macroStart1040);  
-					stream_47.add(char_literal97);
+					char_literal97=(Token)match(input,48,FOLLOW_48_in_macroStart1045);  
+					stream_48.add(char_literal97);
 
-					pushFollow(FOLLOW_formalParams_in_macroStart1042);
+					pushFollow(FOLLOW_formalParams_in_macroStart1047);
 					formalParams98=formalParams();
 					state._fsp--;
 
 					stream_formalParams.add(formalParams98.getTree());
-					char_literal99=(Token)match(input,48,FOLLOW_48_in_macroStart1043);  
-					stream_48.add(char_literal99);
+					char_literal99=(Token)match(input,49,FOLLOW_49_in_macroStart1048);  
+					stream_49.add(char_literal99);
 
 					}
 					break;
@@ -3064,7 +3064,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:130:42: WS
 					{
-					WS100=(Token)match(input,WS,FOLLOW_WS_in_macroStart1048);  
+					WS100=(Token)match(input,WS,FOLLOW_WS_in_macroStart1053);  
 					stream_WS.add(WS100);
 
 					}
@@ -3075,7 +3075,7 @@ public class DynamoParser extends Parser {
 				}
 			}
 
-			NEWLINE101=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_macroStart1051);  
+			NEWLINE101=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_macroStart1056);  
 			stream_NEWLINE.add(NEWLINE101);
 
 			// AST REWRITE
@@ -3150,14 +3150,14 @@ public class DynamoParser extends Parser {
 		RewriteRuleTokenStream stream_INTRN=new RewriteRuleTokenStream(adaptor,"token INTRN");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
-		RewriteRuleTokenStream stream_51=new RewriteRuleTokenStream(adaptor,"token 51");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
+		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
 
 		try {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:133:3: ( INTRN ( WS )+ ID ( ',' ID )* NEWLINE -> ^( LOCALS ( ID )* ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:133:5: INTRN ( WS )+ ID ( ',' ID )* NEWLINE
 			{
-			INTRN102=(Token)match(input,INTRN,FOLLOW_INTRN_in_intrnlStmt1071);  
+			INTRN102=(Token)match(input,INTRN,FOLLOW_INTRN_in_intrnlStmt1076);  
 			stream_INTRN.add(INTRN102);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:133:11: ( WS )+
@@ -3174,7 +3174,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:133:11: WS
 					{
-					WS103=(Token)match(input,WS,FOLLOW_WS_in_intrnlStmt1073);  
+					WS103=(Token)match(input,WS,FOLLOW_WS_in_intrnlStmt1078);  
 					stream_WS.add(WS103);
 
 					}
@@ -3188,7 +3188,7 @@ public class DynamoParser extends Parser {
 				cnt36++;
 			}
 
-			ID104=(Token)match(input,ID,FOLLOW_ID_in_intrnlStmt1076);  
+			ID104=(Token)match(input,ID,FOLLOW_ID_in_intrnlStmt1081);  
 			stream_ID.add(ID104);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:133:18: ( ',' ID )*
@@ -3196,7 +3196,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt37=2;
 				int LA37_0 = input.LA(1);
-				if ( (LA37_0==51) ) {
+				if ( (LA37_0==52) ) {
 					alt37=1;
 				}
 
@@ -3204,10 +3204,10 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:133:19: ',' ID
 					{
-					char_literal105=(Token)match(input,51,FOLLOW_51_in_intrnlStmt1079);  
-					stream_51.add(char_literal105);
+					char_literal105=(Token)match(input,52,FOLLOW_52_in_intrnlStmt1084);  
+					stream_52.add(char_literal105);
 
-					ID106=(Token)match(input,ID,FOLLOW_ID_in_intrnlStmt1081);  
+					ID106=(Token)match(input,ID,FOLLOW_ID_in_intrnlStmt1086);  
 					stream_ID.add(ID106);
 
 					}
@@ -3218,7 +3218,7 @@ public class DynamoParser extends Parser {
 				}
 			}
 
-			NEWLINE107=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_intrnlStmt1085);  
+			NEWLINE107=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_intrnlStmt1090);  
 			stream_NEWLINE.add(NEWLINE107);
 
 			// AST REWRITE
@@ -3303,7 +3303,7 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:137:3: ( MEND ( WS )* NEWLINE ->)
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:137:5: MEND ( WS )* NEWLINE
 			{
-			MEND108=(Token)match(input,MEND,FOLLOW_MEND_in_macroEnd1109);  
+			MEND108=(Token)match(input,MEND,FOLLOW_MEND_in_macroEnd1114);  
 			stream_MEND.add(MEND108);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:137:11: ( WS )*
@@ -3319,7 +3319,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:137:11: WS
 					{
-					WS109=(Token)match(input,WS,FOLLOW_WS_in_macroEnd1112);  
+					WS109=(Token)match(input,WS,FOLLOW_WS_in_macroEnd1117);  
 					stream_WS.add(WS109);
 
 					}
@@ -3330,7 +3330,7 @@ public class DynamoParser extends Parser {
 				}
 			}
 
-			NEWLINE110=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_macroEnd1115);  
+			NEWLINE110=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_macroEnd1120);  
 			stream_NEWLINE.add(NEWLINE110);
 
 			// AST REWRITE
@@ -3396,13 +3396,13 @@ public class DynamoParser extends Parser {
 		Object char_literal112_tree=null;
 		Object ID113_tree=null;
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
-		RewriteRuleTokenStream stream_51=new RewriteRuleTokenStream(adaptor,"token 51");
+		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
 
 		try {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:140:2: ( ID ( ',' ID )* -> ^( FORMAL_PARAMS ( ID )* ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:140:9: ID ( ',' ID )*
 			{
-			ID111=(Token)match(input,ID,FOLLOW_ID_in_formalParams1134);  
+			ID111=(Token)match(input,ID,FOLLOW_ID_in_formalParams1139);  
 			stream_ID.add(ID111);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:140:12: ( ',' ID )*
@@ -3410,7 +3410,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt39=2;
 				int LA39_0 = input.LA(1);
-				if ( (LA39_0==51) ) {
+				if ( (LA39_0==52) ) {
 					alt39=1;
 				}
 
@@ -3418,10 +3418,10 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:140:13: ',' ID
 					{
-					char_literal112=(Token)match(input,51,FOLLOW_51_in_formalParams1137);  
-					stream_51.add(char_literal112);
+					char_literal112=(Token)match(input,52,FOLLOW_52_in_formalParams1142);  
+					stream_52.add(char_literal112);
 
-					ID113=(Token)match(input,ID,FOLLOW_ID_in_formalParams1139);  
+					ID113=(Token)match(input,ID,FOLLOW_ID_in_formalParams1144);  
 					stream_ID.add(ID113);
 
 					}
@@ -3505,21 +3505,21 @@ public class DynamoParser extends Parser {
 
 		Object ID114_tree=null;
 		Object char_literal115_tree=null;
+		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
-		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_expr=new RewriteRuleSubtreeStream(adaptor,"rule expr");
 
 		try {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:144:6: ( ID '=' expr -> ^( PAUX ID expr ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:144:8: ID '=' expr
 			{
-			ID114=(Token)match(input,ID,FOLLOW_ID_in_paramAssignment1165);  
+			ID114=(Token)match(input,ID,FOLLOW_ID_in_paramAssignment1170);  
 			stream_ID.add(ID114);
 
-			char_literal115=(Token)match(input,54,FOLLOW_54_in_paramAssignment1167);  
-			stream_54.add(char_literal115);
+			char_literal115=(Token)match(input,55,FOLLOW_55_in_paramAssignment1172);  
+			stream_55.add(char_literal115);
 
-			pushFollow(FOLLOW_expr_in_paramAssignment1169);
+			pushFollow(FOLLOW_expr_in_paramAssignment1174);
 			expr116=expr();
 			state._fsp--;
 
@@ -3613,7 +3613,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:147:5: colspec
 					{
-					pushFollow(FOLLOW_colspec_in_varList1203);
+					pushFollow(FOLLOW_colspec_in_varList1208);
 					colspec117=colspec();
 					state._fsp--;
 
@@ -3624,7 +3624,7 @@ public class DynamoParser extends Parser {
 
 			}
 
-			ID118=(Token)match(input,ID,FOLLOW_ID_in_varList1206); 
+			ID118=(Token)match(input,ID,FOLLOW_ID_in_varList1211); 
 			ID118_tree = (Object)adaptor.create(ID118);
 			adaptor.addChild(root_0, ID118_tree);
 
@@ -3633,7 +3633,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt41=2;
 				int LA41_0 = input.LA(1);
-				if ( (LA41_0==51||LA41_0==53) ) {
+				if ( (LA41_0==52||LA41_0==54) ) {
 					alt41=1;
 				}
 
@@ -3642,7 +3642,7 @@ public class DynamoParser extends Parser {
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:147:18: ( ',' | '/' ) ID
 					{
 					set119=input.LT(1);
-					if ( input.LA(1)==51||input.LA(1)==53 ) {
+					if ( input.LA(1)==52||input.LA(1)==54 ) {
 						input.consume();
 						adaptor.addChild(root_0, (Object)adaptor.create(set119));
 						state.errorRecovery=false;
@@ -3651,7 +3651,7 @@ public class DynamoParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					ID120=(Token)match(input,ID,FOLLOW_ID_in_varList1215); 
+					ID120=(Token)match(input,ID,FOLLOW_ID_in_varList1220); 
 					ID120_tree = (Object)adaptor.create(ID120);
 					adaptor.addChild(root_0, ID120_tree);
 
@@ -3716,27 +3716,27 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			char_literal121=(Token)match(input,47,FOLLOW_47_in_drawInterval1230); 
+			char_literal121=(Token)match(input,48,FOLLOW_48_in_drawInterval1235); 
 			char_literal121_tree = (Object)adaptor.create(char_literal121);
 			adaptor.addChild(root_0, char_literal121_tree);
 
-			pushFollow(FOLLOW_intervalStart_in_drawInterval1232);
+			pushFollow(FOLLOW_intervalStart_in_drawInterval1237);
 			intervalStart122=intervalStart();
 			state._fsp--;
 
 			adaptor.addChild(root_0, intervalStart122.getTree());
 
-			char_literal123=(Token)match(input,51,FOLLOW_51_in_drawInterval1234); 
+			char_literal123=(Token)match(input,52,FOLLOW_52_in_drawInterval1239); 
 			char_literal123_tree = (Object)adaptor.create(char_literal123);
 			adaptor.addChild(root_0, char_literal123_tree);
 
-			pushFollow(FOLLOW_intervalStop_in_drawInterval1236);
+			pushFollow(FOLLOW_intervalStop_in_drawInterval1241);
 			intervalStop124=intervalStop();
 			state._fsp--;
 
 			adaptor.addChild(root_0, intervalStop124.getTree());
 
-			char_literal125=(Token)match(input,48,FOLLOW_48_in_drawInterval1238); 
+			char_literal125=(Token)match(input,49,FOLLOW_49_in_drawInterval1243); 
 			char_literal125_tree = (Object)adaptor.create(char_literal125);
 			adaptor.addChild(root_0, char_literal125_tree);
 
@@ -3788,7 +3788,7 @@ public class DynamoParser extends Parser {
 
 
 			set126=input.LT(1);
-			if ( (input.LA(1) >= 49 && input.LA(1) <= 50) ) {
+			if ( (input.LA(1) >= 50 && input.LA(1) <= 51) ) {
 				input.consume();
 				adaptor.addChild(root_0, (Object)adaptor.create(set126));
 				state.errorRecovery=false;
@@ -3844,7 +3844,7 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			NUMBER127=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_intervalStart1269); 
+			NUMBER127=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_intervalStart1274); 
 			NUMBER127_tree = (Object)adaptor.create(NUMBER127);
 			adaptor.addChild(root_0, NUMBER127_tree);
 
@@ -3895,7 +3895,7 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			NUMBER128=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_intervalStop1284); 
+			NUMBER128=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_intervalStop1289); 
 			NUMBER128_tree = (Object)adaptor.create(NUMBER128);
 			adaptor.addChild(root_0, NUMBER128_tree);
 
@@ -3948,11 +3948,11 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			NUMBER129=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_colspec1300); 
+			NUMBER129=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_colspec1305); 
 			NUMBER129_tree = (Object)adaptor.create(NUMBER129);
 			adaptor.addChild(root_0, NUMBER129_tree);
 
-			char_literal130=(Token)match(input,48,FOLLOW_48_in_colspec1302); 
+			char_literal130=(Token)match(input,49,FOLLOW_49_in_colspec1307); 
 			char_literal130_tree = (Object)adaptor.create(char_literal130);
 			adaptor.addChild(root_0, char_literal130_tree);
 
@@ -4007,11 +4007,11 @@ public class DynamoParser extends Parser {
 		Object char_literal133_tree=null;
 		Object WS136_tree=null;
 		Object NEWLINE137_tree=null;
-		RewriteRuleTokenStream stream_56=new RewriteRuleTokenStream(adaptor,"token 56");
+		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
+		RewriteRuleTokenStream stream_57=new RewriteRuleTokenStream(adaptor,"token 57");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_eqn=new RewriteRuleSubtreeStream(adaptor,"rule eqn");
 		RewriteRuleSubtreeStream stream_lineComment=new RewriteRuleSubtreeStream(adaptor,"rule lineComment");
 
@@ -4019,8 +4019,8 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:168:2: ( 'C' ( WS )+ id= ID '=' eqn ( lineComment )? ( WS )? NEWLINE -> ^( AUX ID eqn ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:168:4: 'C' ( WS )+ id= ID '=' eqn ( lineComment )? ( WS )? NEWLINE
 			{
-			char_literal131=(Token)match(input,56,FOLLOW_56_in_constDef1317);  
-			stream_56.add(char_literal131);
+			char_literal131=(Token)match(input,57,FOLLOW_57_in_constDef1322);  
+			stream_57.add(char_literal131);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:168:8: ( WS )+
 			int cnt42=0;
@@ -4036,7 +4036,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:168:8: WS
 					{
-					WS132=(Token)match(input,WS,FOLLOW_WS_in_constDef1319);  
+					WS132=(Token)match(input,WS,FOLLOW_WS_in_constDef1324);  
 					stream_WS.add(WS132);
 
 					}
@@ -4050,13 +4050,13 @@ public class DynamoParser extends Parser {
 				cnt42++;
 			}
 
-			id=(Token)match(input,ID,FOLLOW_ID_in_constDef1324);  
+			id=(Token)match(input,ID,FOLLOW_ID_in_constDef1329);  
 			stream_ID.add(id);
 
-			char_literal133=(Token)match(input,54,FOLLOW_54_in_constDef1326);  
-			stream_54.add(char_literal133);
+			char_literal133=(Token)match(input,55,FOLLOW_55_in_constDef1331);  
+			stream_55.add(char_literal133);
 
-			pushFollow(FOLLOW_eqn_in_constDef1328);
+			pushFollow(FOLLOW_eqn_in_constDef1333);
 			eqn134=eqn();
 			state._fsp--;
 
@@ -4074,7 +4074,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:168:26: lineComment
 					{
-					pushFollow(FOLLOW_lineComment_in_constDef1330);
+					pushFollow(FOLLOW_lineComment_in_constDef1335);
 					lineComment135=lineComment();
 					state._fsp--;
 
@@ -4094,7 +4094,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:168:39: WS
 					{
-					WS136=(Token)match(input,WS,FOLLOW_WS_in_constDef1333);  
+					WS136=(Token)match(input,WS,FOLLOW_WS_in_constDef1338);  
 					stream_WS.add(WS136);
 
 					}
@@ -4102,7 +4102,7 @@ public class DynamoParser extends Parser {
 
 			}
 
-			NEWLINE137=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_constDef1336);  
+			NEWLINE137=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_constDef1341);  
 			stream_NEWLINE.add(NEWLINE137);
 
 			// AST REWRITE
@@ -4183,11 +4183,11 @@ public class DynamoParser extends Parser {
 		Object char_literal141_tree=null;
 		Object WS144_tree=null;
 		Object NEWLINE145_tree=null;
-		RewriteRuleTokenStream stream_58=new RewriteRuleTokenStream(adaptor,"token 58");
+		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
+		RewriteRuleTokenStream stream_59=new RewriteRuleTokenStream(adaptor,"token 59");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_eqn=new RewriteRuleSubtreeStream(adaptor,"rule eqn");
 		RewriteRuleSubtreeStream stream_lineComment=new RewriteRuleSubtreeStream(adaptor,"rule lineComment");
 
@@ -4195,8 +4195,8 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:171:2: ( 'N' ( WS )+ ID '=' eqn ( lineComment )? ( WS )? NEWLINE -> ^( IVALUE ID eqn ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:171:4: 'N' ( WS )+ ID '=' eqn ( lineComment )? ( WS )? NEWLINE
 			{
-			char_literal138=(Token)match(input,58,FOLLOW_58_in_initDef1357);  
-			stream_58.add(char_literal138);
+			char_literal138=(Token)match(input,59,FOLLOW_59_in_initDef1362);  
+			stream_59.add(char_literal138);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:171:8: ( WS )+
 			int cnt45=0;
@@ -4212,7 +4212,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:171:8: WS
 					{
-					WS139=(Token)match(input,WS,FOLLOW_WS_in_initDef1359);  
+					WS139=(Token)match(input,WS,FOLLOW_WS_in_initDef1364);  
 					stream_WS.add(WS139);
 
 					}
@@ -4226,13 +4226,13 @@ public class DynamoParser extends Parser {
 				cnt45++;
 			}
 
-			ID140=(Token)match(input,ID,FOLLOW_ID_in_initDef1362);  
+			ID140=(Token)match(input,ID,FOLLOW_ID_in_initDef1367);  
 			stream_ID.add(ID140);
 
-			char_literal141=(Token)match(input,54,FOLLOW_54_in_initDef1364);  
-			stream_54.add(char_literal141);
+			char_literal141=(Token)match(input,55,FOLLOW_55_in_initDef1369);  
+			stream_55.add(char_literal141);
 
-			pushFollow(FOLLOW_eqn_in_initDef1366);
+			pushFollow(FOLLOW_eqn_in_initDef1371);
 			eqn142=eqn();
 			state._fsp--;
 
@@ -4250,7 +4250,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:171:23: lineComment
 					{
-					pushFollow(FOLLOW_lineComment_in_initDef1368);
+					pushFollow(FOLLOW_lineComment_in_initDef1373);
 					lineComment143=lineComment();
 					state._fsp--;
 
@@ -4270,7 +4270,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:171:36: WS
 					{
-					WS144=(Token)match(input,WS,FOLLOW_WS_in_initDef1371);  
+					WS144=(Token)match(input,WS,FOLLOW_WS_in_initDef1376);  
 					stream_WS.add(WS144);
 
 					}
@@ -4278,7 +4278,7 @@ public class DynamoParser extends Parser {
 
 			}
 
-			NEWLINE145=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_initDef1374);  
+			NEWLINE145=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_initDef1379);  
 			stream_NEWLINE.add(NEWLINE145);
 
 			// AST REWRITE
@@ -4376,10 +4376,10 @@ public class DynamoParser extends Parser {
 		Object WS162_tree=null;
 		Object NEWLINE163_tree=null;
 		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
+		RewriteRuleTokenStream stream_56=new RewriteRuleTokenStream(adaptor,"token 56");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_eqn=new RewriteRuleSubtreeStream(adaptor,"rule eqn");
 		RewriteRuleSubtreeStream stream_tableFunction=new RewriteRuleSubtreeStream(adaptor,"rule tableFunction");
 		RewriteRuleSubtreeStream stream_timeExt=new RewriteRuleSubtreeStream(adaptor,"rule timeExt");
@@ -4393,8 +4393,8 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:175:4: 'A' ( WS )+ ID timeExt '=' tableFunction ( lineComment )? ( WS )? NEWLINE
 					{
-					char_literal146=(Token)match(input,55,FOLLOW_55_in_auxDef1395);  
-					stream_55.add(char_literal146);
+					char_literal146=(Token)match(input,56,FOLLOW_56_in_auxDef1400);  
+					stream_56.add(char_literal146);
 
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:175:8: ( WS )+
 					int cnt48=0;
@@ -4410,7 +4410,7 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:175:8: WS
 							{
-							WS147=(Token)match(input,WS,FOLLOW_WS_in_auxDef1397);  
+							WS147=(Token)match(input,WS,FOLLOW_WS_in_auxDef1402);  
 							stream_WS.add(WS147);
 
 							}
@@ -4424,18 +4424,18 @@ public class DynamoParser extends Parser {
 						cnt48++;
 					}
 
-					ID148=(Token)match(input,ID,FOLLOW_ID_in_auxDef1400);  
+					ID148=(Token)match(input,ID,FOLLOW_ID_in_auxDef1405);  
 					stream_ID.add(ID148);
 
-					pushFollow(FOLLOW_timeExt_in_auxDef1402);
+					pushFollow(FOLLOW_timeExt_in_auxDef1407);
 					timeExt149=timeExt();
 					state._fsp--;
 
 					stream_timeExt.add(timeExt149.getTree());
-					char_literal150=(Token)match(input,54,FOLLOW_54_in_auxDef1404);  
-					stream_54.add(char_literal150);
+					char_literal150=(Token)match(input,55,FOLLOW_55_in_auxDef1409);  
+					stream_55.add(char_literal150);
 
-					pushFollow(FOLLOW_tableFunction_in_auxDef1406);
+					pushFollow(FOLLOW_tableFunction_in_auxDef1411);
 					tableFunction151=tableFunction();
 					state._fsp--;
 
@@ -4453,7 +4453,7 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:175:41: lineComment
 							{
-							pushFollow(FOLLOW_lineComment_in_auxDef1408);
+							pushFollow(FOLLOW_lineComment_in_auxDef1413);
 							lineComment152=lineComment();
 							state._fsp--;
 
@@ -4473,7 +4473,7 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:175:54: WS
 							{
-							WS153=(Token)match(input,WS,FOLLOW_WS_in_auxDef1411);  
+							WS153=(Token)match(input,WS,FOLLOW_WS_in_auxDef1416);  
 							stream_WS.add(WS153);
 
 							}
@@ -4481,7 +4481,7 @@ public class DynamoParser extends Parser {
 
 					}
 
-					NEWLINE154=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_auxDef1414);  
+					NEWLINE154=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_auxDef1419);  
 					stream_NEWLINE.add(NEWLINE154);
 
 					// AST REWRITE
@@ -4516,8 +4516,8 @@ public class DynamoParser extends Parser {
 				case 2 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:176:4: 'A' ( WS )+ ID timeExt '=' eqn ( lineComment )? ( WS )? NEWLINE
 					{
-					char_literal155=(Token)match(input,55,FOLLOW_55_in_auxDef1431);  
-					stream_55.add(char_literal155);
+					char_literal155=(Token)match(input,56,FOLLOW_56_in_auxDef1436);  
+					stream_56.add(char_literal155);
 
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:176:8: ( WS )+
 					int cnt51=0;
@@ -4533,7 +4533,7 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:176:8: WS
 							{
-							WS156=(Token)match(input,WS,FOLLOW_WS_in_auxDef1433);  
+							WS156=(Token)match(input,WS,FOLLOW_WS_in_auxDef1438);  
 							stream_WS.add(WS156);
 
 							}
@@ -4547,18 +4547,18 @@ public class DynamoParser extends Parser {
 						cnt51++;
 					}
 
-					ID157=(Token)match(input,ID,FOLLOW_ID_in_auxDef1436);  
+					ID157=(Token)match(input,ID,FOLLOW_ID_in_auxDef1441);  
 					stream_ID.add(ID157);
 
-					pushFollow(FOLLOW_timeExt_in_auxDef1438);
+					pushFollow(FOLLOW_timeExt_in_auxDef1443);
 					timeExt158=timeExt();
 					state._fsp--;
 
 					stream_timeExt.add(timeExt158.getTree());
-					char_literal159=(Token)match(input,54,FOLLOW_54_in_auxDef1440);  
-					stream_54.add(char_literal159);
+					char_literal159=(Token)match(input,55,FOLLOW_55_in_auxDef1445);  
+					stream_55.add(char_literal159);
 
-					pushFollow(FOLLOW_eqn_in_auxDef1442);
+					pushFollow(FOLLOW_eqn_in_auxDef1447);
 					eqn160=eqn();
 					state._fsp--;
 
@@ -4576,7 +4576,7 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:176:31: lineComment
 							{
-							pushFollow(FOLLOW_lineComment_in_auxDef1444);
+							pushFollow(FOLLOW_lineComment_in_auxDef1449);
 							lineComment161=lineComment();
 							state._fsp--;
 
@@ -4596,7 +4596,7 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:176:44: WS
 							{
-							WS162=(Token)match(input,WS,FOLLOW_WS_in_auxDef1447);  
+							WS162=(Token)match(input,WS,FOLLOW_WS_in_auxDef1452);  
 							stream_WS.add(WS162);
 
 							}
@@ -4604,7 +4604,7 @@ public class DynamoParser extends Parser {
 
 					}
 
-					NEWLINE163=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_auxDef1451);  
+					NEWLINE163=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_auxDef1456);  
 					stream_NEWLINE.add(NEWLINE163);
 
 					// AST REWRITE
@@ -4699,14 +4699,14 @@ public class DynamoParser extends Parser {
 		Object char_literal169_tree=null;
 		Object char_literal170_tree=null;
 		RewriteRuleTokenStream stream_NUMBER=new RewriteRuleTokenStream(adaptor,"token NUMBER");
-		RewriteRuleTokenStream stream_47=new RewriteRuleTokenStream(adaptor,"token 47");
 		RewriteRuleTokenStream stream_48=new RewriteRuleTokenStream(adaptor,"token 48");
-		RewriteRuleTokenStream stream_61=new RewriteRuleTokenStream(adaptor,"token 61");
+		RewriteRuleTokenStream stream_49=new RewriteRuleTokenStream(adaptor,"token 49");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
-		RewriteRuleTokenStream stream_51=new RewriteRuleTokenStream(adaptor,"token 51");
 		RewriteRuleTokenStream stream_62=new RewriteRuleTokenStream(adaptor,"token 62");
+		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
 		RewriteRuleTokenStream stream_63=new RewriteRuleTokenStream(adaptor,"token 63");
 		RewriteRuleTokenStream stream_64=new RewriteRuleTokenStream(adaptor,"token 64");
+		RewriteRuleTokenStream stream_65=new RewriteRuleTokenStream(adaptor,"token 65");
 		RewriteRuleSubtreeStream stream_timeExt=new RewriteRuleSubtreeStream(adaptor,"rule timeExt");
 
 		try {
@@ -4716,22 +4716,22 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:180:11: ( 'TABLE' | 'TABXT' | 'TABPL' | 'TABHL' )
 			int alt55=4;
 			switch ( input.LA(1) ) {
-			case 62:
+			case 63:
 				{
 				alt55=1;
 				}
 				break;
-			case 64:
+			case 65:
 				{
 				alt55=2;
 				}
 				break;
-			case 63:
+			case 64:
 				{
 				alt55=3;
 				}
 				break;
-			case 61:
+			case 62:
 				{
 				alt55=4;
 				}
@@ -4745,61 +4745,61 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:180:12: 'TABLE'
 					{
-					expol=(Token)match(input,62,FOLLOW_62_in_tableFunction1479);  
-					stream_62.add(expol);
+					expol=(Token)match(input,63,FOLLOW_63_in_tableFunction1484);  
+					stream_63.add(expol);
 
 					}
 					break;
 				case 2 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:180:21: 'TABXT'
 					{
-					expol=(Token)match(input,64,FOLLOW_64_in_tableFunction1482);  
-					stream_64.add(expol);
+					expol=(Token)match(input,65,FOLLOW_65_in_tableFunction1487);  
+					stream_65.add(expol);
 
 					}
 					break;
 				case 3 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:180:31: 'TABPL'
 					{
-					expol=(Token)match(input,63,FOLLOW_63_in_tableFunction1486);  
-					stream_63.add(expol);
+					expol=(Token)match(input,64,FOLLOW_64_in_tableFunction1491);  
+					stream_64.add(expol);
 
 					}
 					break;
 				case 4 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:180:40: 'TABHL'
 					{
-					expol=(Token)match(input,61,FOLLOW_61_in_tableFunction1489);  
-					stream_61.add(expol);
+					expol=(Token)match(input,62,FOLLOW_62_in_tableFunction1494);  
+					stream_62.add(expol);
 
 					}
 					break;
 
 			}
 
-			char_literal164=(Token)match(input,47,FOLLOW_47_in_tableFunction1493);  
-			stream_47.add(char_literal164);
+			char_literal164=(Token)match(input,48,FOLLOW_48_in_tableFunction1498);  
+			stream_48.add(char_literal164);
 
-			tName=(Token)match(input,ID,FOLLOW_ID_in_tableFunction1497);  
+			tName=(Token)match(input,ID,FOLLOW_ID_in_tableFunction1502);  
 			stream_ID.add(tName);
 
-			char_literal165=(Token)match(input,51,FOLLOW_51_in_tableFunction1499);  
-			stream_51.add(char_literal165);
+			char_literal165=(Token)match(input,52,FOLLOW_52_in_tableFunction1504);  
+			stream_52.add(char_literal165);
 
-			eqId=(Token)match(input,ID,FOLLOW_ID_in_tableFunction1503);  
+			eqId=(Token)match(input,ID,FOLLOW_ID_in_tableFunction1508);  
 			stream_ID.add(eqId);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:180:75: ( timeExt )?
 			int alt56=2;
 			int LA56_0 = input.LA(1);
-			if ( (LA56_0==66) ) {
+			if ( (LA56_0==67) ) {
 				alt56=1;
 			}
 			switch (alt56) {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:180:75: timeExt
 					{
-					pushFollow(FOLLOW_timeExt_in_tableFunction1505);
+					pushFollow(FOLLOW_timeExt_in_tableFunction1510);
 					timeExt166=timeExt();
 					state._fsp--;
 
@@ -4809,26 +4809,26 @@ public class DynamoParser extends Parser {
 
 			}
 
-			char_literal167=(Token)match(input,51,FOLLOW_51_in_tableFunction1508);  
-			stream_51.add(char_literal167);
+			char_literal167=(Token)match(input,52,FOLLOW_52_in_tableFunction1513);  
+			stream_52.add(char_literal167);
 
-			xMin=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_tableFunction1512);  
+			xMin=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_tableFunction1517);  
 			stream_NUMBER.add(xMin);
 
-			char_literal168=(Token)match(input,51,FOLLOW_51_in_tableFunction1514);  
-			stream_51.add(char_literal168);
+			char_literal168=(Token)match(input,52,FOLLOW_52_in_tableFunction1519);  
+			stream_52.add(char_literal168);
 
-			xMax=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_tableFunction1518);  
+			xMax=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_tableFunction1523);  
 			stream_NUMBER.add(xMax);
 
-			char_literal169=(Token)match(input,51,FOLLOW_51_in_tableFunction1520);  
-			stream_51.add(char_literal169);
+			char_literal169=(Token)match(input,52,FOLLOW_52_in_tableFunction1525);  
+			stream_52.add(char_literal169);
 
-			step=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_tableFunction1524);  
+			step=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_tableFunction1529);  
 			stream_NUMBER.add(step);
 
-			char_literal170=(Token)match(input,48,FOLLOW_48_in_tableFunction1526);  
-			stream_48.add(char_literal170);
+			char_literal170=(Token)match(input,49,FOLLOW_49_in_tableFunction1531);  
+			stream_49.add(char_literal170);
 
 			// AST REWRITE
 			// elements: xMax, step, xMin, expol, ID, ID, eqId
@@ -4926,11 +4926,11 @@ public class DynamoParser extends Parser {
 		Object char_literal175_tree=null;
 		Object WS178_tree=null;
 		Object NEWLINE179_tree=null;
-		RewriteRuleTokenStream stream_59=new RewriteRuleTokenStream(adaptor,"token 59");
+		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
+		RewriteRuleTokenStream stream_60=new RewriteRuleTokenStream(adaptor,"token 60");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_eqn=new RewriteRuleSubtreeStream(adaptor,"rule eqn");
 		RewriteRuleSubtreeStream stream_timeExt=new RewriteRuleSubtreeStream(adaptor,"rule timeExt");
 		RewriteRuleSubtreeStream stream_lineComment=new RewriteRuleSubtreeStream(adaptor,"rule lineComment");
@@ -4939,8 +4939,8 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:185:2: ( 'R' ( WS )+ ID timeExt '=' eqn ( lineComment )? ( WS )? NEWLINE -> ^( RATE ID eqn ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:185:4: 'R' ( WS )+ ID timeExt '=' eqn ( lineComment )? ( WS )? NEWLINE
 			{
-			char_literal171=(Token)match(input,59,FOLLOW_59_in_rateDef1569);  
-			stream_59.add(char_literal171);
+			char_literal171=(Token)match(input,60,FOLLOW_60_in_rateDef1574);  
+			stream_60.add(char_literal171);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:185:8: ( WS )+
 			int cnt57=0;
@@ -4956,7 +4956,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:185:8: WS
 					{
-					WS172=(Token)match(input,WS,FOLLOW_WS_in_rateDef1571);  
+					WS172=(Token)match(input,WS,FOLLOW_WS_in_rateDef1576);  
 					stream_WS.add(WS172);
 
 					}
@@ -4970,18 +4970,18 @@ public class DynamoParser extends Parser {
 				cnt57++;
 			}
 
-			ID173=(Token)match(input,ID,FOLLOW_ID_in_rateDef1574);  
+			ID173=(Token)match(input,ID,FOLLOW_ID_in_rateDef1579);  
 			stream_ID.add(ID173);
 
-			pushFollow(FOLLOW_timeExt_in_rateDef1577);
+			pushFollow(FOLLOW_timeExt_in_rateDef1582);
 			timeExt174=timeExt();
 			state._fsp--;
 
 			stream_timeExt.add(timeExt174.getTree());
-			char_literal175=(Token)match(input,54,FOLLOW_54_in_rateDef1579);  
-			stream_54.add(char_literal175);
+			char_literal175=(Token)match(input,55,FOLLOW_55_in_rateDef1584);  
+			stream_55.add(char_literal175);
 
-			pushFollow(FOLLOW_eqn_in_rateDef1581);
+			pushFollow(FOLLOW_eqn_in_rateDef1586);
 			eqn176=eqn();
 			state._fsp--;
 
@@ -4999,7 +4999,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:185:32: lineComment
 					{
-					pushFollow(FOLLOW_lineComment_in_rateDef1583);
+					pushFollow(FOLLOW_lineComment_in_rateDef1588);
 					lineComment177=lineComment();
 					state._fsp--;
 
@@ -5019,7 +5019,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:185:45: WS
 					{
-					WS178=(Token)match(input,WS,FOLLOW_WS_in_rateDef1586);  
+					WS178=(Token)match(input,WS,FOLLOW_WS_in_rateDef1591);  
 					stream_WS.add(WS178);
 
 					}
@@ -5027,7 +5027,7 @@ public class DynamoParser extends Parser {
 
 			}
 
-			NEWLINE179=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_rateDef1589);  
+			NEWLINE179=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_rateDef1594);  
 			stream_NEWLINE.add(NEWLINE179);
 
 			// AST REWRITE
@@ -5109,11 +5109,11 @@ public class DynamoParser extends Parser {
 		Object char_literal184_tree=null;
 		Object WS187_tree=null;
 		Object NEWLINE188_tree=null;
-		RewriteRuleTokenStream stream_57=new RewriteRuleTokenStream(adaptor,"token 57");
+		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
+		RewriteRuleTokenStream stream_58=new RewriteRuleTokenStream(adaptor,"token 58");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_eqn=new RewriteRuleSubtreeStream(adaptor,"rule eqn");
 		RewriteRuleSubtreeStream stream_timeExt=new RewriteRuleSubtreeStream(adaptor,"rule timeExt");
 		RewriteRuleSubtreeStream stream_lineComment=new RewriteRuleSubtreeStream(adaptor,"rule lineComment");
@@ -5122,8 +5122,8 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:189:2: ( 'L' ( WS )+ ID timeExt '=' eqn ( lineComment )? ( WS )? NEWLINE -> ^( LEVEL ID eqn ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:189:4: 'L' ( WS )+ ID timeExt '=' eqn ( lineComment )? ( WS )? NEWLINE
 			{
-			char_literal180=(Token)match(input,57,FOLLOW_57_in_lvlDef1612);  
-			stream_57.add(char_literal180);
+			char_literal180=(Token)match(input,58,FOLLOW_58_in_lvlDef1617);  
+			stream_58.add(char_literal180);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:189:8: ( WS )+
 			int cnt60=0;
@@ -5139,7 +5139,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:189:8: WS
 					{
-					WS181=(Token)match(input,WS,FOLLOW_WS_in_lvlDef1614);  
+					WS181=(Token)match(input,WS,FOLLOW_WS_in_lvlDef1619);  
 					stream_WS.add(WS181);
 
 					}
@@ -5153,18 +5153,18 @@ public class DynamoParser extends Parser {
 				cnt60++;
 			}
 
-			ID182=(Token)match(input,ID,FOLLOW_ID_in_lvlDef1617);  
+			ID182=(Token)match(input,ID,FOLLOW_ID_in_lvlDef1622);  
 			stream_ID.add(ID182);
 
-			pushFollow(FOLLOW_timeExt_in_lvlDef1619);
+			pushFollow(FOLLOW_timeExt_in_lvlDef1624);
 			timeExt183=timeExt();
 			state._fsp--;
 
 			stream_timeExt.add(timeExt183.getTree());
-			char_literal184=(Token)match(input,54,FOLLOW_54_in_lvlDef1621);  
-			stream_54.add(char_literal184);
+			char_literal184=(Token)match(input,55,FOLLOW_55_in_lvlDef1626);  
+			stream_55.add(char_literal184);
 
-			pushFollow(FOLLOW_eqn_in_lvlDef1623);
+			pushFollow(FOLLOW_eqn_in_lvlDef1628);
 			eqn185=eqn();
 			state._fsp--;
 
@@ -5182,7 +5182,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:189:31: lineComment
 					{
-					pushFollow(FOLLOW_lineComment_in_lvlDef1625);
+					pushFollow(FOLLOW_lineComment_in_lvlDef1630);
 					lineComment186=lineComment();
 					state._fsp--;
 
@@ -5202,7 +5202,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:189:44: WS
 					{
-					WS187=(Token)match(input,WS,FOLLOW_WS_in_lvlDef1628);  
+					WS187=(Token)match(input,WS,FOLLOW_WS_in_lvlDef1633);  
 					stream_WS.add(WS187);
 
 					}
@@ -5210,7 +5210,7 @@ public class DynamoParser extends Parser {
 
 			}
 
-			NEWLINE188=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_lvlDef1632);  
+			NEWLINE188=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_lvlDef1637);  
 			stream_NEWLINE.add(NEWLINE188);
 
 			// AST REWRITE
@@ -5291,11 +5291,11 @@ public class DynamoParser extends Parser {
 		Object char_literal192_tree=null;
 		Object WS195_tree=null;
 		Object NEWLINE196_tree=null;
+		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
 		RewriteRuleTokenStream stream_NEWLINE=new RewriteRuleTokenStream(adaptor,"token NEWLINE");
-		RewriteRuleTokenStream stream_60=new RewriteRuleTokenStream(adaptor,"token 60");
+		RewriteRuleTokenStream stream_61=new RewriteRuleTokenStream(adaptor,"token 61");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_rangeList=new RewriteRuleSubtreeStream(adaptor,"rule rangeList");
 		RewriteRuleSubtreeStream stream_lineComment=new RewriteRuleSubtreeStream(adaptor,"rule lineComment");
 
@@ -5303,8 +5303,8 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:192:2: ( 'T' ( WS )+ ID '=' rangeList ( lineComment )? ( WS )? NEWLINE -> ^( YCOORDS ID ^( PTS rangeList ) ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:192:4: 'T' ( WS )+ ID '=' rangeList ( lineComment )? ( WS )? NEWLINE
 			{
-			char_literal189=(Token)match(input,60,FOLLOW_60_in_tblDef1653);  
-			stream_60.add(char_literal189);
+			char_literal189=(Token)match(input,61,FOLLOW_61_in_tblDef1658);  
+			stream_61.add(char_literal189);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:192:8: ( WS )+
 			int cnt63=0;
@@ -5320,7 +5320,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:192:8: WS
 					{
-					WS190=(Token)match(input,WS,FOLLOW_WS_in_tblDef1655);  
+					WS190=(Token)match(input,WS,FOLLOW_WS_in_tblDef1660);  
 					stream_WS.add(WS190);
 
 					}
@@ -5334,13 +5334,13 @@ public class DynamoParser extends Parser {
 				cnt63++;
 			}
 
-			ID191=(Token)match(input,ID,FOLLOW_ID_in_tblDef1658);  
+			ID191=(Token)match(input,ID,FOLLOW_ID_in_tblDef1663);  
 			stream_ID.add(ID191);
 
-			char_literal192=(Token)match(input,54,FOLLOW_54_in_tblDef1660);  
-			stream_54.add(char_literal192);
+			char_literal192=(Token)match(input,55,FOLLOW_55_in_tblDef1665);  
+			stream_55.add(char_literal192);
 
-			pushFollow(FOLLOW_rangeList_in_tblDef1662);
+			pushFollow(FOLLOW_rangeList_in_tblDef1667);
 			rangeList193=rangeList();
 			state._fsp--;
 
@@ -5358,7 +5358,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:192:29: lineComment
 					{
-					pushFollow(FOLLOW_lineComment_in_tblDef1664);
+					pushFollow(FOLLOW_lineComment_in_tblDef1669);
 					lineComment194=lineComment();
 					state._fsp--;
 
@@ -5378,7 +5378,7 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:192:42: WS
 					{
-					WS195=(Token)match(input,WS,FOLLOW_WS_in_tblDef1667);  
+					WS195=(Token)match(input,WS,FOLLOW_WS_in_tblDef1672);  
 					stream_WS.add(WS195);
 
 					}
@@ -5386,7 +5386,7 @@ public class DynamoParser extends Parser {
 
 			}
 
-			NEWLINE196=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_tblDef1671);  
+			NEWLINE196=(Token)match(input,NEWLINE,FOLLOW_NEWLINE_in_tblDef1676);  
 			stream_NEWLINE.add(NEWLINE196);
 
 			// AST REWRITE
@@ -5472,11 +5472,11 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			WS197=(Token)match(input,WS,FOLLOW_WS_in_lineComment1694); 
+			WS197=(Token)match(input,WS,FOLLOW_WS_in_lineComment1699); 
 			WS197_tree = (Object)adaptor.create(WS197);
 			adaptor.addChild(root_0, WS197_tree);
 
-			COMMENT198=(Token)match(input,COMMENT,FOLLOW_COMMENT_in_lineComment1696); 
+			COMMENT198=(Token)match(input,COMMENT,FOLLOW_COMMENT_in_lineComment1701); 
 			COMMENT198_tree = (Object)adaptor.create(COMMENT198);
 			adaptor.addChild(root_0, COMMENT198_tree);
 
@@ -5526,14 +5526,14 @@ public class DynamoParser extends Parser {
 		Object char_literal201_tree=null;
 		Object NUMBER202_tree=null;
 		RewriteRuleTokenStream stream_NUMBER=new RewriteRuleTokenStream(adaptor,"token NUMBER");
-		RewriteRuleTokenStream stream_51=new RewriteRuleTokenStream(adaptor,"token 51");
-		RewriteRuleTokenStream stream_53=new RewriteRuleTokenStream(adaptor,"token 53");
+		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
+		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 
 		try {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:198:2: ( NUMBER ( ( ',' | '/' ) NUMBER )* -> ( NUMBER )+ )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:198:5: NUMBER ( ( ',' | '/' ) NUMBER )*
 			{
-			NUMBER199=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_rangeList1707);  
+			NUMBER199=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_rangeList1712);  
 			stream_NUMBER.add(NUMBER199);
 
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:198:12: ( ( ',' | '/' ) NUMBER )*
@@ -5541,7 +5541,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt67=2;
 				int LA67_0 = input.LA(1);
-				if ( (LA67_0==51||LA67_0==53) ) {
+				if ( (LA67_0==52||LA67_0==54) ) {
 					alt67=1;
 				}
 
@@ -5552,10 +5552,10 @@ public class DynamoParser extends Parser {
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:198:13: ( ',' | '/' )
 					int alt66=2;
 					int LA66_0 = input.LA(1);
-					if ( (LA66_0==51) ) {
+					if ( (LA66_0==52) ) {
 						alt66=1;
 					}
-					else if ( (LA66_0==53) ) {
+					else if ( (LA66_0==54) ) {
 						alt66=2;
 					}
 
@@ -5569,23 +5569,23 @@ public class DynamoParser extends Parser {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:198:14: ','
 							{
-							char_literal200=(Token)match(input,51,FOLLOW_51_in_rangeList1711);  
-							stream_51.add(char_literal200);
+							char_literal200=(Token)match(input,52,FOLLOW_52_in_rangeList1716);  
+							stream_52.add(char_literal200);
 
 							}
 							break;
 						case 2 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:198:18: '/'
 							{
-							char_literal201=(Token)match(input,53,FOLLOW_53_in_rangeList1713);  
-							stream_53.add(char_literal201);
+							char_literal201=(Token)match(input,54,FOLLOW_54_in_rangeList1718);  
+							stream_54.add(char_literal201);
 
 							}
 							break;
 
 					}
 
-					NUMBER202=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_rangeList1716);  
+					NUMBER202=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_rangeList1721);  
 					stream_NUMBER.add(NUMBER202);
 
 					}
@@ -5666,7 +5666,7 @@ public class DynamoParser extends Parser {
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:202:2: ( expr -> ^( EQN expr ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:202:4: expr
 			{
-			pushFollow(FOLLOW_expr_in_eqn1735);
+			pushFollow(FOLLOW_expr_in_eqn1740);
 			expr203=expr();
 			state._fsp--;
 
@@ -5682,9 +5682,9 @@ public class DynamoParser extends Parser {
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 			root_0 = (Object)adaptor.nil();
-			// 202:9: -> ^( EQN expr )
+			// 202:10: -> ^( EQN expr )
 			{
-				// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:202:12: ^( EQN expr )
+				// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:202:13: ^( EQN expr )
 				{
 				Object root_1 = (Object)adaptor.nil();
 				root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(EQN, "EQN"), root_1);
@@ -5746,7 +5746,7 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_multExpr_in_expr1758);
+			pushFollow(FOLLOW_multExpr_in_expr1764);
 			multExpr204=multExpr();
 			state._fsp--;
 
@@ -5757,7 +5757,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt68=2;
 				int LA68_0 = input.LA(1);
-				if ( (LA68_0==50||LA68_0==52) ) {
+				if ( (LA68_0==51||LA68_0==53) ) {
 					alt68=1;
 				}
 
@@ -5766,7 +5766,7 @@ public class DynamoParser extends Parser {
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:206:13: ( '+' | '-' ) multExpr
 					{
 					set205=input.LT(1);
-					if ( input.LA(1)==50||input.LA(1)==52 ) {
+					if ( input.LA(1)==51||input.LA(1)==53 ) {
 						input.consume();
 						adaptor.addChild(root_0, (Object)adaptor.create(set205));
 						state.errorRecovery=false;
@@ -5775,7 +5775,7 @@ public class DynamoParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					pushFollow(FOLLOW_multExpr_in_expr1779);
+					pushFollow(FOLLOW_multExpr_in_expr1785);
 					multExpr206=multExpr();
 					state._fsp--;
 
@@ -5838,7 +5838,7 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_atom_in_multExpr1803);
+			pushFollow(FOLLOW_atom_in_multExpr1809);
 			atom207=atom();
 			state._fsp--;
 
@@ -5849,21 +5849,21 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt69=2;
 				int LA69_0 = input.LA(1);
-				if ( (LA69_0==53) ) {
+				if ( (LA69_0==54) ) {
 					int LA69_2 = input.LA(2);
 					if ( (LA69_2==ID) ) {
 						int LA69_4 = input.LA(3);
-						if ( (LA69_4==NEWLINE||LA69_4==WS||(LA69_4 >= 47 && LA69_4 <= 53)||LA69_4==66) ) {
+						if ( (LA69_4==NEWLINE||LA69_4==WS||(LA69_4 >= 48 && LA69_4 <= 54)||LA69_4==67) ) {
 							alt69=1;
 						}
 
 					}
-					else if ( (LA69_2==NUMBER||LA69_2==47||LA69_2==50||LA69_2==52) ) {
+					else if ( (LA69_2==NUMBER||LA69_2==48||LA69_2==51||LA69_2==53) ) {
 						alt69=1;
 					}
 
 				}
-				else if ( (LA69_0==49) ) {
+				else if ( (LA69_0==50) ) {
 					alt69=1;
 				}
 
@@ -5872,7 +5872,7 @@ public class DynamoParser extends Parser {
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:210:16: ( '*' | '/' ) atom
 					{
 					set208=input.LT(1);
-					if ( input.LA(1)==49||input.LA(1)==53 ) {
+					if ( input.LA(1)==50||input.LA(1)==54 ) {
 						input.consume();
 						adaptor.addChild(root_0, (Object)adaptor.create(set208));
 						state.errorRecovery=false;
@@ -5881,7 +5881,7 @@ public class DynamoParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					pushFollow(FOLLOW_atom_in_multExpr1813);
+					pushFollow(FOLLOW_atom_in_multExpr1819);
 					atom209=atom();
 					state._fsp--;
 
@@ -5954,8 +5954,8 @@ public class DynamoParser extends Parser {
 		Object char_literal219_tree=null;
 		Object char_literal221_tree=null;
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
-		RewriteRuleTokenStream stream_50=new RewriteRuleTokenStream(adaptor,"token 50");
-		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
+		RewriteRuleTokenStream stream_51=new RewriteRuleTokenStream(adaptor,"token 51");
+		RewriteRuleTokenStream stream_53=new RewriteRuleTokenStream(adaptor,"token 53");
 		RewriteRuleSubtreeStream stream_timeExt=new RewriteRuleSubtreeStream(adaptor,"rule timeExt");
 
 		try {
@@ -5967,12 +5967,12 @@ public class DynamoParser extends Parser {
 				alt73=1;
 				}
 				break;
-			case 52:
+			case 53:
 				{
 				alt73=2;
 				}
 				break;
-			case 50:
+			case 51:
 				{
 				alt73=3;
 				}
@@ -5980,10 +5980,10 @@ public class DynamoParser extends Parser {
 			case ID:
 				{
 				int LA73_4 = input.LA(2);
-				if ( (LA73_4==47) ) {
+				if ( (LA73_4==48) ) {
 					alt73=5;
 				}
-				else if ( (LA73_4==NEWLINE||LA73_4==WS||(LA73_4 >= 48 && LA73_4 <= 53)||LA73_4==66) ) {
+				else if ( (LA73_4==NEWLINE||LA73_4==WS||(LA73_4 >= 49 && LA73_4 <= 54)||LA73_4==67) ) {
 					alt73=4;
 				}
 
@@ -6001,7 +6001,7 @@ public class DynamoParser extends Parser {
 
 				}
 				break;
-			case 47:
+			case 48:
 				{
 				alt73=6;
 				}
@@ -6018,7 +6018,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					NUMBER210=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_atom1838); 
+					NUMBER210=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_atom1844); 
 					NUMBER210_tree = (Object)adaptor.create(NUMBER210);
 					adaptor.addChild(root_0, NUMBER210_tree);
 
@@ -6030,23 +6030,23 @@ public class DynamoParser extends Parser {
 				case 2 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:219:9: cc= '-' ID ( timeExt )?
 					{
-					cc=(Token)match(input,52,FOLLOW_52_in_atom1863);  
-					stream_52.add(cc);
+					cc=(Token)match(input,53,FOLLOW_53_in_atom1869);  
+					stream_53.add(cc);
 
-					ID211=(Token)match(input,ID,FOLLOW_ID_in_atom1865);  
+					ID211=(Token)match(input,ID,FOLLOW_ID_in_atom1871);  
 					stream_ID.add(ID211);
 
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:219:20: ( timeExt )?
 					int alt70=2;
 					int LA70_0 = input.LA(1);
-					if ( (LA70_0==66) ) {
+					if ( (LA70_0==67) ) {
 						alt70=1;
 					}
 					switch (alt70) {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:219:20: timeExt
 							{
-							pushFollow(FOLLOW_timeExt_in_atom1868);
+							pushFollow(FOLLOW_timeExt_in_atom1874);
 							timeExt212=timeExt();
 							state._fsp--;
 
@@ -6081,23 +6081,23 @@ public class DynamoParser extends Parser {
 				case 3 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:220:9: '+' ID ( timeExt )?
 					{
-					char_literal213=(Token)match(input,50,FOLLOW_50_in_atom1886);  
-					stream_50.add(char_literal213);
+					char_literal213=(Token)match(input,51,FOLLOW_51_in_atom1892);  
+					stream_51.add(char_literal213);
 
-					ID214=(Token)match(input,ID,FOLLOW_ID_in_atom1888);  
+					ID214=(Token)match(input,ID,FOLLOW_ID_in_atom1894);  
 					stream_ID.add(ID214);
 
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:220:17: ( timeExt )?
 					int alt71=2;
 					int LA71_0 = input.LA(1);
-					if ( (LA71_0==66) ) {
+					if ( (LA71_0==67) ) {
 						alt71=1;
 					}
 					switch (alt71) {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:220:17: timeExt
 							{
-							pushFollow(FOLLOW_timeExt_in_atom1891);
+							pushFollow(FOLLOW_timeExt_in_atom1897);
 							timeExt215=timeExt();
 							state._fsp--;
 
@@ -6131,20 +6131,20 @@ public class DynamoParser extends Parser {
 				case 4 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:221:9: ID ( timeExt )?
 					{
-					ID216=(Token)match(input,ID,FOLLOW_ID_in_atom1906);  
+					ID216=(Token)match(input,ID,FOLLOW_ID_in_atom1912);  
 					stream_ID.add(ID216);
 
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:221:13: ( timeExt )?
 					int alt72=2;
 					int LA72_0 = input.LA(1);
-					if ( (LA72_0==66) ) {
+					if ( (LA72_0==67) ) {
 						alt72=1;
 					}
 					switch (alt72) {
 						case 1 :
 							// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:221:13: timeExt
 							{
-							pushFollow(FOLLOW_timeExt_in_atom1909);
+							pushFollow(FOLLOW_timeExt_in_atom1915);
 							timeExt217=timeExt();
 							state._fsp--;
 
@@ -6181,7 +6181,7 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					pushFollow(FOLLOW_funcRef_in_atom1924);
+					pushFollow(FOLLOW_funcRef_in_atom1930);
 					funcRef218=funcRef();
 					state._fsp--;
 
@@ -6195,17 +6195,17 @@ public class DynamoParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 
 
-					char_literal219=(Token)match(input,47,FOLLOW_47_in_atom1934); 
+					char_literal219=(Token)match(input,48,FOLLOW_48_in_atom1941); 
 					char_literal219_tree = (Object)adaptor.create(char_literal219);
 					adaptor.addChild(root_0, char_literal219_tree);
 
-					pushFollow(FOLLOW_expr_in_atom1936);
+					pushFollow(FOLLOW_expr_in_atom1943);
 					expr220=expr();
 					state._fsp--;
 
 					adaptor.addChild(root_0, expr220.getTree());
 
-					char_literal221=(Token)match(input,48,FOLLOW_48_in_atom1938); 
+					char_literal221=(Token)match(input,49,FOLLOW_49_in_atom1945); 
 					char_literal221_tree = (Object)adaptor.create(char_literal221);
 					adaptor.addChild(root_0, char_literal221_tree);
 
@@ -6240,7 +6240,7 @@ public class DynamoParser extends Parser {
 
 
 	// $ANTLR start "funcRef"
-	// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:226:1: funcRef : ID '(' paramList ')' ;
+	// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:226:1: funcRef : ID '(' paramList ')' -> ^( FREF ID paramList ) ;
 	public final DynamoParser.funcRef_return funcRef() throws RecognitionException {
 		DynamoParser.funcRef_return retval = new DynamoParser.funcRef_return();
 		retval.start = input.LT(1);
@@ -6255,31 +6255,55 @@ public class DynamoParser extends Parser {
 		Object ID222_tree=null;
 		Object char_literal223_tree=null;
 		Object char_literal225_tree=null;
+		RewriteRuleTokenStream stream_48=new RewriteRuleTokenStream(adaptor,"token 48");
+		RewriteRuleTokenStream stream_49=new RewriteRuleTokenStream(adaptor,"token 49");
+		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
+		RewriteRuleSubtreeStream stream_paramList=new RewriteRuleSubtreeStream(adaptor,"rule paramList");
 
 		try {
-			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:227:5: ( ID '(' paramList ')' )
+			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:227:5: ( ID '(' paramList ')' -> ^( FREF ID paramList ) )
 			// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:227:9: ID '(' paramList ')'
 			{
-			root_0 = (Object)adaptor.nil();
+			ID222=(Token)match(input,ID,FOLLOW_ID_in_funcRef1970);  
+			stream_ID.add(ID222);
 
+			char_literal223=(Token)match(input,48,FOLLOW_48_in_funcRef1972);  
+			stream_48.add(char_literal223);
 
-			ID222=(Token)match(input,ID,FOLLOW_ID_in_funcRef1963); 
-			ID222_tree = (Object)adaptor.create(ID222);
-			adaptor.addChild(root_0, ID222_tree);
-
-			char_literal223=(Token)match(input,47,FOLLOW_47_in_funcRef1965); 
-			char_literal223_tree = (Object)adaptor.create(char_literal223);
-			adaptor.addChild(root_0, char_literal223_tree);
-
-			pushFollow(FOLLOW_paramList_in_funcRef1967);
+			pushFollow(FOLLOW_paramList_in_funcRef1974);
 			paramList224=paramList();
 			state._fsp--;
 
-			adaptor.addChild(root_0, paramList224.getTree());
+			stream_paramList.add(paramList224.getTree());
+			char_literal225=(Token)match(input,49,FOLLOW_49_in_funcRef1976);  
+			stream_49.add(char_literal225);
 
-			char_literal225=(Token)match(input,48,FOLLOW_48_in_funcRef1969); 
-			char_literal225_tree = (Object)adaptor.create(char_literal225);
-			adaptor.addChild(root_0, char_literal225_tree);
+			// AST REWRITE
+			// elements: paramList, ID
+			// token labels: 
+			// rule labels: retval
+			// token list labels: 
+			// rule list labels: 
+			// wildcard labels: 
+			retval.tree = root_0;
+			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
+
+			root_0 = (Object)adaptor.nil();
+			// 227:30: -> ^( FREF ID paramList )
+			{
+				// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:227:33: ^( FREF ID paramList )
+				{
+				Object root_1 = (Object)adaptor.nil();
+				root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FREF, "FREF"), root_1);
+				adaptor.addChild(root_1, stream_ID.nextNode());
+				adaptor.addChild(root_1, stream_paramList.nextTree());
+				adaptor.addChild(root_0, root_1);
+				}
+
+			}
+
+
+			retval.tree = root_0;
 
 			}
 
@@ -6330,7 +6354,7 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			pushFollow(FOLLOW_expr_in_paramList1992);
+			pushFollow(FOLLOW_expr_in_paramList2012);
 			expr226=expr();
 			state._fsp--;
 
@@ -6341,7 +6365,7 @@ public class DynamoParser extends Parser {
 			while (true) {
 				int alt74=2;
 				int LA74_0 = input.LA(1);
-				if ( (LA74_0==51) ) {
+				if ( (LA74_0==52) ) {
 					alt74=1;
 				}
 
@@ -6349,11 +6373,11 @@ public class DynamoParser extends Parser {
 				case 1 :
 					// C:\\git3\\SDXlate\\dynamo_parser/src/org/sdxchange/grammars/dynamo/Dynamo.g:231:13: ',' expr
 					{
-					char_literal227=(Token)match(input,51,FOLLOW_51_in_paramList1995); 
+					char_literal227=(Token)match(input,52,FOLLOW_52_in_paramList2015); 
 					char_literal227_tree = (Object)adaptor.create(char_literal227);
 					adaptor.addChild(root_0, char_literal227_tree);
 
-					pushFollow(FOLLOW_expr_in_paramList1997);
+					pushFollow(FOLLOW_expr_in_paramList2017);
 					expr228=expr();
 					state._fsp--;
 
@@ -6416,11 +6440,11 @@ public class DynamoParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 
 
-			char_literal229=(Token)match(input,66,FOLLOW_66_in_timeExt2011); 
+			char_literal229=(Token)match(input,67,FOLLOW_67_in_timeExt2031); 
 			char_literal229_tree = (Object)adaptor.create(char_literal229);
 			adaptor.addChild(root_0, char_literal229_tree);
 
-			JKL230=(Token)match(input,JKL,FOLLOW_JKL_in_timeExt2013); 
+			JKL230=(Token)match(input,JKL,FOLLOW_JKL_in_timeExt2033); 
 			JKL230_tree = (Object)adaptor.create(JKL230);
 			adaptor.addChild(root_0, JKL230_tree);
 
@@ -6453,9 +6477,9 @@ public class DynamoParser extends Parser {
 	static final String DFA54_eofS =
 		"\11\uffff";
 	static final String DFA54_minS =
-		"\1\67\1\54\1\14\1\102\1\17\1\66\1\14\2\uffff";
+		"\1\70\1\55\1\15\1\103\1\20\1\67\1\15\2\uffff";
 	static final String DFA54_maxS =
-		"\1\67\2\54\1\102\1\17\1\66\1\100\2\uffff";
+		"\1\70\2\55\1\103\1\20\1\67\1\101\2\uffff";
 	static final String DFA54_acceptS =
 		"\7\uffff\1\1\1\2";
 	static final String DFA54_specialS =
@@ -6508,244 +6532,244 @@ public class DynamoParser extends Parser {
 		}
 	}
 
-	public static final BitSet FOLLOW_macroDef_in_prog190 = new BitSet(new long[]{0x1F80000101840102L});
-	public static final BitSet FOLLOW_defaultModule_in_prog193 = new BitSet(new long[]{0x0000000100800102L});
-	public static final BitSet FOLLOW_namedModule_in_prog196 = new BitSet(new long[]{0x0000000100800102L});
-	public static final BitSet FOLLOW_controlSector_in_prog200 = new BitSet(new long[]{0x0000004801000000L});
-	public static final BitSet FOLLOW_controlStat_in_prog203 = new BitSet(new long[]{0x0000004891800002L});
-	public static final BitSet FOLLOW_comment_in_prog207 = new BitSet(new long[]{0x0000004891800002L});
-	public static final BitSet FOLLOW_viewSpec_in_prog212 = new BitSet(new long[]{0x0000000090800002L});
-	public static final BitSet FOLLOW_NEWLINE_in_prog217 = new BitSet(new long[]{0x0000000000800002L});
-	public static final BitSet FOLLOW_controlSector_in_controlModule271 = new BitSet(new long[]{0x0000004801000000L});
-	public static final BitSet FOLLOW_controlStat_in_controlModule274 = new BitSet(new long[]{0x0000004891000002L});
-	public static final BitSet FOLLOW_comment_in_controlModule278 = new BitSet(new long[]{0x0000004891000002L});
-	public static final BitSet FOLLOW_viewSpec_in_controlModule283 = new BitSet(new long[]{0x0000000090000002L});
-	public static final BitSet FOLLOW_simSpec_in_controlStat339 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_runSpec_in_controlStat350 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_definition_in_defaultModule375 = new BitSet(new long[]{0x1F80000001000002L});
-	public static final BitSet FOLLOW_comment_in_defaultModule379 = new BitSet(new long[]{0x1F80000001000002L});
-	public static final BitSet FOLLOW_sector_in_namedModule420 = new BitSet(new long[]{0x1F80000001000000L});
-	public static final BitSet FOLLOW_definition_in_namedModule423 = new BitSet(new long[]{0x1F80000001000002L});
-	public static final BitSet FOLLOW_comment_in_namedModule427 = new BitSet(new long[]{0x1F80000001000002L});
-	public static final BitSet FOLLOW_auxDef_in_definition472 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_lvlDef_in_definition482 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_initDef_in_definition492 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_constDef_in_definition500 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rateDef_in_definition511 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_tblDef_in_definition522 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NOTE_in_comment544 = new BitSet(new long[]{0x0000000000800020L});
-	public static final BitSet FOLLOW_COMMENT_in_comment546 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_comment549 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PSECTOR_in_sector573 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_sector575 = new BitSet(new long[]{0x0000100000000000L,0x0000000000000002L});
-	public static final BitSet FOLLOW_65_in_sector578 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_SECTOR_in_sector581 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_sector583 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_ID_in_sector585 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
-	public static final BitSet FOLLOW_67_in_sector588 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_lineComment_in_sector590 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_sector593 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_sector596 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CSECTOR_in_controlSector614 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_controlSector616 = new BitSet(new long[]{0x0000100000000000L,0x0000000000000002L});
-	public static final BitSet FOLLOW_65_in_controlSector619 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_SECTOR_in_controlSector622 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_controlSector624 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_ID_in_controlSector626 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
-	public static final BitSet FOLLOW_67_in_controlSector628 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_lineComment_in_controlSector630 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_controlSector633 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_controlSector636 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PLOT_in_viewSpec666 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_viewSpec668 = new BitSet(new long[]{0x0000100000001000L});
-	public static final BitSet FOLLOW_plotVarList_in_viewSpec671 = new BitSet(new long[]{0x0020000000800000L});
-	public static final BitSet FOLLOW_53_in_viewSpec675 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_plotVarList_in_viewSpec678 = new BitSet(new long[]{0x0020000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_viewSpec682 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PRINT_in_viewSpec702 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_viewSpec704 = new BitSet(new long[]{0x0000100002001000L});
-	public static final BitSet FOLLOW_varList_in_viewSpec707 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_viewSpec709 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_scaleSpec_in_plotVarList732 = new BitSet(new long[]{0x0008000000000002L});
-	public static final BitSet FOLLOW_51_in_plotVarList735 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_scaleSpec_in_plotVarList737 = new BitSet(new long[]{0x0008000000000002L});
-	public static final BitSet FOLLOW_plotVar_in_scaleSpec770 = new BitSet(new long[]{0x0000800000000002L});
-	public static final BitSet FOLLOW_scaleRange_in_scaleSpec773 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_plotVar801 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_plotVar803 = new BitSet(new long[]{0x0016000002001000L});
-	public static final BitSet FOLLOW_plotChar_in_plotVar805 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_plotChar820 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_plotChar822 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_50_in_plotChar824 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_49_in_plotChar826 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_52_in_plotChar828 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_47_in_scaleRange844 = new BitSet(new long[]{0x0000000002000000L});
-	public static final BitSet FOLLOW_min_in_scaleRange846 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_51_in_scaleRange848 = new BitSet(new long[]{0x0000000002000000L});
-	public static final BitSet FOLLOW_max_in_scaleRange850 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_48_in_scaleRange852 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_min883 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_max889 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_RUN_in_runSpec909 = new BitSet(new long[]{0x0000000000800020L});
-	public static final BitSet FOLLOW_COMMENT_in_runSpec911 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_runSpec914 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_SPEC_in_simSpec938 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_simSpec940 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_paramAssignment_in_simSpec942 = new BitSet(new long[]{0x0028000000800000L});
-	public static final BitSet FOLLOW_51_in_simSpec946 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_53_in_simSpec948 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_paramAssignment_in_simSpec951 = new BitSet(new long[]{0x0028000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_simSpec955 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_macroStart_in_macroDef985 = new BitSet(new long[]{0x1F80000001002000L});
-	public static final BitSet FOLLOW_intrnlStmt_in_macroDef987 = new BitSet(new long[]{0x1F80000001002000L});
-	public static final BitSet FOLLOW_definition_in_macroDef991 = new BitSet(new long[]{0x1F80000001100000L});
-	public static final BitSet FOLLOW_comment_in_macroDef995 = new BitSet(new long[]{0x1F80000001100000L});
-	public static final BitSet FOLLOW_macroEnd_in_macroDef1000 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MACRO_in_macroStart1032 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_macroStart1034 = new BitSet(new long[]{0x0000100000001000L});
-	public static final BitSet FOLLOW_ID_in_macroStart1037 = new BitSet(new long[]{0x0000900000800000L});
-	public static final BitSet FOLLOW_47_in_macroStart1040 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_formalParams_in_macroStart1042 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_48_in_macroStart1043 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_macroStart1048 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_macroStart1051 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INTRN_in_intrnlStmt1071 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_intrnlStmt1073 = new BitSet(new long[]{0x0000100000001000L});
-	public static final BitSet FOLLOW_ID_in_intrnlStmt1076 = new BitSet(new long[]{0x0008000000800000L});
-	public static final BitSet FOLLOW_51_in_intrnlStmt1079 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_ID_in_intrnlStmt1081 = new BitSet(new long[]{0x0008000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_intrnlStmt1085 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MEND_in_macroEnd1109 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_macroEnd1112 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_macroEnd1115 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_formalParams1134 = new BitSet(new long[]{0x0008000000000002L});
-	public static final BitSet FOLLOW_51_in_formalParams1137 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_ID_in_formalParams1139 = new BitSet(new long[]{0x0008000000000002L});
-	public static final BitSet FOLLOW_ID_in_paramAssignment1165 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_paramAssignment1167 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_expr_in_paramAssignment1169 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_colspec_in_varList1203 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_ID_in_varList1206 = new BitSet(new long[]{0x0028000000000002L});
-	public static final BitSet FOLLOW_set_in_varList1209 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_ID_in_varList1215 = new BitSet(new long[]{0x0028000000000002L});
-	public static final BitSet FOLLOW_47_in_drawInterval1230 = new BitSet(new long[]{0x0000000002000000L});
-	public static final BitSet FOLLOW_intervalStart_in_drawInterval1232 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_51_in_drawInterval1234 = new BitSet(new long[]{0x0000000002000000L});
-	public static final BitSet FOLLOW_intervalStop_in_drawInterval1236 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_48_in_drawInterval1238 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_intervalStart1269 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_intervalStop1284 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_colspec1300 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_48_in_colspec1302 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_56_in_constDef1317 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_constDef1319 = new BitSet(new long[]{0x0000100000001000L});
-	public static final BitSet FOLLOW_ID_in_constDef1324 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_constDef1326 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_eqn_in_constDef1328 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_lineComment_in_constDef1330 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_constDef1333 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_constDef1336 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_58_in_initDef1357 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_initDef1359 = new BitSet(new long[]{0x0000100000001000L});
-	public static final BitSet FOLLOW_ID_in_initDef1362 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_initDef1364 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_eqn_in_initDef1366 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_lineComment_in_initDef1368 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_initDef1371 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_initDef1374 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_55_in_auxDef1395 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_auxDef1397 = new BitSet(new long[]{0x0000100000001000L});
-	public static final BitSet FOLLOW_ID_in_auxDef1400 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-	public static final BitSet FOLLOW_timeExt_in_auxDef1402 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_auxDef1404 = new BitSet(new long[]{0xE000000000000000L,0x0000000000000001L});
-	public static final BitSet FOLLOW_tableFunction_in_auxDef1406 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_lineComment_in_auxDef1408 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_auxDef1411 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_auxDef1414 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_55_in_auxDef1431 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_auxDef1433 = new BitSet(new long[]{0x0000100000001000L});
-	public static final BitSet FOLLOW_ID_in_auxDef1436 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-	public static final BitSet FOLLOW_timeExt_in_auxDef1438 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_auxDef1440 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_eqn_in_auxDef1442 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_lineComment_in_auxDef1444 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_auxDef1447 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_auxDef1451 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_62_in_tableFunction1479 = new BitSet(new long[]{0x0000800000000000L});
-	public static final BitSet FOLLOW_64_in_tableFunction1482 = new BitSet(new long[]{0x0000800000000000L});
-	public static final BitSet FOLLOW_63_in_tableFunction1486 = new BitSet(new long[]{0x0000800000000000L});
-	public static final BitSet FOLLOW_61_in_tableFunction1489 = new BitSet(new long[]{0x0000800000000000L});
-	public static final BitSet FOLLOW_47_in_tableFunction1493 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_ID_in_tableFunction1497 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_51_in_tableFunction1499 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_ID_in_tableFunction1503 = new BitSet(new long[]{0x0008000000000000L,0x0000000000000004L});
-	public static final BitSet FOLLOW_timeExt_in_tableFunction1505 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_51_in_tableFunction1508 = new BitSet(new long[]{0x0000000002000000L});
-	public static final BitSet FOLLOW_NUMBER_in_tableFunction1512 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_51_in_tableFunction1514 = new BitSet(new long[]{0x0000000002000000L});
-	public static final BitSet FOLLOW_NUMBER_in_tableFunction1518 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_51_in_tableFunction1520 = new BitSet(new long[]{0x0000000002000000L});
-	public static final BitSet FOLLOW_NUMBER_in_tableFunction1524 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_48_in_tableFunction1526 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_59_in_rateDef1569 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_rateDef1571 = new BitSet(new long[]{0x0000100000001000L});
-	public static final BitSet FOLLOW_ID_in_rateDef1574 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-	public static final BitSet FOLLOW_timeExt_in_rateDef1577 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_rateDef1579 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_eqn_in_rateDef1581 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_lineComment_in_rateDef1583 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_rateDef1586 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_rateDef1589 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_57_in_lvlDef1612 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_lvlDef1614 = new BitSet(new long[]{0x0000100000001000L});
-	public static final BitSet FOLLOW_ID_in_lvlDef1617 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-	public static final BitSet FOLLOW_timeExt_in_lvlDef1619 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_lvlDef1621 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_eqn_in_lvlDef1623 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_lineComment_in_lvlDef1625 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_lvlDef1628 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_lvlDef1632 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_60_in_tblDef1653 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_WS_in_tblDef1655 = new BitSet(new long[]{0x0000100000001000L});
-	public static final BitSet FOLLOW_ID_in_tblDef1658 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_tblDef1660 = new BitSet(new long[]{0x0000000002000000L});
-	public static final BitSet FOLLOW_rangeList_in_tblDef1662 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_lineComment_in_tblDef1664 = new BitSet(new long[]{0x0000100000800000L});
-	public static final BitSet FOLLOW_WS_in_tblDef1667 = new BitSet(new long[]{0x0000000000800000L});
-	public static final BitSet FOLLOW_NEWLINE_in_tblDef1671 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_WS_in_lineComment1694 = new BitSet(new long[]{0x0000000000000020L});
-	public static final BitSet FOLLOW_COMMENT_in_lineComment1696 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_rangeList1707 = new BitSet(new long[]{0x0028000000000002L});
-	public static final BitSet FOLLOW_51_in_rangeList1711 = new BitSet(new long[]{0x0000000002000000L});
-	public static final BitSet FOLLOW_53_in_rangeList1713 = new BitSet(new long[]{0x0000000002000000L});
-	public static final BitSet FOLLOW_NUMBER_in_rangeList1716 = new BitSet(new long[]{0x0028000000000002L});
-	public static final BitSet FOLLOW_expr_in_eqn1735 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_multExpr_in_expr1758 = new BitSet(new long[]{0x0014000000000002L});
-	public static final BitSet FOLLOW_set_in_expr1773 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_multExpr_in_expr1779 = new BitSet(new long[]{0x0014000000000002L});
-	public static final BitSet FOLLOW_atom_in_multExpr1803 = new BitSet(new long[]{0x0022000000000002L});
-	public static final BitSet FOLLOW_set_in_multExpr1807 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_atom_in_multExpr1813 = new BitSet(new long[]{0x0022000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_atom1838 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_52_in_atom1863 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_ID_in_atom1865 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000004L});
-	public static final BitSet FOLLOW_timeExt_in_atom1868 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_50_in_atom1886 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_ID_in_atom1888 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000004L});
-	public static final BitSet FOLLOW_timeExt_in_atom1891 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_atom1906 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000004L});
-	public static final BitSet FOLLOW_timeExt_in_atom1909 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_funcRef_in_atom1924 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_47_in_atom1934 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_expr_in_atom1936 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_48_in_atom1938 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_funcRef1963 = new BitSet(new long[]{0x0000800000000000L});
-	public static final BitSet FOLLOW_47_in_funcRef1965 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_paramList_in_funcRef1967 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_48_in_funcRef1969 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expr_in_paramList1992 = new BitSet(new long[]{0x0008000000000002L});
-	public static final BitSet FOLLOW_51_in_paramList1995 = new BitSet(new long[]{0x0014800002001000L});
-	public static final BitSet FOLLOW_expr_in_paramList1997 = new BitSet(new long[]{0x0008000000000002L});
-	public static final BitSet FOLLOW_66_in_timeExt2011 = new BitSet(new long[]{0x0000000000008000L});
-	public static final BitSet FOLLOW_JKL_in_timeExt2013 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_macroDef_in_prog195 = new BitSet(new long[]{0x3F00000203080102L});
+	public static final BitSet FOLLOW_defaultModule_in_prog198 = new BitSet(new long[]{0x0000000201000102L});
+	public static final BitSet FOLLOW_namedModule_in_prog201 = new BitSet(new long[]{0x0000000201000102L});
+	public static final BitSet FOLLOW_controlSector_in_prog205 = new BitSet(new long[]{0x0000009002000000L});
+	public static final BitSet FOLLOW_controlStat_in_prog208 = new BitSet(new long[]{0x0000009123000002L});
+	public static final BitSet FOLLOW_comment_in_prog212 = new BitSet(new long[]{0x0000009123000002L});
+	public static final BitSet FOLLOW_viewSpec_in_prog217 = new BitSet(new long[]{0x0000000121000002L});
+	public static final BitSet FOLLOW_NEWLINE_in_prog222 = new BitSet(new long[]{0x0000000001000002L});
+	public static final BitSet FOLLOW_controlSector_in_controlModule276 = new BitSet(new long[]{0x0000009002000000L});
+	public static final BitSet FOLLOW_controlStat_in_controlModule279 = new BitSet(new long[]{0x0000009122000002L});
+	public static final BitSet FOLLOW_comment_in_controlModule283 = new BitSet(new long[]{0x0000009122000002L});
+	public static final BitSet FOLLOW_viewSpec_in_controlModule288 = new BitSet(new long[]{0x0000000120000002L});
+	public static final BitSet FOLLOW_simSpec_in_controlStat344 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_runSpec_in_controlStat355 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_definition_in_defaultModule380 = new BitSet(new long[]{0x3F00000002000002L});
+	public static final BitSet FOLLOW_comment_in_defaultModule384 = new BitSet(new long[]{0x3F00000002000002L});
+	public static final BitSet FOLLOW_sector_in_namedModule425 = new BitSet(new long[]{0x3F00000002000000L});
+	public static final BitSet FOLLOW_definition_in_namedModule428 = new BitSet(new long[]{0x3F00000002000002L});
+	public static final BitSet FOLLOW_comment_in_namedModule432 = new BitSet(new long[]{0x3F00000002000002L});
+	public static final BitSet FOLLOW_auxDef_in_definition477 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_lvlDef_in_definition487 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_initDef_in_definition497 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_constDef_in_definition505 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rateDef_in_definition516 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_tblDef_in_definition527 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NOTE_in_comment549 = new BitSet(new long[]{0x0000000001000020L});
+	public static final BitSet FOLLOW_COMMENT_in_comment551 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_comment554 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PSECTOR_in_sector578 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_sector580 = new BitSet(new long[]{0x0000200000000000L,0x0000000000000004L});
+	public static final BitSet FOLLOW_66_in_sector583 = new BitSet(new long[]{0x0000004000000000L});
+	public static final BitSet FOLLOW_SECTOR_in_sector586 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_sector588 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_ID_in_sector590 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
+	public static final BitSet FOLLOW_68_in_sector593 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_lineComment_in_sector595 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_sector598 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_sector601 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CSECTOR_in_controlSector619 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_controlSector621 = new BitSet(new long[]{0x0000200000000000L,0x0000000000000004L});
+	public static final BitSet FOLLOW_66_in_controlSector624 = new BitSet(new long[]{0x0000004000000000L});
+	public static final BitSet FOLLOW_SECTOR_in_controlSector627 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_controlSector629 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_ID_in_controlSector631 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
+	public static final BitSet FOLLOW_68_in_controlSector633 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_lineComment_in_controlSector635 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_controlSector638 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_controlSector641 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PLOT_in_viewSpec671 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_viewSpec673 = new BitSet(new long[]{0x0000200000002000L});
+	public static final BitSet FOLLOW_plotVarList_in_viewSpec676 = new BitSet(new long[]{0x0040000001000000L});
+	public static final BitSet FOLLOW_54_in_viewSpec680 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_plotVarList_in_viewSpec683 = new BitSet(new long[]{0x0040000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_viewSpec687 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PRINT_in_viewSpec707 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_viewSpec709 = new BitSet(new long[]{0x0000200004002000L});
+	public static final BitSet FOLLOW_varList_in_viewSpec712 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_viewSpec714 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_scaleSpec_in_plotVarList737 = new BitSet(new long[]{0x0010000000000002L});
+	public static final BitSet FOLLOW_52_in_plotVarList740 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_scaleSpec_in_plotVarList742 = new BitSet(new long[]{0x0010000000000002L});
+	public static final BitSet FOLLOW_plotVar_in_scaleSpec775 = new BitSet(new long[]{0x0001000000000002L});
+	public static final BitSet FOLLOW_scaleRange_in_scaleSpec778 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_plotVar806 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_plotVar808 = new BitSet(new long[]{0x002C000004002000L});
+	public static final BitSet FOLLOW_plotChar_in_plotVar810 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_plotChar825 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_plotChar827 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_51_in_plotChar829 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_50_in_plotChar831 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_53_in_plotChar833 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_48_in_scaleRange849 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_min_in_scaleRange851 = new BitSet(new long[]{0x0010000000000000L});
+	public static final BitSet FOLLOW_52_in_scaleRange853 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_max_in_scaleRange855 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_49_in_scaleRange857 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_min888 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_max894 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_RUN_in_runSpec914 = new BitSet(new long[]{0x0000000001000020L});
+	public static final BitSet FOLLOW_COMMENT_in_runSpec916 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_runSpec919 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_SPEC_in_simSpec943 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_simSpec945 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_paramAssignment_in_simSpec947 = new BitSet(new long[]{0x0050000001000000L});
+	public static final BitSet FOLLOW_52_in_simSpec951 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_54_in_simSpec953 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_paramAssignment_in_simSpec956 = new BitSet(new long[]{0x0050000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_simSpec960 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_macroStart_in_macroDef990 = new BitSet(new long[]{0x3F00000002004000L});
+	public static final BitSet FOLLOW_intrnlStmt_in_macroDef992 = new BitSet(new long[]{0x3F00000002004000L});
+	public static final BitSet FOLLOW_definition_in_macroDef996 = new BitSet(new long[]{0x3F00000002200000L});
+	public static final BitSet FOLLOW_comment_in_macroDef1000 = new BitSet(new long[]{0x3F00000002200000L});
+	public static final BitSet FOLLOW_macroEnd_in_macroDef1005 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MACRO_in_macroStart1037 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_macroStart1039 = new BitSet(new long[]{0x0000200000002000L});
+	public static final BitSet FOLLOW_ID_in_macroStart1042 = new BitSet(new long[]{0x0001200001000000L});
+	public static final BitSet FOLLOW_48_in_macroStart1045 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_formalParams_in_macroStart1047 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_49_in_macroStart1048 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_macroStart1053 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_macroStart1056 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INTRN_in_intrnlStmt1076 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_intrnlStmt1078 = new BitSet(new long[]{0x0000200000002000L});
+	public static final BitSet FOLLOW_ID_in_intrnlStmt1081 = new BitSet(new long[]{0x0010000001000000L});
+	public static final BitSet FOLLOW_52_in_intrnlStmt1084 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_ID_in_intrnlStmt1086 = new BitSet(new long[]{0x0010000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_intrnlStmt1090 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MEND_in_macroEnd1114 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_macroEnd1117 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_macroEnd1120 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_formalParams1139 = new BitSet(new long[]{0x0010000000000002L});
+	public static final BitSet FOLLOW_52_in_formalParams1142 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_ID_in_formalParams1144 = new BitSet(new long[]{0x0010000000000002L});
+	public static final BitSet FOLLOW_ID_in_paramAssignment1170 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_paramAssignment1172 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_expr_in_paramAssignment1174 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_colspec_in_varList1208 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_ID_in_varList1211 = new BitSet(new long[]{0x0050000000000002L});
+	public static final BitSet FOLLOW_set_in_varList1214 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_ID_in_varList1220 = new BitSet(new long[]{0x0050000000000002L});
+	public static final BitSet FOLLOW_48_in_drawInterval1235 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_intervalStart_in_drawInterval1237 = new BitSet(new long[]{0x0010000000000000L});
+	public static final BitSet FOLLOW_52_in_drawInterval1239 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_intervalStop_in_drawInterval1241 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_49_in_drawInterval1243 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_intervalStart1274 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_intervalStop1289 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_colspec1305 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_49_in_colspec1307 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_57_in_constDef1322 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_constDef1324 = new BitSet(new long[]{0x0000200000002000L});
+	public static final BitSet FOLLOW_ID_in_constDef1329 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_constDef1331 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_eqn_in_constDef1333 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_lineComment_in_constDef1335 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_constDef1338 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_constDef1341 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_59_in_initDef1362 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_initDef1364 = new BitSet(new long[]{0x0000200000002000L});
+	public static final BitSet FOLLOW_ID_in_initDef1367 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_initDef1369 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_eqn_in_initDef1371 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_lineComment_in_initDef1373 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_initDef1376 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_initDef1379 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_56_in_auxDef1400 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_auxDef1402 = new BitSet(new long[]{0x0000200000002000L});
+	public static final BitSet FOLLOW_ID_in_auxDef1405 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+	public static final BitSet FOLLOW_timeExt_in_auxDef1407 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_auxDef1409 = new BitSet(new long[]{0xC000000000000000L,0x0000000000000003L});
+	public static final BitSet FOLLOW_tableFunction_in_auxDef1411 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_lineComment_in_auxDef1413 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_auxDef1416 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_auxDef1419 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_56_in_auxDef1436 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_auxDef1438 = new BitSet(new long[]{0x0000200000002000L});
+	public static final BitSet FOLLOW_ID_in_auxDef1441 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+	public static final BitSet FOLLOW_timeExt_in_auxDef1443 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_auxDef1445 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_eqn_in_auxDef1447 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_lineComment_in_auxDef1449 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_auxDef1452 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_auxDef1456 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_63_in_tableFunction1484 = new BitSet(new long[]{0x0001000000000000L});
+	public static final BitSet FOLLOW_65_in_tableFunction1487 = new BitSet(new long[]{0x0001000000000000L});
+	public static final BitSet FOLLOW_64_in_tableFunction1491 = new BitSet(new long[]{0x0001000000000000L});
+	public static final BitSet FOLLOW_62_in_tableFunction1494 = new BitSet(new long[]{0x0001000000000000L});
+	public static final BitSet FOLLOW_48_in_tableFunction1498 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_ID_in_tableFunction1502 = new BitSet(new long[]{0x0010000000000000L});
+	public static final BitSet FOLLOW_52_in_tableFunction1504 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_ID_in_tableFunction1508 = new BitSet(new long[]{0x0010000000000000L,0x0000000000000008L});
+	public static final BitSet FOLLOW_timeExt_in_tableFunction1510 = new BitSet(new long[]{0x0010000000000000L});
+	public static final BitSet FOLLOW_52_in_tableFunction1513 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_NUMBER_in_tableFunction1517 = new BitSet(new long[]{0x0010000000000000L});
+	public static final BitSet FOLLOW_52_in_tableFunction1519 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_NUMBER_in_tableFunction1523 = new BitSet(new long[]{0x0010000000000000L});
+	public static final BitSet FOLLOW_52_in_tableFunction1525 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_NUMBER_in_tableFunction1529 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_49_in_tableFunction1531 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_60_in_rateDef1574 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_rateDef1576 = new BitSet(new long[]{0x0000200000002000L});
+	public static final BitSet FOLLOW_ID_in_rateDef1579 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+	public static final BitSet FOLLOW_timeExt_in_rateDef1582 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_rateDef1584 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_eqn_in_rateDef1586 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_lineComment_in_rateDef1588 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_rateDef1591 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_rateDef1594 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_58_in_lvlDef1617 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_lvlDef1619 = new BitSet(new long[]{0x0000200000002000L});
+	public static final BitSet FOLLOW_ID_in_lvlDef1622 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+	public static final BitSet FOLLOW_timeExt_in_lvlDef1624 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_lvlDef1626 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_eqn_in_lvlDef1628 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_lineComment_in_lvlDef1630 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_lvlDef1633 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_lvlDef1637 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_61_in_tblDef1658 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_WS_in_tblDef1660 = new BitSet(new long[]{0x0000200000002000L});
+	public static final BitSet FOLLOW_ID_in_tblDef1663 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_tblDef1665 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_rangeList_in_tblDef1667 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_lineComment_in_tblDef1669 = new BitSet(new long[]{0x0000200001000000L});
+	public static final BitSet FOLLOW_WS_in_tblDef1672 = new BitSet(new long[]{0x0000000001000000L});
+	public static final BitSet FOLLOW_NEWLINE_in_tblDef1676 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_WS_in_lineComment1699 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_COMMENT_in_lineComment1701 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_rangeList1712 = new BitSet(new long[]{0x0050000000000002L});
+	public static final BitSet FOLLOW_52_in_rangeList1716 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_54_in_rangeList1718 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_NUMBER_in_rangeList1721 = new BitSet(new long[]{0x0050000000000002L});
+	public static final BitSet FOLLOW_expr_in_eqn1740 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_multExpr_in_expr1764 = new BitSet(new long[]{0x0028000000000002L});
+	public static final BitSet FOLLOW_set_in_expr1779 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_multExpr_in_expr1785 = new BitSet(new long[]{0x0028000000000002L});
+	public static final BitSet FOLLOW_atom_in_multExpr1809 = new BitSet(new long[]{0x0044000000000002L});
+	public static final BitSet FOLLOW_set_in_multExpr1813 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_atom_in_multExpr1819 = new BitSet(new long[]{0x0044000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_atom1844 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_53_in_atom1869 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_ID_in_atom1871 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000008L});
+	public static final BitSet FOLLOW_timeExt_in_atom1874 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_51_in_atom1892 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_ID_in_atom1894 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000008L});
+	public static final BitSet FOLLOW_timeExt_in_atom1897 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_atom1912 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000008L});
+	public static final BitSet FOLLOW_timeExt_in_atom1915 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_funcRef_in_atom1930 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_48_in_atom1941 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_expr_in_atom1943 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_49_in_atom1945 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_funcRef1970 = new BitSet(new long[]{0x0001000000000000L});
+	public static final BitSet FOLLOW_48_in_funcRef1972 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_paramList_in_funcRef1974 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_49_in_funcRef1976 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expr_in_paramList2012 = new BitSet(new long[]{0x0010000000000002L});
+	public static final BitSet FOLLOW_52_in_paramList2015 = new BitSet(new long[]{0x0029000004002000L});
+	public static final BitSet FOLLOW_expr_in_paramList2017 = new BitSet(new long[]{0x0010000000000002L});
+	public static final BitSet FOLLOW_67_in_timeExt2031 = new BitSet(new long[]{0x0000000000010000L});
+	public static final BitSet FOLLOW_JKL_in_timeExt2033 = new BitSet(new long[]{0x0000000000000002L});
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xmile xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+    <header>
+        <vendor>SDXchange</vendor>
+        <name></name>
+        <product version="1.0">SDXchange Dynamo to XMILE</product>
+    </header>
+    <sim_specs>
+        <stop>600.0</stop>
+        <start>0.0</start>
+        <dt>0.25</dt>
+    </sim_specs>
+    <model name="default">
+        <variables>
+            <aux name="VAR0">
+                <eqn>100</eqn>
+            </aux>
+            <aux name="VAR1">
+                <eqn>100</eqn>
+                <gf name="TAB1" type="continuous">
+                    <xscale min="1.0" max="0.0"/>
+                    <ypts>0,.2,.4,.6,.8,10</ypts>
+                </gf>
+            </aux>
+        </variables>
+        <views>
+            <view>
+                <aux name="VAR0" x="50.0" y="50.0"/>
+                <aux name="VAR1" x="50.0" y="100.0"/>
+                <stacked_container x="100.0" y="100.0" uid="1" width="350.0" height="280.0"/>
+            </view>
+        </views>
+    </model>
+</xmile>
+
