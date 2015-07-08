@@ -19,15 +19,16 @@ public class TestApp2 {
         Dyn2Xmile.main(argv);
     }
 
-    @Test
-    public void testApp2teacup(){
-        String[] argv = {"/teacup.dyn"};
-        Dyn2Xmile.main(argv);
-    }
 
     @Test
     public void testApp2p96(){
         String[] argv = {"/pugh_p96.dyn"};
+        Dyn2Xmile.main(argv);
+    }
+
+    @Test
+    public void testApp2p96a(){
+        String[] argv = {"/pugh_p96a.dyn"};
         Dyn2Xmile.main(argv);
     }
 

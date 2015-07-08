@@ -42,4 +42,8 @@ public class FixedGraphEditor implements GraphEditor {
 
         frame.setPaneDimensions( defaultAuxCol+50, Math.max(lastFlowY, lastStockY)+defaultYSpace, defaultPaneWidth, defaultPaneHeight);
     }
+
+    public int getMaxY() {
+        return Math.max(Math.max(lastAuxY, lastStockY), lastFlowY);
+    }
 }

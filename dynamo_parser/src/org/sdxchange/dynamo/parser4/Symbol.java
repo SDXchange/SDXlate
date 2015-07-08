@@ -31,4 +31,6 @@ public interface Symbol {
 
     public List<String> getDependencies();
 
+    public void setComment(String text);
+
 }

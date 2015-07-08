@@ -15,7 +15,10 @@ public class PaneDimensions {
     }
 
     public int getY() {
-        return y;
+        //TODO: replace this hack with separated dimensions for graph and table.
+        int rval = y;
+        y+=25;
+        return rval;
     }
 
     public int getWidth() {

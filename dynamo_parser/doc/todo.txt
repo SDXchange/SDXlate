@@ -1,9 +1,21 @@
+CI Backlog
+===================================================
+Build jar for Dyn2Xmile
+Regenerate xmile marshallers (jaxb)
+Regenerate dynamo parser lexer /dynamoParser.g4 dynamolexer.g4
+Create Xmile to Xframe builder and package in jar
+Package Frame to Xmile Builder (from dynamo project) as jar
+
+regenerate xmile files (from dynamo and other sources) as part of build
+copy all xmile files to end-user library page. 
+
+
 
 Backlog Dynamo parser
 =================================================
 
-Conformance: remove name from "root" model. 
-Conformance: add version attribute to xmile tag
+Map TABLE vs TABHL differences
+
 
 Push new version
 Grammar rule for array initializers (T ID[*] = x,x,x) They cause a problem because treating as table fails to find tInfo. 
@@ -33,12 +45,35 @@ Extract intermediate form from Vensim (enough to mimic dynamo?)
 load intermediate form into symbol table 
  
 
-Backlog Output Adapters
+Backlog InsightMaker Output Adapters
 ================================================
 
 
+Backlog Stella Output Adapter
+===============================================
+Retest, 
+eliminate use of m4, (shouldn't be necessary with new Dyn2Xmile.) 
+Add limitations to usage message. 
+Perform xsl transform from Java
+package as jar file. 
+
+Backlog Stella to Xmile
+===================================================
+Test how much we can accomplish in a Java-based XSL transform 
+
  Completed
  ==========================================
+ Conformance: add version attribute to xmile tag
+ Conformance: remove name from "root" model. 
+ Conformance: Options .. uses_outputs --- has modelview
+ Conformance: Product version
+ Conformance: Stacked Container must have x,y,width,height, __uid__ 
+ Conformance: implement "printable view" (see list of required attributes) (TABLE)
+ Conformance: Flows must support equation and lookup (but maybe I don't have to use both when generating)
+ Conformance: Aux must support both equation and lookup (but not mixed?) 
+ Conformance: Plot element attributes index, title, entity (support for, but not required use)
+	add title? 
+ 
  rename dynbare grammar
  Codify Build Targets
 ... parser and lexer generation

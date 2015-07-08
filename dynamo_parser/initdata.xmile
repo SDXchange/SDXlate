@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xmile xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
     <header>
         <vendor>SDXchange</vendor>
         <name>TEST NON-LEVEL INITIALIZATION</name>
+        <options>
+            <has_model_view/>
+            <uses_outputs/>
+        </options>
         <product version="1.0">SDXchange Dynamo to XMILE</product>
     </header>
     <sim_specs>
@@ -10,7 +14,7 @@
         <start>0.0</start>
         <dt>0.25</dt>
     </sim_specs>
-    <model name="default">
+    <model>
         <variables>
             <flow name="RATE2">
                 <eqn>10+AUX2</eqn>
@@ -52,27 +56,27 @@
                 <aux name="AUX1" x="50.0" y="100.0"/>
                 <stock name="STORE2" x="200.0" y="50.0"/>
                 <stock name="STORE1" x="200.0" y="100.0"/>
-                <connector uid="16">
+                <connector uid="17">
                     <from>AUX2</from>
                     <to>RATE2</to>
                 </connector>
-                <connector uid="17">
+                <connector uid="18">
                     <from>STORE2</from>
                     <to>AUX2</to>
                 </connector>
-                <connector uid="18">
+                <connector uid="19">
                     <from>TIME</from>
                     <to>AUX2</to>
                 </connector>
-                <connector uid="19">
+                <connector uid="20">
                     <from>AUX1</from>
                     <to>RATE1</to>
                 </connector>
-                <connector uid="20">
+                <connector uid="21">
                     <from>STORE1</from>
                     <to>AUX1</to>
                 </connector>
-                <stacked_container x="100.0" y="150.0" uid="21" width="350.0" height="280.0">
+                <stacked_container x="100.0" y="150.0" uid="22" width="350.0" height="280.0">
                     <graph show_grid="true" left_axis_multi_scale="false" plot_numbers="true" background="yellow">
                         <plot index="0" show_y_axis="true">
                             <entity name="AUX1"/>

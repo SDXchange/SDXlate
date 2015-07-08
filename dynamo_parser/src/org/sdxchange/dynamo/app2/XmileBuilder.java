@@ -1,5 +1,6 @@
 package org.sdxchange.dynamo.app2;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.oasis.xmile.v1_0.Header;
 import org.oasis.xmile.v1_0.MinMaxType;
 import org.oasis.xmile.v1_0.Model;
 import org.oasis.xmile.v1_0.ObjectFactory;
+import org.oasis.xmile.v1_0.Options;
 import org.oasis.xmile.v1_0.Plot;
 import org.oasis.xmile.v1_0.PointsType;
 import org.oasis.xmile.v1_0.Product;
@@ -24,11 +26,14 @@ import org.oasis.xmile.v1_0.ViewContentType.Connector.From;
 import org.oasis.xmile.v1_0.ViewContentType.Flow.Pts;
 import org.oasis.xmile.v1_0.ViewContentType.Flow.Pts.Pt;
 import org.oasis.xmile.v1_0.ViewContentType.Graph;
+import org.oasis.xmile.v1_0.ViewContentType.Table;
+import org.oasis.xmile.v1_0.ViewContentType.Table.Item.Entity;
 import org.oasis.xmile.v1_0.Views;
 import org.oasis.xmile.v1_0.Views.View;
 import org.oasis.xmile.v1_0.Xmile;
 import org.sdxchange.dynamo.parser4.AuxSymbol;
 import org.sdxchange.dynamo.parser4.AuxTabSymbol;
+import org.sdxchange.dynamo.parser4.Column;
 import org.sdxchange.dynamo.parser4.GraphPane;
 import org.sdxchange.dynamo.parser4.GraphSymbol;
 import org.sdxchange.dynamo.parser4.InitSymbol;
@@ -58,6 +63,9 @@ public class XmileBuilder {
 
     public XmileBuilder(){
         document = factory.createXmile();
+        document.setVersion(BigDecimal.valueOf(1.0));
+        //UsesOutputs out = factory.createOptionsUsesOutputs();
+        //options.setUsesOutputs(out);
         populateSkeleton();
 
     }
@@ -75,6 +83,10 @@ public class XmileBuilder {
         product.setValue("SDXchange Dynamo to XMILE");
         product.setVersion("1.0");
         header.setProduct(product);
+        Options options = factory.createOptions();
+        options.setUsesOutputs(factory.createOptionsUsesOutputs());
+        options.setHasModelView(factory.createEmptyType());
+        header.setOptions(options);
     }
 
     private void setDefaultSimSpecs(){
@@ -124,7 +136,7 @@ public class XmileBuilder {
         Variables vars = factory.createVariables();
         List<Object>modules = document.getSimSpecsOrModelUnitsOrBehavior();
         Model model = factory.createModel();
-        model.setName("default");
+//        model.setName("default");
         modules.add(model);
         marshallVariables(vars, frame);
         model.setVariables(vars);
@@ -151,13 +163,19 @@ public class XmileBuilder {
 
     private void marshallOutputPanes(XFrame frame, View view) {
         List<Object> vList = view.getStyleOrStockOrFlow();
-        StackedContainer container = factory.createStackedContainer();
-        setContainerDefaults(frame, container);
-        vList.add(container);
-        List<Object> graphList = container.getStyleOrStockOrFlow();
-        List<Pane> outputs = frame.getOutputs();
-        for (Pane pane: outputs){
-            pane.accept(this, graphList); // handler adds result (plot or print) to container.
+        marshallPanes(frame.getGraphOutputs(), frame, vList);
+        marshallPanes(frame.getTableOutputs(), frame, vList);
+    }
+
+    private void marshallPanes(List<Pane> outputs, XFrame frame, List<Object> vList) {
+        if (outputs.size() > 0){
+            StackedContainer container = factory.createStackedContainer();
+            setContainerDefaults(frame, container);
+            List<Object> outputList = container.getStyleOrStockOrFlow();
+            for (Pane pane: outputs){
+                pane.accept(this, outputList); // handler adds result (plot or print) to container.
+            }
+            vList.add(container);
         }
     }
 
@@ -194,8 +212,28 @@ public class XmileBuilder {
 
     }
 
-    public void marshall(TablePane tablePane, List<Object> vList) {
-        // TODO Auto-generated method stub
+    public void marshall(TablePane tablePane, List<Object> tableList) {
+        Table t = factory.createViewContentTypeTable();
+        String interval = lastFrame.getViewParams().getPrintInterval();
+        setTableDefaults(t, interval);
+        tableList.add(t);
+        List<Table.Item> columnSet = t.getItem();
+
+        for (Column spec: tablePane.getColumns()){
+            Table.Item item = factory.createViewContentTypeTableItem();
+            item.setIndex(spec.getIndex());
+            Entity e = factory.createViewContentTypeTableItemEntity();
+            e.setName(spec.getName());
+            item.setEntity(e);
+            columnSet.add(item);
+        }
+    }
+
+    private void setTableDefaults(Table t, String interval) {
+        //TODO: parameterize column width
+        t.setColumnWidth(50);
+        t.setReportInterval(interval);
+
     }
 
     private void marshallConnectors(View view, XFrame frame) {
@@ -304,6 +342,9 @@ public class XmileBuilder {
         Auxvar aux = factory.createAuxvar();
         aux.setName(auxSymbol.getName());
         List<Object> eqn = aux.getEqnOrMathmlOrUnits();
+        if (auxSymbol.getComment() != null){
+            eqn.add(factory.createAuxvarDoc(auxSymbol.getComment()));
+        }
         eqn.add(factory.createAuxvarElementEqn(auxSymbol.getEqn()));
         return aux;
     }
@@ -352,6 +393,10 @@ public class XmileBuilder {
         Stock stock = factory.createStock();
         stock.setName(sym.getName());
         List<Object> elList = stock.getEqnOrMathmlOrUnits();
+        if (sym.getComment() != null){
+            elList.add(factory.createStockDoc(sym.getComment()));
+        }
+
         for (String flow: sym.getInFlows()){
             elList.add(factory.createStockInflow(flow));
         }
@@ -371,6 +416,9 @@ public class XmileBuilder {
         Flow flow = factory.createFlow();
         flow.setName(rate.getName());
         List<Object> eqn = flow.getEqnOrMathmlOrUnits();
+        if (rate.getComment() != null){
+            eqn.add(factory.createFlowDoc(rate.getComment()));
+        }
         eqn.add(factory.createAuxvarElementEqn(rate.getEqn()));
         return flow;
     };

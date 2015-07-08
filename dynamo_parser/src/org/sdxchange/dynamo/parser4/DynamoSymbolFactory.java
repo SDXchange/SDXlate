@@ -11,6 +11,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.xpath.XPath;
 import org.sdxchange.dynamo.parser4.DynamoParser.AUX_EQNContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.CONST_EQNContext;
+import org.sdxchange.dynamo.parser4.DynamoParser.ColumnNumContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.EqnContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.ExprContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.INIT_EQNContext;
@@ -19,6 +20,7 @@ import org.sdxchange.dynamo.parser4.DynamoParser.PlotCardContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.PlotSpecContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.PrintCardContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.RATE_EQNContext;
+import org.sdxchange.dynamo.parser4.DynamoParser.RptSpecContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.SpecCardContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.TBL_EQNContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.YValuesContext;
@@ -44,6 +46,9 @@ public class DynamoSymbolFactory implements SymbolFactory {
         Symbol decl = new AuxSymbol(varName, "AUX", extractExpr(eqn), leftRef);
         Set<String> inputs = getInputVars(eqn.expr());
         decl.setInputs(inputs);
+        if ( ctx.auxDef().comment()!=null ){
+            decl.setComment(ctx.auxDef().comment().getText() );
+        }
         frame.defineVar(decl.getName(), decl);
         return null; //TODO: bubble up errors?
     }
@@ -69,6 +74,9 @@ public class DynamoSymbolFactory implements SymbolFactory {
         String tabInput = eqn.expr().tabRef().exprList().expr().get(1).getText();
         String tabName = eqn.expr().tabRef().exprList().expr().get(0).getText();
         AuxTabSymbol decl = new AuxTabSymbol(varName, "AUX", tabInput, leftRef);
+        if ( ctx.auxDef().comment()!=null ){
+            decl.setComment(ctx.auxDef().comment().getText() );
+        }
         TableInfo tInfo = tInfoIndex.get(tabName);
         if (tInfo == null){
             System.out.println("WARNING: no table info entry from prior pass for table "+tabName);
@@ -102,6 +110,9 @@ public class DynamoSymbolFactory implements SymbolFactory {
         String varName = eqn.varRef().start.getText();
         String leftRef = eqn.getRuleContext().getChild(0).getText();
         InitSymbol decl = new InitSymbol(varName, "INIT", extractExpr(eqn), leftRef);
+        if ( ctx.initDef().comment()!=null ){
+            decl.setComment(ctx.initDef().comment().getText() );
+        }
         //stash the pointer so we can analyze later if necessary.
         decl.setContext(ctx);
         frame.defineInitializer(decl.getName(), decl);
@@ -114,6 +125,10 @@ public class DynamoSymbolFactory implements SymbolFactory {
         String varName = eqn.varRef().start.getText();
         String leftRef = eqn.getRuleContext().getChild(0).getText();
         Symbol lvlSym = new StockSymbol(varName, "LVL", leftRef);
+        if ( ctx.stockDef().comment()!=null ){
+            lvlSym.setComment(ctx.stockDef().comment().getText() );
+        }
+
         upDateFlows(lvlSym, eqn);
         frame.defineVar(lvlSym.getName(), lvlSym);
         return null; //TODO
@@ -238,6 +253,9 @@ public class DynamoSymbolFactory implements SymbolFactory {
         String varName = eqn.varRef().start.getText();
         String leftRef = eqn.getRuleContext().getChild(0).getText();
         Symbol decl = new RateSymbol(varName, "RATE", extractExpr(eqn), leftRef);
+        if ( ctx.rateDef().comment()!=null ){
+            decl.setComment(ctx.rateDef().comment().getText() );
+        }
         Set<String> inputs = getInputVars(eqn.expr());
         decl.setInputs(inputs);
         frame.defineVar(decl.getName(), decl);
@@ -251,6 +269,9 @@ public class DynamoSymbolFactory implements SymbolFactory {
         String tabInput = eqn.expr().tabRef().exprList().expr().get(1).getText();
         String tabName = eqn.expr().tabRef().exprList().expr().get(0).getText();
         RateTabSymbol decl = new RateTabSymbol(varName, "LVL", tabInput, leftRef);
+        if ( ctx.rateDef().comment()!=null ){
+            decl.setComment(ctx.rateDef().comment().getText() );
+        }
         TableInfo tInfo = tInfoIndex.get(tabName);
         if (tInfo == null){
             System.out.println("WARNING: no table info entry from prior pass for table "+tabName);
@@ -271,6 +292,9 @@ public class DynamoSymbolFactory implements SymbolFactory {
         YValuesContext eqn = ctx.tableDef().yValues();
         String varName = (ctx.tableDef().ID() == null) ? ctx.tableDef().arrayRef().getText() : ctx.tableDef().ID().getText();
         GraphSymbol decl = new GraphSymbol(varName, "GF", eqn.getText(), varName);
+        if ( ctx.tableDef().comment()!=null ){
+            decl.setComment(ctx.tableDef().comment().getText() );
+        }
         decl.setYPts(eqn.getText());
         TableInfo tInfo = tInfoIndex.get(varName);
         if (tInfo == null){
@@ -288,6 +312,9 @@ public class DynamoSymbolFactory implements SymbolFactory {
         String varName = eqn.varRef().start.getText();
         String leftRef = eqn.getRuleContext().getChild(0).getText();
         Symbol decl = new AuxSymbol(varName, "AUX", extractExpr(eqn), leftRef);
+        if ( ctx.constDef().comment()!=null ){
+            decl.setComment(ctx.constDef().comment().getText() );
+        }
         frame.defineVar(decl.getName(), decl);
         return null; //TODO
     }
@@ -306,8 +333,18 @@ public class DynamoSymbolFactory implements SymbolFactory {
     }
 
     @Override
-    public void processPrintCard(XFrame currentFrame, PrintCardContext ctx) {
-        //not implemented
+    public void processPrintCard(XFrame frame, PrintCardContext ctx) {
+        //TODO: handle array references
+        TablePane output = new TablePane();
+        List<RptSpecContext> columnSpecs = ctx.rptList().rptSpec();
+        int i = 0;
+        for (RptSpecContext rptSpec : columnSpecs){
+            String varName = rptSpec.ID().getText();
+            ColumnNumContext numCtx = rptSpec.columnNum();
+            int colPosition = (numCtx == null)? i++ : Integer.valueOf(numCtx.getText());
+            output.addColumn(new Column(varName, colPosition));
+        }
+        frame.addOutputPane(output);
     }
 
     @Override
@@ -329,9 +366,8 @@ public class DynamoSymbolFactory implements SymbolFactory {
                 case "PLTPER":
                     break;
                 case "PRTPER":
+                    currentFrame.getViewParams().setPrintInterval(spec.numLit().getText());
                     break;
-//                case "MAXLEN":
-//                   frameSpecs.setStop(spec.numLit().getText());
             }
         }
     }

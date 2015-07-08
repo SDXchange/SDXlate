@@ -18,9 +18,11 @@ public class XFrame {
     private Map<String,InitSymbol> initializers = new HashMap<String, InitSymbol>();
     private Set<String> arrayIndexValues = new HashSet<String>();
     private SimSpecs specs = new SimSpecs();
-    private List<Pane> outputs = new ArrayList<Pane>();
+    private List<Pane> graphs = new ArrayList<Pane>();
+    private List<Pane> tables = new ArrayList<Pane>();
     private PaneDimensions paneDim;
     private String simulationName="";
+    private ViewParams viewParams = new ViewParams();
 
     public XFrame(String fname, ModelContext ctx) {
         this.name = fname;
@@ -77,8 +79,11 @@ public class XFrame {
         }
     }
 
-    public void addOutputPane(Pane pane){
-        outputs.add(pane);
+    public void addOutputPane(TablePane pane){
+        tables.add(pane);
+    }
+    public void addOutputPane(GraphPane pane){
+        graphs.add(pane);
     }
 
     public SimSpecs getSimSpec() {
@@ -89,8 +94,12 @@ public class XFrame {
         return definedVars.values();
     }
 
-    public List<Pane> getOutputs() {
-        return outputs;
+    public List<Pane> getGraphOutputs() {
+        return graphs;
+    }
+
+    public List<Pane> getTableOutputs() {
+        return tables;
     }
 
     public void setPaneDimensions(int x, int y, int width, int height) {
@@ -116,6 +125,10 @@ public class XFrame {
             rval+=(sym.dump()+"\n");
         }
         return rval;
+    }
+
+    public ViewParams getViewParams() {
+        return viewParams;
     }
 
 

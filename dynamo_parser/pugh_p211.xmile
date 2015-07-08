@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xmile xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
     <header>
         <vendor>SDXchange</vendor>
         <name>SIMPLE  PROJECT  MODEL</name>
+        <options>
+            <has_model_view/>
+            <uses_outputs/>
+        </options>
         <product version="1.0">SDXchange Dynamo to XMILE</product>
     </header>
     <sim_specs>
@@ -10,7 +14,7 @@
         <start>0.0</start>
         <dt>0.25</dt>
     </sim_specs>
-    <model name="default">
+    <model>
         <variables>
             <aux name="RPROD">
                 <eqn>GPROD*FSAT</eqn>

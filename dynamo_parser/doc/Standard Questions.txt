@@ -1,0 +1,14 @@
+Schema error: from section 6.4.4
+•	Report interval:  REQUIRED interval="…" specifying how often, in model time, to report values during the simulation; use DT to export every DT (default: 1)
+however, schema generates code for attribute named "reportInterval". Stella expects "interval", and adapter does not map it.
+======================================
+Why can't we stack graphs and tables in the same container?  6.2.1 is ambiguous. Stella will not print the graph if it precedes a table in a stacked container.
+====================================== 
+What does support tables and equations mean? Does that mean that graph references embedded in an arbitrary equation should be supported? The Stella converter does not. 
+======================================
+Standard should more clearly distinguish between:
+  *Engines must support
+  *Files must contain
+========================================
+How do you support output in a file with no view? Can stackedContainer appear somewhere outside a view? 
+==========================================

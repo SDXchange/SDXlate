@@ -12,6 +12,7 @@ public class SymbolBase {
     protected List<String> dependencies = new ArrayList<String>();
     protected String lRef = "";
     protected XY position = new XY(0,0);
+    protected String comment = null;
 
 
     public String getName() {
@@ -64,6 +65,14 @@ public class SymbolBase {
 
     public List<String> getDependencies(){
         return dependencies;
+    }
+
+    public void setComment(String text){
+        this.comment = text;
+    }
+
+    public String getComment(){
+        return comment;
     }
 
 }
