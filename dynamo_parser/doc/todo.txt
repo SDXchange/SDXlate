@@ -1,6 +1,7 @@
 CI Backlog
 ===================================================
 Build jar for Dyn2Xmile
+Update build targets to conform to new version requirements.
 Regenerate xmile marshallers (jaxb)
 Regenerate dynamo parser lexer /dynamoParser.g4 dynamolexer.g4
 Create Xmile to Xframe builder and package in jar
@@ -9,7 +10,10 @@ Package Frame to Xmile Builder (from dynamo project) as jar
 regenerate xmile files (from dynamo and other sources) as part of build
 copy all xmile files to end-user library page. 
 
-
+Backlog Architectural
+=====================================================
+Create g4 parser for conforming Xmile expressions. 
+Create Xmile to XFrame unmarshaller. 
 
 Backlog Dynamo parser
 =================================================
