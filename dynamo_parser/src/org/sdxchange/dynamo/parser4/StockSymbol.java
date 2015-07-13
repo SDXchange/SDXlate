@@ -3,6 +3,7 @@ package org.sdxchange.dynamo.parser4;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.oasis.xmile.devkit.util.XUtil;
 import org.sdxchange.dynamo.app2.XmileBuilder;
 
 public class StockSymbol extends SymbolBase implements Symbol {

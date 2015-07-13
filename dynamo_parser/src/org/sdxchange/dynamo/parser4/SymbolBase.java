@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.oasis.xmile.devkit.util.XUtil;
+import org.sdxchange.dynamo.parser4.XY;
+
 public class SymbolBase {
 
     protected String name;

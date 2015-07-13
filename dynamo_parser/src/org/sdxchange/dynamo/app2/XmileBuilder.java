@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.oasis.xmile.devkit.util.XmlHelper;
 import org.oasis.xmile.v1_0.Auxvar;
 import org.oasis.xmile.v1_0.Flow;
 import org.oasis.xmile.v1_0.Gf;
@@ -45,8 +46,6 @@ import org.sdxchange.dynamo.parser4.StockSymbol;
 import org.sdxchange.dynamo.parser4.Symbol;
 import org.sdxchange.dynamo.parser4.TablePane;
 import org.sdxchange.dynamo.parser4.XFrame;
-
-import edu.iastate.xmile.util.XmlHelper;
 
 /**
  * Responsible for constructing an Xmile Document from various input tables and objects.

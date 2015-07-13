@@ -62,7 +62,7 @@ extends DynamoParserBaseListener implements DynamoParserListener, DynamoTreeList
     public void enterModel(org.sdxchange.dynamo.parser4.DynamoParser.ModelContext ctx)
     {
         //set up a frame for this module. In Dynamo there's only one module ... the default.
-        XFrame frame = new XFrame("defaultModule", ctx);
+        XFrame frame = new XFrame("defaultModule");
         frame.setSimulationName(simulationName);
         frameIndex.put(frame.getName(), frame);
         if (defaultModule != null){ // it might be occupied by a macro declaration frame.

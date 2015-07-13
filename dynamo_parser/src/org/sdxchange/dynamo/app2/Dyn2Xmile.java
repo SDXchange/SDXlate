@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.oasis.xmile.devkit.util.XmlHelper;
 import org.oasis.xmile.v1_0.Xmile;
 import org.sdxchange.dynamo.parser4.DynamoLexer;
 import org.sdxchange.dynamo.parser4.DynamoParser;
@@ -24,8 +25,6 @@ import org.sdxchange.dynamo.parser4.NormalizeListener;
 import org.sdxchange.dynamo.parser4.TestV4Parser;
 import org.sdxchange.dynamo.parser4.UserDefListener;
 import org.sdxchange.dynamo.parser4.XFrame;
-
-import edu.iastate.xmile.util.XmlHelper;
 
 
 public class Dyn2Xmile {
@@ -166,7 +165,7 @@ public class Dyn2Xmile {
 
 
 
-    private InputStream getInputStream(String resourcePath) throws Exception {
+    private static InputStream getInputStream(String resourcePath) throws Exception {
         FileInputStream rval;
         try {
             rval = new FileInputStream(getFileLoc(resourcePath));
@@ -177,7 +176,7 @@ public class Dyn2Xmile {
         return rval;
     }
 
-    private String getFileLoc(String fileLoc){
+    private static String getFileLoc(String fileLoc){
 //      URL dir = this.getClass().getResource(".");
 //        System.out.println(dir.getFile());
         String rval = System.getProperty("user.dir") + fileLoc;

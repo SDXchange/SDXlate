@@ -1,4 +1,4 @@
-package org.sdxchange.dynamo.parser4;
+package org.oasis.xmile.devkit.util;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;

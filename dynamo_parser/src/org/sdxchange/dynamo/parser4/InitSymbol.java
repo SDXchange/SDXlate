@@ -1,6 +1,7 @@
 package org.sdxchange.dynamo.parser4;
 
 import org.sdxchange.dynamo.app2.XmileBuilder;
+import org.sdxchange.dynamo.parser4.DynamoParser;
 import org.sdxchange.dynamo.parser4.DynamoParser.INIT_EQNContext;
 
 public class InitSymbol extends SymbolBase implements Symbol  {

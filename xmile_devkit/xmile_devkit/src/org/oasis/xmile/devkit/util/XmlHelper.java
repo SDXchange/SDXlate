@@ -1,4 +1,4 @@
-package edu.iastate.xmile.util;
+package org.oasis.xmile.devkit.util;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.URL;

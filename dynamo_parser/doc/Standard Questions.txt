@@ -12,3 +12,5 @@ Standard should more clearly distinguish between:
 ========================================
 How do you support output in a file with no view? Can stackedContainer appear somewhere outside a view? 
 ==========================================
+Can expressions contain boolean literals "true" and "false"? 
+===========================================

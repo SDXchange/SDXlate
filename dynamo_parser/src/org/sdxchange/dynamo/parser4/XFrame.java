@@ -8,12 +8,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.sdxchange.dynamo.parser4.DynamoParser.ModelContext;
+import org.sdxchange.dynamo.parser4.GraphPane;
+import org.sdxchange.dynamo.parser4.InitSymbol;
+import org.sdxchange.dynamo.parser4.Pane;
+import org.sdxchange.dynamo.parser4.PaneDimensions;
+import org.sdxchange.dynamo.parser4.SimSpecs;
+import org.sdxchange.dynamo.parser4.Symbol;
 
 public class XFrame {
 
     private String name;
-    private ModelContext moduleCtx;
     private Map<String,Symbol> definedVars = new HashMap<String, Symbol>();
     private Map<String,InitSymbol> initializers = new HashMap<String, InitSymbol>();
     private Set<String> arrayIndexValues = new HashSet<String>();
@@ -24,9 +28,8 @@ public class XFrame {
     private String simulationName="";
     private ViewParams viewParams = new ViewParams();
 
-    public XFrame(String fname, ModelContext ctx) {
+    public XFrame(String fname) {
         this.name = fname;
-        this.moduleCtx = ctx;
         arrayIndexValues.add("*");
     }
     //defined functions table

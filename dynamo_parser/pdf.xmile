@@ -41,15 +41,15 @@
                         <pt x="175.0" y="50.0"/>
                     </pts>
                 </flow>
-                <connector uid="379">
+                <connector uid="375">
                     <from>TIME</from>
                     <to>PROB</to>
                 </connector>
-                <connector uid="380">
+                <connector uid="376">
                     <from>PROB</from>
                     <to>PROBRT</to>
                 </connector>
-                <stacked_container x="100.0" y="150.0" uid="381" width="350.0" height="280.0">
+                <stacked_container x="100.0" y="150.0" uid="377" width="350.0" height="280.0">
                     <graph show_grid="true" left_axis_multi_scale="false" plot_numbers="true" background="yellow">
                         <plot index="0" show_y_axis="true">
                             <entity name="DENSITY"/>
