@@ -1,7 +1,8 @@
 CI Backlog
 ===================================================
+Fix xmile generation so top-level table doesn't generate both nested and top level output. See Bug1.xmile
 Build jar for Dyn2Xmile
-Update build targets to conform to new version requirements.
+Update build targets and scripts to conform to new project structure and ANTLR4 requirements.
 Regenerate xmile marshallers (jaxb)
 Regenerate dynamo parser lexer /dynamoParser.g4 dynamolexer.g4
 Create Xmile to Xframe builder and package in jar
@@ -10,10 +11,11 @@ Package Frame to Xmile Builder (from dynamo project) as jar
 regenerate xmile files (from dynamo and other sources) as part of build
 copy all xmile files to end-user library page. 
 
-Backlog Architectural
+Backlog Architectural/DevKit
 =====================================================
-Create g4 parser for conforming Xmile expressions. 
-Create Xmile to XFrame unmarshaller. 
+Refactor to eliminate dynamo and other upward dependencies from devkit. 
+Add Policy object to control spacing in generated displays.
+
 
 Backlog Dynamo parser
 =================================================
@@ -51,7 +53,10 @@ load intermediate form into symbol table
 
 Backlog InsightMaker Output Adapters
 ================================================
-
+Generate Display
+Package as app with file input/output
+Isolate Graph inputs
+Package as jar file. 
 
 Backlog Stella Output Adapter
 ===============================================
@@ -67,6 +72,8 @@ Test how much we can accomplish in a Java-based XSL transform
 
  Completed
  ==========================================
+ 2015-07-16 Create Xmile to XFrame unmarshaller. 
+ 2015-07-12 Create g4 parser for conforming Xmile expressions. 
  Conformance: add version attribute to xmile tag
  Conformance: remove name from "root" model. 
  Conformance: Options .. uses_outputs --- has modelview

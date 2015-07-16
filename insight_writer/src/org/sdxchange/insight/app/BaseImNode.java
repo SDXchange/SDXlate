@@ -250,4 +250,8 @@ public abstract class BaseImNode implements ImNode {
     public String attr(String name, boolean val){
         return attr(name, (val)? 1 : 0);
     }
+    public String getTableInfo() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

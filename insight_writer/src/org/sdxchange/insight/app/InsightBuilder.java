@@ -5,19 +5,19 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.sdxchange.dynamo.parser4.StockSymbol;
-import org.sdxchange.dynamo.parser4.Symbol;
-import org.sdxchange.dynamo.parser4.XFrame;
+import org.sdxchange.xmile.devkit.symbol.StockSymbol;
+import org.sdxchange.xmile.devkit.symbol.XSymbol;
+import org.sdxchange.xmile.devkit.xframe.IXFrame;
 
 
 public class InsightBuilder {
 
     InsightGraph outModel;
-    XFrame frame;
+    IXFrame frame;
     Map<String, Integer> uidIndex = new HashMap<String, Integer>();
     Map<String, ImNode> nodeIndex = new HashMap<String, ImNode>();
 
-    public InsightBuilder(XFrame frame) {
+    public InsightBuilder(IXFrame frame) {
         this.frame = frame;
     }
 
@@ -32,7 +32,7 @@ public class InsightBuilder {
     }
 
     private void adjustFlowDimensions() {
-        for (Symbol sym: frame.getDefinedVars()){
+        for (XSymbol sym: frame.getDefinedVars()){
             if (sym.getVarType().contentEquals("LVL")){
                 StockSymbol stock = (StockSymbol) sym;
                 for (String inFlow: stock.getInFlows()){
@@ -61,7 +61,7 @@ public class InsightBuilder {
     }
 
     private void createLinkNodes() {
-        for (Symbol sym: frame.getDefinedVars()){
+        for (XSymbol sym: frame.getDefinedVars()){
 
             for (String source: sym.getDependencies()){
                 int linkId = outModel.nextNodeId++;
@@ -77,18 +77,44 @@ public class InsightBuilder {
     }
 
     private void assignUids() {
-        for (Symbol sym: frame.getDefinedVars()){
+        for (XSymbol sym: frame.getDefinedVars()){
             uidIndex.put(sym.getName(),new Integer(outModel.nextNodeId++));
         }
     }
 
     private void createDefinedVarNodes(){
-        for (Symbol sym: frame.getDefinedVars()){
+        for (XSymbol sym: frame.getDefinedVars()){
+//            String varType = sym.getVarType();
+
             switch (sym.getVarType()){
                 case "AUX": {
                     String name = sym.getName();
-                    AuxNode item = new AuxNode(name, outModel.currentFolder.id, uidIndex.get(name) );
+                    if (sym.hasNestedTable()) {
+                        ConvNode item = new ConvNode(name, outModel.currentFolder.id, uidIndex.get(name) );
+                        nodeIndex.put(name, item);
+                        item.setEqn(sym.getEqn());
+                        item.setSource(uidIndex.get(sym.getEqn()));
+                        item.setTableInfo(sym.getNestedTable());
+                        item.setTableType(sym.getNestedTable().getTableType());
+
+                        item.setPosition(sym.getPosition().getX(), sym.getPosition().getY());
+                        outModel.addNode(item);
+                    }
+                    else {
+                        AuxNode item = new AuxNode(name, outModel.currentFolder.id, uidIndex.get(name) );
+                        nodeIndex.put(name, item);
+                        item.setEqn(normalizeIDs(sym.getEqn()));
+                        item.setPosition(sym.getPosition().getX(), sym.getPosition().getY());
+                        outModel.addNode(item);
+                    }
+                }
+                break;
+                case "TAUX": {
+                    String name = sym.getName();
+                    ConvNode item = new ConvNode(name, outModel.currentFolder.id, uidIndex.get(name) );
                     nodeIndex.put(name, item);
+                    item.setSource(uidIndex.get(sym.getEqn()));
+                    item.setTableInfo(sym.getNestedTable());
                     item.setEqn(normalizeIDs(sym.getEqn()));
                     item.setPosition(sym.getPosition().getX(), sym.getPosition().getY());
                     outModel.addNode(item);
@@ -147,6 +173,7 @@ public class InsightBuilder {
         node.setStart(frame.getSimSpec().getStart());
         node.setStop(frame.getSimSpec().getStop());
         node.setDt(frame.getSimSpec().getDt());
+
         outModel.settings = node;
     }
 

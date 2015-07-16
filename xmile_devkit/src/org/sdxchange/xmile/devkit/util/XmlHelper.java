@@ -1,4 +1,4 @@
-package org.oasis.xmile.devkit.util;
+package org.sdxchange.xmile.devkit.util;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.URL;
@@ -48,7 +48,7 @@ public class XmlHelper<T> {
         JAXBContext jaxbContext;
         try {
             URL url =  this.getClass().getResource(resource);
-            String resourcePath =url.getFile();
+            String resourcePath = url.getFile();
             File file = new File(resourcePath);
             jaxbContext = JAXBContext.newInstance(pkgName);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();

@@ -9,6 +9,8 @@ import java.io.InputStream;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
+import org.sdxchange.xmile.devkit.policy.DefaultTargetPolicy;
+import org.sdxchange.xmile.devkit.policy.TargetPolicy;
 import org.sdxchange.xmile.parser4.XmileParser.ExprContext;
 
 public class TestExprParse {
@@ -23,6 +25,9 @@ public class TestExprParse {
             { "builtin-logical","VAR1 <= LN(23)","(expr (expr VAR1) <= (expr (funcRef (builtin LN) ( (exprList (expr (numLit 23))) ))))"}
     };
 
+    static TargetPolicy policy = new DefaultTargetPolicy();
+    static XmileParser refParser = new XmileParser( null ); // only use for lookups
+
     @Test
     public void test() throws IOException {
         boolean success=true;
@@ -35,6 +40,17 @@ public class TestExprParse {
         assertTrue(success);
     }
 
+
+    private ExprContext parseExpr(String name, String eqn, String expect) throws IOException{
+        InputStream testInput = new ByteArrayInputStream(eqn.getBytes());
+        ANTLRInputStream input = new ANTLRInputStream(testInput);
+        XmileLexer lexer = new XmileLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        XmileParser parser = new XmileParser(tokens);
+        ExprContext pTree = parser.expr();
+        return pTree;
+    }
+
     private boolean evaluate(String name, String eqn, String expect) throws IOException{
         InputStream testInput = new ByteArrayInputStream(eqn.getBytes());
         ANTLRInputStream input = new ANTLRInputStream(testInput);
@@ -42,7 +58,8 @@ public class TestExprParse {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         XmileParser parser = new XmileParser(tokens);
         ExprContext pTree = parser.expr();
-        String parse = pTree.toStringTree(parser);
+        String parse = pTree.toStringTree(refParser );
+//        String parse = pTree.toStringTree(parser);
         boolean testResult = expect.contentEquals(parse);
         System.out.println( "\n=="+name+" tests:"+testResult+"\n  "+eqn+"\n  "+parse);
         return testResult;

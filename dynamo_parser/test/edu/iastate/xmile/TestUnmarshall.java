@@ -7,13 +7,13 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 
 import org.junit.Test;
-import org.oasis.xmile.devkit.util.XmlHelper;
 import org.oasis.xmile.v1_0.Auxvar;
 import org.oasis.xmile.v1_0.Behavior;
 import org.oasis.xmile.v1_0.Model;
 import org.oasis.xmile.v1_0.ObjectFactory;
 import org.oasis.xmile.v1_0.Variables;
 import org.oasis.xmile.v1_0.Xmile;
+import org.sdxchange.xmile.devkit.util.XmlHelper;
 
 public class TestUnmarshall {
 

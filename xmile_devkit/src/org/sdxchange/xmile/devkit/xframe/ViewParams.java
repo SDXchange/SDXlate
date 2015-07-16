@@ -1,4 +1,4 @@
-package org.sdxchange.dynamo.parser4;
+package org.sdxchange.xmile.devkit.xframe;
 
 public class ViewParams {
 

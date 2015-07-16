@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.oasis.xmile.devkit.util.XmlHelper;
 import org.oasis.xmile.v1_0.Auxvar;
 import org.oasis.xmile.v1_0.Flow;
 import org.oasis.xmile.v1_0.Gf;
@@ -37,15 +36,17 @@ import org.sdxchange.dynamo.parser4.AuxTabSymbol;
 import org.sdxchange.dynamo.parser4.Column;
 import org.sdxchange.dynamo.parser4.GraphPane;
 import org.sdxchange.dynamo.parser4.GraphSymbol;
+import org.sdxchange.dynamo.parser4.IXFrame;
 import org.sdxchange.dynamo.parser4.InitSymbol;
 import org.sdxchange.dynamo.parser4.Pane;
-import org.sdxchange.dynamo.parser4.PaneDimensions;
 import org.sdxchange.dynamo.parser4.PlotLine;
 import org.sdxchange.dynamo.parser4.RateSymbol;
 import org.sdxchange.dynamo.parser4.StockSymbol;
 import org.sdxchange.dynamo.parser4.Symbol;
 import org.sdxchange.dynamo.parser4.TablePane;
-import org.sdxchange.dynamo.parser4.XFrame;
+import org.sdxchange.xmile.devkit.symbol.XSymbol;
+import org.sdxchange.xmile.devkit.util.XmlHelper;
+import org.sdxchange.xmile.devkit.xframe.Dimensions;
 
 /**
  * Responsible for constructing an Xmile Document from various input tables and objects.
@@ -58,7 +59,7 @@ public class XmileBuilder {
     ObjectFactory factory = new ObjectFactory();
     XmlHelper<Xmile> helper = new XmlHelper<Xmile>();
     SimSpecs globalSpecs;
-    XFrame lastFrame = null;
+    IXFrame lastFrame = null;
 
     public XmileBuilder(){
         document = factory.createXmile();
@@ -117,7 +118,7 @@ public class XmileBuilder {
     }
 
 
-    public void applySimSpecs(XFrame frame){
+    public void applySimSpecs(IXFrame frame){
         if (frame.getSimSpec().getDt() != null){
             globalSpecs.getDt().setValue(new Double(frame.getSimSpec().getDt()));
         }
@@ -130,7 +131,7 @@ public class XmileBuilder {
 
     }
 
-    public void applyDefaultFrame(XFrame frame){
+    public void applyDefaultFrame(IXFrame frame){
         updateHeader(frame);
         Variables vars = factory.createVariables();
         List<Object>modules = document.getSimSpecsOrModelUnitsOrBehavior();
@@ -143,12 +144,12 @@ public class XmileBuilder {
     }
 
 
-    private void updateHeader(XFrame frame) {
+    private void updateHeader(IXFrame frame) {
         document.getHeader().setName(frame.getSimulationName());
 
     }
 
-    private void marshallView(Model model, XFrame frame) {
+    private void marshallView(Model model, IXFrame frame) {
         lastFrame = frame;
         Views views = factory.createViews();
         model.setViews(views);
@@ -160,13 +161,13 @@ public class XmileBuilder {
 
     static int index = 1;
 
-    private void marshallOutputPanes(XFrame frame, View view) {
+    private void marshallOutputPanes(IXFrame frame, View view) {
         List<Object> vList = view.getStyleOrStockOrFlow();
         marshallPanes(frame.getGraphOutputs(), frame, vList);
         marshallPanes(frame.getTableOutputs(), frame, vList);
     }
 
-    private void marshallPanes(List<Pane> outputs, XFrame frame, List<Object> vList) {
+    private void marshallPanes(List<Pane> outputs, IXFrame frame, List<Object> vList) {
         if (outputs.size() > 0){
             StackedContainer container = factory.createStackedContainer();
             setContainerDefaults(frame, container);
@@ -178,9 +179,9 @@ public class XmileBuilder {
         }
     }
 
-    private void setContainerDefaults(XFrame frame, StackedContainer container) {
+    private void setContainerDefaults(IXFrame frame, StackedContainer container) {
         container.setUid( nextUid ++);
-        PaneDimensions dims = frame.getPaneDimensions();
+        Dimensions dims = frame.getPaneDimensions();
         container.setX(new Double(dims.getX()));
         container.setY(new Double(dims.getY()));
         container.setWidth(new Double(dims.getWidth()));
@@ -235,9 +236,9 @@ public class XmileBuilder {
 
     }
 
-    private void marshallConnectors(View view, XFrame frame) {
+    private void marshallConnectors(View view, IXFrame frame) {
         List<Object> rval = new ArrayList<Object>();
-        for (Symbol symbol: frame.getDefinedVars()){
+        for (XSymbol symbol: frame.getDefinedVars()){
             List<Object> elements = marshallConnectors(symbol);
             rval.addAll(elements);
         }
@@ -246,7 +247,7 @@ public class XmileBuilder {
 
     static int nextUid = 1;
 
-    private List<Object> marshallConnectors(Symbol symbol) {
+    private List<Object> marshallConnectors(XSymbol symbol) {
         List<Object> conns = new ArrayList<Object>();
         for (String input: symbol.getDependencies()){
             ViewContentType.Connector conn = factory.createViewContentTypeConnector();
@@ -260,10 +261,10 @@ public class XmileBuilder {
         return conns;
     }
 
-    private View marshallViewVars(XFrame frame) {
+    private View marshallViewVars(IXFrame frame) {
         View view = factory.createViewsView();
         List<Object> elements = view.getStyleOrStockOrFlow();
-        for (Symbol symbol: frame.getDefinedVars()){
+        for (XSymbol symbol: frame.getDefinedVars()){
             Object element = marshallViewVar(symbol);
             if (element != null) {
                 elements.add(element);
@@ -272,7 +273,7 @@ public class XmileBuilder {
         return view;
     }
 
-    private Object marshallViewVar(Symbol symbol) {
+    private Object marshallViewVar(XSymbol symbol) {
         Object rval = null;
         switch (symbol.getVarType()) {
             case "AUX" :
@@ -321,23 +322,26 @@ public class XmileBuilder {
         return rval;
     }
 
-    private void marshallVariables(Variables vars, XFrame frame) {
-        Collection<Symbol> symbols = frame.getDefinedVars();
+    private void marshallVariables(Variables vars, IXFrame frame) {
+        Collection<XSymbol> symbols = frame.getDefinedVars();
         List<Object> varList = vars.getStockOrFlowOrAuxvar();
         //
-        for (Symbol symbol: symbols){
+        for (XSymbol symbol: symbols){
 
             /* the following delegates (via visitor style pattern)
              * to the appropriate marshall method below.
+             * must always be Xsymbol in dynamo code.
              */
-            Object varElement = symbol.dispatch(this, frame);
-            if (varElement != null ){
-                varList.add(varElement);
+            if (symbol instanceof Symbol) {
+                Object varElement = ((Symbol) symbol).dispatch(this, frame);
+                if (varElement != null ){
+                    varList.add(varElement);
+                }
             }
         }
     }
 
-    public Auxvar marshal(AuxSymbol auxSymbol, XFrame frame) {
+    public Auxvar marshal(AuxSymbol auxSymbol, IXFrame frame) {
         Auxvar aux = factory.createAuxvar();
         aux.setName(auxSymbol.getName());
         List<Object> eqn = aux.getEqnOrMathmlOrUnits();
@@ -348,7 +352,7 @@ public class XmileBuilder {
         return aux;
     }
 
-    public Auxvar marshal(AuxTabSymbol auxSymbol, XFrame frame) {
+    public Auxvar marshal(AuxTabSymbol auxSymbol, IXFrame frame) {
         Auxvar aux = marshal((AuxSymbol) auxSymbol, frame);
         //now add gf info
 
@@ -371,7 +375,7 @@ public class XmileBuilder {
     }
 
 
-    public Gf marshall(GraphSymbol sym, XFrame frame) {
+    public Gf marshall(GraphSymbol sym, IXFrame frame) {
         Gf gfunc = factory.createGf();
         gfunc.setName(sym.getName());
         MinMaxType xscale = factory.createMinMaxType();
@@ -388,7 +392,7 @@ public class XmileBuilder {
         return gfunc;
     }
 
-    public Stock marshall(StockSymbol sym, XFrame frame) {
+    public Stock marshall(StockSymbol sym, IXFrame frame) {
         Stock stock = factory.createStock();
         stock.setName(sym.getName());
         List<Object> elList = stock.getEqnOrMathmlOrUnits();
@@ -406,12 +410,12 @@ public class XmileBuilder {
         return stock;
     }
 
-    public Object marshall(InitSymbol initSymbol, XFrame frame) {
+    public Object marshall(InitSymbol initSymbol, IXFrame frame) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    public Object marshall(RateSymbol rate, XFrame frame) {
+    public Object marshall(RateSymbol rate, IXFrame frame) {
         Flow flow = factory.createFlow();
         flow.setName(rate.getName());
         List<Object> eqn = flow.getEqnOrMathmlOrUnits();

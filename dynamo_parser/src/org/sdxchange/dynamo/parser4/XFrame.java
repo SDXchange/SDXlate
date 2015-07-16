@@ -8,23 +8,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.sdxchange.dynamo.parser4.GraphPane;
-import org.sdxchange.dynamo.parser4.InitSymbol;
-import org.sdxchange.dynamo.parser4.Pane;
-import org.sdxchange.dynamo.parser4.PaneDimensions;
-import org.sdxchange.dynamo.parser4.SimSpecs;
-import org.sdxchange.dynamo.parser4.Symbol;
+import org.sdxchange.xmile.devkit.symbol.XSymbol;
+import org.sdxchange.xmile.devkit.xframe.Dimensions;
+import org.sdxchange.xmile.devkit.xframe.SimSpecs;
+import org.sdxchange.xmile.devkit.xframe.ViewParams;
 
-public class XFrame {
+public class XFrame implements IXFrame {
 
     private String name;
-    private Map<String,Symbol> definedVars = new HashMap<String, Symbol>();
+    private Map<String, XSymbol> definedVars = new HashMap<String, XSymbol>();
     private Map<String,InitSymbol> initializers = new HashMap<String, InitSymbol>();
     private Set<String> arrayIndexValues = new HashSet<String>();
     private SimSpecs specs = new SimSpecs();
     private List<Pane> graphs = new ArrayList<Pane>();
     private List<Pane> tables = new ArrayList<Pane>();
-    private PaneDimensions paneDim;
+    private Dimensions paneDim;
     private String simulationName="";
     private ViewParams viewParams = new ViewParams();
 
@@ -38,98 +36,170 @@ public class XFrame {
     //simspecs
     //overlayspecs
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#getName()
+     */
+    @Override
     public String getName() {
         return name;
     }
 
 
-    public void defineVar(String varName, Symbol sym) {
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#defineVar(java.lang.String, org.oasis.xmile.devkit.xframe.XSymbol)
+     */
+    @Override
+    public void defineVar(String varName, XSymbol sym) {
         System.out.println("Defining Aux "+sym.dump());
-        Symbol existing = definedVars.put(varName, sym);
+        XSymbol existing = definedVars.put(varName, sym);
         if (existing != null){
             System.err.println("Duplicate Symbol definition: "+existing+" :: "+sym);
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#defineInitializer(java.lang.String, org.sdxchange.dynamo.parser4.InitSymbol)
+     */
+    @Override
     public void defineInitializer(String varName, InitSymbol sym) {
         System.out.println("Defining Ini "+sym.dump());
-        Symbol existing = initializers.put(varName, sym);
+        XSymbol existing = initializers.put(varName, sym);
         if (existing != null){
             System.err.println("Duplicate Initializer definition: "+existing+" :: "+sym);
         }
 
     }
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#dump()
+     */
+    @Override
     public void dump() {
-        for (Symbol sym: definedVars.values()){
+        for (XSymbol sym: definedVars.values()){
             System.out.println(sym.dump());
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#getInitializers()
+     */
+    @Override
     public Collection<InitSymbol> getInitializers() {
         return initializers.values();
     }
 
-    public Symbol getDeclaredSymbol(String name) {
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#getDeclaredSymbol(java.lang.String)
+     */
+    @Override
+    public XSymbol getDeclaredSymbol(String name) {
         return definedVars.get(name);
     }
 
-    public void update(Symbol sym) {
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#update(org.oasis.xmile.devkit.xframe.XSymbol)
+     */
+    @Override
+    public void update(XSymbol sym) {
 
-        Symbol existing = definedVars.put(sym.getName(), sym);
+        XSymbol existing = definedVars.put(sym.getName(), sym);
         if (existing == null){
             System.err.println("Attempt to update undeclared symbol: "+sym.getName());
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#addOutputPane(org.sdxchange.dynamo.parser4.TablePane)
+     */
+    @Override
     public void addOutputPane(TablePane pane){
         tables.add(pane);
     }
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#addOutputPane(org.sdxchange.dynamo.parser4.GraphPane)
+     */
+    @Override
     public void addOutputPane(GraphPane pane){
         graphs.add(pane);
     }
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#getSimSpec()
+     */
+    @Override
     public SimSpecs getSimSpec() {
         return specs;
     }
 
-    public Collection<Symbol> getDefinedVars() {
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#getDefinedVars()
+     */
+    @Override
+    public Collection<XSymbol> getDefinedVars() {
         return definedVars.values();
     }
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#getGraphOutputs()
+     */
+    @Override
     public List<Pane> getGraphOutputs() {
         return graphs;
     }
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#getTableOutputs()
+     */
+    @Override
     public List<Pane> getTableOutputs() {
         return tables;
     }
 
     public void setPaneDimensions(int x, int y, int width, int height) {
-        paneDim = new PaneDimensions(x,y,width,height);
+        paneDim = new Dimensions(x,y,width,height);
     }
 
-    public PaneDimensions getPaneDimensions(){
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#getPaneDimensions()
+     */
+    @Override
+    public Dimensions getPaneDimensions(){
         return paneDim;
     }
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#setSimulationName(java.lang.String)
+     */
+    @Override
     public void setSimulationName(String comment) {
         simulationName = comment;
 
     }
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#getSimulationName()
+     */
+    @Override
     public String getSimulationName() {
         return simulationName;
 
     }
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#dumpSymbols()
+     */
+    @Override
     public String dumpSymbols() {
         String rval="";
-        for (Symbol sym : definedVars.values()){
+        for (XSymbol sym : definedVars.values()){
             rval+=(sym.dump()+"\n");
         }
         return rval;
     }
 
+    /* (non-Javadoc)
+     * @see org.sdxchange.dynamo.parser4.IXFrame#getViewParams()
+     */
+    @Override
     public ViewParams getViewParams() {
         return viewParams;
     }

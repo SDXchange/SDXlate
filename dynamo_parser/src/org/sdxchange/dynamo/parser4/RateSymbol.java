@@ -1,6 +1,7 @@
 package org.sdxchange.dynamo.parser4;
 
 import org.sdxchange.dynamo.app2.XmileBuilder;
+import org.sdxchange.xmile.devkit.symbol.SymbolBase;
 
 public class RateSymbol extends SymbolBase implements Symbol {
 
@@ -17,7 +18,7 @@ public class RateSymbol extends SymbolBase implements Symbol {
     }
 
     @Override
-    public Object dispatch(XmileBuilder xmileBuilder, XFrame frame) {
+    public Object dispatch(XmileBuilder xmileBuilder, IXFrame frame) {
         return xmileBuilder.marshall(this, frame);
     }
 

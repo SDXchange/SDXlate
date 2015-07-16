@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.oasis.xmile.devkit.util.XmlHelper;
 import org.oasis.xmile.v1_0.Xmile;
 import org.sdxchange.dynamo.parser4.DynamoLexer;
 import org.sdxchange.dynamo.parser4.DynamoParser;
@@ -21,14 +20,16 @@ import org.sdxchange.dynamo.parser4.DynamoParser.TContext;
 import org.sdxchange.dynamo.parser4.DynamoSymbolListener;
 import org.sdxchange.dynamo.parser4.DynamoTreeListener;
 import org.sdxchange.dynamo.parser4.FunctionLiftListener;
+import org.sdxchange.dynamo.parser4.IXFrame;
 import org.sdxchange.dynamo.parser4.NormalizeListener;
 import org.sdxchange.dynamo.parser4.TestV4Parser;
 import org.sdxchange.dynamo.parser4.UserDefListener;
 import org.sdxchange.dynamo.parser4.XFrame;
+import org.sdxchange.xmile.devkit.util.XmlHelper;
 
 
 public class Dyn2Xmile {
-    private XFrame lastFrame = null;
+    private IXFrame lastFrame = null;
     private XmlHelper<Xmile> helper = new XmlHelper<Xmile>();
 
     public static void main(String[] argv){

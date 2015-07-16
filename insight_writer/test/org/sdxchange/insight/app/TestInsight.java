@@ -5,30 +5,37 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 
 import org.junit.Test;
-import org.sdxchange.dynamo.app2.Dyn2Xmile;
-import org.sdxchange.dynamo.app2.FixedGraphEditor;
-import org.sdxchange.dynamo.parser4.XFrame;
+import org.oasis.xmile.devkit.view.edit.FixedGraphEditor;
+import org.sdxchange.xmile.loader.XmileFrame;
+import org.sdxchange.xmile.loader.app.XmileLoader;
 
 public class TestInsight {
 
 
 
     @Test
-    public void testApp2Teacup() throws IOException{
-        Dyn2Xmile app = new Dyn2Xmile();
-        XFrame frame = Dyn2Xmile.processFile("/teacup.dyn");
-        FixedGraphEditor editor = new FixedGraphEditor();
-        setGridDefaults(editor);
-        editor.assignPositions(frame);
-        System.out.println("=====================\nAfter Position Assigned\n");
-        frame.dump();
+    public void testPugh96() throws IOException{
+        XmileLoader loader = new XmileLoader();
+        XmileFrame frame = loader.load("/pugh_p96.xmile");
         InsightBuilder builder = new InsightBuilder(frame);
         InsightGraph model = builder.genGraph();
-        model.updateFolderSizes(600+50, editor.getMaxY()+200);
+        String output = model.marshal();
+        System.out.println(output);
+
+
+    }
+
+    @Test
+    public void testPugh96im() throws IOException{
+        XmileLoader loader = new XmileLoader();
+        XmileFrame frame = loader.load("/pugh_p96im.xmile");
+        InsightBuilder builder = new InsightBuilder(frame);
+        InsightGraph model = builder.genGraph();
         String output = model.marshal();
         System.out.println(output);
 
     }
+
 
     @Test
     public void testIdNormalize(){

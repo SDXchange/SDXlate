@@ -1,0 +1,10 @@
+
+xxx context is specialized to source domain 
+  implements specialized symbol, and 
+	inherits from base symbol  
+
+	symbol represents xframe accessor model for symbols. 
+	specialized symbol adds type specific details for internal representation. 
+	context adds parsing and other source domain specifics to symbol. 
+	
+	All objects support a dispatch interface to enable double dispatch to any visitor. 

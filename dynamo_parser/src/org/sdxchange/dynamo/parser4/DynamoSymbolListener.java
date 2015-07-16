@@ -9,6 +9,7 @@ import java.util.Set;
 import org.antlr.v4.runtime.BufferedTokenStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStreamRewriter;
+import org.sdxchange.xmile.devkit.symbol.XSymbol;
 
 
 public class DynamoSymbolListener
@@ -16,7 +17,7 @@ extends DynamoParserBaseListener implements DynamoParserListener, DynamoTreeList
 
     BufferedTokenStream tokens;
     XFrame currentFrame; /* could be current macro or default module */
-    XFrame defaultModule;
+    IXFrame defaultModule;
     int nextSynthIndex = 0;
     SymbolFactory symFactory;
     DynamoParser parser;
@@ -137,7 +138,7 @@ extends DynamoParserBaseListener implements DynamoParserListener, DynamoTreeList
     private void processInitializers() {
         Collection<InitSymbol> nSymbols = defaultModule.getInitializers();
         for (InitSymbol sym : nSymbols){
-            Symbol var = defaultModule.getDeclaredSymbol(sym.getName());
+            XSymbol var = defaultModule.getDeclaredSymbol(sym.getName());
             if (var != null) {
                 switch (var.getVarType()){
                     case "LVL":
@@ -152,7 +153,7 @@ extends DynamoParserBaseListener implements DynamoParserListener, DynamoTreeList
                 }
             }
             else { //this should never execute.
-                Symbol initAux = symFactory.forceInitTerms(sym);
+                XSymbol initAux = symFactory.forceInitTerms(sym);
                 defaultModule.defineVar(initAux.getName(), initAux);
             }
         }

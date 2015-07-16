@@ -1,9 +1,10 @@
-package org.sdxchange.dynamo.parser4;
+package org.sdxchange.xmile.devkit.xframe;
 
 public class SimSpecs {
     private String stop;
     private String start = "0";
     private String dt;
+    private String simMethod = "Euler";
 
     public void setDt(String text) {
         dt = text;
@@ -22,5 +23,11 @@ public class SimSpecs {
     }
     public String getStart() {
         return start;
+    }
+    public void setStart(String time) {
+        start = time;
+    }
+    public void setDefaultMethod(String method) {
+        simMethod = method;
     }
 }

@@ -14,7 +14,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.antlr.v4.runtime.tree.xpath.XPath;
 import org.junit.Test;
-import org.oasis.xmile.devkit.util.XUtil;
+import org.sdxchange.xmile.devkit.util.XUtil;
 
 public class TestXpathAccess {
 

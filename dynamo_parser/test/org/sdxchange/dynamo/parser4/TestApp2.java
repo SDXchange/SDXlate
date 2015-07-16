@@ -19,6 +19,11 @@ public class TestApp2 {
         Dyn2Xmile.main(argv);
     }
 
+    @Test
+    public void testApp2p96im(){
+        String[] argv = {"/pugh_p96im.dyn"};
+        Dyn2Xmile.main(argv);
+    }
 
     @Test
     public void testApp2p96(){

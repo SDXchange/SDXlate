@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+    <header>
+        <vendor>SDXchange</vendor>
+        <name>SIMPLE EPIDEMIC MODEL</name>
+        <options>
+            <has_model_view/>
+            <uses_outputs/>
+        </options>
+        <product version="1.0">SDXchange Dynamo to XMILE</product>
+    </header>
+    <sim_specs>
+        <stop>50.0</stop>
+        <start>0.0</start>
+        <dt>0.25</dt>
+    </sim_specs>
+    <model>
+        <variables>
+            <flow name="INF">
+                <eqn>SICK*CNTCTS*FRSICK</eqn>
+            </flow>
+            <aux name="CNTCTS_IN">
+                <doc>SUSC.K/TOTAL.K</doc>
+                <eqn></eqn>
+            </aux>
+            <aux name="DUR">
+                <eqn>10</eqn>
+            </aux>
+            <aux name="TOTAL">
+                <eqn>988+2+10</eqn>
+            </aux>
+            <stock name="RECOV">
+                <inflow>CURE</inflow>
+                <eqn>10</eqn>
+            </stock>
+            <stock name="SUSC">
+                <outflow>INF</outflow>
+                <eqn>988</eqn>
+            </stock>
+            <aux name="FRSICK">
+                <eqn>0.05</eqn>
+            </aux>
+            <gf name="TABCON">
+                <xscale min="0.0" max="1.0"/>
+                <ypts>0,2.8,5.5,8,9.5,10</ypts>
+            </gf>
+            <stock name="SICK">
+                <inflow>INF</inflow>
+                <outflow>CURE</outflow>
+                <eqn>2</eqn>
+            </stock>
+            <flow name="CURE">
+                <eqn>SICK/DUR</eqn>
+            </flow>
+            <aux name="CNTCTS">
+                <eqn>CNTCTS_IN</eqn>
+                <gf name="TABCON" type="continuous">
+                    <xscale min="0.0" max="1.0"/>
+                    <ypts>0,2.8,5.5,8,9.5,10</ypts>
+                </gf>
+            </aux>
+        </variables>
+        <views>
+            <view>
+                <flow name="INF" x="150.0" y="50.0">
+                    <pts>
+                        <pt x="125.0" y="50.0"/>
+                        <pt x="175.0" y="50.0"/>
+                    </pts>
+                </flow>
+                <aux name="CNTCTS_IN" x="50.0" y="50.0"/>
+                <aux name="DUR" x="50.0" y="100.0"/>
+                <aux name="TOTAL" x="50.0" y="150.0"/>
+                <stock name="RECOV" x="200.0" y="50.0"/>
+                <stock name="SUSC" x="200.0" y="100.0"/>
+                <aux name="FRSICK" x="50.0" y="200.0"/>
+                <stock name="SICK" x="200.0" y="200.0"/>
+                <flow name="CURE" x="150.0" y="100.0">
+                    <pts>
+                        <pt x="125.0" y="100.0"/>
+                        <pt x="175.0" y="100.0"/>
+                    </pts>
+                </flow>
+                <aux name="CNTCTS" x="50.0" y="250.0"/>
+                <connector uid="1">
+                    <from>FRSICK</from>
+                    <to>INF</to>
+                </connector>
+                <connector uid="2">
+                    <from>SICK</from>
+                    <to>INF</to>
+                </connector>
+                <connector uid="3">
+                    <from>CNTCTS</from>
+                    <to>INF</to>
+                </connector>
+                <connector uid="4">
+                    <from>DUR</from>
+                    <to>CURE</to>
+                </connector>
+                <connector uid="5">
+                    <from>SICK</from>
+                    <to>CURE</to>
+                </connector>
+                <connector uid="6">
+                    <from>CNTCTS_IN</from>
+                    <to>CNTCTS</to>
+                </connector>
+                <stacked_container x="100.0" y="250.0" uid="7" width="350.0" height="280.0">
+                    <graph show_grid="true" left_axis_multi_scale="false" plot_numbers="true" background="yellow">
+                        <plot index="0" show_y_axis="true">
+                            <entity name="SUSC"/>
+                        </plot>
+                        <plot index="1" show_y_axis="true">
+                            <entity name="SICK"/>
+                        </plot>
+                        <plot index="2" show_y_axis="true">
+                            <entity name="RECOV"/>
+                        </plot>
+                        <plot index="3" show_y_axis="true">
+                            <entity name="INF"/>
+                        </plot>
+                        <plot index="4" show_y_axis="true">
+                            <entity name="CURE"/>
+                        </plot>
+                    </graph>
+                </stacked_container>
+                <stacked_container x="100.0" y="275.0" uid="8" width="350.0" height="280.0">
+                    <table column_width="50" report_interval="5">
+                        <item index="0">
+                            <entity name="SUSC"/>
+                        </item>
+                        <item index="1">
+                            <entity name="SICK"/>
+                        </item>
+                        <item index="2">
+                            <entity name="RECOV"/>
+                        </item>
+                        <item index="3">
+                            <entity name="INF"/>
+                        </item>
+                        <item index="4">
+                            <entity name="CURE"/>
+                        </item>
+                    </table>
+                </stacked_container>
+            </view>
+        </views>
+    </model>
+</xmile>
+

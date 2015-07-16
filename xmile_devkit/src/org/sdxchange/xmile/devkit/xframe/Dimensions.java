@@ -1,9 +1,9 @@
-package org.sdxchange.dynamo.parser4;
+package org.sdxchange.xmile.devkit.xframe;
 
-public class PaneDimensions {
+public class Dimensions {
     int x, y, width, height;
 
-    public PaneDimensions( int x, int y, int width, int height ){
+    public Dimensions( int x, int y, int width, int height ){
         this.x = x;
         this.y = y;
         this.width = width;

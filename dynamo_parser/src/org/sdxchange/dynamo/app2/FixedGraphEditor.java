@@ -1,8 +1,8 @@
 package org.sdxchange.dynamo.app2;
 
-import org.sdxchange.dynamo.parser4.Symbol;
 import org.sdxchange.dynamo.parser4.XFrame;
-import org.sdxchange.dynamo.parser4.XY;
+import org.sdxchange.xmile.devkit.symbol.XSymbol;
+import org.sdxchange.xmile.devkit.symbol.XY;
 
 public class FixedGraphEditor implements GraphEditor {
 
@@ -20,7 +20,7 @@ public class FixedGraphEditor implements GraphEditor {
 
     @Override
     public void assignPositions(XFrame frame) {
-        for (Symbol var : frame.getDefinedVars()){
+        for (XSymbol var : frame.getDefinedVars()){
             switch (var.getVarType()) {
                 case "AUX" :
                     var.setPosition(new XY(defaultAuxCol, lastAuxY+=defaultYSpace));

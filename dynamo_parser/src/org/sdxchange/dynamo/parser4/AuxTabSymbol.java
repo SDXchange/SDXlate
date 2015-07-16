@@ -2,6 +2,7 @@ package org.sdxchange.dynamo.parser4;
 
 import org.sdxchange.dynamo.app2.XmileBuilder;
 
+
 public class AuxTabSymbol extends AuxSymbol implements Symbol {
 
 
@@ -48,7 +49,7 @@ public class AuxTabSymbol extends AuxSymbol implements Symbol {
     }
 
     @Override
-    public Object dispatch(XmileBuilder builder, XFrame frame) {
+    public Object dispatch(XmileBuilder builder, IXFrame frame) {
         return builder.marshal(this, frame);
     }
 

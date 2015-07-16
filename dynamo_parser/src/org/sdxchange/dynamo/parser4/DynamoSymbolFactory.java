@@ -9,7 +9,6 @@ import java.util.Set;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.xpath.XPath;
-import org.oasis.xmile.devkit.util.XUtil;
 import org.sdxchange.dynamo.parser4.DynamoParser.AUX_EQNContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.CONST_EQNContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.ColumnNumContext;
@@ -25,6 +24,8 @@ import org.sdxchange.dynamo.parser4.DynamoParser.RptSpecContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.SpecCardContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.TBL_EQNContext;
 import org.sdxchange.dynamo.parser4.DynamoParser.YValuesContext;
+import org.sdxchange.xmile.devkit.util.XUtil;
+import org.sdxchange.xmile.devkit.xframe.SimSpecs;
 
 public class DynamoSymbolFactory implements SymbolFactory {
 
@@ -36,7 +37,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
     }
 
     @Override
-    public List<ErrorMsg> processAuxDecl(XFrame frame, AUX_EQNContext ctx, Map<String, TableInfo> tInfoIndex) {
+    public List<ErrorMsg> processAuxDecl(IXFrame frame, AUX_EQNContext ctx, Map<String, TableInfo> tInfoIndex) {
         EqnContext eqn = ctx.auxDef().eqn();
         if (eqn.expr().tabRef() != null){
             return processTableAuxDecl(frame, ctx, tInfoIndex);
@@ -68,7 +69,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
 
     }
 
-    private List<ErrorMsg> processTableAuxDecl(XFrame frame, AUX_EQNContext ctx, Map<String, TableInfo> tInfoIndex) {
+    private List<ErrorMsg> processTableAuxDecl(IXFrame frame, AUX_EQNContext ctx, Map<String, TableInfo> tInfoIndex) {
         EqnContext eqn = ctx.auxDef().eqn();
         String varName = eqn.varRef().start.getText();
         String leftRef = eqn.getRuleContext().getChild(0).getText();
@@ -106,7 +107,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
     }
 
     @Override
-    public List<ErrorMsg> processInitDecl(XFrame frame, INIT_EQNContext ctx) {
+    public List<ErrorMsg> processInitDecl(IXFrame frame, INIT_EQNContext ctx) {
         EqnContext eqn = ctx.initDef().eqn();
         String varName = eqn.varRef().start.getText();
         String leftRef = eqn.getRuleContext().getChild(0).getText();
@@ -121,7 +122,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
     }
 
     @Override
-    public List<ErrorMsg> processLvlDecl(XFrame frame, LVL_EQNContext ctx) {
+    public List<ErrorMsg> processLvlDecl(IXFrame frame, LVL_EQNContext ctx) {
         EqnContext eqn = ctx.stockDef().eqn();
         String varName = eqn.varRef().start.getText();
         String leftRef = eqn.getRuleContext().getChild(0).getText();
@@ -246,7 +247,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
     }
 
     @Override
-    public List<ErrorMsg> processRateDecl(XFrame frame, RATE_EQNContext ctx, Map<String,TableInfo> tInfoIndex) {
+    public List<ErrorMsg> processRateDecl(IXFrame frame, RATE_EQNContext ctx, Map<String,TableInfo> tInfoIndex) {
         EqnContext eqn = ctx.rateDef().eqn();
         if (eqn.expr().tabRef()!=null){
             return processTableRateDecl(frame, ctx, tInfoIndex);
@@ -263,7 +264,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
         return null; //TODO
     }
 
-    private List<ErrorMsg> processTableRateDecl(XFrame frame, RATE_EQNContext ctx, Map<String, TableInfo> tInfoIndex) {
+    private List<ErrorMsg> processTableRateDecl(IXFrame frame, RATE_EQNContext ctx, Map<String, TableInfo> tInfoIndex) {
         EqnContext eqn = ctx.rateDef().eqn();
         String varName = eqn.varRef().start.getText();
         String leftRef = eqn.getRuleContext().getChild(0).getText();
@@ -289,7 +290,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
     }
 
     @Override
-    public List<ErrorMsg> processTblDecl(XFrame frame, TBL_EQNContext ctx, Map<String, TableInfo> tInfoIndex) {
+    public List<ErrorMsg> processTblDecl(IXFrame frame, TBL_EQNContext ctx, Map<String, TableInfo> tInfoIndex) {
         YValuesContext eqn = ctx.tableDef().yValues();
         String varName = (ctx.tableDef().ID() == null) ? ctx.tableDef().arrayRef().getText() : ctx.tableDef().ID().getText();
         GraphSymbol decl = new GraphSymbol(varName, "GF", eqn.getText(), varName);
@@ -308,7 +309,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
     }
 
     @Override
-    public List<ErrorMsg> processConstDecl(XFrame frame, CONST_EQNContext ctx) {
+    public List<ErrorMsg> processConstDecl(IXFrame frame, CONST_EQNContext ctx) {
         EqnContext eqn = ctx.constDef().eqn();
         String varName = eqn.varRef().start.getText();
         String leftRef = eqn.getRuleContext().getChild(0).getText();
@@ -322,7 +323,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
 
 
     @Override
-    public void processPlotCard(XFrame frame, PlotCardContext ctx) {
+    public void processPlotCard(IXFrame frame, PlotCardContext ctx) {
         GraphPane output = new GraphPane();
         List<PlotSpecContext> plots = ctx.plotList().plotSpec();
         int i = 0;
@@ -334,7 +335,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
     }
 
     @Override
-    public void processPrintCard(XFrame frame, PrintCardContext ctx) {
+    public void processPrintCard(IXFrame frame, PrintCardContext ctx) {
         //TODO: handle array references
         TablePane output = new TablePane();
         List<RptSpecContext> columnSpecs = ctx.rptList().rptSpec();
@@ -349,7 +350,7 @@ public class DynamoSymbolFactory implements SymbolFactory {
     }
 
     @Override
-    public void processSpecCard(XFrame currentFrame, SpecCardContext ctx) {
+    public void processSpecCard(IXFrame currentFrame, SpecCardContext ctx) {
         List<DynamoParser.SpecAssignContext> specs = ctx.specAssign();
         SimSpecs frameSpecs = currentFrame.getSimSpec();
         for (DynamoParser.SpecAssignContext spec : specs){

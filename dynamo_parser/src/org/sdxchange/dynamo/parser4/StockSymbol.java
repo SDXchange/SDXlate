@@ -3,8 +3,9 @@ package org.sdxchange.dynamo.parser4;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.oasis.xmile.devkit.util.XUtil;
 import org.sdxchange.dynamo.app2.XmileBuilder;
+import org.sdxchange.xmile.devkit.symbol.SymbolBase;
+import org.sdxchange.xmile.devkit.util.XUtil;
 
 public class StockSymbol extends SymbolBase implements Symbol {
 
@@ -34,7 +35,7 @@ public class StockSymbol extends SymbolBase implements Symbol {
     }
 
     @Override
-    public Object dispatch(XmileBuilder xmileBuilder, XFrame frame) {
+    public Object dispatch(XmileBuilder xmileBuilder, IXFrame frame) {
         return xmileBuilder.marshall(this, frame);
     }
 
@@ -51,10 +52,12 @@ public class StockSymbol extends SymbolBase implements Symbol {
                 + XUtil.rPad("          ", 107)+ "OUT"+ outFlows;
     }
 
+    @Override
     public Set<String> getInFlows() {
         return inFlows;
     }
 
+    @Override
     public Set<String> getOutFlows() {
         return outFlows;
     }

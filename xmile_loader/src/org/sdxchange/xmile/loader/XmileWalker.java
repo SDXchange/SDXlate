@@ -13,17 +13,31 @@ import org.oasis.xmile.v1_0.Model;
 import org.oasis.xmile.v1_0.ModelUnits;
 import org.oasis.xmile.v1_0.Module;
 import org.oasis.xmile.v1_0.SimSpecs;
+import org.oasis.xmile.v1_0.StackedContainer;
 import org.oasis.xmile.v1_0.Stock;
 import org.oasis.xmile.v1_0.Style;
 import org.oasis.xmile.v1_0.Variables;
+import org.oasis.xmile.v1_0.ViewContentType;
+import org.oasis.xmile.v1_0.ViewContentType.Aux;
+import org.oasis.xmile.v1_0.ViewContentType.Connector;
+import org.oasis.xmile.v1_0.ViewContentType.Graph;
+import org.oasis.xmile.v1_0.ViewContentType.Table;
 import org.oasis.xmile.v1_0.Views;
+import org.oasis.xmile.v1_0.Views.View;
 import org.oasis.xmile.v1_0.Xmile;
 import org.oasis.xmile.v1_0.Xmile.Dimensions;
+import org.sdxchange.xmile.devkit.xframe.IXFrame;
 import org.sdxchange.xmile.loader.context.AuxvarContext;
+import org.sdxchange.xmile.loader.context.ConnectorContext;
 import org.sdxchange.xmile.loader.context.FlowContext;
+import org.sdxchange.xmile.loader.context.GraphOutContext;
 import org.sdxchange.xmile.loader.context.ModelCtx;
-import org.sdxchange.xmile.loader.context.SimSpecsCtx;
+import org.sdxchange.xmile.loader.context.SimSpecsContext;
+import org.sdxchange.xmile.loader.context.StockContext;
+import org.sdxchange.xmile.loader.context.TableOutContext;
+import org.sdxchange.xmile.loader.context.VarViewContext;
 import org.sdxchange.xmile.loader.context.VarsContext;
+import org.sdxchange.xmile.loader.context.XmileContextFactory;
 
 
 /**
@@ -44,14 +58,16 @@ public class XmileWalker {
     XmileFrame currentFrame = null;
     XmileListener listener;
     Xmile doc;
+    private XmileContextFactory ctxFactory;
 
-    public XmileWalker(Xmile doc, XmileListener listener){
+    public XmileWalker(Xmile doc, XmileContextFactory ctxFactory, XmileListener listener){
+        this.ctxFactory = ctxFactory;
         this.listener = listener;
         this.doc = doc;
-        this.frame = this.currentFrame = new XmileFrame("");
+        this.frame = this.currentFrame = (XmileFrame) ctxFactory.getFrame();
     }
 
-    private void visit(){
+    public IXFrame visit(){
         List<Object> topNodes = doc.getSimSpecsOrModelUnitsOrBehavior();
         for (Object node : topNodes){
             if (node instanceof SimSpecs) visit((SimSpecs) node);
@@ -66,6 +82,7 @@ public class XmileWalker {
                 System.err.println("unknown top-level node "+node.toString());
             }
         }
+        return currentFrame;
     }
 
     private void visit(Dimensions node) {
@@ -74,24 +91,116 @@ public class XmileWalker {
     }
 
     private void visit(Model root) {
+        //TODO: following should be an operation on frame.
         pushModel();
-        ModelCtx ctx = new ModelCtx(root);
+        ModelCtx ctx = ctxFactory.createModelContext(root);
         ctx.visit( this, listener);
     }
 
     public void visit(Views node) {
+        for (Object viewItem : node.getStyleOrView()){
+            if (viewItem instanceof Views.View){
+                visit ((Views.View) viewItem);
+            } else if (viewItem instanceof Style){
+                System.out.println("Detected as style");
+            } else {
+                System.out.println("it's something else!!");
+            }
+        }
+
         if (listener.targetSupportsMultipleViewsPerModel()){
             // TODO Auto-generated method stub
         }
     }
 
+    private void visit(View view) {
+        // get view presentation details directly from view accessors
+
+        for (Object viewObj : view.getStyleOrStockOrFlow())
+            if  (viewObj instanceof ViewContentType.Stock){
+                visit( (ViewContentType.Stock) viewObj);
+            } else if (viewObj instanceof ViewContentType.Flow){
+                visit( (ViewContentType.Flow) viewObj);
+            } else if (viewObj instanceof ViewContentType.Aux) {
+                visit( (ViewContentType.Aux) viewObj);
+            }
+            else if ((viewObj instanceof ViewContentType.Connector)){
+                visit ((ViewContentType.Connector) viewObj);
+            }
+            else if ((viewObj instanceof StackedContainer)) {
+                visit ((StackedContainer) viewObj);
+            }
+            else {
+                System.err.println("Object type not supported "+viewObj);
+            }
+    }
+
+    private void visit(Aux viewObj) {
+        VarViewContext ctx = ctxFactory.createVarViewContext(viewObj);
+        listener.enterStockView(ctx);
+        listener.process(ctx);
+        listener.exitStockView(ctx);
+    }
+
+    private void visit(org.oasis.xmile.v1_0.ViewContentType.Flow viewObj) {
+        VarViewContext ctx = ctxFactory.createVarViewContext(viewObj);
+        listener.enterFlowView(ctx);
+        listener.process(ctx);
+        listener.exitFlowView(ctx);
+    }
+
+    private void visit(org.oasis.xmile.v1_0.ViewContentType.Stock viewObj) {
+        VarViewContext ctx = ctxFactory.createVarViewContext(viewObj);
+        listener.enterStockView(ctx);
+        listener.process(ctx);
+        listener.exitStockView(ctx);
+
+
+    }
+
+    private void visit(StackedContainer viewObject) {
+        System.out.println("Found Stacked Container");
+        List<Object> items = viewObject.getStyleOrStockOrFlow();
+        for (Object item: items){
+            if (item instanceof Graph){
+                visit ((Graph) item);
+            } else if (item instanceof Table){
+                visit ((Table) item);
+            }
+        }
+    }
+
+    private void visit(Table table) {
+        TableOutContext ctx = ctxFactory.createTableOutContext(table);
+        listener.enterTable(ctx);
+        listener.process(ctx);
+        listener.exitTable(ctx);
+
+    }
+
+    private void visit(Graph graph) {
+        GraphOutContext ctx = ctxFactory.createGraphOutContext(graph);
+        listener.enterGraph(ctx);
+        listener.process(ctx);
+        listener.exitGraph(ctx);
+
+    }
+
+    private void visit(Connector viewObj) {
+        ConnectorContext ctx = ctxFactory.createConnectorContext(viewObj);
+        listener.enterConnector(ctx);
+        listener.process(ctx);
+        listener.exitConnector(ctx);
+    }
+
+
     public void visit(Variables node) {
-        VarsContext varsCtx = new VarsContext(node);
+        VarsContext varsCtx = ctxFactory.createVarsContext(node); //new VarsContext(node);
         listener.enterVariables(varsCtx);
         List<Object> vars = node.getStockOrFlowOrAuxvar();
 
         for (Object var : vars){
-            if (var instanceof Stock) visit((SimSpecs) var);
+            if (var instanceof Stock) visit((Stock) var);
             else if (var instanceof Flow) visit((Flow) var);
             else if (var instanceof Auxvar) visit((Auxvar) var);
             else if (var instanceof Gf) visit((Gf) var);
@@ -103,6 +212,13 @@ public class XmileWalker {
         }
         listener.exitVariables(varsCtx);
 
+    }
+
+    private void visit(Stock var) {
+        StockContext ctx = ctxFactory.createStockContext(var); //new StockContext(var);
+        listener.enterStock(ctx);
+        ctx.visit(this, listener);
+        listener.exitStock(ctx);
     }
 
     private void visit(Module var) {
@@ -121,17 +237,18 @@ public class XmileWalker {
     }
 
     private void visit(Auxvar var) {
-        AuxvarContext ctx = new AuxvarContext(var);
+        AuxvarContext ctx = ctxFactory.createAuxvarContext(var); //new AuxvarContext(var);
         listener.enterAuxvar(ctx);
-        ctx.visit(this);
+        listener.process(ctx);
         listener.exitAuxvar(ctx);
 
     }
 
     private void visit(Flow var) {
-        FlowContext ctx = new FlowContext(var);
-        ctx.visit(this, listener);
-
+        FlowContext ctx = ctxFactory.createFlowContext(var); //new FlowContext(var);
+        listener.enterFlow(ctx);
+        listener.process(ctx);
+        listener.exitFlow(ctx);
     }
 
     private void pushModel() {
@@ -171,8 +288,12 @@ public class XmileWalker {
     }
 
     public void visit(SimSpecs node) {
-        SimSpecsCtx ctx = new SimSpecsCtx(node);
-        ctx.visit(this, listener);
+        if (node != null){
+            SimSpecsContext ctx = ctxFactory.createSimSpectContext(node); //new SimSpecsCtx(node);
+            listener.enterSimSpecs(ctx);
+            listener.process(ctx);
+            listener.exitSimSpecs(ctx);
+        }
     }
 
 
