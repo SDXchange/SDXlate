@@ -36,6 +36,27 @@ public class TestInsight {
 
     }
 
+    @Test
+    public void testPdfIm()  throws IOException{
+        XmileLoader loader = new XmileLoader();
+        XmileFrame frame = loader.load("/pdf.xmile");
+        InsightBuilder builder = new InsightBuilder(frame);
+        InsightGraph model = builder.genGraph();
+        String output = model.marshal();
+        System.out.println(output);
+
+    }
+
+    @Test
+    public void testTeacup()  throws IOException{
+        XmileLoader loader = new XmileLoader();
+        XmileFrame frame = loader.load("/teacup.xmile");
+        InsightBuilder builder = new InsightBuilder(frame);
+        InsightGraph model = builder.genGraph();
+        String output = model.marshal();
+        System.out.println(output);
+
+    }
 
     @Test
     public void testIdNormalize(){

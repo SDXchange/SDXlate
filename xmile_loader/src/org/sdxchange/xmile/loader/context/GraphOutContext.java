@@ -10,6 +10,7 @@ public class GraphOutContext extends GraphOutPane implements Pane {
 
     public GraphOutContext(Graph graph) {
         super.title = graph.getTitle();
+
 //        super.ctxFactory =  XmileContextFactory.getInstance();
         for (Plot item: graph.getPlot()){
             org.oasis.xmile.v1_0.Plot.Entity docE = item.getEntity();

@@ -131,14 +131,12 @@ public class BaseXframe implements IXFrame {
 
     @Override
     public List<Pane> getGraphOutputs() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.graphs;
     }
 
     @Override
     public List<Pane> getTableOutputs() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.tables;
     }
 
     @Override

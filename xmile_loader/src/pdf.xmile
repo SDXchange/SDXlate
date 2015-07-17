@@ -21,35 +21,47 @@
                 <eqn>0</eqn>
             </stock>
             <aux name="PROB">
-                <eqn>TIME/100</eqn>
+                <eqn>PROB_IN</eqn>
                 <gf name="DISTTAB" type="continuous">
                     <xscale min="0.0" max="1.0"/>
                     <ypts>.0001,.014,.03205,.06027,.09679,.13272,.15542,.15542,.13272,.09679,.06027,.03205,.014,.00001</ypts>
                 </gf>
             </aux>
+            <aux name="PROB_IN">
+                <eqn>TIME/100</eqn>
+            </aux>
             <flow name="PROBRT">
                 <eqn>PROB</eqn>
             </flow>
+            <gf name="DISTTAB">
+                <xscale min="0.0" max="1.0"/>
+                <ypts>.0001,.014,.03205,.06027,.09679,.13272,.15542,.15542,.13272,.09679,.06027,.03205,.014,.00001</ypts>
+            </gf>
         </variables>
         <views>
             <view>
                 <stock name="DENSITY" x="200.0" y="50.0"/>
                 <aux name="PROB" x="50.0" y="50.0"/>
+                <aux name="PROB_IN" x="50.0" y="100.0"/>
                 <flow name="PROBRT" x="150.0" y="50.0">
                     <pts>
                         <pt x="125.0" y="50.0"/>
                         <pt x="175.0" y="50.0"/>
                     </pts>
                 </flow>
-                <connector uid="375">
-                    <from>TIME</from>
+                <connector uid="1">
+                    <from>PROB_IN</from>
                     <to>PROB</to>
                 </connector>
-                <connector uid="376">
+                <connector uid="2">
+                    <from>TIME</from>
+                    <to>PROB_IN</to>
+                </connector>
+                <connector uid="3">
                     <from>PROB</from>
                     <to>PROBRT</to>
                 </connector>
-                <stacked_container x="100.0" y="150.0" uid="377" width="350.0" height="280.0">
+                <stacked_container x="100.0" y="150.0" uid="4" width="350.0" height="280.0">
                     <graph show_grid="true" left_axis_multi_scale="false" plot_numbers="true" background="yellow">
                         <plot index="0" show_y_axis="true">
                             <entity name="DENSITY"/>

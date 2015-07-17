@@ -28,7 +28,12 @@ public abstract class PaneBase implements Pane {
         return title;
     }
 
-    public Set<String> getEntityNmes() {
+    @Override
+    public void setTitle(String ttl ){
+        this.title = ttl;
+    }
+
+    public Set<String> getEntityNames() {
         Set<String> rval = new HashSet<String>();
         for (EntitySymbol item: items){
             rval.add(item.getName());

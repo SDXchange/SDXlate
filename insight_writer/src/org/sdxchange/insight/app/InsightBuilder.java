@@ -2,12 +2,16 @@ package org.sdxchange.insight.app;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.sdxchange.xmile.devkit.symbol.GraphOutPane;
 import org.sdxchange.xmile.devkit.symbol.StockSymbol;
 import org.sdxchange.xmile.devkit.symbol.XSymbol;
 import org.sdxchange.xmile.devkit.xframe.IXFrame;
+import org.sdxchange.xmile.devkit.xframe.Pane;
+import org.sdxchange.xmile.devkit.xframe.TableOutPane;
 
 
 public class InsightBuilder {
@@ -25,10 +29,50 @@ public class InsightBuilder {
         outModel = new InsightGraph(frame.getSimulationName());
         applySettings();
         assignUids();
+        createDisplayNodes();
         createDefinedVarNodes();
         adjustFlowDimensions();
         createLinkNodes();
         return outModel;
+    }
+
+    private void createDisplayNodes() {
+
+        System.out.println ("Frame is "+frame);
+        System.out.println ("  pane list is "+ frame.getGraphOutputs());
+        for (Pane item: frame.getGraphOutputs()){
+            GraphOutPane graph = (GraphOutPane) item;
+
+            DisplayNode imGraph = new DisplayNode(graph.getTitle(), "Time Series",
+                    outModel.currentFolder.id, uidIndex.get(graph.getTitle()).intValue());
+            imGraph.setEntities(lookupIds(graph.getEntityNames()));
+            outModel.addNode(imGraph);
+        }
+
+        for (Pane item: frame.getTableOutputs()){
+            TableOutPane table = (TableOutPane) item;
+
+            DisplayNode imTable = new DisplayNode(table.getTitle(), "Tabular",
+                    outModel.currentFolder.id, uidIndex.get(table.getTitle()).intValue());
+            imTable.setEntities(lookupIds(table.getEntityNames()));
+            outModel.addNode(imTable);
+        }
+
+    }
+
+    private String lookupIds(Set<String> names){
+        String rval = "";
+        String temp = null;
+        for (String name: names){
+            Integer id = uidIndex.get(name);
+            if (id == null){
+                System.err.println("Failed to find uid for "+name);
+            }
+            else {
+                rval += ((rval.isEmpty())? ""+id: ","+id);
+            }
+        }
+        return rval;
     }
 
     private void adjustFlowDimensions() {
@@ -77,6 +121,13 @@ public class InsightBuilder {
     }
 
     private void assignUids() {
+        for (Pane item: frame.getGraphOutputs()){
+            uidIndex.put(item.getTitle(), new Integer(outModel.nextNodeId++));
+        }
+        for (Pane item: frame.getTableOutputs()){
+            uidIndex.put(item.getTitle(), new Integer(outModel.nextNodeId++));
+        }
+
         for (XSymbol sym: frame.getDefinedVars()){
             uidIndex.put(sym.getName(),new Integer(outModel.nextNodeId++));
         }

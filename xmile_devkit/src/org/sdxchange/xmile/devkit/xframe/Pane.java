@@ -9,5 +9,6 @@ public interface Pane {
     public List<EntitySymbol> getEntities();
     public String getTitle();
     public String dump();
+    void setTitle(String title);
 
 }

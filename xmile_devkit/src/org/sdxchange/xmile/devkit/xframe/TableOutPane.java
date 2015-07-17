@@ -10,7 +10,7 @@ public class TableOutPane extends PaneBase implements Pane{
     public String dump() {
         String rval = "";
         rval += (super.title == null || title.isEmpty()) ? XUtil.rPad("", 15): XUtil.rPad(title, 15);
-        rval += super.getEntityNmes();
+        rval += super.getEntityNames();
         return rval;
     }
 

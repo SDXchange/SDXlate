@@ -128,12 +128,23 @@ public class XmileContextFactory {
         return rval;
     }
 
+    public static int titleCount = 1;
     public TableOutContext createTableOutContext(Table table) {
-        return new TableOutContext(table);
+        TableOutContext ctx = new TableOutContext(table);
+        String title = null;
+        if ((title = ctx.getTitle()) == null || title.isEmpty()){
+            ctx.setTitle("Default Out "+(titleCount++));
+        }
+        return ctx;
     }
 
     public GraphOutContext createGraphOutContext(Graph graph) {
-        return new GraphOutContext(graph);
+        GraphOutContext ctx = new GraphOutContext(graph);
+        String title = null;
+        if ((title = ctx.getTitle()) == null || title.isEmpty()){
+            ctx.setTitle("Default Out "+(titleCount++));
+        }
+        return ctx;
     }
 
 
