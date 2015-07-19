@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><xmile version="1.0">
+    <header>
+        <vendor>SDXchange</vendor>
+        <name>Teacup cooling</name>
+        <options>
+            <has_model_view/>
+            <uses_outputs/>
+        </options>
+        <product version="1.0">SDXchange Dynamo to XMILE</product>
+    </header>
+    <sim_specs>
+        <stop>50.0</stop>
+        <start>0.0</start>
+        <dt>0.25</dt>
+    </sim_specs>
+    <model>
+        <aux name="MAXLEN">
+<eqn>50.0</eqn>
+<display color="black" x="100" y="100" label_side="top"/>
+</aux>
+<aux name="MAXLEN">
+<eqn>50</eqn>
+<display color="black" x="100" y="200" label_side="top"/>
+</aux>
+<flow name="TDIFF">
+<doc>Heat Loss</doc>
+<eqn>KFAC*(RMTMP-CUPTEMP)</eqn>
+<display color="black" x="300" y="100" label_side="bottom">
+<pts>
+<pt x="250" y="100"/>
+<pt x="350" y="100"/>
+</pts>
+</display>
+</flow>
+<aux name="RMTMP">
+<doc>AMBIENT ROOM TEMPERATURE</doc>
+<eqn>68</eqn>
+<display color="black" x="100" y="300" label_side="top"/>
+</aux>
+<stock name="CUPTEMP">
+<doc>CURRENT TEMPERATURE</doc>
+<inflow>TDIFF</inflow>
+<eqn>170</eqn>
+<display color="black" x="400" y="100" label_side="center"/>
+</stock>
+<aux name="KFAC">
+<eqn>.17</eqn>
+<display color="black" x="100" y="400" label_side="top"/>
+</aux>
+        <display orientation="landscape">
+<aux name="MAXLEN" x="50.0" y="50.0">
+<display color="black" x="100" y="500" label_side="top"/>
+</aux>
+<flow name="TDIFF" x="150.0" y="50.0">
+<pts>
+                        <pt x="125.0" y="50.0"/>
+                        <pt x="175.0" y="50.0"/>
+                    </pts>
+<display color="black" x="300" y="200" label_side="bottom">
+<pts>
+<pt x="250" y="200"/>
+<pt x="350" y="200"/>
+</pts>
+</display>
+</flow>
+<aux name="RMTMP" x="50.0" y="100.0">
+<display color="black" x="100" y="600" label_side="top"/>
+</aux>
+<stock name="CUPTEMP" x="200.0" y="50.0">
+<display color="black" x="400" y="200" label_side="center"/>
+</stock>
+<aux name="KFAC" x="50.0" y="150.0">
+<display color="black" x="100" y="700" label_side="top"/>
+</aux>
+<connector uid="1">
+                    <from>RMTMP</from>
+                    <to>TDIFF</to>
+                </connector>
+<connector uid="2">
+                    <from>KFAC</from>
+                    <to>TDIFF</to>
+                </connector>
+<connector uid="3">
+                    <from>CUPTEMP</from>
+                    <to>TDIFF</to>
+                </connector>
+<stacked_container x="200" y="400" height="282" width="492" visible_index="0" uid="4">
+<graph type="time_series" title="Untitled" show_grid="true" numbers_on_plots="true" background="#FFFFC9" from="0" to="600">
+<plot index="0" pen_width="1" show_y_axis="true">
+<entity name="CUPTEMP"/>
+</plot>
+</graph>
+</stacked_container>
+</display>
+    </model>
+</xmile>

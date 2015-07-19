@@ -178,7 +178,7 @@
 </graph>
 </stacked_container>
 <stacked_container x="200" y="400" height="282" width="492" visible_index="0" uid="16">
-<table title="SIC Model Trace" column_width="50" report_interval="5">
+<table column_width="50" report_interval="5">
                         <item index="0">
                             <entity name="SUSC"/>
                         </item>

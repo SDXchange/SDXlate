@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><xmile version="1.0">
+    <header>
+        <vendor>SDXchange</vendor>
+        <name>Compute probability density from probability distribution table</name>
+        <options>
+            <has_model_view/>
+            <uses_outputs/>
+        </options>
+        <product version="1.0">SDXchange Dynamo to XMILE</product>
+    </header>
+    <sim_specs>
+        <stop>100.0</stop>
+        <start>0.0</start>
+        <dt>0.25</dt>
+    </sim_specs>
+    <model>
+        <aux name="MAXLEN">
+<eqn>100.0</eqn>
+<display color="black" x="100" y="100" label_side="top"/>
+</aux>
+<stock name="DENSITY">
+<inflow>PROBRT</inflow>
+<eqn>0</eqn>
+<display color="black" x="400" y="100" label_side="center"/>
+</stock>
+<aux name="PROB">
+<eqn>PROB_IN</eqn>
+<gf name="DISTTAB" type="continuous">
+                    <xscale min="0.0" max="1.0"/>
+                    <ypts>.0001,.014,.03205,.06027,.09679,.13272,.15542,.15542,.13272,.09679,.06027,.03205,.014,.00001</ypts>
+                </gf>
+<display color="black" x="100" y="200" label_side="top"/>
+</aux>
+<aux name="PROB_IN">
+<eqn>TIME/100</eqn>
+<display color="black" x="100" y="300" label_side="top"/>
+</aux>
+<flow name="PROBRT">
+<eqn>PROB</eqn>
+<display color="black" x="300" y="100" label_side="bottom">
+<pts>
+<pt x="250" y="100"/>
+<pt x="350" y="100"/>
+</pts>
+</display>
+</flow>
+        <display orientation="landscape">
+<stock name="DENSITY" x="200.0" y="50.0">
+<display color="black" x="400" y="200" label_side="center"/>
+</stock>
+<aux name="PROB" x="50.0" y="50.0">
+<display color="black" x="100" y="400" label_side="top"/>
+</aux>
+<aux name="PROB_IN" x="50.0" y="100.0">
+<display color="black" x="100" y="500" label_side="top"/>
+</aux>
+<flow name="PROBRT" x="150.0" y="50.0">
+<pts>
+                        <pt x="125.0" y="50.0"/>
+                        <pt x="175.0" y="50.0"/>
+                    </pts>
+<display color="black" x="300" y="200" label_side="bottom">
+<pts>
+<pt x="250" y="200"/>
+<pt x="350" y="200"/>
+</pts>
+</display>
+</flow>
+<connector uid="385">
+                    <from>PROB_IN</from>
+                    <to>PROB</to>
+                </connector>
+<connector uid="386">
+                    <from>TIME</from>
+                    <to>PROB_IN</to>
+                </connector>
+<connector uid="387">
+                    <from>PROB</from>
+                    <to>PROBRT</to>
+                </connector>
+<stacked_container x="200" y="400" height="282" width="492" visible_index="0" uid="388">
+<graph type="time_series" title="Untitled" show_grid="true" numbers_on_plots="true" background="#FFFFC9" from="0" to="600">
+<plot index="0" pen_width="1" show_y_axis="true">
+<entity name="DENSITY"/>
+</plot>
+<plot index="1" pen_width="1" show_y_axis="true">
+<entity name="PROBRT"/>
+</plot>
+</graph>
+</stacked_container>
+</display>
+    </model>
+</xmile>
