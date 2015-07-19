@@ -106,14 +106,18 @@ public class InsightBuilder {
 
     private void createLinkNodes() {
         for (XSymbol sym: frame.getDefinedVars()){
-
             for (String source: sym.getDependencies()){
-                int linkId = outModel.nextNodeId++;
-                LinkNode link = new LinkNode("LINK"+linkId, outModel.currentFolder.id, linkId);
-                uidIndex.put(link.getName(),linkId);
-                link.source = uidIndex.get(source);
-                link.target = uidIndex.get(sym.getName());
-                outModel.addNode(link);
+                try {
+                    int linkId = outModel.nextNodeId++;
+                    LinkNode link = new LinkNode("LINK"+linkId, outModel.currentFolder.id, linkId);
+                    uidIndex.put(link.getName(),linkId);
+                    link.source = uidIndex.get(source);
+                    link.target = uidIndex.get(sym.getName());
+                    outModel.addNode(link);
+                } catch (Exception e){
+                    System.err.println(e.getMessage());
+                    System.err.println("WARNING: maybe UID is missing for "+source+" or "+sym.getName());
+                }
             }
 
 

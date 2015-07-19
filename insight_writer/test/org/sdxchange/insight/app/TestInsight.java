@@ -55,7 +55,6 @@ public class TestInsight {
         InsightGraph model = builder.genGraph();
         String output = model.marshal();
         System.out.println(output);
-
     }
 
     @Test

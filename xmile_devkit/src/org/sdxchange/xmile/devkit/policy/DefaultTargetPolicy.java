@@ -49,4 +49,10 @@ public class DefaultTargetPolicy implements TargetPolicy {
         return true;
     }
 
+    @Override
+    public boolean isFunctionsNeedParens() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

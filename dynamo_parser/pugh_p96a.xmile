@@ -39,6 +39,10 @@
             <aux name="FRSICK">
                 <eqn>0.05</eqn>
             </aux>
+            <gf name="TABCON">
+                <xscale min="0.0" max="1.0"/>
+                <ypts>0,2.8,5.5,8,9.5,10</ypts>
+            </gf>
             <stock name="SICK">
                 <inflow>INF</inflow>
                 <outflow>CURE</outflow>
@@ -77,51 +81,51 @@
                     </pts>
                 </flow>
                 <aux name="CNTCTS" x="50.0" y="250.0"/>
-                <connector uid="425">
+                <connector uid="436">
                     <from>FRSICK</from>
                     <to>INF</to>
                 </connector>
-                <connector uid="426">
+                <connector uid="437">
                     <from>SICK</from>
                     <to>INF</to>
                 </connector>
-                <connector uid="427">
+                <connector uid="438">
                     <from>CNTCTS</from>
                     <to>INF</to>
                 </connector>
-                <connector uid="428">
+                <connector uid="439">
                     <from>RECOV</from>
                     <to>TOTAL</to>
                 </connector>
-                <connector uid="429">
+                <connector uid="440">
                     <from>SUSC</from>
                     <to>TOTAL</to>
                 </connector>
-                <connector uid="430">
+                <connector uid="441">
                     <from>SICK</from>
                     <to>TOTAL</to>
                 </connector>
-                <connector uid="431">
+                <connector uid="442">
                     <from>TOTAL</from>
                     <to>TABIN</to>
                 </connector>
-                <connector uid="432">
+                <connector uid="443">
                     <from>SUSC</from>
                     <to>TABIN</to>
                 </connector>
-                <connector uid="433">
+                <connector uid="444">
                     <from>DUR</from>
                     <to>CURE</to>
                 </connector>
-                <connector uid="434">
+                <connector uid="445">
                     <from>SICK</from>
                     <to>CURE</to>
                 </connector>
-                <connector uid="435">
+                <connector uid="446">
                     <from>TABIN</from>
                     <to>CNTCTS</to>
                 </connector>
-                <stacked_container x="100.0" y="250.0" uid="436" width="350.0" height="280.0">
+                <stacked_container x="100.0" y="250.0" uid="447" width="350.0" height="280.0">
                     <graph show_grid="true" left_axis_multi_scale="false" plot_numbers="true" background="yellow">
                         <plot index="0" show_y_axis="true">
                             <entity name="SUSC"/>
@@ -140,7 +144,7 @@
                         </plot>
                     </graph>
                 </stacked_container>
-                <stacked_container x="100.0" y="275.0" uid="437" width="350.0" height="280.0">
+                <stacked_container x="100.0" y="275.0" uid="448" width="350.0" height="280.0">
                     <table column_width="50" report_interval="5">
                         <item index="0">
                             <entity name="SUSC"/>

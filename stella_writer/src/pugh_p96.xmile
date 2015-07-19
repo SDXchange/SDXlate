@@ -44,7 +44,7 @@
             <flow name="CURE">
                 <eqn>SICK/DUR</eqn>
             </flow>
-            <aux name="CNTCTS">
+                 <aux name="CNTCTS">
                 <eqn>SUSC/TOTAL</eqn>
                 <gf name="TABCON" type="continuous">
                     <xscale min="0.0" max="1.0"/>
@@ -114,7 +114,7 @@
                     <to>CNTCTS</to>
                 </connector>
                 <stacked_container x="100.0" y="250.0" uid="15" width="350.0" height="280.0">
-                    <graph show_grid="true" left_axis_multi_scale="false" plot_numbers="true" background="yellow">
+                    <graph title="Basic Graph" show_grid="true" left_axis_multi_scale="false" plot_numbers="true" background="yellow">
                         <plot index="0" show_y_axis="true">
                             <entity name="SUSC"/>
                         </plot>
@@ -133,7 +133,7 @@
                     </graph>
                 </stacked_container>
                 <stacked_container x="100.0" y="275.0" uid="16" width="350.0" height="280.0">
-                    <table column_width="50" report_interval="5">
+                    <table title="SIC Model Trace" column_width="50" report_interval="5">
                         <item index="0">
                             <entity name="SUSC"/>
                         </item>

@@ -19,14 +19,11 @@
             <flow name="INF">
                 <eqn>SICK*CNTCTS*FRSICK</eqn>
             </flow>
-            <aux name="CNTCTS_IN">
-                <eqn>SUSC/TOTAL</eqn>
-            </aux>
             <aux name="DUR">
                 <eqn>10</eqn>
             </aux>
             <aux name="TOTAL">
-                <eqn>988+2+10</eqn>
+                <eqn>INIT(SUSC)+INIT(SICK)+INIT(RECOV)</eqn>
             </aux>
             <stock name="RECOV">
                 <inflow>CURE</inflow>
@@ -52,7 +49,7 @@
                 <eqn>SICK/DUR</eqn>
             </flow>
             <aux name="CNTCTS">
-                <eqn>CNTCTS_IN</eqn>
+                <eqn>SUSC/TOTAL</eqn>
                 <gf name="TABCON" type="continuous">
                     <xscale min="0.0" max="1.0"/>
                     <ypts>0,2.8,5.5,8,9.5,10</ypts>
@@ -67,12 +64,11 @@
                         <pt x="175.0" y="50.0"/>
                     </pts>
                 </flow>
-                <aux name="CNTCTS_IN" x="50.0" y="50.0"/>
-                <aux name="DUR" x="50.0" y="100.0"/>
-                <aux name="TOTAL" x="50.0" y="150.0"/>
+                <aux name="DUR" x="50.0" y="50.0"/>
+                <aux name="TOTAL" x="50.0" y="100.0"/>
                 <stock name="RECOV" x="200.0" y="50.0"/>
                 <stock name="SUSC" x="200.0" y="100.0"/>
-                <aux name="FRSICK" x="50.0" y="200.0"/>
+                <aux name="FRSICK" x="50.0" y="150.0"/>
                 <stock name="SICK" x="200.0" y="200.0"/>
                 <flow name="CURE" x="150.0" y="100.0">
                     <pts>
@@ -80,40 +76,48 @@
                         <pt x="175.0" y="100.0"/>
                     </pts>
                 </flow>
-                <aux name="CNTCTS" x="50.0" y="250.0"/>
-                <connector uid="1">
+                <aux name="CNTCTS" x="50.0" y="200.0"/>
+                <connector uid="5">
                     <from>FRSICK</from>
                     <to>INF</to>
                 </connector>
-                <connector uid="2">
+                <connector uid="6">
                     <from>SICK</from>
                     <to>INF</to>
                 </connector>
-                <connector uid="3">
+                <connector uid="7">
                     <from>CNTCTS</from>
                     <to>INF</to>
                 </connector>
-                <connector uid="4">
-                    <from>TOTAL</from>
-                    <to>CNTCTS_IN</to>
+                <connector uid="8">
+                    <from>RECOV</from>
+                    <to>TOTAL</to>
                 </connector>
-                <connector uid="5">
+                <connector uid="9">
                     <from>SUSC</from>
-                    <to>CNTCTS_IN</to>
+                    <to>TOTAL</to>
                 </connector>
-                <connector uid="6">
+                <connector uid="10">
+                    <from>SICK</from>
+                    <to>TOTAL</to>
+                </connector>
+                <connector uid="11">
                     <from>DUR</from>
                     <to>CURE</to>
                 </connector>
-                <connector uid="7">
+                <connector uid="12">
                     <from>SICK</from>
                     <to>CURE</to>
                 </connector>
-                <connector uid="8">
-                    <from>CNTCTS_IN</from>
+                <connector uid="13">
+                    <from>TOTAL</from>
                     <to>CNTCTS</to>
                 </connector>
-                <stacked_container x="100.0" y="250.0" uid="9" width="350.0" height="280.0">
+                <connector uid="14">
+                    <from>SUSC</from>
+                    <to>CNTCTS</to>
+                </connector>
+                <stacked_container x="100.0" y="250.0" uid="15" width="350.0" height="280.0">
                     <graph show_grid="true" left_axis_multi_scale="false" plot_numbers="true" background="yellow">
                         <plot index="0" show_y_axis="true">
                             <entity name="SUSC"/>
@@ -132,7 +136,7 @@
                         </plot>
                     </graph>
                 </stacked_container>
-                <stacked_container x="100.0" y="275.0" uid="10" width="350.0" height="280.0">
+                <stacked_container x="100.0" y="275.0" uid="16" width="350.0" height="280.0">
                     <table column_width="50" report_interval="5">
                         <item index="0">
                             <entity name="SUSC"/>

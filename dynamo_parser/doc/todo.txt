@@ -53,18 +53,20 @@ load intermediate form into symbol table
 
 Backlog InsightMaker Output Adapters
 ================================================
-Generate Display
-Package as app with file input/output
 Isolate Graph inputs
-Package as jar file. 
+Substitute for Time and cancel dimension if dimensionless. 
+Substitute for SMTH1
+Define IF/THEN/ELSE to avoid brackets attempt to find uid. 
+
 
 Backlog Stella Output Adapter
 ===============================================
-Retest, 
-eliminate use of m4, (shouldn't be necessary with new Dyn2Xmile.) 
+Wrap stella transform in CLI
+Modify xslt to fix reporting interval problem
+package Stella adapter as jar file. 
+
 Add limitations to usage message. 
-Perform xsl transform from Java
-package as jar file. 
+
 
 Backlog Stella to Xmile
 ===================================================
@@ -72,6 +74,13 @@ Test how much we can accomplish in a Java-based XSL transform
 
  Completed
  ==========================================
+ 2015-07-18  Fix problem with stella xslt losing GF with new Dynamo xmile
+ 2015-07-18 eliminate use of m4, (shouldn't be necessary with new Dyn2Xmile.) in Stella Adapter
+ 2015-07-18 Perform xsl transform from Java
+ 2015-07-18 Retest Stella xslt adapter
+ 
+ 2015-07-17  Generate Display in InsightMaker adapter
+ 2015-07-17  Package InsightMaker adapter as app with file input/output
  2015-07-16 Create Xmile to XFrame unmarshaller. 
  2015-07-12 Create g4 parser for conforming Xmile expressions. 
  Conformance: add version attribute to xmile tag

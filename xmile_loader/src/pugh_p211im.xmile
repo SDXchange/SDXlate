@@ -32,7 +32,7 @@
                 <eqn>EPREM/WFS</eqn>
             </aux>
             <aux name="LENGTH">
-                <eqn>(IF(1&lt;FCOMP)THEN(0)ELSE(MAXLEN))</eqn>
+                <eqn>MAXLEN</eqn>
             </aux>
             <aux name="IPROD">
                 <eqn>WTRP*RPROD+(1-WTRP)*GPROD</eqn>
@@ -100,7 +100,7 @@
                 <eqn>SMTH1(IPROD,TPPROD)</eqn>
             </aux>
             <aux name="ICD">
-                <eqn>TIME+TPREQ</eqn>
+                <eqn>TIME()+TPREQ</eqn>
             </aux>
             <aux name="CPPRG">
                 <eqn>CRPRG+URW</eqn>

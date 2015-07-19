@@ -17,4 +17,6 @@ public interface TargetPolicy {
 
     public abstract boolean isEquationParseNeeded();
 
+    public abstract boolean isFunctionsNeedParens();
+
 }
