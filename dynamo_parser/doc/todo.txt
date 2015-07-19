@@ -58,13 +58,11 @@ Substitute for Time and cancel dimension if dimensionless.
 Substitute for SMTH1
 Define IF/THEN/ELSE to avoid brackets attempt to find uid. 
 
-
 Backlog Stella Output Adapter
 ===============================================
-Wrap stella transform in CLI
-Modify xslt to fix reporting interval problem
 package Stella adapter as jar file. 
-
+Test that Stella executing from jar finds files. 
+Modify xslt to fix reporting interval problem
 Add limitations to usage message. 
 
 
@@ -74,6 +72,7 @@ Test how much we can accomplish in a Java-based XSL transform
 
  Completed
  ==========================================
+ 2015-07-18 Wrap stella transform in CLI
  2015-07-18  Fix problem with stella xslt losing GF with new Dynamo xmile
  2015-07-18 eliminate use of m4, (shouldn't be necessary with new Dyn2Xmile.) in Stella Adapter
  2015-07-18 Perform xsl transform from Java
