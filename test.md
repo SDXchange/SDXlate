@@ -35,7 +35,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-<H1XMILE Models, Translation, Transport, and Exchange</H1>
+<H1>XMILE Models, Translation, Transport, and Exchange</H1>
 
 <p>SDXchange is an open source project devoted to enabling exchange of XMILE-coded System Dynamics simulation models. To that end, we foster
 
@@ -49,7 +49,7 @@
 <LI>the creation and publication of embeddable Xmile components that make it easier for developers and experimenters to use Xmile models in their own projects.</LI>
 
 </UL>
-For developer-oriented documentation and support, please see our [wiki](wiki).
+<p>For developer-oriented documentation and support, please see our [wiki](wiki).
       </section>
     </div>
 
