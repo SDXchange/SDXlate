@@ -1,5 +1,8 @@
 ---
 ---
+
+<html>
+
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -11,6 +14,7 @@
   </head>
 
   <body>
+
 
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
@@ -54,3 +58,5 @@ For developer-oriented documentation and support, please see our [wiki](wiki).
         <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
+</body>
+</html>
