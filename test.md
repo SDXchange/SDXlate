@@ -28,6 +28,8 @@
     </div>
 
     <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
 
 # XMILE Models, Translation, Transport, and Exchange
 
@@ -42,6 +44,8 @@ SDXchange is an open source project devoted to enabling exchange of XMILE-coded 
 * the creation and publication of embeddable Xmile components that make it easier for developers and experimenters to use Xmile models in their own projects.
 
 For developer-oriented documentation and support, please see our [wiki](wiki).
+      </section>
+    </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
