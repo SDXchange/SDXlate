@@ -13,3 +13,5 @@ SDXchange is an open source project devoted to enabling exchange of XMILE-coded 
 * the creation and publication of embeddable Xmile components that make it easier for developers and experimenters to use Xmile models in their own projects.
 
 For developer-oriented documentation and support, please see our [wiki](wiki).
+
+Version 2
