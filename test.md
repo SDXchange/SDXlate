@@ -5,7 +5,7 @@ myStuff: some text
 
 
 
-{{ page.myStuff }}
+
 
 # XMILE Models, Translation, Transport, and Exchange
 
