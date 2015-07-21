@@ -1,6 +1,6 @@
 ---
 ---
-{{ default_header.html }}
+{{> default_header }}
 
 # XMILE Models, Translation, Transport, and Exchange
 
