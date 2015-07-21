@@ -1,7 +1,8 @@
 ---
 myStuff: some text
 ---
-{{> default_header }}
+{{> default_header }} 
+
 
 
 {{ page.myStuff }}
