@@ -1,7 +1,7 @@
 ---
 myStuff: some text
 ---
-{% include default_header.html %}
+{% include sample.txt %}
 
 
 
