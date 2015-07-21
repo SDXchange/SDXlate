@@ -1,5 +1,3 @@
----
----
 <!DOCTYPE html>
 <html>
 
@@ -36,6 +34,8 @@
       <section id="main_content" class="inner">
 
 {{md  content }}
+
+# YES MD WAS PROCESSED
 
       </section>
     </div>
