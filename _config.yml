@@ -26,6 +26,7 @@ gems:      []
 
 # Conversion
 markdown:    kramdown
-highlighter: rouge
+kramdown: 
+  parse_block_html: true
 lsi:         false
 excerpt_separator: "\n\n"

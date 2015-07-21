@@ -1,8 +1,8 @@
 ---
-layout: page
+layout: download
 ---
 
-# XMILE Model Adaptation, Translation, and Transport
+# DYNAMO to XMILE
 
 SDXchange is an open source project devoted to enabling exchange of XMILE-coded System Dynamics simulation models. To that end, we foster the creation and publication of open source, stand-alone translators, both from other formats to Xmile and from Xmile to other formats;
 
@@ -13,3 +13,5 @@ SDXchange is an open source project devoted to enabling exchange of XMILE-coded 
 * the creation and publication of embeddable Xmile components that make it easier for developers and experimenters to use Xmile models in their own projects.
 
 For developer-oriented documentation and support, please see our [wiki](wiki).
+
+
