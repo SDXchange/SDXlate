@@ -1,4 +1,5 @@
 ---
+myTestText: # XMILE Models, Translation, Transport, and Exchange
 ---
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-# XMILE Models, Translation, Transport, and Exchange
+{{ myTestText | markdownify }}
 
 <p>SDXchange is an open source project devoted to enabling exchange of XMILE-coded System Dynamics simulation models. To that end, we foster
 
