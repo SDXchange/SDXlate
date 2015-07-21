@@ -1,7 +1,8 @@
 ---
 layout: default
+myStuff: text from variable
 ---
-
+# {{ myStuff }}
 
 # XMILE Models, Translation, Transport, and Exchange
 
