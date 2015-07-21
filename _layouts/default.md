@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html>
 
@@ -34,6 +36,7 @@
       <section id="main_content" class="inner">
 
 {{md  content }}
+
       </section>
     </div>
 
