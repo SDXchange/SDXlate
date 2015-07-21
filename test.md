@@ -1,7 +1,7 @@
 ---
 myStuff: some text
 ---
-{{> default_header }} 
+{% include default_header.html %}
 
 
 
