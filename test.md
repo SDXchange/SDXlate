@@ -1,11 +1,6 @@
 ---
-myStuff: some text
+layout: page
 ---
-{% include default_header.html %}
-
-
-
-
 
 # XMILE Models, Translation, Transport, and Exchange
 
