@@ -33,7 +33,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-{{md  content }}
+{{md  Content }}
 
 # YES MD WAS PROCESSED
 
