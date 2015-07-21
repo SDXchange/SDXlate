@@ -1,6 +1,10 @@
 ---
+myStuff: some text
 ---
 {{> default_header }}
+
+
+{{ page.myStuff }}
 
 # XMILE Models, Translation, Transport, and Exchange
 
