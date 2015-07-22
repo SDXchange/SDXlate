@@ -6,7 +6,7 @@
   <property name="compiler.args.sdx_plugin_api" value="-encoding windows-1252 -source 7 ${compiler.args}"/>
   
   <property name="sdx_plugin_api.output.classes.dir" value="${module.sdx_plugin_api.basedir}/build/classes"/>
-  <property name="sdx_plugin_api.output.jar.dir" value="${module.sdx_plugin_api.basedir}/build/jar"/>
+  <property name="sdx_plugin_api.output.jar.dir" value="${module.sdx_plugin_api.basedir}/build/lib"/>
   <property name="sdx_plugin_api.testoutput.dir" value="${module.sdx_plugin_api.basedir}/build/test/classes"/>
   
   <path id="sdx_plugin_api.module.bootclasspath">
