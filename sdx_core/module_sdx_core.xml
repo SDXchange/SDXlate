@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sdx_core" default="compile.module.sdx_core">
+    <dirname property="module.sdx_core.basedir" file="${ant.file.module_sdx_core}"/>
+
+
+    <property name="compiler.args.sdx_core" value="-encoding windows-1252 -source 7 ${compiler.args}"/>
+
+    <property name="sdx_core.output.classes.dir" value="${module.sdx_core.basedir}/build/classes"/>
+    <property name="sdx_core.output.jar.dir" value="${module.sdx_core.basedir}/build/lib"/>
+    <property name="sdx_core.testoutput.dir" value="${module.sdx_core.basedir}/build/test"/>
+
+    <path id="sdx_core.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="sdx_core.module.production.classpath">
+        <fileset dir="${basedir}/sdx_core/lib">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+    <path id="sdx_core.runtime.production.module.classpath">
+        <pathelement location="${sdx_core.output.classes.dir}"/>
+        <fileset dir="${basedir}/sdx_core/lib">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+    <path id="sdx_core.module.classpath">
+        <pathelement location="${sdx_core.output.classes.dir}"/>
+        <fileset dir="${basedir}/sdx_core/lib">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+    <path id="sdx_core.runtime.module.classpath">
+        <pathelement location="${sdx_core.testoutput.dir}"/>
+        <pathelement location="${sdx_core.output.classes.dir}"/>
+        <fileset dir="${basedir}/sdx_core/lib">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+
+    <patternset id="excluded.from.module.sdx_core">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.sdx_core">
+        <patternset refid="excluded.from.module.sdx_core"/>
+    </patternset>
+
+    <path id="sdx_core.module.sourcepath">
+        <dirset dir="${module.sdx_core.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.sdx_core" depends="compile.module.sdx_core.production,compile.module.sdx_core.tests" description="Compile module sdx_core"/>
+
+    <target name="compile.module.sdx_core.production" description="Compile module sdx_core; production classes">
+        <mkdir dir="${sdx_core.output.classes.dir}"/>
+        <javac destdir="${sdx_core.output.classes.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+            <compilerarg line="${compiler.args.sdx_core}"/>
+            <bootclasspath refid="sdx_core.module.bootclasspath"/>
+            <classpath refid="sdx_core.module.production.classpath"/>
+            <src refid="sdx_core.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.sdx_core"/>
+        </javac>
+
+        <copy todir="${sdx_core.output.classes.dir}">
+            <fileset dir="${module.sdx_core.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.sdx_core.tests" depends="compile.module.sdx_core.production" description="compile module sdx_core; test classes" unless="skip.tests">
+        <jar destfile="${sdx_core.output.jar.dir}/sdx_core.jar"
+             basedir="${sdx_core.output.classes.dir}"/>
+    </target>
+
+    <target name="clean.module.sdx_core" description="cleanup module">
+        <delete dir="${sdx_core.output.classes.dir}"/>
+        <delete dir="${sdx_core.testoutput.dir}"/>
+    </target>
+</project>
