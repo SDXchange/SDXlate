@@ -1,0 +1,28 @@
+to create a local repository
+
+mkdir a directory where you want the repository to reside. The name of this directory is not
+significant. 
+
+cd into the new directory and create an empty git repository with 
+execute git init
+
+clone the remote github pages branch into the new repository:
+ git clone -b gh-pages http://github.com/SDXchange/SDXlate
+ 
+ in addition to getting the desired code, this sets up the proper local/remote traking relationship
+ between the local and remote images. 
+ 
+ The local image is complete. 
+ 
+ To serve the image with the same relative paths as it will have when served from github,
+ 
+ cd to the git directory(NOT the SDXlate directory), and use this command to start jekyll
+jekyll serve --source ./SDXlate --baseurl '/SDXlate'
+
+The single quotes are essential. For some reason, I found it easier to run this command from a dos command
+line than from a unix shell. Probably because the forward slash keeps windows from 
+expanding the arguments into full path references. 
+
+Now all relative references in the markdown and html will be relative /SDXlate in 
+both the remote sever and the local server. 
+ 
