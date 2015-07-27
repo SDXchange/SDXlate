@@ -2,9 +2,13 @@ package org.sdxchange.xmile.devkit.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
+import java.nio.file.Paths;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -86,6 +90,34 @@ public class XUtil {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static InputStream getFileInput(String fPath) throws Exception{
+        Exception error = null;
+        FileInputStream rval = null;
+        String resourcePath = null;
+        String currentDir = Paths.get(".").toAbsolutePath().normalize().toString();
+        String path = currentDir + File.separator + fPath;
+        try {
+            rval = new FileInputStream(path);
+            return rval; //success
+        } catch (Exception e){
+            error = e;
+            //save it in case we can't find as resource either.
+        }
+        try {
+            URL url = XUtil.class.getResource(fPath);
+            resourcePath = url.getFile();
+            System.out.println(resourcePath);
+            rval = new FileInputStream(resourcePath);
+            System.out.println("Opening resource file at "+resourcePath);
+            return rval;
+        } catch (Exception e){
+            System.err.println("Unable to open file "+path +"\n ...or resource "+ resourcePath);
+            throw error;
+        }
+
+
     }
 
     //TODO: make a little more intelligent search, look resource relative first,
