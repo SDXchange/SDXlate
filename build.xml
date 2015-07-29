@@ -71,7 +71,12 @@
     <!-- Perform any build initialization in this target -->
   </target>
   
-  <target name="clean" depends="clean.module.sdx_core, clean.module.sdx_plugin_api" description="cleanup all"/>
+  <target name="clean"
+          depends="clean.module.sdx_core,
+                   clean.module.sdx_plugin_api,
+                   clean.module.sdxmod_xmile,
+                   clean.application.sdxapp_basicCli"
+          description="cleanup all"/>
   
   <target name="build.modules" depends="init, clean, compile.module.sdx_core, compile.module.sdx_plugin_api, compile.module.sdxmod_xmile" description="build all modules"/>
 
