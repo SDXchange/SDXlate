@@ -12,5 +12,8 @@ Currently we offer these translations:
 
 - [*Dynamo to Xmile.*](dyn2xmile.html)
 - [*Xmile to Stella.*](xmile2stella.html)
+- [*Smile to python.*](pysd.html)
+- [*Xmile to python.*](pysd.html)
+- [*Vensim to python.*](pysd.html)
 
 
