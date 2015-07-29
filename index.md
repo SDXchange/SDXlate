@@ -10,4 +10,6 @@ is an open source project devoted to enabling exchange of XMILE-coded System Dyn
 
 * the creation and publication of embeddable Xmile components that make it easier for developers and experimenters to use Xmile models in their own projects.
 
+The tabs at the left above will take you to pages that list downloadable Xmile models and translation tools respectively. 
+
 For developer-oriented documentation and support, please see our [wiki](https://github.com/SDXchange/SDXlate/wiki).

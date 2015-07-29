@@ -11,4 +11,6 @@ Each translator link will take you to a separate page with download and installa
 Currently we offer these translations:
 
 - [*Dynamo to Xmile.*](dyn2xmile.html)
+- [*Xmile to Stella.*](xmile2stella.html)
+
 
