@@ -67,7 +67,8 @@
 
   <import file="${basedir}/sdxapp_basicCli/application_sdxapp_basicCli.xml"/>
 
-  <target name="init" description="Build initialization">
+  <target name="init"
+          description="Build initialization">
     <!-- Perform any build initialization in this target -->
   </target>
   
@@ -78,9 +79,20 @@
                    clean.application.sdxapp_basicCli"
           description="cleanup all"/>
   
-  <target name="build.modules" depends="init, clean, compile.module.sdx_core, compile.module.sdx_plugin_api, compile.module.sdxmod_xmile" description="build all modules"/>
+  <target name="build.modules"
+          depends="init,
+                    clean,
+                    compile.module.sdx_core,
+                    compile.module.sdx_plugin_api,
+                    compile.module.sdxmod_xmile"
+          description="build all modules"/>
 
-  <target name="build.applications" depends="clean, compile.application.sdxapp_basicCli"/>
+  <target name="build.applications"
+          depends="clean,
+                    compile.application.sdxapp_basicCli"/>
   
-  <target name="all" depends="build.modules, build.applications" description="build all"/>
+  <target name="all"
+          depends="build.modules,
+                    build.applications"
+          description="build all"/>
 </project>

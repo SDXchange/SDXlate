@@ -2,6 +2,7 @@
 <project name="module_sdxmod_xmile" default="compile.module.sdxmod_xmile">
 
     <import file="${basedir}/sdx_plugin_api/module_sdx_plugin_api.xml"/>
+    <import file="${basedir}/sdx_core/module_sdx_core.xml"/>
 
     <dirname property="module.sdxmod_xmile.basedir" file="${ant.file.module_sdxmod_xmile}"/>
 
@@ -18,6 +19,7 @@
 
     <path id="sdxmod_xmile.module.production.classpath">
         <pathelement location="${sdx_plugin_api.output.classes.dir}"/>
+        <pathelement location="${sdx_core.output.classes.dir}"/>
     </path>
 
     <path id="sdxmod_xmile.runtime.production.module.classpath">
@@ -50,10 +52,14 @@
 
 
     <target name="compile.module.sdxmod_xmile"
-            depends="compile.module.sdx_plugin_api, compile.module.sdxmod_xmile.production,compile.module.sdxmod_xmile.tests"
+            depends="compile.module.sdx_plugin_api,
+                        compile.module.sdx_core,
+                        compile.module.sdxmod_xmile.production,
+                        compile.module.sdxmod_xmile.tests"
             description="Compile module sdxmod_xmile"/>
 
-    <target name="compile.module.sdxmod_xmile.production" description="Compile module sdxmod_xmile; production classes">
+    <target name="compile.module.sdxmod_xmile.production"
+            description="Compile module sdxmod_xmile; production classes">
         <mkdir dir="${sdxmod_xmile.output.classes.dir}"/>
         <javac destdir="${sdxmod_xmile.output.classes.dir}" debug="${compiler.debug}"
                nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
