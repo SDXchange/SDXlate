@@ -11,6 +11,8 @@ import org.sdxchange.xmile.devkit.util.XUtil;
 
 public class SymbolBase {
 
+    private static int nextSynthSerial;
+
     protected String name;
     protected String varType;
     protected String eqn;
@@ -137,5 +139,24 @@ public class SymbolBase {
         return policy;
     }
 
+    public static String createVarName(String baseName) {
+        String pad = "0000000000";
+        String suffix = pad + (nextSynthSerial++);
+        return baseName.substring(0,Math.min(baseName.length(),5))+"_SDX"+suffix.substring(suffix.length()-4);
+    }
 
+    public void clearDependencies(){
+        dependencies = new ArrayList<String>();
+    }
+
+    /**
+     * Should be overridden in superclasses that have a parsed version of the
+     * equation available. (the tree is required by the test );
+     *
+     * @return true if the equation exists and is more than
+     * just a single variable (or array) ref.
+     */
+    public boolean hasComplexEqn(){
+        return false;
+    };
 }

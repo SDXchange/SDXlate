@@ -12,7 +12,7 @@ import org.sdxchange.xmile.loader.parse.ParseUtil;
 import org.sdxchange.xmile.parser4.XmileParser.ExprContext;
 
 public class StockContext extends StockSymbolBase
-implements StockSymbol {
+implements StockSymbol, ParsedEqn {
 
     Stock docNode ;
     ExprContext eqnParseTree = null;
@@ -41,6 +41,13 @@ implements StockSymbol {
         setInputs(XmileContextFactory.getInputVars(eqnParseTree));
         super.setEqn(eqn);
     }
+    
+
+    @Override
+    public ExprContext getEqnParseTree() {
+        return eqnParseTree;
+    }
+
 
     @Override
     public String dump(){

@@ -1,6 +1,8 @@
 package org.sdxchange.insight.app;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -140,7 +142,7 @@ public class InsightBuilder {
     private void createDefinedVarNodes(){
         for (XSymbol sym: frame.getDefinedVars()){
 //            String varType = sym.getVarType();
-
+            System.out.println("Processing symbol "+sym.dump());
             switch (sym.getVarType()){
                 case "AUX": {
                     String name = sym.getName();
@@ -210,13 +212,26 @@ public class InsightBuilder {
      * @return
      */
 
+    static String[] reserved = {"IF", "THEN", "ELSE", "TIME", "IF_THEN_ELSE","ABS", "ARCCOS", "ARCSIN", "ARCTAN",
+        "COS", "EXP", "INF", "INT", "LN", "LOG10", "MAX", "MIN", "PI", "SIN", "SQRT", "TAN",
+        "EXPRND", "LOGNORMAL", "NORMAL", "POISSON", "RANDOM", "DELAY", "DELAY1", "DELAY3", "DELAYN",
+        "FORCST", "SMTH1", "SMTH3", "SMTHN", "TREND", "PULSE", "RAMP", "STEP", "DT", "STARTTIME",
+        "STOPTIME", "INIT", "PREVIOUS", "SELF", "SDX_TIME" };
+    public static List<String> resvList = null;
+    static {
+        resvList = Arrays.asList(reserved);
+    }
+
     public static String normalizeIDs(String eqn) {
         Pattern p = Pattern.compile("[a-zA-Z][a-zA-Z_0-9]+"); //for now we know it's a Dynamo ID
         Matcher m = p.matcher(eqn);
         StringBuffer rval = new StringBuffer(eqn.length()*2+2); //max it can grow, assume one char ids with 1 char op between.
         while (m.find()){
 //            System.err.println("group(0) "+m.group(0));
-            m.appendReplacement(rval, Matcher.quoteReplacement("["+m.group(0)+"]"));
+            // exclude functional refs from bracketing
+            if (!resvList.contains(m.group(0))){
+                m.appendReplacement(rval, Matcher.quoteReplacement("["+m.group(0)+"]"));
+            }
         }
         m.appendTail(rval);
 //        System.err.println(rval);

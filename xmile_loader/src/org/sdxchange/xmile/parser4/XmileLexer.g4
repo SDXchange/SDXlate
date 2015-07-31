@@ -33,6 +33,9 @@ EQUAL : '=' ;
 NOTEQUAL: '<>';
 AND : 'AND';
 OR: 'OR';
+IF: 'IF';
+THEN: 'THEN';
+ELSE: 'ELSE';
 
 OTHER : '!' | '#' | '%' | ':' ;
 
@@ -55,11 +58,13 @@ TESTFUNC:
 	'PULSE' | 'RAMP' | 'STEP'
 	;
 TIMEFUNC:
-	'DT' | 'STARTTIME' | 'STOPTIME' | 'TIME'
+	'DT' | 'STARTTIME' | 'STOPTIME' | 'TIME' | 'SDX_TIME'
 	;
 MISCFUNC:
 	'IF_THEN_ELSE' | 'INIT' | 'PREVIOUS' | 'SELF'
 	;
+	
+
 //TODO: add unicode character range	
 ID:  
 	 ('a'..'z'|'A'..'Z'|'$')+

@@ -52,6 +52,16 @@ public interface XmileParserListener extends ParseTreeListener {
 	 */
 	void exitExprList(@NotNull XmileParser.ExprListContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link XmileParser#ifExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfExpr(@NotNull XmileParser.IfExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link XmileParser#ifExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfExpr(@NotNull XmileParser.IfExprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link XmileParser#numLit}.
 	 * @param ctx the parse tree
 	 */

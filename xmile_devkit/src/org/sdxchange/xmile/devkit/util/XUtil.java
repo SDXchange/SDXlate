@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -110,18 +111,44 @@ public class XUtil {
             resourcePath = url.getFile();
             System.out.println(resourcePath);
             rval = new FileInputStream(resourcePath);
-            System.out.println("Opening resource file at "+resourcePath);
+            System.out.println("Opening file file at "+resourcePath);
             return rval;
         } catch (Exception e){
             System.err.println("Unable to open file "+path +"\n ...or resource "+ resourcePath);
             throw error;
         }
-
-
     }
 
-    //TODO: make a little more intelligent search, look resource relative first,
-    // then resource relative, and then absolute.
+    public static File getFile(String fPath) throws Exception{
+        Exception error = null;
+        File rval = null;
+        String resourcePath = null;
+        String currentDir = Paths.get(".").toAbsolutePath().normalize().toString();
+        String path = currentDir + File.separator + fPath;
+        System.out.println("Attempting to open file at "+path);
+        try {
+            rval = new File(path);
+            if (rval.exists())
+                throw new FileNotFoundException();
+            return rval; //success
+        } catch (Exception e){
+            error = e;
+            //save it in case we can't find as resource either.
+        }
+        try {
+            URL url = XUtil.class.getResource(fPath);
+            resourcePath = url.getFile();
+            System.out.println(resourcePath);
+            rval = new File(resourcePath);
+            System.out.println("Opening file file at "+resourcePath);
+            return rval;
+        } catch (Exception e){
+            System.err.println("Unable to open file "+path +"\n ...or resource "+ resourcePath);
+            throw error;
+        }
+    }
+
+    @Deprecated
     public static String getFileLoc(String fileLoc){
 //      URL dir = this.getClass().getResource(".");
 //        System.out.println(dir.getFile());
@@ -133,6 +160,14 @@ public class XUtil {
 //        return dir.getFile()+"../../.."+fileLoc;
     }
 
+    public static String getFilePath(String fileLoc){
+
+        String currentDir = Paths.get(".").toAbsolutePath().normalize().toString();
+        System.out.println("Paths computes: "+ Paths.get(".").toAbsolutePath().normalize().toString());
+        String rval = currentDir + File.separator + fileLoc;
+        System.out.println("Looking for file at absolute path "+rval);
+        return rval;
+    }
 
 
 }

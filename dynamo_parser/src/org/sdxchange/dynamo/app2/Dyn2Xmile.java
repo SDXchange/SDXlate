@@ -165,6 +165,7 @@ public class Dyn2Xmile {
         return tree;
     }
 
+    @Deprecated
     private static String getFileLoc(String fileLoc){
 
         String currentDir = Paths.get(".").toAbsolutePath().normalize().toString();
