@@ -14,6 +14,7 @@ Currently we offer these translations:
 
 - [*Dynamo to Xmile.*](dyn2xmile.html)
 - [*Xmile to Stella.*](xmile2stella.html)
+- [*Xmile to InsightMaker.*](xmile2insight.html)
 
 ### Python-Based
 

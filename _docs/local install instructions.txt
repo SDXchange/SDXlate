@@ -9,7 +9,7 @@ execute git init
 clone the remote github pages branch into the new repository:
  git clone -b gh-pages http://github.com/SDXchange/SDXlate
  
- in addition to getting the desired code, this sets up the proper local/remote traking relationship
+ in addition to getting the desired code, this sets up the proper local/remote tracking relationship
  between the local and remote images. 
  
  The local image is complete. 
