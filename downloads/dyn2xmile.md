@@ -28,3 +28,5 @@ The angle brackets are _not_ part of the command -- they just indicate the porti
 
 The translator will generate an XMILE verion named <code>myModel.xmile</code> and (for diagnostic purposes) will dump its internal symbol table to the file <code>myModel.sym</code>. 
 
+#### Recent Revisions
+* 2015-08-06 Fix corrupted build. Replace dyn2xmile.md with new build: ver 1.01.
