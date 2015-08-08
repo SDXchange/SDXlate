@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sdxmod_insightMaker" default="compile.module.sdxmod_insightMaker">
+
+    <import file="${basedir}/sdx_plugin_api/module_sdx_plugin_api.xml"/>
+    <import file="${basedir}/sdx_core/module_sdx_core.xml"/>
+
+    <dirname property="module.sdxmod_insightMaker.basedir" file="${ant.file.module_sdxmod_insightMaker}"/>
+
+
+    <property name="compiler.args.sdxmod_insightMaker" value="-encoding windows-1252 -source 7 ${compiler.args}"/>
+
+    <property name="sdxmod_insightMaker.output.classes.dir" value="${module.sdxmod_insightMaker.basedir}/build/classes"/>
+    <property name="sdxmod_insightMaker.output.jar.dir" value="${module.sdxmod_insightMaker.basedir}/build/lib"/>
+    <property name="sdxmod_insightMaker.testoutput.dir" value="${module.sdxmod_insightMaker.basedir}/build/test/classes"/>
+
+    <path id="sdxmod_insightMaker.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="sdxmod_insightMaker.module.production.classpath">
+        <pathelement location="${sdx_plugin_api.output.classes.dir}"/>
+        <pathelement location="${sdx_core.output.classes.dir}"/>
+    </path>
+
+    <path id="sdxmod_insightMaker.runtime.production.module.classpath">
+        <pathelement location="${sdxmod_insightMaker.output.classes.dir}"/>
+    </path>
+
+    <path id="sdxmod_insightMaker.module.classpath">
+        <pathelement location="${sdxmod_insightMaker.output.classes.dir}"/>
+    </path>
+
+    <path id="sdxmod_insightMaker.runtime.module.classpath">
+        <pathelement location="${sdxmod_insightMaker.testoutput.dir}"/>
+        <pathelement location="${sdxmod_insightMaker.output.classes.dir}"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.sdxmod_insightMaker">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.sdxmod_insightMaker">
+        <patternset refid="excluded.from.module.sdxmod_insightMaker"/>
+    </patternset>
+
+    <path id="sdxmod_insightMaker.module.sourcepath">
+        <dirset dir="${module.sdxmod_insightMaker.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.sdxmod_insightMaker"
+            depends="compile.module.sdx_plugin_api,
+                        compile.module.sdx_core,
+                        compile.module.sdxmod_insightMaker.production,
+                        compile.module.sdxmod_insightMaker.tests"
+            description="Compile module sdxmod_insightMaker"/>
+
+    <target name="compile.module.sdxmod_insightMaker.production"
+            description="Compile module sdxmod_insightMaker; production classes">
+        <mkdir dir="${sdxmod_insightMaker.output.classes.dir}"/>
+        <javac destdir="${sdxmod_insightMaker.output.classes.dir}" debug="${compiler.debug}"
+               nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+            <compilerarg line="${compiler.args.sdxmod_insightMaker}"/>
+            <bootclasspath refid="sdxmod_insightMaker.module.bootclasspath"/>
+            <classpath refid="sdxmod_insightMaker.module.production.classpath"/>
+            <src refid="sdxmod_insightMaker.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.sdxmod_insightMaker"/>
+        </javac>
+
+        <copy todir="${sdxmod_insightMaker.output.classes.dir}">
+            <fileset dir="${module.sdxmod_insightMaker.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.sdxmod_insightMaker.tests" depends="compile.module.sdxmod_insightMaker.production"
+            description="compile module sdxmod_insightMaker; test classes" unless="skip.tests">
+        <jar destfile="${sdxmod_insightMaker.output.jar.dir}/sdxmod_insightMaker.jar"
+             basedir="${sdxmod_insightMaker.output.classes.dir}">
+            <service type="org.sdxchange.plugin.api.SDXExportPlugin">
+                <provider classname="org.sdxchange.lang.insightMaker.plugin.PluginIdentity"/>
+            </service>
+        </jar>
+    </target>
+
+    <target name="clean.module.sdxmod_insightMaker" description="cleanup module">
+        <delete dir="${sdxmod_insightMaker.output.classes.dir}"/>
+        <delete dir="${sdxmod_insightMaker.output.jar.dir}"/>
+        <delete dir="${sdxmod_insightMaker.testoutput.dir}"/>
+    </target>
+</project>
