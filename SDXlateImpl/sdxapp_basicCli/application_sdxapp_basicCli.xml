@@ -56,6 +56,7 @@
     <target name="compile.application.sdxapp_basicCli.production"
             description="Compile module sdxapp_basicCli; production classes">
         <mkdir dir="${sdxapp_basicCli.output.classes.dir}"/>
+        <mkdir dir="${sdxapp_basicCli.output.jar.dir}"/>
         <javac destdir="${sdxapp_basicCli.output.classes.dir}" debug="${compiler.debug}"
                nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.sdxapp_basicCli}"/>
@@ -75,6 +76,7 @@
 
     <target name="compile.application.sdxapp_basicCli.tests" depends="compile.application.sdxapp_basicCli.production"
             description="compile module sdxapp_basicCli; test classes" unless="skip.tests">
+        <mkdir dir="${sdxapp_basicCli.output.jar.dir}"/>
         <jar destfile="${sdxapp_basicCli.output.jar.dir}/sdxapp_basicCli.jar"
              basedir="${sdxapp_basicCli.output.classes.dir}">
             <manifest>

@@ -61,6 +61,7 @@
 
     <target name="compile.module.sdx_core.production" description="Compile module sdx_core; production classes">
         <mkdir dir="${sdx_core.output.classes.dir}"/>
+        <mkdir dir="${sdx_core.output.jar.dir}"/>
         <javac destdir="${sdx_core.output.classes.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.sdx_core}"/>
             <bootclasspath refid="sdx_core.module.bootclasspath"/>

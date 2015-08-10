@@ -61,6 +61,7 @@
     <target name="compile.module.sdxmod_xmile.production"
             description="Compile module sdxmod_xmile; production classes">
         <mkdir dir="${sdxmod_xmile.output.classes.dir}"/>
+        <mkdir dir="${sdxmod_xmile.output.jar.dir}"/>
         <javac destdir="${sdxmod_xmile.output.classes.dir}" debug="${compiler.debug}"
                nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.sdxmod_xmile}"/>

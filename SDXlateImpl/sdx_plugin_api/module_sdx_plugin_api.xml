@@ -59,6 +59,7 @@
             description="Compile module sdx_plugin_api; production classes">
 
         <mkdir dir="${sdx_plugin_api.output.classes.dir}"/>
+        <mkdir dir="${sdx_plugin_api.output.jar.dir}"/>
         <javac destdir="${sdx_plugin_api.output.classes.dir}" debug="${compiler.debug}"
                nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.sdx_plugin_api}"/>

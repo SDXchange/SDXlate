@@ -61,6 +61,7 @@
     <target name="compile.module.sdxmod_insightMaker.production"
             description="Compile module sdxmod_insightMaker; production classes">
         <mkdir dir="${sdxmod_insightMaker.output.classes.dir}"/>
+        <mkdir dir="${sdxmod_insightMaker.output.jar.dir}"/>
         <javac destdir="${sdxmod_insightMaker.output.classes.dir}" debug="${compiler.debug}"
                nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.sdxmod_insightMaker}"/>
