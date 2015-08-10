@@ -5,14 +5,7 @@ import org.sdxchange.core.xframe.IXFrame;
 /**
  * Created by Ivan on 22.07.2015.
  */
-public interface SDXExportPlugin {
-    /**
-     * Returns a name of the output format
-     * which cam be processed by the plugin
-     * @return String format name
-     */
-    public String getSupportedModelFormat();
-
+public interface SDXExportPlugin extends SDXPlugin {
     /**
      * Serialize model to get a text-based interpretation of
      * given IXFrame object in a custom, know for the plugin

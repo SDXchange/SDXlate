@@ -32,6 +32,43 @@ public class Main {
             printHelp();
             return;
         }
+
+        ModelFileDescriptor inputMD = getDescriptor("-input", args);
+        ModelFileDescriptor outputMD = getDescriptor("-output", args);
+
+        if (null == inputMD)
+            System.out.println("!!! error !!! input model source was not specified");
+        else {
+            System.out.println("Input model definition:");
+            System.out.println(" - Model type:    " + inputMD.getModelFormat());
+            if (!ts.hasReaderForFormat(inputMD.getModelFormat()))
+                System.out.println("   !!! error !!! Reader for model type \"" +
+                        inputMD.getModelFormat() +
+                        "\" was not found");
+            System.out.println(" - Model location " + inputMD.getModelPath());
+        }
+
+        if (null == outputMD)
+            System.out.println("!!! error !!! output model source was not specified");
+        else {
+            System.out.println("Output model definition:");
+            System.out.println(" - Model type:    " + outputMD.getModelFormat());
+            if (!ts.hasWriterForFormat(outputMD.getModelFormat()))
+                System.out.println("   !!! error !!! Writer for model type \"" +
+                        outputMD.getModelFormat() +
+                        "\" was not found");
+            System.out.println(" - Model location " + outputMD.getModelPath());
+        }
+    }
+
+    private static ModelFileDescriptor getDescriptor(String argumentName, String[] args) {
+        for (int i = 0; i < args.length; i++) {
+            if (argumentName.equals(args[i]))
+                if (i < args.length - 1)
+                    return new ModelFileDescriptor(args[i+1]);
+        }
+
+        return null;
     }
 
     private static void printBanner() {

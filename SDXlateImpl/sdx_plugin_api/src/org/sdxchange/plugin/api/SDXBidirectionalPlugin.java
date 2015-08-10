@@ -12,14 +12,7 @@ import org.sdxchange.core.xframe.IXFrame;
  * From some custom format, known for the plugin to xFrame structure
  * From xFrame structure to some custom format, known for the plugin
  */
-public interface SDXBidirectionalPlugin {
-    /**
-     * Returns a name of the input and output format
-     * which cam be processed by the plugin
-     * @return String format name
-     */
-    public String getSupportedModelFormat();
-
+public interface SDXBidirectionalPlugin extends SDXPlugin {
     /**
      * Returns an IXFrame structure which is build from the
      * given model source in a custom way, implemented in

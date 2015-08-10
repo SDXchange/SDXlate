@@ -3,6 +3,7 @@ package org.sdxchange.plugin;
 import org.sdxchange.plugin.api.SDXBidirectionalPlugin;
 import org.sdxchange.plugin.api.SDXExportPlugin;
 import org.sdxchange.plugin.api.SDXImportPlugin;
+import org.sdxchange.plugin.api.SDXPlugin;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;
@@ -64,5 +65,31 @@ public class TranslationService {
      */
     public ServiceLoader<SDXBidirectionalPlugin> getModelReadWriters() {
         return modelReadWriters;
+    }
+
+
+    public<T extends SDXPlugin> T getHandlerByFormatName(String modelFormatName, ServiceLoader<T> loader){
+        Iterator<T> processors = loader.iterator();
+        while (processors.hasNext()) {
+            SDXPlugin plugin = processors.next();
+            if (plugin.getSupportedModelFormat().equals(modelFormatName))
+                return (T)plugin;
+
+        }
+        return null;
+    }
+
+    public boolean hasReaderForFormat(String modelFormatName) {
+        if (null == getHandlerByFormatName(modelFormatName, modelReaders))
+            if (null == getHandlerByFormatName(modelFormatName, modelReadWriters))
+                return false;
+        return true;
+    }
+
+    public boolean hasWriterForFormat(String modelFormatName) {
+        if (null == getHandlerByFormatName(modelFormatName, modelWriters))
+            if (null == getHandlerByFormatName(modelFormatName, modelReadWriters))
+                return false;
+        return true;
     }
 }
