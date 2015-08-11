@@ -4,13 +4,13 @@
 
 package org.sdxchange.apps;
 
+import org.sdxchange.core.xframe.IXFrame;
 import org.sdxchange.plugin.TranslationService;
 import org.sdxchange.plugin.api.SDXBidirectionalPlugin;
 import org.sdxchange.plugin.api.SDXExportPlugin;
 import org.sdxchange.plugin.api.SDXImportPlugin;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
 
 public class Main {
@@ -33,6 +33,9 @@ public class Main {
             return;
         }
 
+        /**
+         * Processing of command line arguments
+         */
         ModelFileDescriptor inputMD = getDescriptor("-input", args);
         ModelFileDescriptor outputMD = getDescriptor("-output", args);
 
@@ -59,6 +62,33 @@ public class Main {
                         "\" was not found");
             System.out.println(" - Model location " + outputMD.getModelPath());
         }
+        /**
+         * Processing of command line arguments (end)
+         */
+
+        /**
+         * Reading a model from the file and converting it to the
+         * IXFrame object
+         */
+        File file = new File(inputMD.getModelPath());
+        FileInputStream fis = new FileInputStream(file);
+        byte[] data = new byte[(int) file.length()];
+        fis.read(data);
+        fis.close();
+
+        String str = new String(data, "UTF-8");
+
+        IXFrame modelObject = ts.deserializeModelFromString(inputMD.getModelFormat(), str);
+
+        /**
+         * Converting IXFrame object to the target format and writing it to the
+         * output file
+         */
+        FileWriter writer = new FileWriter(outputMD.getModelPath());
+        writer.write(ts.serializeModelToString(outputMD.getModelFormat(),
+                modelObject));
+        writer.close();
+
     }
 
     private static ModelFileDescriptor getDescriptor(String argumentName, String[] args) {

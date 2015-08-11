@@ -2,6 +2,7 @@
 <project name="application_sdxapp_basicCli" default="compile.application.sdxapp_basicCli">
 
     <import file="${basedir}/sdx_plugin_api/module_sdx_plugin_api.xml"/>
+    <import file="${basedir}/sdx_core/module_sdx_core.xml"/>
 
     <dirname property="application.sdxapp_basicCli.basedir" file="${ant.file.application_sdxapp_basicCli}"/>
 
@@ -18,6 +19,7 @@
 
     <path id="sdxapp_basicCli.module.production.classpath">
         <pathelement location="${sdx_plugin_api.output.classes.dir}"/>
+        <pathelement location="${sdx_core.output.classes.dir}"/>
     </path>
 
     <path id="sdxapp_basicCli.runtime.production.module.classpath">
@@ -50,7 +52,7 @@
 
 
     <target name="compile.application.sdxapp_basicCli"
-            depends="build.modules, compile.module.sdx_plugin_api, compile.application.sdxapp_basicCli.production,compile.application.sdxapp_basicCli.tests"
+            depends="compile.module.sdx_core, build.modules, compile.module.sdx_plugin_api, compile.application.sdxapp_basicCli.production,compile.application.sdxapp_basicCli.tests"
             description="Compile module sdxapp_basicCli"/>
 
     <target name="compile.application.sdxapp_basicCli.production"
