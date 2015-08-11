@@ -1,5 +1,6 @@
 package org.sdxchange.plugin;
 
+import org.sdxchange.core.xframe.IXFrame;
 import org.sdxchange.plugin.api.SDXBidirectionalPlugin;
 import org.sdxchange.plugin.api.SDXExportPlugin;
 import org.sdxchange.plugin.api.SDXImportPlugin;
@@ -67,8 +68,75 @@ public class TranslationService {
         return modelReadWriters;
     }
 
+    /**
+     * Check does current instance of TranslationService has a reader
+     * for the model which format name was passed as a parameter
+     * @param modelFormatName name of the model format to be verified
+     * @return true in case reader was found. False in all other cases
+     */
+    public boolean hasReaderForFormat(String modelFormatName) {
+        if (null == getHandlerByFormatName(modelFormatName, modelReaders))
+            if (null == getHandlerByFormatName(modelFormatName, modelReadWriters))
+                return false;
+        return true;
+    }
 
-    public<T extends SDXPlugin> T getHandlerByFormatName(String modelFormatName, ServiceLoader<T> loader){
+    /**
+     * Check does current instance of TranslationService has a writer
+     * for the model which format name was passed as a parameter
+     * @param modelFormatName name of the model format to be verified
+     * @return true in case reader was found. False in all other cases
+     */
+    public boolean hasWriterForFormat(String modelFormatName) {
+        if (null == getHandlerByFormatName(modelFormatName, modelWriters))
+            if (null == getHandlerByFormatName(modelFormatName, modelReadWriters))
+                return false;
+        return true;
+    }
+
+    /**
+     * Build an IXFrame object from the model content and model format name
+     * @param modelFormatName name of the model format to load
+     * @param modelContent String representation of model content
+     * @return IXFrame object
+     */
+    public IXFrame deserializeModelFromString(String modelFormatName, String modelContent) {
+        SDXImportPlugin inLoader = getHandlerByFormatName(modelFormatName, modelReaders);
+        SDXBidirectionalPlugin biLoader = getHandlerByFormatName(modelFormatName, modelReadWriters);
+        if (null == inLoader)
+            if (null == biLoader)
+                throw new IllegalArgumentException("Invalid model format name \"" +
+                modelFormatName +
+                "\". Non of loaded plugins can load model of this type");
+            else
+                return biLoader.deserializeModel(modelContent);
+        else
+            return inLoader.deserializeModel(modelContent);
+
+    }
+
+    /**
+     * Serialize an IXFrame object to String representation in given model format
+     * @param modelFormatName name of the model format to written
+     * @param modelContent IXFrame object to be serialized to string
+     * @return IXFrame object
+     */
+    public String serializeModelToString(String modelFormatName, IXFrame modelContent) {
+        SDXExportPlugin outWriter = getHandlerByFormatName(modelFormatName, modelWriters);
+        SDXBidirectionalPlugin biWriter = getHandlerByFormatName(modelFormatName, modelReadWriters);
+        if (null == outWriter)
+            if (null == biWriter)
+                throw new IllegalArgumentException("Invalid model format name \"" +
+                        modelFormatName +
+                        "\". Non of loaded plugins can write model of this type");
+            else
+                return biWriter.serializeModel(modelContent);
+        else
+            return outWriter.serializeModel(modelContent);
+
+    }
+
+    private<T extends SDXPlugin> T getHandlerByFormatName(String modelFormatName, ServiceLoader<T> loader){
         Iterator<T> processors = loader.iterator();
         while (processors.hasNext()) {
             SDXPlugin plugin = processors.next();
@@ -77,19 +145,5 @@ public class TranslationService {
 
         }
         return null;
-    }
-
-    public boolean hasReaderForFormat(String modelFormatName) {
-        if (null == getHandlerByFormatName(modelFormatName, modelReaders))
-            if (null == getHandlerByFormatName(modelFormatName, modelReadWriters))
-                return false;
-        return true;
-    }
-
-    public boolean hasWriterForFormat(String modelFormatName) {
-        if (null == getHandlerByFormatName(modelFormatName, modelWriters))
-            if (null == getHandlerByFormatName(modelFormatName, modelReadWriters))
-                return false;
-        return true;
     }
 }
