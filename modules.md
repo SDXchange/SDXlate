@@ -1,11 +1,18 @@
 ---
 layout: page
 ---
-#Currently available modules of the sdXchange project
+# Currently available modules of the sdXchange project
 
-##sdx_core
+## sdx_core
 
-Version | Name | Features
--------:|------|----------
-1.0     |Alpha |<ul><li>Supports</li><li>lists</li><li>with HTML</li></ul>
+Property    | Value
+-----------:|--------------
+Module name | sdx_core
+Version     | 1.0
 
+### Description
+
+This is a very cool module :)
+* feature 1
+* feature 2
+* feature 3
