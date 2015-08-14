@@ -5,10 +5,11 @@ layout: page
 
 ## sdx_core
 
-Property    | Value
------------:|--------------
-Module name | sdx_core
-Version     | 1.0
+---------------------------------------------------------------------
+Property                        | Value
+-------------------------------:|------------------------------------
+Module name                     | sdx_core
+Version                         | 1.0
 
 ### Description
 
