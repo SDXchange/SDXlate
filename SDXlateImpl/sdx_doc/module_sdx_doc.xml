@@ -49,16 +49,10 @@
         <echo message="${line.separator}"
               append="true"
               file="${modules.doc.filePath}"/>
-        <echo message="---------------------------------------${line.separator}"
+        <echo message="---------------------------------------${line.separator}${line.separator}"
               append="true"
               file="${modules.doc.filePath}"/>
-        <echo message="${line.separator}"
-              append="true"
-              file="${modules.doc.filePath}"/>
-        <echo message="## ${docFile.module} ${line.separator}"
-              append="true"
-              file="${modules.doc.filePath}"/>
-        <echo message="${line.separator}"
+        <echo message="## ${docFile.module} ${line.separator}${line.separator}"
               append="true"
               file="${modules.doc.filePath}"/>
 
@@ -71,7 +65,7 @@
               append="true"
               file="${modules.doc.filePath}"/>
 
-        <echo message="### Description${line.separator}" append="true" file="${modules.doc.filePath}"/>
+        <echo message="### Description${line.separator}${line.separator}" append="true" file="${modules.doc.filePath}"/>
 
 
         <concat destfile="${modules.doc.filePath}"
