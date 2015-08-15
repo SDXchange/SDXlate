@@ -4,7 +4,6 @@ layout: page
 
 # Currently available modules of the sdXchange project
 
-
 ---------------------------------------
 
 ## sdx_core 
@@ -15,7 +14,6 @@ layout: page
 > Version                         | 1.0
 
 ### Description
-
 #### Overview
 
 This is core module of sdXchange project. It contains all key classes and interfaces, required to introduce new 
@@ -31,7 +29,6 @@ model types in the sdXchange echo system.
 > Version                         | 1.0
 
 ### Description
-
 #### Overview
 
 This module contains set of classes and interfaces which are required to 
