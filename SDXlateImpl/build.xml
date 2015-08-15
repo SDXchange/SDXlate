@@ -59,6 +59,8 @@
 
     <!-- Modules -->
 
+    <import file="${basedir}/sdx_doc/module_sdx_doc.xml"/>
+
     <import file="${basedir}/sdx_core/module_sdx_core.xml"/>
 
     <import file="${basedir}/sdx_plugin_api/module_sdx_plugin_api.xml"/>
