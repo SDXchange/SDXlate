@@ -14,6 +14,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.antlr.v4.runtime.tree.xpath.XPath;
 import org.junit.Test;
+import org.sdxchange.xmile.devkit.symbol.SymbolBase;
 import org.sdxchange.xmile.devkit.util.XUtil;
 
 public class TestXpathAccess {
@@ -72,7 +73,7 @@ public class TestXpathAccess {
                         ParserRuleContext target = (ParserRuleContext) f;
                         String baseName = src.getParent().getParent().start.getText();
                         baseName = target.start.getText();
-                        String liftName = DynamoSymbolFactory.createVarName(baseName);
+                        String liftName = SymbolBase.createVarName(baseName);
                         rewriter.insertBefore(src.getParent().getParent().getParent().start, "A\t"+liftName+"="+f.getText()+"\r\n");
                         rewriter.replace(target.start, target.stop, liftName);
 

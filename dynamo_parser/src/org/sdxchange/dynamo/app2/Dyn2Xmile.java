@@ -1,13 +1,14 @@
 package org.sdxchange.dynamo.app2;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -22,9 +23,9 @@ import org.sdxchange.dynamo.parser4.DynamoTreeListener;
 import org.sdxchange.dynamo.parser4.FunctionLiftListener;
 import org.sdxchange.dynamo.parser4.IXFrame;
 import org.sdxchange.dynamo.parser4.NormalizeListener;
-import org.sdxchange.dynamo.parser4.TestV4Parser;
 import org.sdxchange.dynamo.parser4.UserDefListener;
 import org.sdxchange.dynamo.parser4.XFrame;
+import org.sdxchange.xmile.devkit.util.XUtil;
 import org.sdxchange.xmile.devkit.util.XmlHelper;
 
 
@@ -99,7 +100,7 @@ public class Dyn2Xmile {
         out.println(xml);
     }
 
-    public XmileBuilder genXmile(String path) throws IOException{
+    public XmileBuilder genXmile(String path) throws Exception{
         XFrame frame = processFile(path);
         lastFrame=frame;
         GraphEditor editor = new FixedGraphEditor();
@@ -111,16 +112,16 @@ public class Dyn2Xmile {
         builder.applyDefaultFrame(frame);
         return builder;
     }
-    public static XFrame processFile(String path) throws IOException {
+    public static XFrame processFile(String path) throws Exception {
         //pass0 collects info necessary to reliably normalize array references and to recognize reference types.
-        InputStream inStream = TestV4Parser.getFileInput(path);
+        InputStream inStream = XUtil.getFileInput(path);
         UserDefListener listener = new UserDefListener();
         performPass(inStream, listener);
         System.out.println("Pass0 finds array names: "+listener.getArrayNames());
         inStream.close();
 
         //pass1 performs token level normalization, to minimize work in the symbol collection phase and in code generation.
-        inStream = TestV4Parser.getFileInput(path);
+        inStream = XUtil.getFileInput(path);
         NormalizeListener pass1Listener = new NormalizeListener();
         pass1Listener.setDefinitions("ArrayNames", listener.getArrayNames());
         TContext tree = performPass(inStream,pass1Listener);
@@ -164,23 +165,18 @@ public class Dyn2Xmile {
         return tree;
     }
 
-
-
-    private static InputStream getInputStream(String resourcePath) throws Exception {
-        FileInputStream rval;
-        try {
-            rval = new FileInputStream(getFileLoc(resourcePath));
-        } catch (Exception  e ) {
-            e.printStackTrace();
-            throw new Exception("Cannot open file at "+resourcePath +"\n"+ e.getMessage());
-        }
-        return rval;
-    }
-
+    @Deprecated
     private static String getFileLoc(String fileLoc){
+
+        String currentDir = Paths.get(".").toAbsolutePath().normalize().toString();
+
+        System.out.println("Paths computes: "+ Paths.get(".").toAbsolutePath().normalize().toString());
+
+
 //      URL dir = this.getClass().getResource(".");
 //        System.out.println(dir.getFile());
-        String rval = System.getProperty("user.dir") + fileLoc;
+
+        String rval = currentDir + File.separator + fileLoc;
         System.out.println("Looking for file at absolute path "+rval);
         return rval;
 //        URL url = this.getClass().getResource(dir.getFile()+"../../.."+fileLoc);

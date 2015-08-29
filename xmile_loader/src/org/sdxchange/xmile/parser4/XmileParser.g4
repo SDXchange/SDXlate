@@ -13,6 +13,7 @@ package org.sdxchange.xmile.parser4;
 	
 expr: 
 	arrayRef 
+	|ifExpr
 	|funcRef 
 	|macroRef 
 	|LPAREN expr RPAREN
@@ -34,7 +35,9 @@ arrayRef:
 	|ID  LPAREN exprList RPAREN
 	;
 
-	
+ifExpr:
+	| IF expr THEN expr ELSE expr
+	;
 	
 numLit:
 	(PLUS|MINUS)? (INTEGER|FNUM)
@@ -42,12 +45,14 @@ numLit:
 		
 	
 funcRef: 
-	builtin LPAREN exprList RPAREN
-	| DT
+	TIMEFUNC LPAREN RPAREN
+	| TIMEFUNC (LPAREN exprList RPAREN)
+	| TIMEFUNC
+	| builtin LPAREN exprList RPAREN
 	;
 
 builtin:
-	MATHFUNC | STATFUNC | DLYFUNC | TESTFUNC | MISCFUNC
+	MATHFUNC | STATFUNC | DLYFUNC | TESTFUNC | MISCFUNC 
 	;
 		
 macroRef:

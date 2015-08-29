@@ -17,18 +17,18 @@ import org.sdxchange.xmile.devkit.symbol.XSymbol;
 
 public class BaseXframe implements IXFrame {
 
-    private String name;
-    private Map<String, XSymbol> definedVars = new HashMap<String, XSymbol>();
-    private Map<String,InitContext> initializers = new HashMap<String, InitContext>();
-    private Set<String> arrayIndexValues = new HashSet<String>();
-    private SimSpecs specs = new SimSpecs();
-    private List<Pane> graphs = new ArrayList<Pane>();
-    private List<Pane> tables = new ArrayList<Pane>();
-    private Dimensions paneDim;
-    private String simulationName="";
-    private ViewParams viewParams = new ViewParams();
-    private TargetPolicy targetPolicy = null;
-    private List<ConnectorSymbol> connectors = new ArrayList<ConnectorSymbol>();
+    protected  String name;
+    protected  Map<String, XSymbol> definedVars = new HashMap<String, XSymbol>();
+    protected  Map<String,InitContext> initializers = new HashMap<String, InitContext>();
+    protected  Set<String> arrayIndexValues = new HashSet<String>();
+    protected  SimSpecs specs = new SimSpecs();
+    protected  List<Pane> graphs = new ArrayList<Pane>();
+    protected  List<Pane> tables = new ArrayList<Pane>();
+    protected  Dimensions paneDim;
+    protected  String simulationName="";
+    protected  ViewParams viewParams = new ViewParams();
+    protected  TargetPolicy targetPolicy = null;
+    protected  List<ConnectorSymbol> connectors = new ArrayList<ConnectorSymbol>();
 
     public BaseXframe(String frameName) {
         this.name = frameName;

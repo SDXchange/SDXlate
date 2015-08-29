@@ -30,7 +30,7 @@ import org.sdxchange.xmile.devkit.xframe.SimSpecs;
 public class DynamoSymbolFactory implements SymbolFactory {
 
     DynamoParser parser;
-    static int nextSynthSerial = 0;
+//    static int nextSynthSerial = 0;
 
     public DynamoSymbolFactory(DynamoParser parser){
         this.parser = parser;
@@ -377,13 +377,6 @@ public class DynamoSymbolFactory implements SymbolFactory {
     public static String stripTimeScript(String strExpr) {
         return strExpr.replaceAll("\\.[JKL]+", "");
     }
-
-    public static String createVarName(String baseName) {
-        String pad = "0000000000";
-        String suffix = pad + (nextSynthSerial++);
-        return baseName.substring(0,Math.min(baseName.length(),5))+"_SDX"+suffix.substring(suffix.length()-4);
-    }
-
     /* This is called for initialization nodes that do not correspond to a declared stock. These cards are
      * expressions which should be evaluated only once, using initial values from variables referenced in the
      * equation. Once an initializer has been determined to belong to this class, it is called so that an

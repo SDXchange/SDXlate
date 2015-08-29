@@ -56,5 +56,9 @@ public interface XSymbol {
 
     public DrawingAttributes getDrawingAttrs();
 
+    public boolean hasComplexEqn();
+
+    public void clearDependencies();
+
 
 }

@@ -1,7 +1,6 @@
 CI Backlog
 ===================================================
 Fix xmile generation so top-level table doesn't generate both nested and top level output. See Bug1.xmile
-Build jar for Dyn2Xmile
 Update build targets and scripts to conform to new project structure and ANTLR4 requirements.
 Regenerate xmile marshallers (jaxb)
 Regenerate dynamo parser lexer /dynamoParser.g4 dynamolexer.g4
@@ -13,20 +12,19 @@ copy all xmile files to end-user library page.
 
 Backlog Architectural/DevKit
 =====================================================
+Add dimension information to each symbol. Translations from dynamo should always be dimensionless. 
 Refactor to eliminate dynamo and other upward dependencies from devkit. 
 Add Policy object to control spacing in generated displays.
 
 
 Backlog Dynamo parser
 =================================================
+Correct builtIn handling so that all builtins which aren't a perfect match (and that includes dimension behavior) are mapped to DYN.BUILTIN() macro calls. 
 
 Map TABLE vs TABHL differences
-
-
 Push new version
 Grammar rule for array initializers (T ID[*] = x,x,x) They cause a problem because treating as table fails to find tInfo. 
 
-Test "compact if/else" in insight maker. 
 map plot  start and stop times
 map axis ranges.
 
@@ -53,18 +51,12 @@ load intermediate form into symbol table
 
 Backlog InsightMaker Output Adapters
 ================================================
-Isolate Graph inputs
-Substitute for Time and cancel dimension if dimensionless. 
-Substitute for SMTH1
-Define IF/THEN/ELSE to avoid brackets attempt to find uid. 
+
 
 Backlog Stella Output Adapter
 ===============================================
-package Stella adapter as jar file. 
-Test that Stella executing from jar finds files. 
 Modify xslt to fix reporting interval problem
 Add limitations to usage message. 
-
 
 Backlog Stella to Xmile
 ===================================================
@@ -72,8 +64,21 @@ Test how much we can accomplish in a Java-based XSL transform
 
  Completed
  ==========================================
+ 2015-07-31 InsightMaker: Pre-define macro for IF_THEN_ELSE();
+ 2015-07-31 InsightMaker: Convert if..then..else to compact form. required new parser rule to recognize if ... then...else statement. 
+ 2015-07-31 InsightMaker: XML escape everything (embedded in attr() function)  as part of marshalling. 
+ 2015-07-30 Test "compact if/else" in insight maker. Works as expected if relational op is XML escaped. 
+ 2015-07-30 Define IF/THEN/ELSE to avoid brackets attempt to find uid. Added many pre-defined symbols to grammar to assure 
+            equations would still parse after modifications.  
+ 2015-07-30 XmileLoader, fix problem in grammar that was generateing error node when parsing function call without parens. 
+ 2015-07-30 InsightMaker, define SMTH1(a,b) macro. 
+ 2015-07-30 InsightMaker, map TIME to SDX_TIME() macro include macro def by default
+ 2015-07-29 InsightMaker, Isolate Graph Inputs
+ 2015-07-28 package Stella adapter as jar file. 
+ 2015-07-28 Test that Stella executing from jar finds files. 
+ 2015-07-27 Build jar for Dyn2Xmile
  2015-07-18 Wrap stella transform in CLI
- 2015-07-18  Fix problem with stella xslt losing GF with new Dynamo xmile
+ 2015-07-18 Fix problem with stella xslt losing GF with new Dynamo xmile
  2015-07-18 eliminate use of m4, (shouldn't be necessary with new Dyn2Xmile.) in Stella Adapter
  2015-07-18 Perform xsl transform from Java
  2015-07-18 Retest Stella xslt adapter

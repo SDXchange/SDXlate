@@ -1,12 +1,10 @@
 package org.sdxchange.stella.writer.app;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.net.URL;
 
 import org.sdxchange.stella.transform.StellaTransform;
 import org.sdxchange.xmile.devkit.util.XUtil;
@@ -50,12 +48,13 @@ public class Xmile2Stella {
         try {
             String baseName = getBaseName(inFileName);
             System.out.println("Seeking url for "+baseName+kInputExt);
-            URL url = this.getClass().getResource(baseName+kInputExt);
-            String resourcePath = url.getFile();
-            System.out.println(resourcePath);
-            inStream = new FileInputStream(resourcePath);
+//            URL url = this.getClass().getResource(baseName+kInputExt);
+//            String resourcePath = url.getFile();
+//            System.out.println(resourcePath);
+            inStream = XUtil.getFileInput(inFileName);
 
-            String path = XUtil.getFileLoc(baseName+kOutputExt);
+            String path = XUtil.getFilePath(baseName+kOutputExt);
+            System.out.println("Writing to "+path);
             outStream = new FileOutputStream(path);
             transform.transform(inStream, outStream);
 

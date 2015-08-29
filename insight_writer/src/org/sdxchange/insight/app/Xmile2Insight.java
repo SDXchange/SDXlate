@@ -15,7 +15,7 @@ public class Xmile2Insight {
     public static final String kOutputExt = "InsightMaker";
     public static final String kSymtabExt = "sym";
     public static final String kUsageMsg =
-            "Usage: java -jar dyn2xmile.jar <relative file path>";
+            "Usage: java -jar xmile2insight.jar <relative file path>";
 
     public static void main(String[] argv){
         //argv[1] is source file, relative or absolute, with input extension
@@ -51,8 +51,13 @@ public class Xmile2Insight {
             symOut   = getWriter(baseName+kSymtabExt);
 
             XmileLoader loader = new XmileLoader();
-            XmileFrame frame = loader.load(inFileName);
-            InsightBuilder builder = new InsightBuilder(frame);
+            ImFrame xModel = new ImFrame("");
+            XmileFrame frame = loader.load(inFileName, xModel);
+            xModel.refactorTableInputs();
+            xModel.inlineInitTerms();
+            xModel.mapTimeReferences();
+            xModel.mapIfThenExprs();
+            InsightBuilder builder = new InsightBuilder(xModel);
             InsightGraph model = builder.genGraph();
             String output = model.marshal();
             writer.println(output);
@@ -77,10 +82,11 @@ public class Xmile2Insight {
 
     }
 
+
     private PrintWriter getWriter(String string) throws Exception {
         String path = string;
         try {
-            path = XUtil.getFileLoc(string);
+            path = XUtil.getFilePath(string);
             return new PrintWriter(new FileOutputStream(path));
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -9,8 +9,8 @@ import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.sdxchange.dynamo.parser4.DynamoParser;
 import org.sdxchange.dynamo.parser4.DynamoParserBaseListener;
 import org.sdxchange.dynamo.parser4.DynamoParserListener;
-import org.sdxchange.dynamo.parser4.DynamoSymbolFactory;
 import org.sdxchange.dynamo.parser4.DynamoTreeListener;
+import org.sdxchange.xmile.devkit.symbol.SymbolBase;
 
 public class TableLiftListener
 extends DynamoParserBaseListener implements DynamoParserListener, DynamoTreeListener {
@@ -53,7 +53,7 @@ extends DynamoParserBaseListener implements DynamoParserListener, DynamoTreeList
             //getTableName
             String tName = ctx.exprList().expr().get(0).getText();
             //create aux variable (using tablename) with existing text
-            String auxName = DynamoSymbolFactory.createVarName(tName);
+            String auxName = SymbolBase.createVarName(tName);
             System.err.println("Planning to lift "+ctx.getText());
             ParserRuleContext card = findContainingCard(ctx);
             rewriter.insertAfter(card.stop, "\r\nA\t"+auxName+"="+ctx.getText());

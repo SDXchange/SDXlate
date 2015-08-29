@@ -41,9 +41,9 @@ public class TestWalker {
     }
 
     @Test
-    public void testPath(){
+    public void testPath() throws Exception{
         XmileLoader loader = new XmileLoader();
-        XmileFrame frame =  loader.load("/pugh_p96.xmile");
+        XmileFrame frame =  loader.load("/pugh_p96.xmile", new XmileFrame(""));
         System.out.println("=========Variables================");
         System.out.println(frame.dumpSymbols());
         System.out.println("========Connectors================");
@@ -55,9 +55,9 @@ public class TestWalker {
     }
 
     @Test
-    public void testPathIm(){
+    public void testPathIm() throws Exception{
         XmileLoader loader = new XmileLoader();
-        XmileFrame frame =  loader.load("/pugh_p96im.xmile");
+        XmileFrame frame =  loader.load("/pugh_p96im.xmile", new XmileFrame(""));
         System.out.println("=========Variables================");
         System.out.println(frame.dumpSymbols());
         System.out.println("========Connectors================");

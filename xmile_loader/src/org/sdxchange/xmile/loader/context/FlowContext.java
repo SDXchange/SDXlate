@@ -10,7 +10,7 @@ import org.sdxchange.xmile.loader.parse.ParseUtil;
 import org.sdxchange.xmile.parser4.XmileParser.ExprContext;
 
 public class FlowContext extends FlowSymbolBase
-implements FlowSymbol, DispatchEnabled{
+implements FlowSymbol, DispatchEnabled, ParsedEqn {
 
     private Flow docNode;
     private VarAttrs wrapped;
@@ -39,6 +39,13 @@ implements FlowSymbol, DispatchEnabled{
         setInputs(XmileContextFactory.getInputVars(eqnParseTree));
         super.setEqn(eqn);
     }
+    
+
+    @Override
+    public ExprContext getEqnParseTree() {
+        return eqnParseTree;
+    }
+
 
     @Override
     public String dump(){

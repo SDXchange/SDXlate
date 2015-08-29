@@ -21,7 +21,7 @@ public class LinkNode extends BaseImNode {
     @Override
     public String marshall(){
         String rval = "<Link "
-                + attr("name", name)
+//                + attr("name", name)
                 + attr("id", id)
                 + attr("BiDirectional",false)
                 + ">\n";

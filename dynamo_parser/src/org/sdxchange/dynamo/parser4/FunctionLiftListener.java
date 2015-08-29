@@ -16,6 +16,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.xpath.XPath;
 import org.sdxchange.dynamo.parser4.DynamoParser.ExprContext;
+import org.sdxchange.xmile.devkit.symbol.SymbolBase;
 
 
 public class FunctionLiftListener
@@ -81,7 +82,7 @@ extends DynamoParserBaseListener implements DynamoParserListener, DynamoTreeList
                         ParserRuleContext target = (ParserRuleContext) f;
                         String baseName = src.getParent().getParent().start.getText();
                         baseName = target.start.getText();
-                        String liftName = DynamoSymbolFactory.createVarName(baseName);
+                        String liftName = SymbolBase.createVarName(baseName);
                         //create new aux
                         rewriter.insertBefore(src.getParent().getParent().getParent().start,
                                 NormalizeListener.stripTimeScript("A\t" + liftName + "=" + f.getText() + "\r\n"));

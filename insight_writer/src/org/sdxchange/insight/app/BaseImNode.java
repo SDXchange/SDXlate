@@ -1,5 +1,7 @@
 package org.sdxchange.insight.app;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 public abstract class BaseImNode implements ImNode {
 
     boolean edge;
@@ -240,7 +242,8 @@ public abstract class BaseImNode implements ImNode {
     }
 
     public String attr(String name, String val) {
-        return name +"=\""+val+"\" ";
+        String escapedValue = StringEscapeUtils.escapeXml10(val);
+        return name +"=\""+escapedValue+"\" ";
     }
 
     public String attr(String name, int val) {

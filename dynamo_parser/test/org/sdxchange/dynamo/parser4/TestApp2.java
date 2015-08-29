@@ -3,8 +3,6 @@ package org.sdxchange.dynamo.parser4;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-
 import org.junit.Test;
 import org.oasis.xmile.v1_0.Xmile;
 import org.sdxchange.dynamo.app2.Dyn2Xmile;
@@ -62,7 +60,7 @@ public class TestApp2 {
 
 
     @Test
-    public void testApp2MinTable() throws IOException{
+    public void testApp2MinTable() throws Exception{
         Dyn2Xmile app = new Dyn2Xmile();
         XmileBuilder builder = app.genXmile("/tableonly.dyn");
         Xmile doc = builder.getDocument();
@@ -73,7 +71,7 @@ public class TestApp2 {
     }
 
     @Test
-    public void testTableFix() throws IOException {
+    public void testTableFix() throws Exception {
         Dyn2Xmile app = new Dyn2Xmile();
         XmileBuilder builder = app.genXmile("/tabledata.dyn");
         Xmile doc = builder.getDocument();

@@ -12,7 +12,7 @@ import org.sdxchange.xmile.loader.parse.ParseUtil;
 import org.sdxchange.xmile.parser4.XmileParser.ExprContext;
 
 public class AuxvarContext extends AuxSymbolBase
-implements AuxSymbol, DispatchEnabled, XSymbol
+implements AuxSymbol, DispatchEnabled, XSymbol, ParsedEqn
 {
 
     private XmileContextFactory ctxFactory = null;
@@ -34,6 +34,14 @@ implements AuxSymbol, DispatchEnabled, XSymbol
             nestedTable = ctxFactory.createGfContext(wrapped.getNestedTable());
         }
 
+    }
+
+    public AuxvarContext(String name, String eqn){
+        super.name=name;
+        this.ctxFactory = XmileContextFactory.getInstance();
+        setEqn(eqn);
+        hasNestedTable = false;
+        docNode = null;
     }
 
     @Override
@@ -58,6 +66,22 @@ implements AuxSymbol, DispatchEnabled, XSymbol
         else {
             return dump();
         }
+    }
+
+    @Override
+    public boolean hasComplexEqn(){
+        if (eqn == null) {
+            return false;
+        }
+        if (eqnParseTree == null) { //sync problem, fix it
+            eqnParseTree = ctxFactory.createExprContext(eqn);
+        }
+        return (eqnParseTree.children.size() > 1 ) ;
+    }
+
+    @Override
+    public ExprContext getEqnParseTree() {
+        return eqnParseTree;
     }
 
 }

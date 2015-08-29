@@ -2,8 +2,6 @@ package org.sdxchange.insight.app;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
-
 import org.junit.Test;
 import org.oasis.xmile.devkit.view.edit.FixedGraphEditor;
 import org.sdxchange.xmile.loader.XmileFrame;
@@ -14,9 +12,9 @@ public class TestInsight {
 
 
     @Test
-    public void testPugh96() throws IOException{
+    public void testPugh96() throws Exception{
         XmileLoader loader = new XmileLoader();
-        XmileFrame frame = loader.load("/pugh_p96.xmile");
+        XmileFrame frame = loader.load("/pugh_p96.xmile", new ImFrame(""));
         InsightBuilder builder = new InsightBuilder(frame);
         InsightGraph model = builder.genGraph();
         String output = model.marshal();
@@ -26,9 +24,9 @@ public class TestInsight {
     }
 
     @Test
-    public void testPugh96im() throws IOException{
+    public void testPugh96im() throws Exception{
         XmileLoader loader = new XmileLoader();
-        XmileFrame frame = loader.load("/pugh_p96im.xmile");
+        XmileFrame frame = loader.load("/pugh_p96im.xmile", new ImFrame(""));
         InsightBuilder builder = new InsightBuilder(frame);
         InsightGraph model = builder.genGraph();
         String output = model.marshal();
@@ -37,9 +35,9 @@ public class TestInsight {
     }
 
     @Test
-    public void testPdfIm()  throws IOException{
+    public void testPdfIm()  throws Exception{
         XmileLoader loader = new XmileLoader();
-        XmileFrame frame = loader.load("/pdf.xmile");
+        XmileFrame frame = loader.load("/pdf.xmile", new ImFrame(""));
         InsightBuilder builder = new InsightBuilder(frame);
         InsightGraph model = builder.genGraph();
         String output = model.marshal();
@@ -48,9 +46,9 @@ public class TestInsight {
     }
 
     @Test
-    public void testTeacup()  throws IOException{
+    public void testTeacup()  throws Exception{
         XmileLoader loader = new XmileLoader();
-        XmileFrame frame = loader.load("/teacup.xmile");
+        XmileFrame frame = loader.load("/teacup.xmile", new ImFrame(""));
         InsightBuilder builder = new InsightBuilder(frame);
         InsightGraph model = builder.genGraph();
         String output = model.marshal();

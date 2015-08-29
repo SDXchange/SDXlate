@@ -5,13 +5,13 @@ import org.junit.Test;
 public class TestInsightApp {
     @Test
     public void testApp2p211(){
-        String[] argv = {"/pugh_p211im.xmile"};
+        String[] argv = {"/pugh_p211.xmile"};
         Xmile2Insight.main(argv);
     }
 
     @Test
     public void testApp2p96im(){
-        String[] argv = {"/pugh_p96im.xmile"};
+        String[] argv = {"/pugh_p96.xmile"};
         Xmile2Insight.main(argv);
     }
     @Test
