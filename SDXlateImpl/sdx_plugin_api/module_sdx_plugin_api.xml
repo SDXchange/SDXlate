@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sdx_plugin_api" default="compile.module.sdx_plugin_api">
+
+    <import file="${basedir}/sdx_core/module_sdx_core.xml"/>
+
+    <dirname property="module.sdx_plugin_api.basedir" file="${ant.file.module_sdx_plugin_api}"/>
+
+
+    <property name="compiler.args.sdx_plugin_api" value="-encoding windows-1252 -source 7 ${compiler.args}"/>
+
+    <property name="sdx_plugin_api.output.classes.dir" value="${module.sdx_plugin_api.basedir}/build/classes"/>
+    <property name="sdx_plugin_api.output.jar.dir" value="${module.sdx_plugin_api.basedir}/build/lib"/>
+    <property name="sdx_plugin_api.testoutput.dir" value="${module.sdx_plugin_api.basedir}/build/test/classes"/>
+
+    <path id="sdx_plugin_api.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="sdx_plugin_api.module.production.classpath">
+        <pathelement location="${sdx_core.output.classes.dir}"/>
+    </path>
+
+    <path id="sdx_plugin_api.runtime.production.module.classpath">
+        <pathelement location="${sdx_plugin_api.output.classes.dir}"/>
+    </path>
+
+    <path id="sdx_plugin_api.module.classpath">
+        <pathelement location="${sdx_plugin_api.output.classes.dir}"/>
+    </path>
+
+    <path id="sdx_plugin_api.runtime.module.classpath">
+        <pathelement location="${sdx_plugin_api.testoutput.dir}"/>
+        <pathelement location="${sdx_plugin_api.output.classes.dir}"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.sdx_plugin_api">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.sdx_plugin_api">
+        <patternset refid="excluded.from.module.sdx_plugin_api"/>
+    </patternset>
+
+    <path id="sdx_plugin_api.module.sourcepath">
+        <dirset dir="${module.sdx_plugin_api.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.sdx_plugin_api"
+            depends="compile.module.sdx_core,
+                        compile.module.sdx_plugin_api.production,
+                        compile.module.sdx_plugin_api.tests"
+            description="Compile module sdx_plugin_api"/>
+
+    <target name="compile.module.sdx_plugin_api.production"
+            description="Compile module sdx_plugin_api; production classes">
+
+        <mkdir dir="${sdx_plugin_api.output.classes.dir}"/>
+        <mkdir dir="${sdx_plugin_api.output.jar.dir}"/>
+        <javac destdir="${sdx_plugin_api.output.classes.dir}" debug="${compiler.debug}"
+               nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+            <compilerarg line="${compiler.args.sdx_plugin_api}"/>
+            <bootclasspath refid="sdx_plugin_api.module.bootclasspath"/>
+            <classpath refid="sdx_plugin_api.module.production.classpath"/>
+            <src refid="sdx_plugin_api.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.sdx_plugin_api"/>
+        </javac>
+
+        <copy todir="${sdx_plugin_api.output.classes.dir}">
+            <fileset dir="${module.sdx_plugin_api.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.sdx_plugin_api.tests" depends="compile.module.sdx_plugin_api.production"
+            description="compile module sdx_plugin_api; test classes" unless="skip.tests">
+        <jar destfile="${sdx_plugin_api.output.jar.dir}/sdx_plugin_api.jar"
+             basedir="${sdx_plugin_api.output.classes.dir}"/>
+    </target>
+
+    <target name="clean.module.sdx_plugin_api" description="cleanup module">
+        <delete dir="${sdx_plugin_api.output.classes.dir}"/>
+        <delete dir="${sdx_plugin_api.testoutput.dir}"/>
+    </target>
+</project>

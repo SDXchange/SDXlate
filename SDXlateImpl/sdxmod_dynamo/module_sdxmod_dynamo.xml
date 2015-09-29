@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sdxmod_dynamo" default="compile.module.sdxmod_dynamo">
+
+    <import file="${basedir}/sdx_plugin_api/module_sdx_plugin_api.xml"/>
+    <import file="${basedir}/sdx_core/module_sdx_core.xml"/>
+
+    <dirname property="module.sdxmod_dynamo.basedir" file="${ant.file.module_sdxmod_dynamo}"/>
+
+
+    <property name="compiler.args.sdxmod_dynamo" value="-encoding windows-1252 -source 7 ${compiler.args}"/>
+
+    <property name="sdxmod_dynamo.output.classes.dir" value="${module.sdxmod_dynamo.basedir}/build/classes"/>
+    <property name="sdxmod_dynamo.output.jar.dir" value="${module.sdxmod_dynamo.basedir}/build/lib"/>
+    <property name="sdxmod_dynamo.testoutput.dir" value="${module.sdxmod_dynamo.basedir}/build/test/classes"/>
+
+    <path id="sdxmod_dynamo.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="sdxmod_dynamo.module.production.classpath">
+        <pathelement location="${sdx_plugin_api.output.classes.dir}"/>
+        <pathelement location="${sdx_core.output.classes.dir}"/>
+    </path>
+
+    <path id="sdxmod_dynamo.runtime.production.module.classpath">
+        <pathelement location="${sdxmod_dynamo.output.classes.dir}"/>
+    </path>
+
+    <path id="sdxmod_dynamo.module.classpath">
+        <pathelement location="${sdxmod_dynamo.output.classes.dir}"/>
+    </path>
+
+    <path id="sdxmod_dynamo.runtime.module.classpath">
+        <pathelement location="${sdxmod_dynamo.testoutput.dir}"/>
+        <pathelement location="${sdxmod_dynamo.output.classes.dir}"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.sdxmod_dynamo">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.sdxmod_dynamo">
+        <patternset refid="excluded.from.module.sdxmod_dynamo"/>
+    </patternset>
+
+    <path id="sdxmod_dynamo.module.sourcepath">
+        <dirset dir="${module.sdxmod_dynamo.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.sdxmod_dynamo"
+            depends="compile.module.sdx_plugin_api,
+                        compile.module.sdx_core,
+                        compile.module.sdxmod_dynamo.production,
+                        compile.module.sdxmod_dynamo.tests"
+            description="Compile module sdxmod_dynamo"/>
+
+    <target name="compile.module.sdxmod_dynamo.production"
+            description="Compile module sdxmod_dynamo; production classes">
+        <mkdir dir="${sdxmod_dynamo.output.classes.dir}"/>
+        <mkdir dir="${sdxmod_dynamo.output.jar.dir}"/>
+        <javac destdir="${sdxmod_dynamo.output.classes.dir}" debug="${compiler.debug}"
+               nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+            <compilerarg line="${compiler.args.sdxmod_dynamo}"/>
+            <bootclasspath refid="sdxmod_dynamo.module.bootclasspath"/>
+            <classpath refid="sdxmod_dynamo.module.production.classpath"/>
+            <src refid="sdxmod_dynamo.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.sdxmod_dynamo"/>
+        </javac>
+
+        <copy todir="${sdxmod_dynamo.output.classes.dir}">
+            <fileset dir="${module.sdxmod_dynamo.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.sdxmod_dynamo.tests" depends="compile.module.sdxmod_dynamo.production"
+            description="compile module sdxmod_dynamo; test classes" unless="skip.tests">
+        <jar destfile="${sdxmod_dynamo.output.jar.dir}/sdxmod_dynamo.jar"
+             basedir="${sdxmod_dynamo.output.classes.dir}">
+            <service type="org.sdxchange.plugin.api.SDXImportPlugin">
+                <provider classname="org.sdxchange.lang.dynamo.plugin.PluginIdentity"/>
+            </service>
+        </jar>
+    </target>
+
+    <target name="clean.module.sdxmod_dynamo" description="cleanup module">
+        <delete dir="${sdxmod_dynamo.output.classes.dir}"/>
+        <delete dir="${sdxmod_dynamo.output.jar.dir}"/>
+        <delete dir="${sdxmod_dynamo.testoutput.dir}"/>
+    </target>
+</project>

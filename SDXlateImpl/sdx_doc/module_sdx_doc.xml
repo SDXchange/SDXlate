@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sdx_doc" default="build.modules.doc">
+    <dirname property="module.sdx_doc.basedir" file="${ant.file.module_sdx_doc}"/>
+
+    <property name="sdx_doc.header.path" value="${module.sdx_doc.basedir}/src/modulesPageHeader.md"/>
+    <property name="sdx_doc.footer.path" value="${module.sdx_doc.basedir}/src/modulesPageFooter.md"/>
+
+    <property name="sdx_doc.output.dir" value="${module.sdx_doc.basedir}/build/modules"/>
+
+    <property name="modules.doc.filePath" value="${sdx_doc.output.dir}/modules.md"/>
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="${module.sdx_doc.basedir}/lib/ant-contrib-0.6.jar"/>
+        </classpath>
+    </taskdef>
+
+
+    <target name="build.modules.doc">
+        <delete dir="${sdx_doc.output.dir}"/>
+
+        <concat destfile="${modules.doc.filePath}"
+                append="true"
+                fixlastline="yes">
+            <fileset file="${sdx_doc.header.path}"/>
+        </concat>
+
+        <foreach target="appendModuleDoc" param="moduleDocFile">
+            <fileset dir="${module.sdx_doc.basedir}/../" casesensitive="yes">
+                <include name="**/module.md"/>
+            </fileset>
+        </foreach>
+
+        <concat destfile="${modules.doc.filePath}"
+                append="true"
+                fixlastline="yes">
+            <fileset file="${sdx_doc.footer.path}"/>
+        </concat>
+    </target>
+
+    <target name="appendModuleDoc">
+        <dirname property="docFile.location" file="${moduleDocFile}"/>
+        <basename property="docFile.module" file="${docFile.location}"/>
+
+        <echo message="Doc file: ${docFile.location}"/>
+        <echo message="Doc module: ${docFile.module}"/>
+
+
+        <echo message="${line.separator}"
+              append="true"
+              file="${modules.doc.filePath}"/>
+        <echo message="---------------------------------------${line.separator}${line.separator}"
+              append="true"
+              file="${modules.doc.filePath}"/>
+        <echo message="## ${docFile.module} ${line.separator}${line.separator}"
+              append="true"
+              file="${modules.doc.filePath}"/>
+
+        <echo message="> Property                        | Value${line.separator}" append="true" file="${modules.doc.filePath}"/>
+        <echo message="> --------------------------------|------------------------------------${line.separator}" append="true" file="${modules.doc.filePath}"/>
+        <echo message="> Module name                     | ${docFile.module}${line.separator}" append="true" file="${modules.doc.filePath}"/>
+        <echo message="> Version                         | 1.0${line.separator}" append="true" file="${modules.doc.filePath}"/>
+
+        <echo message="${line.separator}"
+              append="true"
+              file="${modules.doc.filePath}"/>
+
+        <echo message="### Description${line.separator}${line.separator}" append="true" file="${modules.doc.filePath}"/>
+
+
+        <concat destfile="${modules.doc.filePath}"
+                append="true"
+                fixlastline="yes">
+            <fileset file="${moduleDocFile}" />
+        </concat>
+    </target>
+
+</project>

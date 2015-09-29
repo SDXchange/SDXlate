@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="sdxlate" default="all">
+
+
+    <property file="build.properties"/>
+    <!-- Uncomment the following property if no tests compilation is needed -->
+    <!--
+    <property name="skip.tests" value="true"/>
+     -->
+
+    <!-- Compiler options -->
+
+    <property name="compiler.debug" value="on"/>
+    <property name="compiler.generate.no.warnings" value="off"/>
+    <property name="compiler.args" value=""/>
+    <property name="compiler.max.memory" value="700m"/>
+    <patternset id="ignored.files">
+        <exclude name="**/*.hprof/**"/>
+        <exclude name="**/*.pyc/**"/>
+        <exclude name="**/*.pyo/**"/>
+        <exclude name="**/*.rbc/**"/>
+        <exclude name="**/*~/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.bundle/**"/>
+        <exclude name="**/.git/**"/>
+        <exclude name="**/.hg/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="**/.tox/**"/>
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/RCS/**"/>
+        <exclude name="**/SCCS/**"/>
+        <exclude name="**/__pycache__/**"/>
+        <exclude name="**/_svn/**"/>
+        <exclude name="**/rcs/**"/>
+        <exclude name="**/vssver.scc/**"/>
+        <exclude name="**/vssver2.scc/**"/>
+    </patternset>
+    <patternset id="library.patterns">
+        <include name="*.zip"/>
+        <include name="*.apk"/>
+        <include name="*.war"/>
+        <include name="*.egg"/>
+        <include name="*.ear"/>
+        <include name="*.ane"/>
+        <include name="*.swc"/>
+        <include name="*.jar"/>
+    </patternset>
+    <patternset id="compiler.resources">
+        <exclude name="**/?*.java"/>
+        <exclude name="**/?*.form"/>
+        <exclude name="**/?*.class"/>
+        <exclude name="**/?*.groovy"/>
+        <exclude name="**/?*.scala"/>
+        <exclude name="**/?*.flex"/>
+        <exclude name="**/?*.kt"/>
+        <exclude name="**/?*.clj"/>
+        <exclude name="**/?*.aj"/>
+    </patternset>
+
+    <!-- Modules -->
+
+    <import file="${basedir}/sdx_doc/module_sdx_doc.xml"/>
+
+    <import file="${basedir}/sdx_core/module_sdx_core.xml"/>
+
+    <import file="${basedir}/sdx_plugin_api/module_sdx_plugin_api.xml"/>
+
+    <import file="${basedir}/sdxmod_xmile/module_sdxmod_xmile.xml"/>
+
+    <import file="${basedir}/sdxmod_dynamo/module_sdxmod_dynamo.xml"/>
+
+    <import file="${basedir}/sdxmod_insightMaker/module_sdxmod_insightMaker.xml"/>
+
+    <import file="${basedir}/sdxapp_basicCli/application_sdxapp_basicCli.xml"/>
+
+    <target name="init"
+            description="Build initialization">
+        <!-- Perform any build initialization in this target -->
+    </target>
+
+    <target name="clean"
+            depends="clean.module.sdx_core,
+                   clean.module.sdx_plugin_api,
+                   clean.module.sdxmod_xmile,
+                   clean.module.sdxmod_dynamo,
+                   clean.module.sdxmod_insightMaker,
+                   clean.application.sdxapp_basicCli"
+            description="cleanup all"/>
+
+    <target name="build.modules"
+            depends="init,
+                    clean,
+                    compile.module.sdx_core,
+                    compile.module.sdx_plugin_api,
+                    compile.module.sdxmod_xmile,
+                    compile.module.sdxmod_dynamo,
+                    compile.module.sdxmod_insightMaker"
+            description="build all modules"/>
+
+    <target name="build.applications"
+            depends="clean,
+                    compile.application.sdxapp_basicCli"/>
+
+    <target name="all"
+            depends="build.modules,
+                    build.applications"
+            description="build all"/>
+</project>

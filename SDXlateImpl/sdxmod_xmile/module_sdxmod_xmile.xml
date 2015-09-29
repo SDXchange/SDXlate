@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sdxmod_xmile" default="compile.module.sdxmod_xmile">
+
+    <import file="${basedir}/sdx_plugin_api/module_sdx_plugin_api.xml"/>
+    <import file="${basedir}/sdx_core/module_sdx_core.xml"/>
+
+    <dirname property="module.sdxmod_xmile.basedir" file="${ant.file.module_sdxmod_xmile}"/>
+
+
+    <property name="compiler.args.sdxmod_xmile" value="-encoding windows-1252 -source 7 ${compiler.args}"/>
+
+    <property name="sdxmod_xmile.output.classes.dir" value="${module.sdxmod_xmile.basedir}/build/classes"/>
+    <property name="sdxmod_xmile.output.jar.dir" value="${module.sdxmod_xmile.basedir}/build/lib"/>
+    <property name="sdxmod_xmile.testoutput.dir" value="${module.sdxmod_xmile.basedir}/build/test/classes"/>
+
+    <path id="sdxmod_xmile.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="sdxmod_xmile.module.production.classpath">
+        <pathelement location="${sdx_plugin_api.output.classes.dir}"/>
+        <pathelement location="${sdx_core.output.classes.dir}"/>
+    </path>
+
+    <path id="sdxmod_xmile.runtime.production.module.classpath">
+        <pathelement location="${sdxmod_xmile.output.classes.dir}"/>
+    </path>
+
+    <path id="sdxmod_xmile.module.classpath">
+        <pathelement location="${sdxmod_xmile.output.classes.dir}"/>
+    </path>
+
+    <path id="sdxmod_xmile.runtime.module.classpath">
+        <pathelement location="${sdxmod_xmile.testoutput.dir}"/>
+        <pathelement location="${sdxmod_xmile.output.classes.dir}"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.sdxmod_xmile">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.sdxmod_xmile">
+        <patternset refid="excluded.from.module.sdxmod_xmile"/>
+    </patternset>
+
+    <path id="sdxmod_xmile.module.sourcepath">
+        <dirset dir="${module.sdxmod_xmile.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.sdxmod_xmile"
+            depends="compile.module.sdx_plugin_api,
+                        compile.module.sdx_core,
+                        compile.module.sdxmod_xmile.production,
+                        compile.module.sdxmod_xmile.tests"
+            description="Compile module sdxmod_xmile"/>
+
+    <target name="compile.module.sdxmod_xmile.production"
+            description="Compile module sdxmod_xmile; production classes">
+        <mkdir dir="${sdxmod_xmile.output.classes.dir}"/>
+        <mkdir dir="${sdxmod_xmile.output.jar.dir}"/>
+        <javac destdir="${sdxmod_xmile.output.classes.dir}" debug="${compiler.debug}"
+               nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+            <compilerarg line="${compiler.args.sdxmod_xmile}"/>
+            <bootclasspath refid="sdxmod_xmile.module.bootclasspath"/>
+            <classpath refid="sdxmod_xmile.module.production.classpath"/>
+            <src refid="sdxmod_xmile.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.sdxmod_xmile"/>
+        </javac>
+
+        <copy todir="${sdxmod_xmile.output.classes.dir}">
+            <fileset dir="${module.sdxmod_xmile.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.sdxmod_xmile.tests" depends="compile.module.sdxmod_xmile.production"
+            description="compile module sdxmod_xmile; test classes" unless="skip.tests">
+        <jar destfile="${sdxmod_xmile.output.jar.dir}/sdxmod_xmile.jar"
+             basedir="${sdxmod_xmile.output.classes.dir}">
+            <service type="org.sdxchange.plugin.api.SDXBidirectionalPlugin">
+                <provider classname="org.sdxchange.lang.xmile.plugin.PluginIdentity"/>
+            </service>
+        </jar>
+    </target>
+
+    <target name="clean.module.sdxmod_xmile" description="cleanup module">
+        <delete dir="${sdxmod_xmile.output.classes.dir}"/>
+        <delete dir="${sdxmod_xmile.output.jar.dir}"/>
+        <delete dir="${sdxmod_xmile.testoutput.dir}"/>
+    </target>
+</project>
